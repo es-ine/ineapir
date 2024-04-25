@@ -1,0 +1,364 @@
+#' Get all available operations
+#'
+#' @param operation (string): code of the operation. To obtain a list of
+#' available operations see [get_metadata_operations()].
+#' If no operation is specified then all the operations will be shown
+#' @param lang  (string): language of the retrieved data. Set to 'ES' for Spanish or set to 'EN' for English.
+#' @param geo (int): set to 0 for operations with national data or set to 1 for operations with data with
+#' a greater level of disaggregation.
+#' @param page (int): page number. The retrieved result of the query is paginated (page=0 retrieves all pages).
+#' @param validate (logical): validate input parameters. A FALSE value means fewer API calls.
+#' @param verbose (logical): print additional information, including the URL to call the API service.
+#'
+#' @return Data frame with information of the available operations
+#' @export
+#'
+#' @examples \dontrun{
+#' get_metadata_operations()
+#' get_metadata_operations(operation = "IPC")
+#' get_metadata_operations(geo = 1)
+#' }
+#'
+get_metadata_operations <- function(operation = NULL, lang = "ES", geo = NULL, page = 0, validate = TRUE, verbose = FALSE){
+  # List of values to define the call to the API
+  definition <- list()
+  definition <- append(definition, list(lang = lang))
+  definition <- append(definition, if(is.null(operation)) list(fun = "OPERACIONES_DISPONIBLES") else list(fun = "OPERACION"))
+  definition <- append(definition, list(input = operation))
+  definition <- append(definition, list(tag = "operation_active_null"))
+
+  # List of parameters to call the API
+  parameters <- list()
+  parameters <- append(parameters, list(geo = geo))
+  parameters <- append(parameters, list(page = page))
+
+  # List of addons
+  addons <- list(validate = validate, verbose = verbose)
+
+  # List of definitions and parameters
+  request <- list(definition = definition, parameters = parameters, addons = addons)
+
+  # Check request
+  request <- check_request(request)
+
+  # Build the complete URL to call the API
+  url <- get_url(request)
+
+  # Obtain the retrieved data calling the API
+  data <- get_api_data_all_pages(url, request)
+
+  return(data)
+}
+
+#' Get all available variables
+#'
+#' @param operation (string): Code of the operation. Provide code to get all
+#' the variables for the given operation. To obtain a list of
+#' available operations see [get_metadata_operations()].
+#' If no operation is specified then all the variables will be shown.
+#' @param lang (string): language of the retrieved data. Set to 'ES' for Spanish or set to 'EN' for English.
+#' @param page (int): page number. The retrieved result of the query is paginated (page=0 retrieves all pages).
+#' @param validate (logical): validate input parameters. A FALSE value means fewer API calls.
+#' @param verbose (logical): print additional information, including the URL to call the API service.
+#'
+#' @return Data frame with information of the available variables
+#' @export
+#'
+#' @examples \dontrun{
+#' get_metadata_variables()
+#' get_metadata_variables(operation = "IPC")
+#' }
+#'
+get_metadata_variables <- function(operation = NULL, lang = "ES", page = 0, validate = TRUE, verbose = FALSE){
+  # List of values to define the call to the API
+  definition <- list()
+  definition <- append(definition, list(lang = lang))
+  definition <- append(definition, if(is.null(operation)) list(fun = "VARIABLES") else list(fun = "VARIABLES_OPERACION"))
+  definition <- append(definition, list(input = operation))
+  definition <- append(definition, list(tag = "operation_active_null"))
+
+  # List of parameters to call the API
+  parameters <- list()
+  parameters <- append(parameters, list(page = page))
+
+  # List of addons
+  addons <- list(validate = validate, verbose = verbose)
+
+  # List of definitions and parameters
+  request <- list(definition = definition, parameters = parameters, addons = addons)
+
+  # Check request
+  request <- check_request(request)
+
+  # Build the complete URL to call the API
+  url <- get_url(request)
+
+  # Obtain the retrieved data calling the API
+  data <- get_api_data_all_pages(url, request)
+
+  return(data)
+}
+
+#' Get all values for a specific variable
+#'
+#' @param operation (string): code of the operation. Provide code to get all
+#' the values for the given operation. To obtain a list of
+#' available operations see [get_metadata_operations()].
+#' @param variable (int): id of a variable. To obtain a list of
+#' available variables see [get_metadata_variables()].
+#' @param det (int): level of detail. Valid values: 0, 1 or 2.
+#' @param lang (string): language of the retrieved data. Set to 'ES' for Spanish or set to 'EN' for English.
+#' @param page (int): page number. The retrieved result of the query is paginated (page=0 retrieves all pages).
+#' @param validate (logical): validate input parameters. A FALSE value means fewer API calls.
+#' @param verbose (logical): print additional information, including the URL to call the API service.
+#'
+#' @return Data frame with information of the available values for the variable specified in the function
+#' @export
+#'
+#' @examples \dontrun{
+#' get_metadata_values(variable = 115)
+#' get_metadata_values(operation = "IPC", variable = 115)
+#' }
+#'
+get_metadata_values <- function(operation = NULL, variable =  NULL, det = 0, lang = "ES", page = 0, validate = TRUE, verbose = FALSE){
+  # List of values to define the call to the API
+  definition <- list()
+  definition <- append(definition, list(lang = lang))
+  definition <- append(definition, if(is.null(operation)) list(fun = "VALORES_VARIABLE") else list(fun = "VALORES_VARIABLEOPERACION"))
+  definition <- append(definition, list(input = list(variable = variable, operation = operation)))
+  definition <- append(definition, list(tag = "variable_operation"))
+
+  # List of parameters to call the API
+  parameters <- list()
+  parameters <- append(parameters, list(det = det))
+  parameters <- append(parameters, list(page = page))
+
+  # List of addons
+  addons <- list(validate = validate, verbose = verbose)
+
+  # List of definitions and parameters
+  request <- list(definition = definition, parameters = parameters, addons = addons)
+
+  # Check request
+  request <- check_request(request)
+
+  # Build the complete URL to call the API
+  url <- get_url(request)
+
+  # Obtain the retrieved data calling the API
+  data <- get_api_data_all_pages(url, request)
+
+  return(data)
+}
+
+#' Get all publications
+#'
+#' @param operation (string): code of the operation. Provide code to get all
+#' the publications for the given operation. To obtain a list of
+#' available operations see [get_metadata_operations()].
+#' If no operation is specified then all the publications will be shown.
+#' @param det (int): level of detail. Valid values: 0, 1 or 2.
+#' @param lang (string): language of the retrieved data. Set to 'ES' for Spanish or set to 'EN' for English.
+#' @param page (int): page number. The retrieved result of the query is paginated (page=0 retrieves all pages).
+#' @param validate (logical): validate input parameters. A FALSE value means fewer API calls.
+#' @param verbose (logical): print additional information, including the URL to call the API service.
+#'
+#' @return Data frame with information about publications
+#' @export
+#'
+#' @examples \dontrun{
+#' get_metadata_publications()
+#' get_metadata_publications(operation = "IPC")
+#' }
+#'
+get_metadata_publications <- function(operation = NULL, det = 0, lang = "ES", page = 0, validate = TRUE, verbose = FALSE){
+  # List of values to define the call to the API
+  definition <- list()
+  definition <- append(definition, list(lang = lang))
+  definition <- append(definition, if(is.null(operation)) list(fun = "PUBLICACIONES") else list(fun = "PUBLICACIONES_OPERACION"))
+  definition <- append(definition, list(input = operation))
+  definition <- append(definition, list(tag = "operation_active_null"))
+
+  # List of parameters to call the API
+  parameters <- list()
+  parameters <- append(parameters, list(det = det))
+  parameters <- append(parameters, list(page = page))
+
+  # List of addons
+  addons <- list(validate = validate, verbose = verbose)
+
+  # List of definitions and parameters
+  request <- list(definition = definition, parameters = parameters, addons = addons)
+
+  # Check request
+  request <- check_request(request)
+
+  # Build the complete URL to call the API
+  url <- get_url(request)
+
+  # Obtain the retrieved data calling the API
+  data <- get_api_data_all_pages(url, request)
+
+  return(data)
+}
+
+#' Get the dates of a publication
+#'
+#' @param publication (int): id of the publication. To obtain a list of
+#' available publications see [get_metadata_publications()].
+#' @param det (int): level of detail. Valid values: 0, 1 or 2.
+#' @param tip (string): set to 'A' for friendly output (e.g. readable dates),
+#' set to 'M' to include metadata or set to 'AM' for both.
+#' @param lang (string): language of the retrieved data. Set to 'ES' for Spanish or set to 'EN' for English.
+#' @param page (int): page number. The retrieved result of the query is paginated (page=0 retrieves all pages).
+#' @param validate (logical): validate input parameters. A FALSE value means fewer API calls.
+#' @param verbose (logical): print additional information, including the URL to call the API service.
+#'
+#' @return Data frame with information of the dates of the publication specified in the function
+#' @export
+#'
+#' @examples \dontrun{
+#' get_metadata_publication_dates(publication = 8)
+#' }
+#'
+get_metadata_publication_dates <- function(publication = NULL, det = 0, tip = NULL, lang = "ES", page = 0, validate = TRUE, verbose = FALSE){
+  # List of values to define the call to the API
+  definition <- list()
+  definition <- append(definition, list(lang = lang))
+  definition <- append(definition, list(fun = "PUBLICACIONFECHA_PUBLICACION"))
+  definition <- append(definition, list(input = publication))
+  definition <- append(definition, list(tag = "publication"))
+
+  # List of parameters to call the API
+  parameters <- list()
+  parameters <- append(parameters, list(det = det))
+  parameters <- append(parameters, list(tip = tip))
+  parameters <- append(parameters, list(page = page))
+
+  # List of addons
+  addons <- list(validate = validate, verbose = verbose)
+
+  # List of definitions and parameters
+  request <- list(definition = definition, parameters = parameters, addons = addons)
+
+  # Check request
+  request <- check_request(request)
+
+  # Build the complete URL to call the API
+  url <- get_url(request)
+
+  # Obtain the retrieved data calling the API
+  data <- get_api_data_all_pages(url, request)
+
+  return(data)
+}
+
+#' Get all available periodicities
+#'
+#' @param operation (string): Code of the operation. Provide code to get all
+#' the periodicities for the given operation. To obtain a list of
+#' available operations see [get_metadata_operations()].
+#' If no operation is specified then all the periodicities will be shown.
+#' @param lang (string): language of the retrieved data. Set to 'ES' for Spanish or set to 'EN' for English.
+#' @param validate (logical): validate input parameters. A FALSE value means fewer API calls.
+#' @param verbose (logical): print additional information, including the URL to call the API service.
+#'
+#' @return Data frame with information of the available periodicities
+#' @export
+#'
+#' @examples \dontrun{
+#' get_metadata_periodicity()
+#' get_metadata_periodicity(operation = "IPC")
+#' }
+#'
+get_metadata_periodicity <- function(operation = NULL, lang = "ES", validate = TRUE, verbose = FALSE){
+  # List of values to define the call to the API
+  definition <- list()
+  definition <- append(definition, list(lang = lang))
+  definition <- append(definition, if(is.null(operation)) list(fun = "PERIODICIDADES") else list(fun = "PERIODICIDAD_OPERACION"))
+  definition <- append(definition, list(input = operation))
+  definition <- append(definition, list(tag = "operation_active_null"))
+
+  # List of parameters to call the API
+  parameters <- list()
+
+  # List of addons
+  addons <- list(validate = validate, verbose = verbose)
+
+  # List of definitions and parameters
+  request <- list(definition = definition, parameters = parameters, addons = addons)
+
+  # Check request
+  request <- check_request(request)
+
+  # Build the complete URL to call the API
+  url <- get_url(request)
+
+  # Obtain the retrieved data calling the API
+  data <- get_api_data(url, request)
+
+  return(data)
+}
+
+#' Get all available filter shortcuts
+#'
+#' @param lang (string): language. Set to 'ES' for the Spanish version of the
+#' shortcuts or set to 'EN' for the English version of the shortcuts.
+#' @param validate (logical): validate input parameters.
+#' @param verbose (logical): print additional information.
+#'
+#' @return Data frame with information of the available filter shortcuts
+#' @export
+#'
+#' @examples \dontrun{
+#' get_filter_shortcuts()
+#' get_filter_shortcuts(lang = "EN")
+#' }
+#'
+get_filter_shortcuts <- function(lang = "ES", validate = TRUE, verbose = FALSE){
+
+  # List of values to define the call to the API
+  definition <- list()
+  definition <- append(definition, list(lang = lang))
+
+  # List of parameters to call the API
+  parameters <- list()
+
+  # List of addons
+  addons <- list(validate = validate, verbose = verbose)
+
+  # List of definitions and parameters
+  request <- list(definition = definition, parameters = parameters, addons = addons)
+
+  # Check request
+  request <- check_request(request)
+
+  short <- names(shortcuts_filter)
+  varid <- character()
+  comment <- character()
+  language <- character()
+
+  for (s in short){
+    varid <- append(varid, paste0(shortcuts_filter[[s]], collapse = ", "))
+    comment <- append(comment, shortcuts_filter_comments[[s]]$comment)
+    language <- append(language, shortcuts_filter_comments[[s]]$lang)
+  }
+
+  # Add values wrapper
+  short <- append(short, "values")
+  varid <- append(varid, "-")
+  comment <- append(comment, "Values wrapper")
+  language <- append(language, "ALL")
+
+  # Select language
+  df <- data.frame(Shortcut = short, "Variable.ID" = varid, Comment = comment, language = language)
+
+  # Select columns
+  df <- subset(df, language %in% c(lang, "ALL"), select = c("Shortcut", "Variable.ID", "Comment"))
+
+  return(df)
+}
+
+
+
+
