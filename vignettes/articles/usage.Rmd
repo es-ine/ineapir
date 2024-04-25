@@ -1,0 +1,185 @@
+---
+title: "Usage examples"
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+The downloaded data can be plotted using packages like
+[plotly](https://plotly.com/r/) or [leaflet](https://rstudio.github.io/leaflet/).
+
+## Example 1. Interactive time series
+
+```{r example_1}
+library(ineapir)
+library(plotly)
+
+# Filter cpi overall index
+filter <- list(values = c("variación anual" , "índice general"))
+
+# Request data of cpi
+# Table url: https://www.ine.es/jaxiT3/Tabla.htm?t=50902&L=0
+general <- get_data_table(idTable = 50902, filter = filter, unnest = TRUE,
+                          tip = "A", validate = FALSE)
+
+# Filter core cpi
+filter <- list(values = c("variación anual" , 
+                       "general sin alimentos no elaborados ni productos energéticos"))
+
+# Request data of core cpi
+# Table url: https://www.ine.es/jaxiT3/Tabla.htm?t=50907&L=0
+subyacente <- get_data_table(idTable = 50907, filter = filter, unnest = TRUE,
+                             tip = "A", validate = FALSE)
+
+# Format Fecha column as date
+general$Fecha <- as.Date(general$Fecha)
+subyacente$Fecha <- as.Date(subyacente$Fecha)
+
+# Plot cpi overall index
+fig <- plot_ly(general, x = ~Fecha, y = ~Valor, name = 'General',
+               type = 'scatter', mode = 'lines')
+
+## Plot core cpi
+fig <- fig %>% add_trace(y = ~subyacente$Valor, name = 'Subyacente',
+                         mode = 'lines') %>%
+  layout(yaxis = list(title="Variación anual (%)"),
+         legend = list(title=list(text='<b> IPC </b>'),
+                       x = 0.25,
+                       y = -0.25,
+                       orientation = 'h'),
+         hovermode = 'x') %>%
+  config(displayModeBar = FALSE)
+
+fig
+
+```
+
+## Example 2. Population pyramid
+
+```{r example_2}
+library(forcats)
+
+# Filter for total population of men and women 
+filter <- list(nacionalidad = "total", sexo = c("hombres", "mujeres"))
+
+# Table: Resident population by date, sex, age group and nationality
+# Table url: https://www.ine.es/jaxiT3/Tabla.htm?t=56936&L=0
+poblacion <- get_data_table(idTable = 56936, filter = filter, validate = FALSE, 
+                            tip = "AM", unnest = TRUE, metanames = TRUE)
+
+# Filter and calculate percentages
+pob <- poblacion %>% 
+  filter(Grupo.quinquenal.de.edad != "Todas las edades" & T3_Periodo == "1 de enero de") %>%
+  group_by(Anyo) %>% 
+  mutate(Total = sum(Valor), 
+         Porcentaje = Valor/Total*100, 
+         Grupo.quinquenal.de.edad = fct_inorder(trimws(Grupo.quinquenal.de.edad))) %>%
+  ungroup() %>%
+  mutate(Porcentaje = ifelse(Sexo == "Hombres",
+                             -Porcentaje, Porcentaje))
+  
+# Pyramid using plotly
+fig <- plot_ly(pob, x = ~Porcentaje , y = ~Grupo.quinquenal.de.edad, color = ~Sexo, 
+               colors = c("blue", "red"), type = 'bar', frame = ~Anyo) %>% 
+       layout(bargap = 0.1, barmode = 'overlay',
+              xaxis = list(hoverformat = '.2f'),
+              yaxis = list(title="Edad"),
+              title = 'Población residente por sexo y grupo de edad') %>%
+       animation_slider(currentvalue = list(prefix = "Año: ")) %>%
+       config(displayModeBar = FALSE)
+
+fig
+
+```
+
+
+## Example 3. Interactive bar chart.
+```{r example_3}
+# Filter for life expectancy
+filter = list(ccaa = "", sexo = "total", values = c("0 años", "esperanza de vida"))
+
+# Table: Mortality tables by year, autonomous communities and cities, sex, age and functions.
+# Table url: https://www.ine.es/jaxiT3/Tabla.htm?t=27154&L=0
+esp <- get_data_table(idTable = 27154, filter = filter, nlast = 1, unnest = TRUE,
+                       metanames = TRUE, tip = "AM", validate = FALSE)
+
+# Bar chart using plotly
+fig <- plot_ly(esp, 
+               x = ~esp$Comunidades.y.Ciudades.Autónomas,
+               y = ~Valor, type = "bar") %>%
+       config(displayModeBar = FALSE) %>%
+       layout(xaxis = list(title="", tickangle = -45),
+              yaxis = list(title = "Años", hoverformat = '.2f'),
+              title = sprintf("Esperanza de vida al nacimiento por Comunidad Autónoma (%s)",
+                              esp$Anyo[1])
+              )
+
+fig
+  
+```
+
+
+## Example 4. Interactive map.
+```{r example_4}
+library(leaflet)
+library(sf)
+library(htmltools)
+
+# Get the boundaries of the autonomous communities
+ccaa <- read_sf("https://www.ine.es/wstempus/geojs/ES/CONTORNOS/70")
+
+# Filter for life expectancy
+filter = list(ccaa = "", sexo = "total", values = c("0 años", "esperanza de vida"))
+
+# Table: Mortality tables by year, autonomous communities and cities, sex, age and functions.
+# Table url: https://www.ine.es/jaxiT3/Tabla.htm?t=27154&L=0
+esp <- get_data_table(idTable = 27154, filter = filter, nlast = 1, unnest = TRUE,
+                       metacodes = TRUE, tip = "AM", validate = FALSE)
+
+# Select a set on columns from data
+esp <- subset(esp, select = c("Comunidades.y.Ciudades.Autónomas.Id", "T3_Periodo",
+                                "Anyo","Valor"))
+
+# Join boundaries information with data information
+ccaa <- merge(ccaa, esp, by.x = "id_region", 
+              by.y = "Comunidades.y.Ciudades.Autónomas.Id" )
+
+# Create the palette of the legend
+pal <- colorBin("plasma", domain = NULL, bins = c(quantile(ccaa$Valor)))
+
+# Labels of the map
+labels <- sprintf(
+  "<strong>%s</strong><br/> Esperanza de vida al nacimiento: %.2f años ",
+  ccaa$nom_region, ccaa$Valor
+) %>% lapply(htmltools::HTML)
+
+
+# Create the map
+m <- leaflet(ccaa) %>% 
+  addTiles() %>%
+  setView(-4, 40, zoom = 5) %>%
+  addPolygons(fillOpacity = 0.8,
+              fillColor = ~pal(Valor),
+              weight = 1,
+              color = "white",
+              label = labels,
+              labelOptions = labelOptions(
+                style = list("font-weight" = "normal", padding = "3px 8px"),
+                textsize = "15px",
+                direction = "auto"
+              ),
+              highlightOptions = highlightOptions(fillOpacity = 1, bringToFront = TRUE, 
+                                                  weight = 2, color = "white")
+  ) %>%
+  addLegend(pal = pal, values = ~Valor, opacity = 1.0, position = "bottomright",
+            labFormat = labelFormat(suffix = " años", digits = 2),
+            title = sprintf("Esperanza de vida al nacimiento (%s)",
+                            esp$Anyo[1]))
+
+m
+
+```

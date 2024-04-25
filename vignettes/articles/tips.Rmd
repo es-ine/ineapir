@@ -1,0 +1,154 @@
+---
+title: "Tips"
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Use of `verbose`
+
+When the argument `verbose = TRUE` is passed to a function, a number of 
+information is displayed in the console, including the URL used to call the API.
+
+```{r verbose}
+library(ineapir)
+
+# Variables used in the operation IPC and verbose = TRUE
+variables <- get_metadata_variables(operation = "IPC", verbose = TRUE)
+```
+
+## Use of `validate`
+If it is not necessary to validate the values of the arguments passed to a
+function, this validation can be turned off with `validate = FALSE`.
+
+```{r validate_1}
+# Variables used in the operation IPC with verbose = TRUE and validate = FALSE
+variables <- get_metadata_variables(operation = "IPC", verbose = TRUE,
+                                    validate = FALSE)
+```
+
+This is useful when we are filtering data and the filter we are using is
+the one we want. Turning off validation means making fewer API calls.
+For better performance, it is recommended to use codes in the filter instead
+of shortcuts and disable validation if we are sure that the filter is correct.
+
+```{r validate_2}
+# The filter 
+filter <- list("115" = "2",     # variable id = 115, value id = 2
+               "3" = "74" ,     # variable id = 3, value id = 74
+               "762" = "304092" # variable id = 762, value id = 304092
+               )
+
+# Request data using the filter with verbose = TRUE and validate = TRUE
+ipc <- get_data_series_filter(operation = "IPC", filter = filter, periodicity = 1,
+                       verbose = TRUE)
+
+# Request data using the filter with verbose = TRUE and validate = FALSE
+ipc <- get_data_series_filter(operation = "IPC", filter = filter, periodicity = 1,
+                       verbose = TRUE, validate = FALSE)
+```
+
+## Use of `lang`
+It is possible to retrieve information in English passing the argument
+`lang = "EN"` to certain functions.
+
+```{r lang_1}
+# Variables used in the operation IPC and lang = "EN"
+variables <- get_metadata_variables(operation = "IPC", lang = "EN")
+variables
+```
+
+
+We can use the English language as well filtering data using shortcuts.
+
+```{r lang_2}
+# Filter with the values wrapper (CPI)
+filter <- list(values = c("annual change" , "overall index"))
+
+# Request data using the filter with shortcut = TRUE and lang = "EN"
+cpi <- get_data_table(idTable = 50902, filter = filter, unnest = TRUE,
+                      tip = "A", nlast = 5, lang = "EN")
+
+cpi[,c("Nombre", "T3_Periodo", "Anyo", "Valor")]
+```
+
+## Use of `unnest`
+When we request data from tables or series using the functions
+`get_data_table()`, `get_data_series()` and `get_data_series_filter`, the
+`$Data` column containing the data values is a list of data frames, one for each
+ entry.
+
+```{r unnest_1}
+# Filter with the values wrapper (CPI)
+filter <- list(values = c("variación anual" , "variación mensual", "índice general"))
+
+# Request data using the filter and unnest = FALSE
+ipc <- get_data_table(idTable = 50902, filter = filter, tip = "A", nlast = 3)
+
+# We have two entries
+ ipc[,c("COD","Nombre")]
+ 
+# Data column is a list of two data frames. One for each entry. 
+ ipc$Data
+```
+
+If we want to get only one data frame for all data values, we can pass
+the argument `unnest = TRUE`.
+
+```{r unnest_2}
+# Filter with the values wrapper (CPI)
+filter <- list(values = c("variación anual" , "variación mensual", "índice general"))
+
+# Request data using the filter and unnest = TRUE
+ipc <- get_data_table(idTable = 50902, filter = filter, tip = "A",
+                      nlast = 3, unnest = TRUE)
+
+# Unique data frame with 6 rows
+ipc[,c("Nombre", "T3_Periodo", "Anyo", "Valor")]
+```
+
+## Use of `metanames` and `metacodes`
+When we pass the argument `metanames = TRUE` we get additional columns that 
+contain the names of the values extracted from the metadata information.
+To get additional columns containing the codes and ids of the values 
+extracted from the metadata information we pass the argument `metacodes = TRUE`.
+
+```{r extractmetadata}
+# Filter for total population of men and women 
+filter <- list(nacionalidad = "total", sexo = c("hombres", "mujeres"))
+
+# Table: Resident population by date, sex, age group and nationality
+poblacion <- get_data_table(idTable = 9674, filter = filter, validate = FALSE, 
+                            tip = "AM", unnest = TRUE, nlast = 1)
+# Names of columns
+names(poblacion)
+
+# Request data with metanames = TRUE
+poblacion <- get_data_table(idTable = 9674, filter = filter, validate = FALSE, 
+                            tip = "AM", unnest = TRUE, nlast = 1,
+                            metanames =  TRUE, metacodes = TRUE)
+
+# Additional columns of Nacionalidad, Edad and Sexo
+names(poblacion)
+```
+
+## Filtering with regular expresions
+When we use shortcuts names in the filter, we can also include as values
+regular expressions if this helps us filter the data better.
+
+```{r regexp_1}
+# Filter with a regular expression for ages between 20 and 25 years old
+filter <- list(sexo = "total", edad = "2[0-5]+")
+
+# Request data using the filter with a regular expression
+pob <- get_data_table(idTable = 56934, filter = filter, tip = "A", nlast = 1,
+                      unnest = TRUE)
+
+# Only ages between 20 and 25 years old
+pob[,c("Nombre", "Anyo", "Valor")]
+```
+

@@ -1,0 +1,168 @@
+---
+title: "How to filter data using shortcut names"
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+Instead of using numeric codes, it is possible to use certain shortcut names
+when the `filter` argument is passed. However, for a better performance is
+recommended to use numeric codes. The available shortcuts for variables are
+shown below.
+
+|Shortcut | Variable ID | Comment|
+|---------|----|--------|
+|nac             | 349 | National|
+|ccaa            | 70  | Autonomous Communities |
+|prov            | 115 | Provinces |
+|mun             | 19  | Municipalities |
+|island          | 20  | Islands |
+|isla            | 20  | Islands |
+|group           | 762 | CPI groups |
+|grupo           | 762 | CPI groups |
+|subgroup        | 763 | CPI subgroups |
+|subgrupo        | 763 | CPI subgroups |
+|class           | 764 | CPI class |
+|clase           | 764 | CPI class |
+|subclass        | 765 | CPI subclass |
+|subclase        | 765 | CPI subclass |
+|heading         | 270 | CPI headings |
+|rubrica         | 270 | CPI headings |
+|specialgroup    | 269 | CPI special groups |
+|grupoespecial   | 269 | CPI special groups |
+|datatype        | 3   | Type of data |
+|tipodato        | 3   | Type of data |
+|sex             | 18  | Sex |
+|sexo            | 18  | Sex |
+|age1            | 355 | Simple age |
+|edad1           | 355 | Simple age |
+|aget            | 356 | Age totals |
+|edadt           | 356 | Age totals |
+|ageg            | 360 | Age groups |
+|edadg           | 360 | Age groups |
+|ages            | 357 | Age semi-intervals |
+|edads           | 357 | Age semi-intervals |
+|age             |355, 356, 357, 360 | Age wrapper |
+|edad            |355, 356, 357, 360 | Age wrapper |
+|generation      | 612 | Generation/ages |
+|generacion      | 612 | Generation/ages |
+|nationality     | 141 | Nationality |
+|nacionalidad    | 141 | Nationality |
+|birthcountry    | 431, 432 | Country of birth |
+|paisnacimiento  | 431, 432 | Country of birth |
+|birthplace      | 97  | Place of birth |
+|lugarnacimiento | 97  | Place of birth |
+|effectscorr     | 544 | Correction of effects |
+|efectoscorr     | 544 | Correction of effects |
+|values          | -    | Values wrapper |
+
+## Filtering data from tables
+
+To use a filter with shortcuts it is necessary to pass the argument
+`filter` using a shortcut as variable and a name as value.
+
+### Example one
+We are going to filter the table [Índices nacionales: general y de grupos ECOICOP](https://www.ine.es/jaxiT3/Tabla.htm?t=50902) (Id 50902):
+
+```{r tabla_filter_1}
+library(ineapir)
+
+# Filter using shortcuts (CPI)
+filter <- list(tipodato = "variación anual" , # variable id = 3
+               grupo = "índice general"       # variable id = 762
+               )
+
+# Request data using the filter
+ipc <- get_data_table(idTable = 50902, filter = filter, unnest = TRUE,
+                      tip = "A", nlast = 5, validate = FALSE)
+ipc[,c("Nombre", "T3_Periodo", "Anyo", "Valor")]
+```
+
+Besides, we can also use the *values* wrapper.
+
+```{r tabla_filter_2}
+# Filter with the values wrapper
+filter <- list(values = c("variación anual" , "índice general"))
+
+# Request data using the filter
+ipc <- get_data_table(idTable = 50902, filter = filter, unnest = TRUE,
+                      tip = "A", nlast = 5, validate = FALSE)
+ipc[,c("Nombre", "T3_Periodo", "Anyo", "Valor")]
+```
+
+### Example two
+We are going to filter the table [PIB pm Oferta (Indices de volumen encadenado)](https://www.ine.es/jaxiT3/Tabla.htm?t=30679) (Id 30679):
+
+```{r tabla_filter_3}
+# Filter with the values wrapper (GDP)
+filter <- list(values = c("producto interior", "datos ajustados", "variación anual"))
+
+# Request data using the filter and shortcut = TRUE
+pib <- get_data_table(idTable = 30679, filter = filter, unnest = TRUE,
+                      tip = "A", nlast = 5, validate = FALSE)
+pib[,c("Nombre", "T3_Periodo", "Anyo", "Valor")]
+```
+
+### Example three
+We are going to filter the table [Población residente por fecha, sexo y edad (desde 1971)](https://www.ine.es/jaxiT3/Tabla.htm?t=56934) (Id 56934)
+
+```{r tabla_filter_4}
+# Filter with the values wrapper (population)
+filter <- list(values = c("todas las edades", "total"))
+
+# Request data using the filter
+pob <- get_data_table(idTable = 56934, filter = filter, unnest = TRUE, 
+                      tip = "A", nlast = 5, validate = FALSE)
+pob[,c("Nombre", "T3_Periodo", "Anyo", "Valor")]
+```
+
+## Filtering data from series
+It is necessary to pass the argument `filter` of the 
+`get_data_series_filter()` function. We use a shortcut as variable 
+and a name as value.
+
+### Example one
+
+```{r series_filter_1}
+# Filter with the values wrapper (CPI)
+filter <- list(values = c("variación anual" , "índice general", "total nacional"))
+
+# Request data using the filter
+ipc <- get_data_series_filter(operation = "IPC", filter = filter,
+                              periodicity = 1, unnest = TRUE, tip = "A",
+                              validate = FALSE)
+ipc[,c("Nombre", "T3_Periodo", "Anyo", "Valor")]
+```
+
+### Example two
+
+```{r series_filter_2}
+# Filter with the values wrapper (GDP)
+filter <- list(values = c("producto interior", "datos ajustados",
+                       "volumen encadenado", "variación anual"))
+
+# Request data using the filter
+pib <- get_data_series_filter(operation = "CNTR2010", filter = filter,
+                              periodicity = 3, unnest = TRUE, tip = "A",
+                              validate = FALSE)
+pib[,c("Nombre", "T3_Periodo", "Anyo", "Valor")]
+```
+
+
+### Example three
+
+```{r series_filter_3}
+# Filter with the values wrapper combine with individual shortcuts (population)
+filter <- list(values = c("todas las edades", "total nacional"), nacionalidad = "total",
+               sexo = "total", paisnacimiento = "total" )
+
+# Request data using the filter
+pob <- get_data_series_filter(operation = "ECP", filter = filter,
+                              periodicity = 3, unnest = TRUE, tip = "A",
+                              validate = FALSE)
+pob[,c("Nombre", "T3_Periodo", "Anyo", "Valor")]
+```

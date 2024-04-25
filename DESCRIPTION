@@ -13,3 +13,4 @@ RoxygenNote: 7.3.1
 Imports: 
     httr,
     jsonlite
+Config/Needs/website: rmarkdown

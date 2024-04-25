@@ -1,3 +1,3 @@
-# ineapir (development version)
+# ineapir 0.0.0.9000
 
-* Initial CRAN submission.
+* Added a `NEWS.md` file to track changes to the package.

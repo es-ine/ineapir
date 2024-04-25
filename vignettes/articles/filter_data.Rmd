@@ -1,0 +1,240 @@
+---
+title: "How to filter data"
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+When we request data from tables or series there is the possibility of
+filtering data on the fly using metadata information about the variables
+and their values that define the series.
+
+## Filtering data from tables
+
+It is necessary to pass the argument `filter` of the `get_data_table()`
+function, which is a `list()` of variables and the values they take.
+There are two approaches to build the filter depending on the
+table type.
+
+### Case one.
+
+- **URL:** https://www.ine.es/jaxiT3/Tabla.htm?t=50902
+
+1. The first step is to obtain the values of the groups (combo boxes) of the
+table that interest us to build the filter.
+
+```{r tabla_grupos}
+library(ineapir)
+
+# Get metadata information of the table
+metadata <- get_metadata_table_varval(idTable = 50902, validate = FALSE)
+head(metadata,4)
+tail(metadata,4)
+```
+
+2. With this information we build the filter as follows.
+
+```{r tabla_filter_1}
+# The filter is a list()
+filter <- list("3" = "74" ,     # variable id = 3, value id = 74
+               "762" = "304092" # variable id = 762, value id = 304092
+               )
+
+# Request data using the filter
+ipc <- get_data_table(idTable = 50902, filter = filter, unnest = TRUE,
+                      tip = "A", nlast = 5, validate = FALSE)
+ipc[,c("Nombre", "T3_Periodo", "Anyo", "Valor")]
+```
+
+### Case two (pc-axis file)
+
+- **URL:** https://www.ine.es/jaxi/Tabla.htm?path=/t20/e245/p08/l0/&file=01001.px
+
+1. The first step is to obtain the metadata information from a table.
+
+```{r tabla_filter_2}
+# Get metadata information of the table
+metadata <- get_metadata_table_varval(idTable = "t20/e245/p08/l0/01001.px")
+metadata
+```
+
+```{r tabla_filter_2b}
+# NOTE: for px tables we can use a filter.
+metadata <- get_metadata_table_varval(idTable = "t20/e245/p08/l0/01001.px",
+                                      filter = list(sexo = "ambossexos"))
+metadata
+```
+
+2. With this information we build the filter as follows.
+
+```{r tabla_filter_3}
+# Build the filter with the codes of variables and values
+filter <- list(sexo = "ambossexos",              
+               espanolesextranjeros = "total",   
+               edad3gruposdeedad = "totaledades" 
+               ) 
+
+# Request data using the filter
+poblacion <- get_data_table(idTable = "t20/e245/p08/l0/01001.px", unnest = TRUE,
+                            tip = "A", nlast = 5, filter = filter,
+                            validate = FALSE)
+poblacion
+```
+
+### Case three (tpx file)
+
+- **URL:** https://www.ine.es/jaxi/Tabla.htm?tpx=33387&L=0
+
+1. The first step is to obtain the metadata information from a table.
+
+```{r tabla_filter_4}
+# Get metadata information of the table
+metadata <- get_metadata_table_varval(idTable = 33387)
+metadata[grepl("^\\d{1}\\D+",metadata$Codigo),]
+```
+
+```{r tabla_filter_4b}
+# NOTE: for tpx tables we can use a filter.
+metadata <- get_metadata_table_varval(idTable = 33387,
+                                      filter = list(tipodematerial = "1biomasa"))
+metadata[grepl("^\\d{1}\\D+",metadata$Codigo),]
+```
+
+2. With this information we build the filter as follows.
+
+```{r tabla_filter_5}
+# Build the filter with the codes of variables and values
+# A variable can take more than one value
+filter <- list(tipodematerial = c("1biomasa", "2mineralesmetalicosmineralenbruto",
+                                  "3mineralesnometalicos", "4combustiblesfosiles")
+               )
+
+
+# Request data using the filter
+materiales <- get_data_table(idTable = 33387, unnest = TRUE, tip = "A",
+                             nlast = 1, filter = filter, validate = FALSE)
+materiales
+```
+
+- **URL:** https://www.ine.es/jaxi/Tabla.htm?tpx=52056&L=0
+
+1. There are tpx tables that contain variable ids and value ids. We can see that
+when we obtain the metadata information from a table.
+
+```{r tabla_filter_6}
+# Get metadata information of the table using a filter.
+# The filter is useful when the table contains a large number of series
+# (for example, tables with a large territorial segmentation) which slows down
+# the information retrieval.
+metadata <- get_metadata_table_varval(idTable = 52056,
+                                      filter = list(NAC = "00"))
+head(metadata[order(metadata$Variable.Id),],4)
+```
+
+
+2. In this case, we can use the ids instead of the codes to build the filter.
+To do this we add the alias *~id* at the end of each id.
+
+```{r tabla_filter_7}
+# In order to use the ids of variables and values we add the alias '~id'
+filter = list("349~id" = "16473~id",  # variable id = 349, value id = 16473
+              "916~id" = "391871~id", # variable id = 909, value id = 391455
+              "942~id" = "274282~id", # variable id = 942, value id = 274282
+              "999~id" = "391770~id", # variable id = 975, value id = 391438
+              "3~id"   = "11406~id"  # variable id = 3, value id = 11406
+              )
+
+# Request data using the filter
+explotaciones <- get_data_table(idTable = 52056, unnest = TRUE, tip = "A",
+                             nlast = 1, filter = filter, validate = FALSE)
+explotaciones
+```
+
+## Filtering data from series
+
+It is necessary to pass the argument `filter` of the `get_data_series_filter()`
+function, which is a `list()` of variables and the values they take.
+
+1. The first step is to obtain the variables used in the operation to which 
+the series belong.
+
+```{r series_variables}
+# Variables used in the operation IPC
+variables <- get_metadata_variables(operation = "IPC", validate = FALSE)
+variables
+```
+
+2. The second step is to obtain the values of the variables that interest us
+to build the filter.
+
+```{r series_values_1}
+# Values of the variable with id = 115
+provincias <- get_metadata_values(operation = "IPC", variable = 115, validate = FALSE)
+head(provincias)
+
+# Values of the variable with id = 3
+tipo <- get_metadata_values(operation = "IPC", variable = 3, validate = FALSE)
+head(tipo)
+
+# Values of the variable with id = 762
+grupos <- get_metadata_values(operation = "IPC", variable = 762, validate = FALSE)
+head(grupos, 4)
+
+# We can get all the values at once with the function get_metadata_series_varval
+varval <- get_metadata_series_varval(operation = "IPC", validate = FALSE)
+head(subset(varval, Fk_Variable == 115))
+head(subset(varval, Fk_Variable == 3))
+head(subset(varval, Fk_Variable == 762), 4)
+```
+
+3. With this information we build the filter as follows.
+
+```{r series_filter_1}
+# The filter is a list()
+filter <- list("115" = "2",     # variable id = 115, value id = 2
+               "3" = "74" ,     # variable id = 3, value id = 74
+               "762" = "304092" # variable id = 762, value id = 304092
+               )
+
+# Request data using the filter
+ipc <- get_data_series_filter(operation = "IPC", filter = filter, periodicity = 1,
+                              unnest = TRUE, tip = "A", validate = FALSE)
+ipc[,c("Nombre", "T3_Periodo", "Anyo", "Valor")]
+```
+
+- A variable can take more than one value (valid to filter data from tables
+as well).
+
+```{r series_filter_2}
+# The filter is a list()
+filter <- list("115" = c("2" ,"3", "4"), # variable id = 115, values id 2, 3, 4
+               "3" = "74" ,              # variable id = 3, value id = 74
+               "762" = "304092"          # variable id = 762, value id = 304092
+               )
+
+# Request data using the filter
+ipc <- get_data_series_filter(operation = "IPC", filter = filter, periodicity = 1, 
+                              unnest = TRUE, tip = "A", validate = FALSE)
+ipc[,c("Nombre", "T3_Periodo", "Anyo", "Valor")]
+```
+
+
+- A variable can take a empty character `""` to get all its possible values
+(valid to filter data from tables as well).
+
+```{r series_filter_3}
+# The filter is a list()
+filter <- list("115" = "",      # variable id = 115, all values
+               "3" = "83" ,     # variable id = 3, value id = 83
+               "762" = "304092" # variable id = 762, value id = 304092
+               )
+
+# Request data using the filter
+ipc <- get_data_series_filter(operation = "IPC", filter = filter, periodicity = 1, 
+                              unnest = TRUE, tip = "A", validate = FALSE)
+ipc[,c("Nombre", "T3_Periodo", "Anyo", "Valor")]
+```
