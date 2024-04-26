@@ -27,7 +27,7 @@ Alternatively, for public repositories or in case you have a personal
 access token (only for private repositories).
 
 ``` r
-remotes::install_github("es-ine/ineapir")
+remotes::install_github("inedifusion/ineapir")
 ```
 
 ## Cheatsheet
