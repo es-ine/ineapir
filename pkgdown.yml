@@ -1,0 +1,14 @@
+pandoc: 3.1.11
+pkgdown: 2.0.9
+pkgdown_sha: ~
+articles:
+  filter_data_shortcuts: filter_data_shortcuts.html
+  filter_data: filter_data.html
+  identify_codes: identify_codes.html
+  tips: tips.html
+  usage: usage.html
+last_built: 2024-04-26T13:20Z
+urls:
+  reference: https://inedifusion.github.io/ineapir/reference
+  article: https://inedifusion.github.io/ineapir/articles
+
