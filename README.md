@@ -16,18 +16,17 @@ available statistical information published by INE.
 
 ## Installation
 
-To install the development version of **ineapir** you can download the
-source code as a zip file and then install it as follows.
-
-``` r
-remotes::install_local(path = "path/to/file.zip")
-```
-
-Alternatively, for public repositories or in case you have a personal
-access token (only for private repositories).
+To install the development version of **ineapir** from GitHub.
 
 ``` r
 remotes::install_github("inedifusion/ineapir")
+```
+
+Alternatively, you can download the source code as a zip file and then
+install it as follows.
+
+``` r
+remotes::install_local(path = "path/to/file.zip")
 ```
 
 ## Cheatsheet
