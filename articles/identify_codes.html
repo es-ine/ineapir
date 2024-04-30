@@ -111,9 +111,9 @@ no matter what variables/values have been selected in the table.</p>
 <span><span class="co"># Request table data with id = 50902</span></span>
 <span><span class="va">table</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_data_table.html">get_data_table</a></span><span class="op">(</span>idTable <span class="op">=</span> <span class="fl">50902</span>, nlast <span class="op">=</span> <span class="fl">1</span>, unnest <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="va">table</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Nombre"</span>, <span class="st">"FK_Periodo"</span>, <span class="st">"Anyo"</span>, <span class="st">"Valor"</span><span class="op">)</span><span class="op">]</span></span>
-<span><span class="co">#&gt;                                                Nombre FK_Periodo Anyo   Valor</span></span>
-<span><span class="co">#&gt; 1            Total Nacional. Índice general. Índice.           3 2024 114.674</span></span>
-<span><span class="co">#&gt; 2 Total Nacional. Índice general. Variación mensual.           3 2024   0.800</span></span></code></pre></div>
+<span><span class="co">#&gt;                                                Nombre FK_Periodo Anyo Valor</span></span>
+<span><span class="co">#&gt; 2 Total Nacional. Índice general. Variación mensual.           4 2024   0.7</span></span>
+<span><span class="co">#&gt; 3   Total Nacional. Índice general. Variación anual.           4 2024   3.3</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="case-two-pc-axis-file">Case two (pc-axis file)<a class="anchor" aria-label="anchor" href="#case-two-pc-axis-file"></a>
@@ -183,7 +183,7 @@ code of the series associated with the cell that was clicked on.</li>
 <span><span class="va">serie</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_data_series.html">get_data_series</a></span><span class="op">(</span>codSeries <span class="op">=</span> <span class="st">"IPC251856"</span>, unnest <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="va">serie</span><span class="op">[</span><span class="fl">1</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Nombre"</span>, <span class="st">"FK_Periodo"</span>, <span class="st">"Anyo"</span>, <span class="st">"Valor"</span><span class="op">)</span><span class="op">]</span></span>
 <span><span class="co">#&gt;                                              Nombre FK_Periodo Anyo Valor</span></span>
-<span><span class="co">#&gt; 1 Total Nacional. Índice general. Variación anual.           3 2024   3.2</span></span></code></pre></div>
+<span><span class="co">#&gt; 1 Total Nacional. Índice general. Variación anual.           4 2024   3.3</span></span></code></pre></div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>
