@@ -177,7 +177,7 @@ get_api_data_all_pages <- function(url, request){
     numrows <- if(!is.null(nrow(result))) nrow(result) else 1
 
     # if the number of rows is equal to the length of a page, we query the next page
-    while (numrows == page_lenght){
+    while (numrows > 0){
       numpage <- numpage + 1
 
       # Update page
