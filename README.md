@@ -19,7 +19,7 @@ available statistical information published by INE.
 To install the development version of **ineapir** from GitHub.
 
 ``` r
-remotes::install_github("inedifusion/ineapir")
+remotes::install_github("es-ine/ineapir")
 ```
 
 Alternatively, you can download the source code as a zip file and then
@@ -31,7 +31,7 @@ remotes::install_local(path = "path/to/file.zip")
 
 ## Cheatsheet
 
-<a href="https://raw.githubusercontent.com/inedifusion/ineapir/main/man/figures/ineapir.pdf"><img src="man/figures/ineapir_thumbnail.png" width="315"/></a>
+<a href="https://raw.githubusercontent.com/es-ine/ineapir/main/man/figures/ineapir.pdf"><img src="man/figures/ineapir_thumbnail.png" width="315"/></a>
 
 ## Data request examples
 
@@ -100,7 +100,6 @@ table[1,c("COD", "Nombre")]
 head(table$Data[[1]])
 #>          Fecha FK_TipoDato FK_Periodo Anyo   Valor Secreto
 #> 1 1.709248e+12           1          3 2024 114.674   FALSE
-#> 2 1.706742e+12           1          2 2024 113.807   FALSE
 ```
 
 ### Obtaining data from a series
@@ -114,7 +113,7 @@ function `get_data_series()`.
 series <- get_data_series(codSeries = "IPC251856", tip = "A")
 series$Data
 #>                           Fecha T3_TipoDato T3_Periodo Anyo Valor
-#> 1 2024-03-01T00:00:00.000+01:00  Definitivo        M03 2024   3.2
+#> 1 2024-04-01T00:00:00.000+02:00      Avance        M04 2024   3.3
 ```
 
 To get the last n data from a series it is necessary to pass the `nlast`
@@ -125,11 +124,11 @@ argument as well.
 series <- get_data_series(codSeries = "IPC251856", tip = "A", nlast = 5)
 series$Data
 #>                           Fecha T3_TipoDato T3_Periodo Anyo Valor
-#> 1 2023-11-01T00:00:00.000+01:00  Definitivo        M11 2023   3.2
-#> 2 2023-12-01T00:00:00.000+01:00  Definitivo        M12 2023   3.1
-#> 3 2024-01-01T00:00:00.000+01:00  Definitivo        M01 2024   3.4
-#> 4 2024-02-01T00:00:00.000+01:00  Definitivo        M02 2024   2.8
-#> 5 2024-03-01T00:00:00.000+01:00  Definitivo        M03 2024   3.2
+#> 1 2023-12-01T00:00:00.000+01:00  Definitivo        M12 2023   3.1
+#> 2 2024-01-01T00:00:00.000+01:00  Definitivo        M01 2024   3.4
+#> 3 2024-02-01T00:00:00.000+01:00  Definitivo        M02 2024   2.8
+#> 4 2024-03-01T00:00:00.000+01:00  Definitivo        M03 2024   3.2
+#> 5 2024-04-01T00:00:00.000+02:00      Avance        M04 2024   3.3
 
 # Using unnest = TRUE
 series <- get_data_series(codSeries = "IPC251856", tip = "A", nlast = 5,
@@ -142,11 +141,11 @@ head(series[,c("COD", "Nombre", "Fecha", "Valor")])
 #> 1.3 IPC251856 Total Nacional. Índice general. Variación anual. 
 #> 1.4 IPC251856 Total Nacional. Índice general. Variación anual. 
 #>                             Fecha Valor
-#> 1   2023-11-01T00:00:00.000+01:00   3.2
-#> 1.1 2023-12-01T00:00:00.000+01:00   3.1
-#> 1.2 2024-01-01T00:00:00.000+01:00   3.4
-#> 1.3 2024-02-01T00:00:00.000+01:00   2.8
-#> 1.4 2024-03-01T00:00:00.000+01:00   3.2
+#> 1   2023-12-01T00:00:00.000+01:00   3.1
+#> 1.1 2024-01-01T00:00:00.000+01:00   3.4
+#> 1.2 2024-02-01T00:00:00.000+01:00   2.8
+#> 1.3 2024-03-01T00:00:00.000+01:00   3.2
+#> 1.4 2024-04-01T00:00:00.000+02:00   3.3
 ```
 
 Additionally, it is possible to obtain data from a series between two

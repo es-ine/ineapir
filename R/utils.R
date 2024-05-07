@@ -174,7 +174,7 @@ get_api_data_all_pages <- function(url, request){
     result <- get_api_data(url, request)
 
     # Number of rows
-    numrows <- if(!is.null(nrow(result))) nrow(result) else 1
+    numrows <- if(!is.null(nrow(result))) nrow(result) else -1
 
     # if the number of rows is equal to the length of a page, we query the next page
     while (numrows > 0){
@@ -190,7 +190,7 @@ get_api_data_all_pages <- function(url, request){
       resultpage <- get_api_data(url, request)
 
       # Number of rows
-      numrows <- if(!is.null(nrow(resultpage))) nrow(resultpage) else 1
+      numrows <- if(!is.null(nrow(resultpage))) nrow(resultpage) else -1
 
       # Accumulated result
       result <- rbind(result, resultpage)

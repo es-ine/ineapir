@@ -31,7 +31,7 @@ available statistical information published by INE.
 To install the development version of **ineapir** from GitHub.
 
 ```{r, eval = FALSE}
-remotes::install_github("inedifusion/ineapir")
+remotes::install_github("es-ine/ineapir")
 ```
 
 Alternatively, you can download the source code as a zip file and
@@ -44,7 +44,7 @@ remotes::install_local(path = "path/to/file.zip")
 
 ## Cheatsheet
 
-<a href="https://raw.githubusercontent.com/inedifusion/ineapir/main/man/figures/ineapir.pdf"><img src="man/figures/ineapir_thumbnail.png" width="315"/></a>
+<a href="https://raw.githubusercontent.com/es-ine/ineapir/main/man/figures/ineapir.pdf"><img src="man/figures/ineapir_thumbnail.png" width="315"/></a>
 
 ## Data request examples
 
