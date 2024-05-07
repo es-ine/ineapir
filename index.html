@@ -85,7 +85,7 @@
 </h2>
 <p>To install the development version of <strong>ineapir</strong> from GitHub.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"inedifusion/ineapir"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"es-ine/ineapir"</span><span class="op">)</span></span></code></pre></div>
 <p>Alternatively, you can download the source code as a zip file and then install it as follows.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_local</span><span class="op">(</span>path <span class="op">=</span> <span class="st">"path/to/file.zip"</span><span class="op">)</span></span></code></pre></div>
@@ -93,7 +93,7 @@
 <div class="section level2">
 <h2 id="cheatsheet">Cheatsheet<a class="anchor" aria-label="anchor" href="#cheatsheet"></a>
 </h2>
-<p><a href="https://raw.githubusercontent.com/inedifusion/ineapir/main/man/figures/ineapir.pdf" class="external-link"><img src="reference/figures/ineapir_thumbnail.png" width="315"></a></p>
+<p><a href="https://raw.githubusercontent.com/es-ine/ineapir/main/man/figures/ineapir.pdf" class="external-link"><img src="reference/figures/ineapir_thumbnail.png" width="315"></a></p>
 </div>
 <div class="section level2">
 <h2 id="data-request-examples">Data request examples<a class="anchor" aria-label="anchor" href="#data-request-examples"></a>
@@ -152,8 +152,7 @@
 <span><span class="co">#&gt; 1 IPC251852 Total Nacional. Índice general. Índice.</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">table</span><span class="op">$</span><span class="va">Data</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="co">#&gt;          Fecha FK_TipoDato FK_Periodo Anyo   Valor Secreto</span></span>
-<span><span class="co">#&gt; 1 1.709248e+12           1          3 2024 114.674   FALSE</span></span>
-<span><span class="co">#&gt; 2 1.706742e+12           1          2 2024 113.807   FALSE</span></span></code></pre></div>
+<span><span class="co">#&gt; 1 1.709248e+12           1          3 2024 114.674   FALSE</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="obtaining-data-from-a-series">Obtaining data from a series<a class="anchor" aria-label="anchor" href="#obtaining-data-from-a-series"></a>
@@ -164,18 +163,18 @@
 <span><span class="va">series</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_data_series.html">get_data_series</a></span><span class="op">(</span>codSeries <span class="op">=</span> <span class="st">"IPC251856"</span>, tip <span class="op">=</span> <span class="st">"A"</span><span class="op">)</span></span>
 <span><span class="va">series</span><span class="op">$</span><span class="va">Data</span></span>
 <span><span class="co">#&gt;                           Fecha T3_TipoDato T3_Periodo Anyo Valor</span></span>
-<span><span class="co">#&gt; 1 2024-03-01T00:00:00.000+01:00  Definitivo        M03 2024   3.2</span></span></code></pre></div>
+<span><span class="co">#&gt; 1 2024-04-01T00:00:00.000+02:00      Avance        M04 2024   3.3</span></span></code></pre></div>
 <p>To get the last n data from a series it is necessary to pass the <code>nlast</code> argument as well.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># We use the function get_data_series with arguments codSeries and nlast</span></span>
 <span><span class="va">series</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_data_series.html">get_data_series</a></span><span class="op">(</span>codSeries <span class="op">=</span> <span class="st">"IPC251856"</span>, tip <span class="op">=</span> <span class="st">"A"</span>, nlast <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
 <span><span class="va">series</span><span class="op">$</span><span class="va">Data</span></span>
 <span><span class="co">#&gt;                           Fecha T3_TipoDato T3_Periodo Anyo Valor</span></span>
-<span><span class="co">#&gt; 1 2023-11-01T00:00:00.000+01:00  Definitivo        M11 2023   3.2</span></span>
-<span><span class="co">#&gt; 2 2023-12-01T00:00:00.000+01:00  Definitivo        M12 2023   3.1</span></span>
-<span><span class="co">#&gt; 3 2024-01-01T00:00:00.000+01:00  Definitivo        M01 2024   3.4</span></span>
-<span><span class="co">#&gt; 4 2024-02-01T00:00:00.000+01:00  Definitivo        M02 2024   2.8</span></span>
-<span><span class="co">#&gt; 5 2024-03-01T00:00:00.000+01:00  Definitivo        M03 2024   3.2</span></span>
+<span><span class="co">#&gt; 1 2023-12-01T00:00:00.000+01:00  Definitivo        M12 2023   3.1</span></span>
+<span><span class="co">#&gt; 2 2024-01-01T00:00:00.000+01:00  Definitivo        M01 2024   3.4</span></span>
+<span><span class="co">#&gt; 3 2024-02-01T00:00:00.000+01:00  Definitivo        M02 2024   2.8</span></span>
+<span><span class="co">#&gt; 4 2024-03-01T00:00:00.000+01:00  Definitivo        M03 2024   3.2</span></span>
+<span><span class="co">#&gt; 5 2024-04-01T00:00:00.000+02:00      Avance        M04 2024   3.3</span></span>
 <span></span>
 <span><span class="co"># Using unnest = TRUE</span></span>
 <span><span class="va">series</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_data_series.html">get_data_series</a></span><span class="op">(</span>codSeries <span class="op">=</span> <span class="st">"IPC251856"</span>, tip <span class="op">=</span> <span class="st">"A"</span>, nlast <span class="op">=</span> <span class="fl">5</span>,</span>
@@ -188,11 +187,11 @@
 <span><span class="co">#&gt; 1.3 IPC251856 Total Nacional. Índice general. Variación anual. </span></span>
 <span><span class="co">#&gt; 1.4 IPC251856 Total Nacional. Índice general. Variación anual. </span></span>
 <span><span class="co">#&gt;                             Fecha Valor</span></span>
-<span><span class="co">#&gt; 1   2023-11-01T00:00:00.000+01:00   3.2</span></span>
-<span><span class="co">#&gt; 1.1 2023-12-01T00:00:00.000+01:00   3.1</span></span>
-<span><span class="co">#&gt; 1.2 2024-01-01T00:00:00.000+01:00   3.4</span></span>
-<span><span class="co">#&gt; 1.3 2024-02-01T00:00:00.000+01:00   2.8</span></span>
-<span><span class="co">#&gt; 1.4 2024-03-01T00:00:00.000+01:00   3.2</span></span></code></pre></div>
+<span><span class="co">#&gt; 1   2023-12-01T00:00:00.000+01:00   3.1</span></span>
+<span><span class="co">#&gt; 1.1 2024-01-01T00:00:00.000+01:00   3.4</span></span>
+<span><span class="co">#&gt; 1.2 2024-02-01T00:00:00.000+01:00   2.8</span></span>
+<span><span class="co">#&gt; 1.3 2024-03-01T00:00:00.000+01:00   3.2</span></span>
+<span><span class="co">#&gt; 1.4 2024-04-01T00:00:00.000+02:00   3.3</span></span></code></pre></div>
 <p>Additionally, it is possible to obtain data from a series between two dates. The date must have and specific format (<em>yyyy/mm/dd</em>). If the end date is not specified we obtain all the data from the start date.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># We use the function get_data_series with arguments codSeries, dateStart and dataEnd</span></span>

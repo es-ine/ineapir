@@ -97,9 +97,11 @@ the URL used to call the API.</p>
 <span><span class="va">variables</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_metadata_variables.html">get_metadata_variables</a></span><span class="op">(</span>operation <span class="op">=</span> <span class="st">"IPC"</span>, verbose <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="co">#&gt; - Check lang: OK</span></span>
 <span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/OPERACIONES_DISPONIBLES?page=1</span></span>
+<span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/OPERACIONES_DISPONIBLES?page=2</span></span>
 <span><span class="co">#&gt; - Check operation: OK</span></span>
 <span><span class="co">#&gt; - Check page: OK</span></span>
-<span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/VARIABLES_OPERACION/IPC?page=1</span></span></code></pre></div>
+<span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/VARIABLES_OPERACION/IPC?page=1</span></span>
+<span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/VARIABLES_OPERACION/IPC?page=2</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="use-of-validate">Use of <code>validate</code><a class="anchor" aria-label="anchor" href="#use-of-validate"></a>
@@ -111,7 +113,8 @@ to a function, this validation can be turned off with
 <code class="sourceCode R"><span><span class="co"># Variables used in the operation IPC with verbose = TRUE and validate = FALSE</span></span>
 <span><span class="va">variables</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_metadata_variables.html">get_metadata_variables</a></span><span class="op">(</span>operation <span class="op">=</span> <span class="st">"IPC"</span>, verbose <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>                                    validate <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/VARIABLES_OPERACION/IPC?page=1</span></span></code></pre></div>
+<span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/VARIABLES_OPERACION/IPC?page=1</span></span>
+<span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/VARIABLES_OPERACION/IPC?page=2</span></span></code></pre></div>
 <p>This is useful when we are filtering data and the filter we are using
 is the one we want. Turning off validation means making fewer API calls.
 For better performance, it is recommended to use codes in the filter
@@ -129,19 +132,32 @@ filter is correct.</p>
 <span>                       verbose <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="co">#&gt; - Check lang: OK</span></span>
 <span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/OPERACIONES_DISPONIBLES?page=1</span></span>
+<span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/OPERACIONES_DISPONIBLES?page=2</span></span>
 <span><span class="co">#&gt; - Check operation: OK</span></span>
 <span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/VARIABLES_OPERACION/IPC?page=1</span></span>
+<span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/VARIABLES_OPERACION/IPC?page=2</span></span>
 <span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/VALORES_VARIABLEOPERACION/3/IPC?det=0&amp;page=1</span></span>
+<span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/VALORES_VARIABLEOPERACION/3/IPC?det=0&amp;page=2</span></span>
 <span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/VALORES_VARIABLEOPERACION/70/IPC?det=0&amp;page=1</span></span>
+<span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/VALORES_VARIABLEOPERACION/70/IPC?det=0&amp;page=2</span></span>
 <span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/VALORES_VARIABLEOPERACION/115/IPC?det=0&amp;page=1</span></span>
+<span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/VALORES_VARIABLEOPERACION/115/IPC?det=0&amp;page=2</span></span>
 <span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/VALORES_VARIABLEOPERACION/269/IPC?det=0&amp;page=1</span></span>
+<span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/VALORES_VARIABLEOPERACION/269/IPC?det=0&amp;page=2</span></span>
 <span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/VALORES_VARIABLEOPERACION/270/IPC?det=0&amp;page=1</span></span>
+<span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/VALORES_VARIABLEOPERACION/270/IPC?det=0&amp;page=2</span></span>
 <span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/VALORES_VARIABLEOPERACION/349/IPC?det=0&amp;page=1</span></span>
+<span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/VALORES_VARIABLEOPERACION/349/IPC?det=0&amp;page=2</span></span>
 <span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/VALORES_VARIABLEOPERACION/544/IPC?det=0&amp;page=1</span></span>
+<span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/VALORES_VARIABLEOPERACION/544/IPC?det=0&amp;page=2</span></span>
 <span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/VALORES_VARIABLEOPERACION/762/IPC?det=0&amp;page=1</span></span>
+<span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/VALORES_VARIABLEOPERACION/762/IPC?det=0&amp;page=2</span></span>
 <span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/VALORES_VARIABLEOPERACION/763/IPC?det=0&amp;page=1</span></span>
+<span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/VALORES_VARIABLEOPERACION/763/IPC?det=0&amp;page=2</span></span>
 <span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/VALORES_VARIABLEOPERACION/764/IPC?det=0&amp;page=1</span></span>
+<span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/VALORES_VARIABLEOPERACION/764/IPC?det=0&amp;page=2</span></span>
 <span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/VALORES_VARIABLEOPERACION/765/IPC?det=0&amp;page=1</span></span>
+<span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/VALORES_VARIABLEOPERACION/765/IPC?det=0&amp;page=2</span></span>
 <span><span class="co">#&gt; - Check filter: OK</span></span>
 <span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/PERIODICIDAD_OPERACION/IPC</span></span>
 <span><span class="co">#&gt; - Check periodicity: OK</span></span>
