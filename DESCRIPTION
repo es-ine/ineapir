@@ -14,5 +14,5 @@ Imports:
     httr,
     jsonlite
 Config/Needs/website: rmarkdown
-URL: https://github.com/inedifusion/ineapir, https://inedifusion.github.io/ineapir/
-BugReports: https://github.com/inedifusion/ineapir/issues
+URL: https://github.com/es-ine/ineapir, https://es-ine.github.io/ineapir/
+BugReports: https://github.com/es-ine/ineapir/issues
