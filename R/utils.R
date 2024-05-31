@@ -1,6 +1,9 @@
 # URL root to call the API
 API_URL = "https://servicios.ine.es/wstempus/js"
 
+# API version
+API_version <- 3
+
 # Number of rows per page
 page_lenght = 500
 
@@ -243,6 +246,9 @@ get_parameters_query <- function(request){
       parameters[[x]] <- val
     }
   }
+
+  # include version API
+  parameters[["ver"]] <- API_version
 
   return(parameters)
 
