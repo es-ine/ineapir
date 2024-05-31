@@ -96,12 +96,12 @@ the URL used to call the API.</p>
 <span><span class="co"># Variables used in the operation IPC and verbose = TRUE</span></span>
 <span><span class="va">variables</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_metadata_variables.html">get_metadata_variables</a></span><span class="op">(</span>operation <span class="op">=</span> <span class="st">"IPC"</span>, verbose <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="co">#&gt; - Check lang: OK</span></span>
-<span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/OPERACIONES_DISPONIBLES?page=1</span></span>
-<span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/OPERACIONES_DISPONIBLES?page=2</span></span>
+<span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/OPERACIONES_DISPONIBLES?page=1&amp;ver=3</span></span>
+<span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/OPERACIONES_DISPONIBLES?page=2&amp;ver=3</span></span>
 <span><span class="co">#&gt; - Check operation: OK</span></span>
 <span><span class="co">#&gt; - Check page: OK</span></span>
-<span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/VARIABLES_OPERACION/IPC?page=1</span></span>
-<span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/VARIABLES_OPERACION/IPC?page=2</span></span></code></pre></div>
+<span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/VARIABLES_OPERACION/IPC?page=1&amp;ver=3</span></span>
+<span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/VARIABLES_OPERACION/IPC?page=2&amp;ver=3</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="use-of-validate">Use of <code>validate</code><a class="anchor" aria-label="anchor" href="#use-of-validate"></a>
@@ -113,8 +113,8 @@ to a function, this validation can be turned off with
 <code class="sourceCode R"><span><span class="co"># Variables used in the operation IPC with verbose = TRUE and validate = FALSE</span></span>
 <span><span class="va">variables</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_metadata_variables.html">get_metadata_variables</a></span><span class="op">(</span>operation <span class="op">=</span> <span class="st">"IPC"</span>, verbose <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>                                    validate <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/VARIABLES_OPERACION/IPC?page=1</span></span>
-<span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/VARIABLES_OPERACION/IPC?page=2</span></span></code></pre></div>
+<span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/VARIABLES_OPERACION/IPC?page=1&amp;ver=3</span></span>
+<span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/VARIABLES_OPERACION/IPC?page=2&amp;ver=3</span></span></code></pre></div>
 <p>This is useful when we are filtering data and the filter we are using
 is the one we want. Turning off validation means making fewer API calls.
 For better performance, it is recommended to use codes in the filter
@@ -131,54 +131,55 @@ filter is correct.</p>
 <span><span class="va">ipc</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_data_series_filter.html">get_data_series_filter</a></span><span class="op">(</span>operation <span class="op">=</span> <span class="st">"IPC"</span>, filter <span class="op">=</span> <span class="va">filter</span>, periodicity <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>                       verbose <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="co">#&gt; - Check lang: OK</span></span>
-<span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/OPERACIONES_DISPONIBLES?page=1</span></span>
-<span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/OPERACIONES_DISPONIBLES?page=2</span></span>
+<span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/OPERACIONES_DISPONIBLES?page=1&amp;ver=3</span></span>
+<span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/OPERACIONES_DISPONIBLES?page=2&amp;ver=3</span></span>
 <span><span class="co">#&gt; - Check operation: OK</span></span>
-<span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/VARIABLES_OPERACION/IPC?page=1</span></span>
-<span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/VARIABLES_OPERACION/IPC?page=2</span></span>
-<span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/VALORES_VARIABLEOPERACION/3/IPC?det=0&amp;page=1</span></span>
-<span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/VALORES_VARIABLEOPERACION/3/IPC?det=0&amp;page=2</span></span>
-<span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/VALORES_VARIABLEOPERACION/70/IPC?det=0&amp;page=1</span></span>
-<span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/VALORES_VARIABLEOPERACION/70/IPC?det=0&amp;page=2</span></span>
-<span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/VALORES_VARIABLEOPERACION/115/IPC?det=0&amp;page=1</span></span>
-<span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/VALORES_VARIABLEOPERACION/115/IPC?det=0&amp;page=2</span></span>
-<span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/VALORES_VARIABLEOPERACION/269/IPC?det=0&amp;page=1</span></span>
-<span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/VALORES_VARIABLEOPERACION/269/IPC?det=0&amp;page=2</span></span>
-<span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/VALORES_VARIABLEOPERACION/270/IPC?det=0&amp;page=1</span></span>
-<span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/VALORES_VARIABLEOPERACION/270/IPC?det=0&amp;page=2</span></span>
-<span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/VALORES_VARIABLEOPERACION/349/IPC?det=0&amp;page=1</span></span>
-<span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/VALORES_VARIABLEOPERACION/349/IPC?det=0&amp;page=2</span></span>
-<span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/VALORES_VARIABLEOPERACION/544/IPC?det=0&amp;page=1</span></span>
-<span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/VALORES_VARIABLEOPERACION/544/IPC?det=0&amp;page=2</span></span>
-<span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/VALORES_VARIABLEOPERACION/762/IPC?det=0&amp;page=1</span></span>
-<span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/VALORES_VARIABLEOPERACION/762/IPC?det=0&amp;page=2</span></span>
-<span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/VALORES_VARIABLEOPERACION/763/IPC?det=0&amp;page=1</span></span>
-<span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/VALORES_VARIABLEOPERACION/763/IPC?det=0&amp;page=2</span></span>
-<span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/VALORES_VARIABLEOPERACION/764/IPC?det=0&amp;page=1</span></span>
-<span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/VALORES_VARIABLEOPERACION/764/IPC?det=0&amp;page=2</span></span>
-<span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/VALORES_VARIABLEOPERACION/765/IPC?det=0&amp;page=1</span></span>
-<span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/VALORES_VARIABLEOPERACION/765/IPC?det=0&amp;page=2</span></span>
+<span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/VARIABLES_OPERACION/IPC?page=1&amp;ver=3</span></span>
+<span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/VARIABLES_OPERACION/IPC?page=2&amp;ver=3</span></span>
+<span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/VALORES_VARIABLEOPERACION/3/IPC?det=0&amp;page=1&amp;ver=3</span></span>
+<span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/VALORES_VARIABLEOPERACION/3/IPC?det=0&amp;page=2&amp;ver=3</span></span>
+<span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/VALORES_VARIABLEOPERACION/70/IPC?det=0&amp;page=1&amp;ver=3</span></span>
+<span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/VALORES_VARIABLEOPERACION/70/IPC?det=0&amp;page=2&amp;ver=3</span></span>
+<span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/VALORES_VARIABLEOPERACION/115/IPC?det=0&amp;page=1&amp;ver=3</span></span>
+<span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/VALORES_VARIABLEOPERACION/115/IPC?det=0&amp;page=2&amp;ver=3</span></span>
+<span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/VALORES_VARIABLEOPERACION/269/IPC?det=0&amp;page=1&amp;ver=3</span></span>
+<span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/VALORES_VARIABLEOPERACION/269/IPC?det=0&amp;page=2&amp;ver=3</span></span>
+<span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/VALORES_VARIABLEOPERACION/270/IPC?det=0&amp;page=1&amp;ver=3</span></span>
+<span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/VALORES_VARIABLEOPERACION/270/IPC?det=0&amp;page=2&amp;ver=3</span></span>
+<span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/VALORES_VARIABLEOPERACION/349/IPC?det=0&amp;page=1&amp;ver=3</span></span>
+<span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/VALORES_VARIABLEOPERACION/349/IPC?det=0&amp;page=2&amp;ver=3</span></span>
+<span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/VALORES_VARIABLEOPERACION/544/IPC?det=0&amp;page=1&amp;ver=3</span></span>
+<span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/VALORES_VARIABLEOPERACION/544/IPC?det=0&amp;page=2&amp;ver=3</span></span>
+<span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/VALORES_VARIABLEOPERACION/762/IPC?det=0&amp;page=1&amp;ver=3</span></span>
+<span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/VALORES_VARIABLEOPERACION/762/IPC?det=0&amp;page=2&amp;ver=3</span></span>
+<span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/VALORES_VARIABLEOPERACION/763/IPC?det=0&amp;page=1&amp;ver=3</span></span>
+<span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/VALORES_VARIABLEOPERACION/763/IPC?det=0&amp;page=2&amp;ver=3</span></span>
+<span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/VALORES_VARIABLEOPERACION/764/IPC?det=0&amp;page=1&amp;ver=3</span></span>
+<span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/VALORES_VARIABLEOPERACION/764/IPC?det=0&amp;page=2&amp;ver=3</span></span>
+<span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/VALORES_VARIABLEOPERACION/765/IPC?det=0&amp;page=1&amp;ver=3</span></span>
+<span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/VALORES_VARIABLEOPERACION/765/IPC?det=0&amp;page=2&amp;ver=3</span></span>
 <span><span class="co">#&gt; - Check filter: OK</span></span>
-<span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/PERIODICIDAD_OPERACION/IPC</span></span>
+<span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/PERIODICIDAD_OPERACION/IPC?ver=3</span></span>
 <span><span class="co">#&gt; - Check periodicity: OK</span></span>
 <span><span class="co">#&gt; - Check nlast: OK</span></span>
 <span><span class="co">#&gt; - Check det: OK</span></span>
 <span><span class="co">#&gt; - Check page: OK</span></span>
 <span><span class="co">#&gt; - Processing filter: 0% - Processing filter: 67%        - Processing filter: 83%        - Processing filter: 100%        - Processing filter: 100%         </span></span>
-<span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/DATOS_METADATAOPERACION/IPC?p=1&amp;nult=1&amp;det=0&amp;page=1&amp;g1=115%3A2&amp;g2=3%3A74&amp;g3=762%3A304092</span></span>
-<span></span>
+<span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/DATOS_METADATAOPERACION/IPC?p=1&amp;nult=1&amp;det=0&amp;page=1&amp;ver=3&amp;g1=115%3A2&amp;g2=3%3A74&amp;g3=762%3A304092</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
 <span><span class="co"># Request data using the filter with verbose = TRUE and validate = FALSE</span></span>
 <span><span class="va">ipc</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_data_series_filter.html">get_data_series_filter</a></span><span class="op">(</span>operation <span class="op">=</span> <span class="st">"IPC"</span>, filter <span class="op">=</span> <span class="va">filter</span>, periodicity <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>                       verbose <span class="op">=</span> <span class="cn">TRUE</span>, validate <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="co">#&gt; - Processing filter: 0% - Processing filter: 67%        - Processing filter: 83%        - Processing filter: 100%        - Processing filter: 100%         </span></span>
-<span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/DATOS_METADATAOPERACION/IPC?p=1&amp;nult=1&amp;det=0&amp;page=1&amp;g1=115%3A2&amp;g2=3%3A74&amp;g3=762%3A304092</span></span></code></pre></div>
+<span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/DATOS_METADATAOPERACION/IPC?p=1&amp;nult=1&amp;det=0&amp;page=1&amp;ver=3&amp;g1=115%3A2&amp;g2=3%3A74&amp;g3=762%3A304092</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="use-of-lang">Use of <code>lang</code><a class="anchor" aria-label="anchor" href="#use-of-lang"></a>
 </h2>
 <p>It is possible to retrieve information in English passing the
 argument <code>lang = "EN"</code> to certain functions.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Variables used in the operation IPC and lang = "EN"</span></span>
 <span><span class="va">variables</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_metadata_variables.html">get_metadata_variables</a></span><span class="op">(</span>operation <span class="op">=</span> <span class="st">"IPC"</span>, lang <span class="op">=</span> <span class="st">"EN"</span><span class="op">)</span></span>
 <span><span class="va">variables</span></span>
@@ -196,7 +197,7 @@ argument <code>lang = "EN"</code> to certain functions.</p>
 <span><span class="co">#&gt; 11 765                 Subclases ECOICOP</span></span></code></pre></div>
 <p>We can use the English language as well filtering data using
 shortcuts.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Filter with the values wrapper (CPI)</span></span>
 <span><span class="va">filter</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"annual change"</span> , <span class="st">"overall index"</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
@@ -212,11 +213,11 @@ shortcuts.</p>
 <span><span class="co">#&gt; 1.3 National Total. Overall index. Annual variation (for monthly series). </span></span>
 <span><span class="co">#&gt; 1.4 National Total. Overall index. Annual variation (for monthly series). </span></span>
 <span><span class="co">#&gt;     T3_Periodo Anyo Valor</span></span>
-<span><span class="co">#&gt; 1          M04 2024   3.3</span></span>
-<span><span class="co">#&gt; 1.1        M03 2024   3.2</span></span>
-<span><span class="co">#&gt; 1.2        M02 2024   2.8</span></span>
-<span><span class="co">#&gt; 1.3        M01 2024   3.4</span></span>
-<span><span class="co">#&gt; 1.4        M12 2023   3.1</span></span></code></pre></div>
+<span><span class="co">#&gt; 1          M05 2024   3.6</span></span>
+<span><span class="co">#&gt; 1.1        M04 2024   3.3</span></span>
+<span><span class="co">#&gt; 1.2        M03 2024   3.2</span></span>
+<span><span class="co">#&gt; 1.3        M02 2024   2.8</span></span>
+<span><span class="co">#&gt; 1.4        M01 2024   3.4</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="use-of-unnest">Use of <code>unnest</code><a class="anchor" aria-label="anchor" href="#use-of-unnest"></a>
@@ -226,7 +227,7 @@ shortcuts.</p>
 <code>get_data_series_filter</code>, the <code>$Data</code> column
 containing the data values is a list of data frames, one for each
 entry.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Filter with the values wrapper (CPI)</span></span>
 <span><span class="va">filter</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"variación anual"</span> , <span class="st">"variación mensual"</span>, <span class="st">"índice general"</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
@@ -237,24 +238,25 @@ entry.</p>
 <span> <span class="va">ipc</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"COD"</span>,<span class="st">"Nombre"</span><span class="op">)</span><span class="op">]</span></span>
 <span><span class="co">#&gt;         COD                                              Nombre</span></span>
 <span><span class="co">#&gt; 1 IPC251855 Total Nacional. Índice general. Variación mensual. </span></span>
-<span><span class="co">#&gt; 2 IPC251856   Total Nacional. Índice general. Variación anual.</span></span>
-<span> </span>
+<span><span class="co">#&gt; 2 IPC251856   Total Nacional. Índice general. Variación anual.</span></span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span> </span>
 <span><span class="co"># Data column is a list of two data frames. One for each entry. </span></span>
 <span> <span class="va">ipc</span><span class="op">$</span><span class="va">Data</span></span>
 <span><span class="co">#&gt; [[1]]</span></span>
 <span><span class="co">#&gt;                           Fecha T3_TipoDato T3_Periodo Anyo Valor</span></span>
-<span><span class="co">#&gt; 1 2024-04-01T00:00:00.000+02:00      Avance        M04 2024   0.7</span></span>
-<span><span class="co">#&gt; 2 2024-03-01T00:00:00.000+01:00  Definitivo        M03 2024   0.8</span></span>
-<span><span class="co">#&gt; 3 2024-02-01T00:00:00.000+01:00  Definitivo        M02 2024   0.4</span></span>
+<span><span class="co">#&gt; 1 2024-05-01T00:00:00.000+02:00      Avance        M05 2024   0.3</span></span>
+<span><span class="co">#&gt; 2 2024-04-01T00:00:00.000+02:00  Definitivo        M04 2024   0.7</span></span>
+<span><span class="co">#&gt; 3 2024-03-01T00:00:00.000+01:00  Definitivo        M03 2024   0.8</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; [[2]]</span></span>
 <span><span class="co">#&gt;                           Fecha T3_TipoDato T3_Periodo Anyo Valor</span></span>
-<span><span class="co">#&gt; 1 2024-04-01T00:00:00.000+02:00      Avance        M04 2024   3.3</span></span>
-<span><span class="co">#&gt; 2 2024-03-01T00:00:00.000+01:00  Definitivo        M03 2024   3.2</span></span>
-<span><span class="co">#&gt; 3 2024-02-01T00:00:00.000+01:00  Definitivo        M02 2024   2.8</span></span></code></pre></div>
+<span><span class="co">#&gt; 1 2024-05-01T00:00:00.000+02:00      Avance        M05 2024   3.6</span></span>
+<span><span class="co">#&gt; 2 2024-04-01T00:00:00.000+02:00  Definitivo        M04 2024   3.3</span></span>
+<span><span class="co">#&gt; 3 2024-03-01T00:00:00.000+01:00  Definitivo        M03 2024   3.2</span></span></code></pre></div>
 <p>If we want to get only one data frame for all data values, we can
 pass the argument <code>unnest = TRUE</code>.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Filter with the values wrapper (CPI)</span></span>
 <span><span class="va">filter</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"variación anual"</span> , <span class="st">"variación mensual"</span>, <span class="st">"índice general"</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
@@ -265,12 +267,12 @@ pass the argument <code>unnest = TRUE</code>.</p>
 <span><span class="co"># Unique data frame with 6 rows</span></span>
 <span><span class="va">ipc</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Nombre"</span>, <span class="st">"T3_Periodo"</span>, <span class="st">"Anyo"</span>, <span class="st">"Valor"</span><span class="op">)</span><span class="op">]</span></span>
 <span><span class="co">#&gt;                                                  Nombre T3_Periodo Anyo Valor</span></span>
-<span><span class="co">#&gt; 1   Total Nacional. Índice general. Variación mensual.         M04 2024   0.7</span></span>
-<span><span class="co">#&gt; 1.1 Total Nacional. Índice general. Variación mensual.         M03 2024   0.8</span></span>
-<span><span class="co">#&gt; 1.2 Total Nacional. Índice general. Variación mensual.         M02 2024   0.4</span></span>
-<span><span class="co">#&gt; 2     Total Nacional. Índice general. Variación anual.         M04 2024   3.3</span></span>
-<span><span class="co">#&gt; 2.1   Total Nacional. Índice general. Variación anual.         M03 2024   3.2</span></span>
-<span><span class="co">#&gt; 2.2   Total Nacional. Índice general. Variación anual.         M02 2024   2.8</span></span></code></pre></div>
+<span><span class="co">#&gt; 1   Total Nacional. Índice general. Variación mensual.         M05 2024   0.3</span></span>
+<span><span class="co">#&gt; 1.1 Total Nacional. Índice general. Variación mensual.         M04 2024   0.7</span></span>
+<span><span class="co">#&gt; 1.2 Total Nacional. Índice general. Variación mensual.         M03 2024   0.8</span></span>
+<span><span class="co">#&gt; 2     Total Nacional. Índice general. Variación anual.         M05 2024   3.6</span></span>
+<span><span class="co">#&gt; 2.1   Total Nacional. Índice general. Variación anual.         M04 2024   3.3</span></span>
+<span><span class="co">#&gt; 2.2   Total Nacional. Índice general. Variación anual.         M03 2024   3.2</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="use-of-metanames-and-metacodes">Use of <code>metanames</code> and <code>metacodes</code><a class="anchor" aria-label="anchor" href="#use-of-metanames-and-metacodes"></a>
@@ -280,24 +282,27 @@ additional columns that contain the names of the values extracted from
 the metadata information. To get additional columns containing the codes
 and ids of the values extracted from the metadata information we pass
 the argument <code>metacodes = TRUE</code>.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Filter for total population of men and women </span></span>
 <span><span class="va">filter</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>nacionalidad <span class="op">=</span> <span class="st">"total"</span>, sexo <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"hombres"</span>, <span class="st">"mujeres"</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Table: Resident population by date, sex, age group and nationality</span></span>
 <span><span class="va">poblacion</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_data_table.html">get_data_table</a></span><span class="op">(</span>idTable <span class="op">=</span> <span class="fl">9674</span>, filter <span class="op">=</span> <span class="va">filter</span>, validate <span class="op">=</span> <span class="cn">FALSE</span>, </span>
 <span>                            tip <span class="op">=</span> <span class="st">"AM"</span>, unnest <span class="op">=</span> <span class="cn">TRUE</span>, nlast <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
-<span><span class="co">#&gt; No encoding supplied: defaulting to UTF-8.</span></span>
-<span><span class="co"># Names of columns</span></span>
+<span><span class="co">#&gt; No encoding supplied: defaulting to UTF-8.</span></span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Names of columns</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">poblacion</span><span class="op">)</span></span>
-<span><span class="co">#&gt; NULL</span></span>
-<span></span>
+<span><span class="co">#&gt; NULL</span></span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
 <span><span class="co"># Request data with metanames = TRUE</span></span>
 <span><span class="va">poblacion</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_data_table.html">get_data_table</a></span><span class="op">(</span>idTable <span class="op">=</span> <span class="fl">9674</span>, filter <span class="op">=</span> <span class="va">filter</span>, validate <span class="op">=</span> <span class="cn">FALSE</span>, </span>
 <span>                            tip <span class="op">=</span> <span class="st">"AM"</span>, unnest <span class="op">=</span> <span class="cn">TRUE</span>, nlast <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>                            metanames <span class="op">=</span>  <span class="cn">TRUE</span>, metacodes <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; No encoding supplied: defaulting to UTF-8.</span></span>
-<span></span>
+<span><span class="co">#&gt; No encoding supplied: defaulting to UTF-8.</span></span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
 <span><span class="co"># Additional columns of Nacionalidad, Edad and Sexo</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">poblacion</span><span class="op">)</span></span>
 <span><span class="co">#&gt; NULL</span></span></code></pre></div>
@@ -307,7 +312,7 @@ the argument <code>metacodes = TRUE</code>.</p>
 </h2>
 <p>When we use shortcuts names in the filter, we can also include as
 values regular expressions if this helps us filter the data better.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Filter with a regular expression for ages between 20 and 25 years old</span></span>
 <span><span class="va">filter</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>sexo <span class="op">=</span> <span class="st">"total"</span>, edad <span class="op">=</span> <span class="st">"2[0-5]+"</span><span class="op">)</span></span>
 <span></span>

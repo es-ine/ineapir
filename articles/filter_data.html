@@ -116,8 +116,9 @@ of the table that interest us to build the filter.</li>
 <span><span class="co">#&gt; 1 304092         762                     Índice general     00</span></span>
 <span><span class="co">#&gt; 2 304093         762 Alimentos y bebidas no alcohólicas     01</span></span>
 <span><span class="co">#&gt; 3 304094         762       Bebidas alcohólicas y tabaco     02</span></span>
-<span><span class="co">#&gt; 4 304095         762                  Vestido y calzado     03</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">tail</a></span><span class="op">(</span><span class="va">metadata</span>,<span class="fl">4</span><span class="op">)</span></span>
+<span><span class="co">#&gt; 4 304095         762                  Vestido y calzado     03</span></span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">tail</a></span><span class="op">(</span><span class="va">metadata</span>,<span class="fl">4</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    Id Fk_Variable                        Nombre Codigo</span></span>
 <span><span class="co">#&gt; 14 83           3                        Índice      0</span></span>
 <span><span class="co">#&gt; 15 84           3             Variación mensual      1</span></span>
@@ -126,7 +127,7 @@ of the table that interest us to build the filter.</li>
 <ol start="2" style="list-style-type: decimal">
 <li>With this information we build the filter as follows.</li>
 </ol>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># The filter is a list()</span></span>
 <span><span class="va">filter</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"3"</span> <span class="op">=</span> <span class="st">"74"</span> ,     <span class="co"># variable id = 3, value id = 74</span></span>
 <span>               <span class="st">"762"</span> <span class="op">=</span> <span class="st">"304092"</span> <span class="co"># variable id = 762, value id = 304092</span></span>
@@ -137,11 +138,11 @@ of the table that interest us to build the filter.</li>
 <span>                      tip <span class="op">=</span> <span class="st">"A"</span>, nlast <span class="op">=</span> <span class="fl">5</span>, validate <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="va">ipc</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Nombre"</span>, <span class="st">"T3_Periodo"</span>, <span class="st">"Anyo"</span>, <span class="st">"Valor"</span><span class="op">)</span><span class="op">]</span></span>
 <span><span class="co">#&gt;                                                Nombre T3_Periodo Anyo Valor</span></span>
-<span><span class="co">#&gt; 1   Total Nacional. Índice general. Variación anual.         M04 2024   3.3</span></span>
-<span><span class="co">#&gt; 1.1 Total Nacional. Índice general. Variación anual.         M03 2024   3.2</span></span>
-<span><span class="co">#&gt; 1.2 Total Nacional. Índice general. Variación anual.         M02 2024   2.8</span></span>
-<span><span class="co">#&gt; 1.3 Total Nacional. Índice general. Variación anual.         M01 2024   3.4</span></span>
-<span><span class="co">#&gt; 1.4 Total Nacional. Índice general. Variación anual.         M12 2023   3.1</span></span></code></pre></div>
+<span><span class="co">#&gt; 1   Total Nacional. Índice general. Variación anual.         M05 2024   3.6</span></span>
+<span><span class="co">#&gt; 1.1 Total Nacional. Índice general. Variación anual.         M04 2024   3.3</span></span>
+<span><span class="co">#&gt; 1.2 Total Nacional. Índice general. Variación anual.         M03 2024   3.2</span></span>
+<span><span class="co">#&gt; 1.3 Total Nacional. Índice general. Variación anual.         M02 2024   2.8</span></span>
+<span><span class="co">#&gt; 1.4 Total Nacional. Índice general. Variación anual.         M01 2024   3.4</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="case-two-pc-axis-file">Case two (pc-axis file)<a class="anchor" aria-label="anchor" href="#case-two-pc-axis-file"></a>
@@ -155,7 +156,7 @@ of the table that interest us to build the filter.</li>
 <li>The first step is to obtain the metadata information from a
 table.</li>
 </ol>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Get metadata information of the table</span></span>
 <span><span class="va">metadata</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_metadata_table_varval.html">get_metadata_table_varval</a></span><span class="op">(</span>idTable <span class="op">=</span> <span class="st">"t20/e245/p08/l0/01001.px"</span><span class="op">)</span></span>
 <span><span class="va">metadata</span></span>
@@ -167,11 +168,11 @@ table.</li>
 <span><span class="co">#&gt; 9         Mujeres       mujeres                    Sexo                 sexo</span></span>
 <span><span class="co">#&gt; 11      Españoles     espanoles   Españoles/Extranjeros espanolesextranjeros</span></span>
 <span><span class="co">#&gt; 20    Extranjeros   extranjeros   Españoles/Extranjeros espanolesextranjeros</span></span>
-<span><span class="co">#&gt; 29  % Extranjeros extranjeros~3   Españoles/Extranjeros espanolesextranjeros</span></span>
+<span><span class="co">#&gt; 29  % Extranjeros extranjeros~1   Españoles/Extranjeros espanolesextranjeros</span></span>
 <span><span class="co">#&gt; 37      0-15 años       015anos edad (3 grupos de edad)    edad3gruposdeedad</span></span>
 <span><span class="co">#&gt; 73     16-64 años      1664anos edad (3 grupos de edad)    edad3gruposdeedad</span></span>
 <span><span class="co">#&gt; 109      65 y más        65ymas edad (3 grupos de edad)    edad3gruposdeedad</span></span></code></pre></div>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># NOTE: for px tables we can use a filter.</span></span>
 <span><span class="va">metadata</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_metadata_table_varval.html">get_metadata_table_varval</a></span><span class="op">(</span>idTable <span class="op">=</span> <span class="st">"t20/e245/p08/l0/01001.px"</span>,</span>
 <span>                                      filter <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>sexo <span class="op">=</span> <span class="st">"ambossexos"</span><span class="op">)</span><span class="op">)</span></span>
@@ -182,14 +183,14 @@ table.</li>
 <span><span class="co">#&gt; 3    Ambos sexos    ambossexos                    Sexo                 sexo</span></span>
 <span><span class="co">#&gt; 5      Españoles     espanoles   Españoles/Extranjeros espanolesextranjeros</span></span>
 <span><span class="co">#&gt; 8    Extranjeros   extranjeros   Españoles/Extranjeros espanolesextranjeros</span></span>
-<span><span class="co">#&gt; 11 % Extranjeros extranjeros~3   Españoles/Extranjeros espanolesextranjeros</span></span>
+<span><span class="co">#&gt; 11 % Extranjeros extranjeros~1   Españoles/Extranjeros espanolesextranjeros</span></span>
 <span><span class="co">#&gt; 13     0-15 años       015anos edad (3 grupos de edad)    edad3gruposdeedad</span></span>
 <span><span class="co">#&gt; 25    16-64 años      1664anos edad (3 grupos de edad)    edad3gruposdeedad</span></span>
 <span><span class="co">#&gt; 37      65 y más        65ymas edad (3 grupos de edad)    edad3gruposdeedad</span></span></code></pre></div>
 <ol start="2" style="list-style-type: decimal">
 <li>With this information we build the filter as follows.</li>
 </ol>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Build the filter with the codes of variables and values</span></span>
 <span><span class="va">filter</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>sexo <span class="op">=</span> <span class="st">"ambossexos"</span>,              </span>
 <span>               espanolesextranjeros <span class="op">=</span> <span class="st">"total"</span>,   </span>
@@ -220,7 +221,7 @@ table.</li>
 <li>The first step is to obtain the metadata information from a
 table.</li>
 </ol>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Get metadata information of the table</span></span>
 <span><span class="va">metadata</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_metadata_table_varval.html">get_metadata_table_varval</a></span><span class="op">(</span>idTable <span class="op">=</span> <span class="fl">33387</span><span class="op">)</span></span>
 <span><span class="va">metadata</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grepl</a></span><span class="op">(</span><span class="st">"^\\d{1}\\D+"</span>,<span class="va">metadata</span><span class="op">$</span><span class="va">Codigo</span><span class="op">)</span>,<span class="op">]</span></span>
@@ -234,7 +235,7 @@ table.</li>
 <span><span class="co">#&gt; 29  2mineralesmetalicosmineralenbruto tipo de material  tipodematerial</span></span>
 <span><span class="co">#&gt; 50              3mineralesnometalicos tipo de material  tipodematerial</span></span>
 <span><span class="co">#&gt; 106              4combustiblesfosiles tipo de material  tipodematerial</span></span></code></pre></div>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># NOTE: for tpx tables we can use a filter.</span></span>
 <span><span class="va">metadata</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_metadata_table_varval.html">get_metadata_table_varval</a></span><span class="op">(</span>idTable <span class="op">=</span> <span class="fl">33387</span>,</span>
 <span>                                      filter <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>tipodematerial <span class="op">=</span> <span class="st">"1biomasa"</span><span class="op">)</span><span class="op">)</span></span>
@@ -244,7 +245,7 @@ table.</li>
 <ol start="2" style="list-style-type: decimal">
 <li>With this information we build the filter as follows.</li>
 </ol>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Build the filter with the codes of variables and values</span></span>
 <span><span class="co"># A variable can take more than one value</span></span>
 <span><span class="va">filter</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>tipodematerial <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"1biomasa"</span>, <span class="st">"2mineralesmetalicosmineralenbruto"</span>,</span>
@@ -270,7 +271,7 @@ table.</li>
 <li>There are tpx tables that contain variable ids and value ids. We can
 see that when we obtain the metadata information from a table.</li>
 </ol>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Get metadata information of the table using a filter.</span></span>
 <span><span class="co"># The filter is useful when the table contains a large number of series</span></span>
 <span><span class="co"># (for example, tables with a large territorial segmentation) which slows down</span></span>
@@ -288,7 +289,7 @@ see that when we obtain the metadata information from a table.</li>
 filter. To do this we add the alias <em>~id</em> at the end of each
 id.</li>
 </ol>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># In order to use the ids of variables and values we add the alias '~id'</span></span>
 <span><span class="va">filter</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"349~id"</span> <span class="op">=</span> <span class="st">"16473~id"</span>,  <span class="co"># variable id = 349, value id = 16473</span></span>
 <span>              <span class="st">"916~id"</span> <span class="op">=</span> <span class="st">"391871~id"</span>, <span class="co"># variable id = 909, value id = 391455</span></span>
@@ -321,7 +322,7 @@ id.</li>
 <li>The first step is to obtain the variables used in the operation to
 which the series belong.</li>
 </ol>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Variables used in the operation IPC</span></span>
 <span><span class="va">variables</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_metadata_variables.html">get_metadata_variables</a></span><span class="op">(</span>operation <span class="op">=</span> <span class="st">"IPC"</span>, validate <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="va">variables</span></span>
@@ -341,7 +342,7 @@ which the series belong.</li>
 <li>The second step is to obtain the values of the variables that
 interest us to build the filter.</li>
 </ol>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Values of the variable with id = 115</span></span>
 <span><span class="va">provincias</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_metadata_values.html">get_metadata_values</a></span><span class="op">(</span>operation <span class="op">=</span> <span class="st">"IPC"</span>, variable <span class="op">=</span> <span class="fl">115</span>, validate <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">provincias</span><span class="op">)</span></span>
@@ -351,8 +352,9 @@ interest us to build the filter.</li>
 <span><span class="co">#&gt; 3  4         115 Alicante/Alacant     03               9006</span></span>
 <span><span class="co">#&gt; 4  5         115          Almería     04               8997</span></span>
 <span><span class="co">#&gt; 5  6         115            Ávila     05               9003</span></span>
-<span><span class="co">#&gt; 6  7         115          Badajoz     06               9007</span></span>
-<span></span>
+<span><span class="co">#&gt; 6  7         115          Badajoz     06               9007</span></span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
 <span><span class="co"># Values of the variable with id = 3</span></span>
 <span><span class="va">tipo</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_metadata_values.html">get_metadata_values</a></span><span class="op">(</span>operation <span class="op">=</span> <span class="st">"IPC"</span>, variable <span class="op">=</span> <span class="fl">3</span>, validate <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">tipo</span><span class="op">)</span></span>
@@ -362,8 +364,9 @@ interest us to build the filter.</li>
 <span><span class="co">#&gt; 3 83           3            Índice       </span></span>
 <span><span class="co">#&gt; 4 84           3 Variación mensual       </span></span>
 <span><span class="co">#&gt; 5 85           3       Media anual      M</span></span>
-<span><span class="co">#&gt; 6 86           3   Variación anual</span></span>
-<span></span>
+<span><span class="co">#&gt; 6 86           3   Variación anual</span></span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
 <span><span class="co"># Values of the variable with id = 762</span></span>
 <span><span class="va">grupos</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_metadata_values.html">get_metadata_values</a></span><span class="op">(</span>operation <span class="op">=</span> <span class="st">"IPC"</span>, variable <span class="op">=</span> <span class="fl">762</span>, validate <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">grupos</span>, <span class="fl">4</span><span class="op">)</span></span>
@@ -376,8 +379,9 @@ interest us to build the filter.</li>
 <span><span class="co">#&gt; 1               NULL</span></span>
 <span><span class="co">#&gt; 2             304092</span></span>
 <span><span class="co">#&gt; 3             304092</span></span>
-<span><span class="co">#&gt; 4             304092</span></span>
-<span></span>
+<span><span class="co">#&gt; 4             304092</span></span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
 <span><span class="co"># We can get all the values at once with the function get_metadata_series_varval</span></span>
 <span><span class="va">varval</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_metadata_series_varval.html">get_metadata_series_varval</a></span><span class="op">(</span>operation <span class="op">=</span> <span class="st">"IPC"</span>, validate <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">varval</span>, <span class="va">Fk_Variable</span> <span class="op">==</span> <span class="fl">115</span><span class="op">)</span><span class="op">)</span></span>
@@ -387,16 +391,18 @@ interest us to build the filter.</li>
 <span><span class="co">#&gt; 35  4         115 Alicante/Alacant     03</span></span>
 <span><span class="co">#&gt; 36  5         115          Almería     04</span></span>
 <span><span class="co">#&gt; 37  6         115            Ávila     05</span></span>
-<span><span class="co">#&gt; 38  7         115          Badajoz     06</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">varval</span>, <span class="va">Fk_Variable</span> <span class="op">==</span> <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; 38  7         115          Badajoz     06</span></span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">varval</span>, <span class="va">Fk_Variable</span> <span class="op">==</span> <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt;   Id Fk_Variable            Nombre Codigo</span></span>
 <span><span class="co">#&gt; 1 72           3         Dato base       </span></span>
 <span><span class="co">#&gt; 2 74           3   Variación anual       </span></span>
 <span><span class="co">#&gt; 3 83           3            Índice       </span></span>
 <span><span class="co">#&gt; 4 84           3 Variación mensual       </span></span>
 <span><span class="co">#&gt; 5 85           3       Media anual      M</span></span>
-<span><span class="co">#&gt; 6 86           3   Variación anual</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">varval</span>, <span class="va">Fk_Variable</span> <span class="op">==</span> <span class="fl">762</span><span class="op">)</span>, <span class="fl">4</span><span class="op">)</span></span>
+<span><span class="co">#&gt; 6 86           3   Variación anual</span></span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">varval</span>, <span class="va">Fk_Variable</span> <span class="op">==</span> <span class="fl">762</span><span class="op">)</span>, <span class="fl">4</span><span class="op">)</span></span>
 <span><span class="co">#&gt;         Id Fk_Variable                             Nombre Codigo</span></span>
 <span><span class="co">#&gt; 176 304092         762                     Índice general     00</span></span>
 <span><span class="co">#&gt; 177 304093         762 Alimentos y bebidas no alcohólicas     01</span></span>
@@ -405,7 +411,7 @@ interest us to build the filter.</li>
 <ol start="3" style="list-style-type: decimal">
 <li>With this information we build the filter as follows.</li>
 </ol>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># The filter is a list()</span></span>
 <span><span class="va">filter</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"115"</span> <span class="op">=</span> <span class="st">"2"</span>,     <span class="co"># variable id = 115, value id = 2</span></span>
 <span>               <span class="st">"3"</span> <span class="op">=</span> <span class="st">"74"</span> ,     <span class="co"># variable id = 3, value id = 74</span></span>
@@ -417,12 +423,12 @@ interest us to build the filter.</li>
 <span>                              unnest <span class="op">=</span> <span class="cn">TRUE</span>, tip <span class="op">=</span> <span class="st">"A"</span>, validate <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="va">ipc</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Nombre"</span>, <span class="st">"T3_Periodo"</span>, <span class="st">"Anyo"</span>, <span class="st">"Valor"</span><span class="op">)</span><span class="op">]</span></span>
 <span><span class="co">#&gt;                                           Nombre T3_Periodo Anyo Valor</span></span>
-<span><span class="co">#&gt; 1 Araba/Álava. Índice general. Variación anual.         M03 2024   2.6</span></span></code></pre></div>
+<span><span class="co">#&gt; 1 Araba/Álava. Índice general. Variación anual.       Abril 2024   2.8</span></span></code></pre></div>
 <ul>
 <li>A variable can take more than one value (valid to filter data from
 tables as well).</li>
 </ul>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># The filter is a list()</span></span>
 <span><span class="va">filter</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"115"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"2"</span> ,<span class="st">"3"</span>, <span class="st">"4"</span><span class="op">)</span>, <span class="co"># variable id = 115, values id 2, 3, 4</span></span>
 <span>               <span class="st">"3"</span> <span class="op">=</span> <span class="st">"74"</span> ,              <span class="co"># variable id = 3, value id = 74</span></span>
@@ -434,14 +440,14 @@ tables as well).</li>
 <span>                              unnest <span class="op">=</span> <span class="cn">TRUE</span>, tip <span class="op">=</span> <span class="st">"A"</span>, validate <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="va">ipc</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Nombre"</span>, <span class="st">"T3_Periodo"</span>, <span class="st">"Anyo"</span>, <span class="st">"Valor"</span><span class="op">)</span><span class="op">]</span></span>
 <span><span class="co">#&gt;                                                Nombre T3_Periodo Anyo Valor</span></span>
-<span><span class="co">#&gt; 1 Alicante/Alacant. Índice general. Variación anual.         M03 2024   3.3</span></span>
-<span><span class="co">#&gt; 2         Albacete. Índice general. Variación anual.         M03 2024   3.8</span></span>
-<span><span class="co">#&gt; 3      Araba/Álava. Índice general. Variación anual.         M03 2024   2.6</span></span></code></pre></div>
+<span><span class="co">#&gt; 1 Alicante/Alacant. Índice general. Variación anual.       Abril 2024   3.4</span></span>
+<span><span class="co">#&gt; 2         Albacete. Índice general. Variación anual.       Abril 2024   3.7</span></span>
+<span><span class="co">#&gt; 3      Araba/Álava. Índice general. Variación anual.       Abril 2024   2.8</span></span></code></pre></div>
 <ul>
 <li>A variable can take a empty character <code>""</code> to get all its
 possible values (valid to filter data from tables as well).</li>
 </ul>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># The filter is a list()</span></span>
 <span><span class="va">filter</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"115"</span> <span class="op">=</span> <span class="st">""</span>,      <span class="co"># variable id = 115, all values</span></span>
 <span>               <span class="st">"3"</span> <span class="op">=</span> <span class="st">"83"</span> ,     <span class="co"># variable id = 3, value id = 83</span></span>
@@ -453,58 +459,58 @@ possible values (valid to filter data from tables as well).</li>
 <span>                              unnest <span class="op">=</span> <span class="cn">TRUE</span>, tip <span class="op">=</span> <span class="st">"A"</span>, validate <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="va">ipc</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Nombre"</span>, <span class="st">"T3_Periodo"</span>, <span class="st">"Anyo"</span>, <span class="st">"Valor"</span><span class="op">)</span><span class="op">]</span></span>
 <span><span class="co">#&gt;                                              Nombre T3_Periodo Anyo   Valor</span></span>
-<span><span class="co">#&gt; 1               Salamanca. Índice general. Índice.         M03 2024 115.044</span></span>
-<span><span class="co">#&gt; 2                  Huelva. Índice general. Índice.         M03 2024 116.141</span></span>
-<span><span class="co">#&gt; 3             Ciudad Real. Índice general. Índice.         M03 2024 116.615</span></span>
-<span><span class="co">#&gt; 4        Alicante/Alacant. Índice general. Índice.         M03 2024 115.270</span></span>
-<span><span class="co">#&gt; 5                 Ourense. Índice general. Índice.         M03 2024 115.905</span></span>
-<span><span class="co">#&gt; 6  Santa Cruz de Tenerife. Índice general. Índice.         M03 2024 115.325</span></span>
-<span><span class="co">#&gt; 7               Coruña, A. Índice general. Índice.         M03 2024 114.966</span></span>
-<span><span class="co">#&gt; 8              Valladolid. Índice general. Índice.         M03 2024 114.715</span></span>
-<span><span class="co">#&gt; 9                  Huesca. Índice general. Índice.         M03 2024 115.567</span></span>
-<span><span class="co">#&gt; 10                  Cádiz. Índice general. Índice.         M03 2024 115.203</span></span>
-<span><span class="co">#&gt; 11                 Málaga. Índice general. Índice.         M03 2024 115.805</span></span>
-<span><span class="co">#&gt; 12                 Teruel. Índice general. Índice.         M03 2024 115.016</span></span>
-<span><span class="co">#&gt; 13               Albacete. Índice general. Índice.         M03 2024 116.104</span></span>
-<span><span class="co">#&gt; 14              Rioja, La. Índice general. Índice.         M03 2024 115.094</span></span>
-<span><span class="co">#&gt; 15             Pontevedra. Índice general. Índice.         M03 2024 116.097</span></span>
-<span><span class="co">#&gt; 16                Melilla. Índice general. Índice.         M03 2024 115.472</span></span>
-<span><span class="co">#&gt; 17                 Cuenca. Índice general. Índice.         M03 2024 116.193</span></span>
-<span><span class="co">#&gt; 18                 Toledo. Índice general. Índice.         M03 2024 117.418</span></span>
-<span><span class="co">#&gt; 19                Córdoba. Índice general. Índice.         M03 2024 115.351</span></span>
-<span><span class="co">#&gt; 20                  Ceuta. Índice general. Índice.         M03 2024 114.471</span></span>
-<span><span class="co">#&gt; 21                Granada. Índice general. Índice.         M03 2024 115.328</span></span>
-<span><span class="co">#&gt; 22                  Ávila. Índice general. Índice.         M03 2024 116.649</span></span>
-<span><span class="co">#&gt; 23              Tarragona. Índice general. Índice.         M03 2024 114.383</span></span>
-<span><span class="co">#&gt; 24                  Soria. Índice general. Índice.         M03 2024 115.125</span></span>
-<span><span class="co">#&gt; 25      Valencia/València. Índice general. Índice.         M03 2024 114.268</span></span>
-<span><span class="co">#&gt; 26            Guadalajara. Índice general. Índice.         M03 2024 116.388</span></span>
-<span><span class="co">#&gt; 27                 Burgos. Índice general. Índice.         M03 2024 114.825</span></span>
-<span><span class="co">#&gt; 28                   Lugo. Índice general. Índice.         M03 2024 115.875</span></span>
-<span><span class="co">#&gt; 29               Gipuzkoa. Índice general. Índice.         M03 2024 114.429</span></span>
-<span><span class="co">#&gt; 30                Almería. Índice general. Índice.         M03 2024 114.303</span></span>
-<span><span class="co">#&gt; 31                 Girona. Índice general. Índice.         M03 2024 114.640</span></span>
-<span><span class="co">#&gt; 32                 Lleida. Índice general. Índice.         M03 2024 115.963</span></span>
-<span><span class="co">#&gt; 33               Zaragoza. Índice general. Índice.         M03 2024 114.588</span></span>
-<span><span class="co">#&gt; 34                 Zamora. Índice general. Índice.         M03 2024 116.655</span></span>
-<span><span class="co">#&gt; 35     Castellón/Castelló. Índice general. Índice.         M03 2024 115.995</span></span>
-<span><span class="co">#&gt; 36                   Jaén. Índice general. Índice.         M03 2024 115.400</span></span>
-<span><span class="co">#&gt; 37               Asturias. Índice general. Índice.         M03 2024 114.575</span></span>
-<span><span class="co">#&gt; 38            Araba/Álava. Índice general. Índice.         M03 2024 113.217</span></span>
-<span><span class="co">#&gt; 39                Badajoz. Índice general. Índice.         M03 2024 115.486</span></span>
-<span><span class="co">#&gt; 40                 Madrid. Índice general. Índice.         M03 2024 113.227</span></span>
-<span><span class="co">#&gt; 41                Bizkaia. Índice general. Índice.         M03 2024 114.784</span></span>
-<span><span class="co">#&gt; 42              Cantabria. Índice general. Índice.         M03 2024 114.484</span></span>
-<span><span class="co">#&gt; 43            Palmas, Las. Índice general. Índice.         M03 2024 114.823</span></span>
-<span><span class="co">#&gt; 44                Segovia. Índice general. Índice.         M03 2024 115.499</span></span>
-<span><span class="co">#&gt; 45               Palencia. Índice general. Índice.         M03 2024 114.948</span></span>
-<span><span class="co">#&gt; 46                Sevilla. Índice general. Índice.         M03 2024 115.054</span></span>
-<span><span class="co">#&gt; 47                   León. Índice general. Índice.         M03 2024 117.025</span></span>
-<span><span class="co">#&gt; 48         Balears, Illes. Índice general. Índice.         M03 2024 114.454</span></span>
-<span><span class="co">#&gt; 49              Barcelona. Índice general. Índice.         M03 2024 113.857</span></span>
-<span><span class="co">#&gt; 50                Navarra. Índice general. Índice.         M03 2024 114.967</span></span>
-<span><span class="co">#&gt; 51                Cáceres. Índice general. Índice.         M03 2024 113.881</span></span>
-<span><span class="co">#&gt; 52                 Murcia. Índice general. Índice.         M03 2024 115.475</span></span></code></pre></div>
+<span><span class="co">#&gt; 1               Salamanca. Índice general. Índice.       Abril 2024 115.684</span></span>
+<span><span class="co">#&gt; 2                  Huelva. Índice general. Índice.       Abril 2024 117.308</span></span>
+<span><span class="co">#&gt; 3             Ciudad Real. Índice general. Índice.       Abril 2024 117.500</span></span>
+<span><span class="co">#&gt; 4        Alicante/Alacant. Índice general. Índice.       Abril 2024 116.100</span></span>
+<span><span class="co">#&gt; 5                 Ourense. Índice general. Índice.       Abril 2024 117.051</span></span>
+<span><span class="co">#&gt; 6  Santa Cruz de Tenerife. Índice general. Índice.       Abril 2024 115.822</span></span>
+<span><span class="co">#&gt; 7               Coruña, A. Índice general. Índice.       Abril 2024 115.978</span></span>
+<span><span class="co">#&gt; 8              Valladolid. Índice general. Índice.       Abril 2024 115.580</span></span>
+<span><span class="co">#&gt; 9                  Huesca. Índice general. Índice.       Abril 2024 116.496</span></span>
+<span><span class="co">#&gt; 10                  Cádiz. Índice general. Índice.       Abril 2024 116.130</span></span>
+<span><span class="co">#&gt; 11                 Málaga. Índice general. Índice.       Abril 2024 116.660</span></span>
+<span><span class="co">#&gt; 12                 Teruel. Índice general. Índice.       Abril 2024 115.438</span></span>
+<span><span class="co">#&gt; 13               Albacete. Índice general. Índice.       Abril 2024 117.341</span></span>
+<span><span class="co">#&gt; 14              Rioja, La. Índice general. Índice.       Abril 2024 116.000</span></span>
+<span><span class="co">#&gt; 15             Pontevedra. Índice general. Índice.       Abril 2024 117.061</span></span>
+<span><span class="co">#&gt; 16                Melilla. Índice general. Índice.       Abril 2024 116.899</span></span>
+<span><span class="co">#&gt; 17                 Cuenca. Índice general. Índice.       Abril 2024 116.696</span></span>
+<span><span class="co">#&gt; 18                 Toledo. Índice general. Índice.       Abril 2024 118.362</span></span>
+<span><span class="co">#&gt; 19                Córdoba. Índice general. Índice.       Abril 2024 116.518</span></span>
+<span><span class="co">#&gt; 20                  Ceuta. Índice general. Índice.       Abril 2024 115.523</span></span>
+<span><span class="co">#&gt; 21                Granada. Índice general. Índice.       Abril 2024 116.190</span></span>
+<span><span class="co">#&gt; 22                  Ávila. Índice general. Índice.       Abril 2024 117.668</span></span>
+<span><span class="co">#&gt; 23              Tarragona. Índice general. Índice.       Abril 2024 115.167</span></span>
+<span><span class="co">#&gt; 24                  Soria. Índice general. Índice.       Abril 2024 115.866</span></span>
+<span><span class="co">#&gt; 25      Valencia/València. Índice general. Índice.       Abril 2024 114.798</span></span>
+<span><span class="co">#&gt; 26            Guadalajara. Índice general. Índice.       Abril 2024 117.399</span></span>
+<span><span class="co">#&gt; 27                 Burgos. Índice general. Índice.       Abril 2024 115.906</span></span>
+<span><span class="co">#&gt; 28                   Lugo. Índice general. Índice.       Abril 2024 116.655</span></span>
+<span><span class="co">#&gt; 29               Gipuzkoa. Índice general. Índice.       Abril 2024 115.254</span></span>
+<span><span class="co">#&gt; 30                Almería. Índice general. Índice.       Abril 2024 115.239</span></span>
+<span><span class="co">#&gt; 31                 Girona. Índice general. Índice.       Abril 2024 115.413</span></span>
+<span><span class="co">#&gt; 32                 Lleida. Índice general. Índice.       Abril 2024 116.785</span></span>
+<span><span class="co">#&gt; 33               Zaragoza. Índice general. Índice.       Abril 2024 115.148</span></span>
+<span><span class="co">#&gt; 34                 Zamora. Índice general. Índice.       Abril 2024 117.605</span></span>
+<span><span class="co">#&gt; 35     Castellón/Castelló. Índice general. Índice.       Abril 2024 116.552</span></span>
+<span><span class="co">#&gt; 36                   Jaén. Índice general. Índice.       Abril 2024 116.410</span></span>
+<span><span class="co">#&gt; 37               Asturias. Índice general. Índice.       Abril 2024 115.438</span></span>
+<span><span class="co">#&gt; 38            Araba/Álava. Índice general. Índice.       Abril 2024 114.253</span></span>
+<span><span class="co">#&gt; 39                Badajoz. Índice general. Índice.       Abril 2024 116.525</span></span>
+<span><span class="co">#&gt; 40                 Madrid. Índice general. Índice.       Abril 2024 113.935</span></span>
+<span><span class="co">#&gt; 41                Bizkaia. Índice general. Índice.       Abril 2024 115.721</span></span>
+<span><span class="co">#&gt; 42              Cantabria. Índice general. Índice.       Abril 2024 115.393</span></span>
+<span><span class="co">#&gt; 43            Palmas, Las. Índice general. Índice.       Abril 2024 115.684</span></span>
+<span><span class="co">#&gt; 44                Segovia. Índice general. Índice.       Abril 2024 116.242</span></span>
+<span><span class="co">#&gt; 45               Palencia. Índice general. Índice.       Abril 2024 115.531</span></span>
+<span><span class="co">#&gt; 46                Sevilla. Índice general. Índice.       Abril 2024 115.936</span></span>
+<span><span class="co">#&gt; 47                   León. Índice general. Índice.       Abril 2024 117.894</span></span>
+<span><span class="co">#&gt; 48         Balears, Illes. Índice general. Índice.       Abril 2024 115.606</span></span>
+<span><span class="co">#&gt; 49              Barcelona. Índice general. Índice.       Abril 2024 114.536</span></span>
+<span><span class="co">#&gt; 50                Navarra. Índice general. Índice.       Abril 2024 115.591</span></span>
+<span><span class="co">#&gt; 51                Cáceres. Índice general. Índice.       Abril 2024 114.771</span></span>
+<span><span class="co">#&gt; 52                 Murcia. Índice general. Índice.       Abril 2024 116.118</span></span></code></pre></div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>
