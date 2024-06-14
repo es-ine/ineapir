@@ -104,7 +104,7 @@ filter <- list(values = c("producto interior", "datos ajustados", "variación an
 # Request data using the filter and shortcut = TRUE
 pib <- get_data_table(idTable = 30679, filter = filter, unnest = TRUE,
                       tip = "A", nlast = 5, validate = FALSE)
-pib[,c("Nombre", "T3_Periodo", "Anyo", "Valor")]
+head(pib[,c("Nombre", "T3_Periodo", "Anyo", "Valor")])
 ```
 
 ### Example three

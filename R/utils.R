@@ -371,193 +371,195 @@ build_filter <- function(parameter, definition, addons, checkfilter){
 
     # It is necessary to include shortcut in the case of a px table with a code equal to a shortcut (eg sexo)
     if(shortcut && short){
-      # filter with ids
-      filterout <- list()
+      if(!is.null(dfval)){
+        # filter with ids
+        filterout <- list()
 
-      if(origin == "tablepx"){
-        # Select codes
-        varid <- unique(dfval$Variable.Codigo)
+        if(origin == "tablepx"){
+          # Select codes
+          varid <- unique(dfval$Variable.Codigo)
 
-        # We select only the values of variables present in the filter
-        dfvalfilter <- subset(dfval, dfval$Variable.Codigo %in% varid)
+          # We select only the values of variables present in the filter
+          dfvalfilter <- subset(dfval, dfval$Variable.Codigo %in% varid)
 
-      }else if(origin == "tablepxid"){
-        # Select codes
-        varid <- c(unique(dfval$Variable.Codigo), unique(dfval$Variable.Id))
+        }else if(origin == "tablepxid"){
+          # Select codes
+          varid <- c(unique(dfval$Variable.Codigo), unique(dfval$Variable.Id))
 
-        # We select only the values of variables present in the filter
-        dfvalfilter <- subset(dfval, dfval$Variable.Codigo %in% varid | dfval$Variable.Id %in% varid)
-
-      }else{
-        if(tolower(n) %in% shortcut_wrapper){
-          # Select ids
-          varid <- unique(dfval$Fk_Variable)
+          # We select only the values of variables present in the filter
+          dfvalfilter <- subset(dfval, dfval$Variable.Codigo %in% varid | dfval$Variable.Id %in% varid)
 
         }else{
-          # id of variables
-          varid <- shortcuts_filter[[tolower(n)]]
-        }
-
-        # We select only the values of variables present in the filter
-        dfvalfilter <- subset(dfval, dfval$Fk_Variable %in% varid)
-      }
-
-      # Reset the values found
-      dfvalgrep <- NULL
-
-      # Find a match between the filter inputs and the possible values
-      for(f in filter[[n]]){
-
-        ### Way one:  find a value for the largest word
-        # Split the phrase
-        valshort1 <- if(nchar(f) > 0 ) unlist(strsplit(as.character(f), "\\s+")) else f
-
-        # Find the largest word
-        valshort1 <- valshort1[which.max(nchar(valshort1))]
-
-        # Find a match for the largest word and the possible values
-        ind1 <- grepl(valshort1, dfvalfilter$Nombre, ignore.case = TRUE)
-
-        # Dataframe with the matches
-        dfvalgrep1 <- subset(dfvalfilter, ind1)
-
-        ### Way two: find a value for the entire string
-        # Find a match for the entire phrase and the possible values
-        ind2 <- grepl(f, dfvalfilter$Nombre, ignore.case = TRUE)
-
-        # Dataframe with the matches
-        dfvalgrep2 <- subset(dfvalfilter, ind2)
-
-        # Intersect the values from these two different ways
-        if(nrow(dfvalgrep1) > 0 && nrow(dfvalgrep2) == 0){
-          dfvalgreptmp <- dfvalgrep1
-
-        }else if(nrow(dfvalgrep1) == 0 && nrow(dfvalgrep2) > 0){
-          dfvalgreptmp <- dfvalgrep2
-
-        }else if(nrow(dfvalgrep1) > 0 && nrow(dfvalgrep2) > 0){
-          if(origin == "tablepx"){
-            dfvalgrep2 <- subset(dfvalgrep2, select = c("Codigo", "Variable.Codigo"))
-            dfvalgreptmp <- merge(dfvalgrep1, dfvalgrep2, by = c("Codigo", "Variable.Codigo"))
-
-          }else if(origin == "tablepxid"){
-            dfvalgrep2 <- subset(dfvalgrep2, select = c("Id", "Variable.Id"))
-            dfvalgreptmp <- merge(dfvalgrep1, dfvalgrep2, by = c("Id", "Variable.Id"))
+          if(tolower(n) %in% shortcut_wrapper){
+            # Select ids
+            varid <- unique(dfval$Fk_Variable)
 
           }else{
-            dfvalgrep2 <- subset(dfvalgrep2, select = c("Id", "Fk_Variable"))
-            dfvalgreptmp <- merge(dfvalgrep1, dfvalgrep2, by = c("Id", "Fk_Variable"))
+            # id of variables
+            varid <- shortcuts_filter[[tolower(n)]]
           }
-        }else{
-          dfvalgreptmp <- dfvalgrep1
+
+          # We select only the values of variables present in the filter
+          dfvalfilter <- subset(dfval, dfval$Fk_Variable %in% varid)
         }
 
-        # If there is no match result look in the id
-        if(nrow(dfvalgreptmp) == 0){
-          if(origin == "tablepx"){
-            dfvalgreptmp <- subset(dfvalfilter, grepl(paste0("^",f,"$"), dfvalfilter$Codigo))
+        # Reset the values found
+        dfvalgrep <- NULL
 
-          }else if(origin == "tablepxid"){
-            dfvalgreptmp <- subset(dfvalfilter, grepl(paste0("^",f,"$"), c(dfvalfilter$Codigo, dfvalfilter$Id)))
+        # Find a match between the filter inputs and the possible values
+        for(f in filter[[n]]){
 
+          ### Way one:  find a value for the largest word
+          # Split the phrase
+          valshort1 <- if(nchar(f) > 0 ) unlist(strsplit(as.character(f), "\\s+")) else f
+
+          # Find the largest word
+          valshort1 <- valshort1[which.max(nchar(valshort1))]
+
+          # Find a match for the largest word and the possible values
+          ind1 <- grepl(valshort1, dfvalfilter$Nombre, ignore.case = TRUE)
+
+          # Dataframe with the matches
+          dfvalgrep1 <- subset(dfvalfilter, ind1)
+
+          ### Way two: find a value for the entire string
+          # Find a match for the entire phrase and the possible values
+          ind2 <- grepl(f, dfvalfilter$Nombre, ignore.case = TRUE)
+
+          # Dataframe with the matches
+          dfvalgrep2 <- subset(dfvalfilter, ind2)
+
+          # Intersect the values from these two different ways
+          if(nrow(dfvalgrep1) > 0 && nrow(dfvalgrep2) == 0){
+            dfvalgreptmp <- dfvalgrep1
+
+          }else if(nrow(dfvalgrep1) == 0 && nrow(dfvalgrep2) > 0){
+            dfvalgreptmp <- dfvalgrep2
+
+          }else if(nrow(dfvalgrep1) > 0 && nrow(dfvalgrep2) > 0){
+            if(origin == "tablepx"){
+              dfvalgrep2 <- subset(dfvalgrep2, select = c("Codigo", "Variable.Codigo"))
+              dfvalgreptmp <- merge(dfvalgrep1, dfvalgrep2, by = c("Codigo", "Variable.Codigo"))
+
+            }else if(origin == "tablepxid"){
+              dfvalgrep2 <- subset(dfvalgrep2, select = c("Id", "Variable.Id"))
+              dfvalgreptmp <- merge(dfvalgrep1, dfvalgrep2, by = c("Id", "Variable.Id"))
+
+            }else{
+              dfvalgrep2 <- subset(dfvalgrep2, select = c("Id", "Fk_Variable"))
+              dfvalgreptmp <- merge(dfvalgrep1, dfvalgrep2, by = c("Id", "Fk_Variable"))
+            }
           }else{
-            dfvalgreptmp <- subset(dfvalfilter, grepl(paste0("^",f,"$"), dfvalfilter$Id))
+            dfvalgreptmp <- dfvalgrep1
           }
-        }
 
-        # We add a column with the counter
-        dfvalgreptmp$i <- rep(i,nrow(dfvalgreptmp))
+          # If there is no match result look in the id
+          if(nrow(dfvalgreptmp) == 0){
+            if(origin == "tablepx"){
+              dfvalgreptmp <- subset(dfvalfilter, grepl(paste0("^",f,"$"), dfvalfilter$Codigo))
 
-        # Transform the filter in a the format used by the API
-        if(nchar(f) > 0){
+            }else if(origin == "tablepxid"){
+              dfvalgreptmp <- subset(dfvalfilter, grepl(paste0("^",f,"$"), c(dfvalfilter$Codigo, dfvalfilter$Id)))
 
-          # When grep found something
-          if(nrow(dfvalgreptmp) > 0){
+            }else{
+              dfvalgreptmp <- subset(dfvalfilter, grepl(paste0("^",f,"$"), dfvalfilter$Id))
+            }
+          }
 
-            # We go through all the matches
-            for(r in 1:nrow(dfvalgreptmp)){
-              if(origin == "tablepx"){
-                # Variable code
-                var <- dfvalgreptmp$Variable.Codigo[r]
+          # We add a column with the counter
+          dfvalgreptmp$i <- rep(i,nrow(dfvalgreptmp))
 
-                # Value code
-                filterout[[var]] <- dfvalgreptmp$Codigo[r]
+          # Transform the filter in a the format used by the API
+          if(nchar(f) > 0){
 
-              }else if(origin == "tablepxid"){
-                # Variable id
-                var <- dfvalgreptmp$Variable.Id[r]
+            # When grep found something
+            if(nrow(dfvalgreptmp) > 0){
 
-                # Value id
-                filterout[[var]] <- dfvalgreptmp$Id[r]
+              # We go through all the matches
+              for(r in 1:nrow(dfvalgreptmp)){
+                if(origin == "tablepx"){
+                  # Variable code
+                  var <- dfvalgreptmp$Variable.Codigo[r]
 
-              }else{
-                # Variable id
-                var <- dfvalgreptmp$Fk_Variable[r]
+                  # Value code
+                  filterout[[var]] <- dfvalgreptmp$Codigo[r]
 
-                # Value id
-                filterout[[var]] <- dfvalgreptmp$Id[r]
+                }else if(origin == "tablepxid"){
+                  # Variable id
+                  var <- dfvalgreptmp$Variable.Id[r]
 
-                if(exists("dfvalgrep") && is.data.frame(get("dfvalgrep")) ){
+                  # Value id
+                  filterout[[var]] <- dfvalgreptmp$Id[r]
 
-                  # If the variable id has been used in the filter, set the same counter
-                  if(is.element(var, dfvalgrep$Fk_Variable)){
-                    i <- dfvalgrep[dfvalgrep$Fk_Variable == var,]$i[1]
-                    dfvalgreptmp$i[r] <- i
-                  }else{
-                    if(nrow(dfvalgrep) > 0){
-                      i <- max(dfvalgrep$i) + 1
+                }else{
+                  # Variable id
+                  var <- dfvalgreptmp$Fk_Variable[r]
+
+                  # Value id
+                  filterout[[var]] <- dfvalgreptmp$Id[r]
+
+                  if(exists("dfvalgrep") && is.data.frame(get("dfvalgrep")) ){
+
+                    # If the variable id has been used in the filter, set the same counter
+                    if(is.element(var, dfvalgrep$Fk_Variable)){
+                      i <- dfvalgrep[dfvalgrep$Fk_Variable == var,]$i[1]
+                      dfvalgreptmp$i[r] <- i
+                    }else{
+                      if(nrow(dfvalgrep) > 0){
+                        i <- max(dfvalgrep$i) + 1
+                      }
                     }
                   }
                 }
+
+                # Check the filter comes from a table or a series
+                parurl <- if(is.element("idtable",parnames)) "tv" else paste0("g", i)
+
+                # Build the filter with the format of the API
+                tmp <- paste0(parurl, "=", var, ":", filterout[[var]])
+
+                # Vector with all the values in the format of the API
+                val <- append(val, tmp)
+
+                # List with all the values
+                lval <- append(lval, list(paste0(var, ":", filterout[[var]])))
+                names(lval)[length(lval)] <- parurl
               }
+            }
+          }else{
+            # Case when the value introduced is and empty character ""
+            if(length(varid) == 1){
+              # value set to ""
+              filterout[[varid]] <- f
 
               # Check the filter comes from a table or a series
               parurl <- if(is.element("idtable",parnames)) "tv" else paste0("g", i)
 
               # Build the filter with the format of the API
-              tmp <- paste0(parurl, "=", var, ":", filterout[[var]])
+              tmp <- paste0(parurl, "=", varid, ":", filterout[[varid]])
 
               # Vector with all the values in the format of the API
               val <- append(val, tmp)
 
               # List with all the values
-              lval <- append(lval, list(paste0(var, ":", filterout[[var]])))
+              lval <- append(lval, list(paste0(varid, ":", filterout[[varid]])))
               names(lval)[length(lval)] <- parurl
             }
           }
-        }else{
-          # Case when the value introduced is and empty character ""
-          if(length(varid) == 1){
-            # value set to ""
-            filterout[[varid]] <- f
 
-            # Check the filter comes from a table or a series
-            parurl <- if(is.element("idtable",parnames)) "tv" else paste0("g", i)
-
-            # Build the filter with the format of the API
-            tmp <- paste0(parurl, "=", varid, ":", filterout[[varid]])
-
-            # Vector with all the values in the format of the API
-            val <- append(val, tmp)
-
-            # List with all the values
-            lval <- append(lval, list(paste0(varid, ":", filterout[[varid]])))
-            names(lval)[length(lval)] <- parurl
+          if (exists("dfvalgrep") && is.data.frame(get("dfvalgrep"))){
+            dfvalgrep <- rbind(dfvalgrep,dfvalgreptmp)
+          }else{
+            dfvalgrep <- dfvalgreptmp
           }
-        }
 
-        if (exists("dfvalgrep") && is.data.frame(get("dfvalgrep"))){
-          dfvalgrep <- rbind(dfvalgrep,dfvalgreptmp)
-        }else{
-          dfvalgrep <- dfvalgreptmp
-        }
+          if(addons$verbose){
+            cat(sprintf("- Processing filter: %s%%        \r", round(50 + j/sum(lengths(filter))*50,0)))
+          }
 
-        if(addons$verbose){
-          cat(sprintf("- Processing filter: %s%%        \r", round(50 + j/sum(lengths(filter))*50,0)))
+          i <- i + 1
+          j <- j + 1
         }
-
-        i <- i + 1
-        j <- j + 1
       }
       # When there are no shortcuts in the filter
     }else{
@@ -1202,7 +1204,7 @@ check_filter <- function(parameter, verbose, definition){
   df <- get_filter_values(parameter, definition$lang, shortcut = TRUE, verbose = verbose, progress = FALSE)
 
   # Make sure the response is valid or null
-  if(!check_result_status(df$values)){
+  if(check_result(df$values)){
 
     # The filter comes from a px table
     if(df$origin == "tablepx"){
@@ -2008,7 +2010,10 @@ get_metadata_variable_values_table <- function(idTable, filter = NULL, verbose, 
         }
 
         df <- get_metadata_table_values(idTable = idTable, idGroup = g, validate = FALSE, lang = lang, verbose = verbose)
-        df <- subset(df, select = c("Id", "Fk_Variable", "Nombre", "Codigo"))
+
+        if(!is.null(df)){
+          df <- subset(df, select = c("Id", "Fk_Variable", "Nombre", "Codigo"))
+        }
 
         if (exists("dfvalues") && is.data.frame(get("dfvalues"))){
           dfvalues <- rbind(dfvalues,df)
