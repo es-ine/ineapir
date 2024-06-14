@@ -423,7 +423,7 @@ interest us to build the filter.</li>
 <span>                              unnest <span class="op">=</span> <span class="cn">TRUE</span>, tip <span class="op">=</span> <span class="st">"A"</span>, validate <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="va">ipc</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Nombre"</span>, <span class="st">"T3_Periodo"</span>, <span class="st">"Anyo"</span>, <span class="st">"Valor"</span><span class="op">)</span><span class="op">]</span></span>
 <span><span class="co">#&gt;                                           Nombre T3_Periodo Anyo Valor</span></span>
-<span><span class="co">#&gt; 1 Araba/Álava. Índice general. Variación anual.       Abril 2024   2.8</span></span></code></pre></div>
+<span><span class="co">#&gt; 1 Araba/Álava. Índice general. Variación anual.        Mayo 2024   3.6</span></span></code></pre></div>
 <ul>
 <li>A variable can take more than one value (valid to filter data from
 tables as well).</li>
@@ -440,9 +440,9 @@ tables as well).</li>
 <span>                              unnest <span class="op">=</span> <span class="cn">TRUE</span>, tip <span class="op">=</span> <span class="st">"A"</span>, validate <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="va">ipc</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Nombre"</span>, <span class="st">"T3_Periodo"</span>, <span class="st">"Anyo"</span>, <span class="st">"Valor"</span><span class="op">)</span><span class="op">]</span></span>
 <span><span class="co">#&gt;                                                Nombre T3_Periodo Anyo Valor</span></span>
-<span><span class="co">#&gt; 1 Alicante/Alacant. Índice general. Variación anual.       Abril 2024   3.4</span></span>
-<span><span class="co">#&gt; 2         Albacete. Índice general. Variación anual.       Abril 2024   3.7</span></span>
-<span><span class="co">#&gt; 3      Araba/Álava. Índice general. Variación anual.       Abril 2024   2.8</span></span></code></pre></div>
+<span><span class="co">#&gt; 1 Alicante/Alacant. Índice general. Variación anual.        Mayo 2024   3.8</span></span>
+<span><span class="co">#&gt; 2         Albacete. Índice general. Variación anual.        Mayo 2024   3.9</span></span>
+<span><span class="co">#&gt; 3      Araba/Álava. Índice general. Variación anual.        Mayo 2024   3.6</span></span></code></pre></div>
 <ul>
 <li>A variable can take a empty character <code>""</code> to get all its
 possible values (valid to filter data from tables as well).</li>
@@ -459,58 +459,58 @@ possible values (valid to filter data from tables as well).</li>
 <span>                              unnest <span class="op">=</span> <span class="cn">TRUE</span>, tip <span class="op">=</span> <span class="st">"A"</span>, validate <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="va">ipc</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Nombre"</span>, <span class="st">"T3_Periodo"</span>, <span class="st">"Anyo"</span>, <span class="st">"Valor"</span><span class="op">)</span><span class="op">]</span></span>
 <span><span class="co">#&gt;                                              Nombre T3_Periodo Anyo   Valor</span></span>
-<span><span class="co">#&gt; 1               Salamanca. Índice general. Índice.       Abril 2024 115.684</span></span>
-<span><span class="co">#&gt; 2                  Huelva. Índice general. Índice.       Abril 2024 117.308</span></span>
-<span><span class="co">#&gt; 3             Ciudad Real. Índice general. Índice.       Abril 2024 117.500</span></span>
-<span><span class="co">#&gt; 4        Alicante/Alacant. Índice general. Índice.       Abril 2024 116.100</span></span>
-<span><span class="co">#&gt; 5                 Ourense. Índice general. Índice.       Abril 2024 117.051</span></span>
-<span><span class="co">#&gt; 6  Santa Cruz de Tenerife. Índice general. Índice.       Abril 2024 115.822</span></span>
-<span><span class="co">#&gt; 7               Coruña, A. Índice general. Índice.       Abril 2024 115.978</span></span>
-<span><span class="co">#&gt; 8              Valladolid. Índice general. Índice.       Abril 2024 115.580</span></span>
-<span><span class="co">#&gt; 9                  Huesca. Índice general. Índice.       Abril 2024 116.496</span></span>
-<span><span class="co">#&gt; 10                  Cádiz. Índice general. Índice.       Abril 2024 116.130</span></span>
-<span><span class="co">#&gt; 11                 Málaga. Índice general. Índice.       Abril 2024 116.660</span></span>
-<span><span class="co">#&gt; 12                 Teruel. Índice general. Índice.       Abril 2024 115.438</span></span>
-<span><span class="co">#&gt; 13               Albacete. Índice general. Índice.       Abril 2024 117.341</span></span>
-<span><span class="co">#&gt; 14              Rioja, La. Índice general. Índice.       Abril 2024 116.000</span></span>
-<span><span class="co">#&gt; 15             Pontevedra. Índice general. Índice.       Abril 2024 117.061</span></span>
-<span><span class="co">#&gt; 16                Melilla. Índice general. Índice.       Abril 2024 116.899</span></span>
-<span><span class="co">#&gt; 17                 Cuenca. Índice general. Índice.       Abril 2024 116.696</span></span>
-<span><span class="co">#&gt; 18                 Toledo. Índice general. Índice.       Abril 2024 118.362</span></span>
-<span><span class="co">#&gt; 19                Córdoba. Índice general. Índice.       Abril 2024 116.518</span></span>
-<span><span class="co">#&gt; 20                  Ceuta. Índice general. Índice.       Abril 2024 115.523</span></span>
-<span><span class="co">#&gt; 21                Granada. Índice general. Índice.       Abril 2024 116.190</span></span>
-<span><span class="co">#&gt; 22                  Ávila. Índice general. Índice.       Abril 2024 117.668</span></span>
-<span><span class="co">#&gt; 23              Tarragona. Índice general. Índice.       Abril 2024 115.167</span></span>
-<span><span class="co">#&gt; 24                  Soria. Índice general. Índice.       Abril 2024 115.866</span></span>
-<span><span class="co">#&gt; 25      Valencia/València. Índice general. Índice.       Abril 2024 114.798</span></span>
-<span><span class="co">#&gt; 26            Guadalajara. Índice general. Índice.       Abril 2024 117.399</span></span>
-<span><span class="co">#&gt; 27                 Burgos. Índice general. Índice.       Abril 2024 115.906</span></span>
-<span><span class="co">#&gt; 28                   Lugo. Índice general. Índice.       Abril 2024 116.655</span></span>
-<span><span class="co">#&gt; 29               Gipuzkoa. Índice general. Índice.       Abril 2024 115.254</span></span>
-<span><span class="co">#&gt; 30                Almería. Índice general. Índice.       Abril 2024 115.239</span></span>
-<span><span class="co">#&gt; 31                 Girona. Índice general. Índice.       Abril 2024 115.413</span></span>
-<span><span class="co">#&gt; 32                 Lleida. Índice general. Índice.       Abril 2024 116.785</span></span>
-<span><span class="co">#&gt; 33               Zaragoza. Índice general. Índice.       Abril 2024 115.148</span></span>
-<span><span class="co">#&gt; 34                 Zamora. Índice general. Índice.       Abril 2024 117.605</span></span>
-<span><span class="co">#&gt; 35     Castellón/Castelló. Índice general. Índice.       Abril 2024 116.552</span></span>
-<span><span class="co">#&gt; 36                   Jaén. Índice general. Índice.       Abril 2024 116.410</span></span>
-<span><span class="co">#&gt; 37               Asturias. Índice general. Índice.       Abril 2024 115.438</span></span>
-<span><span class="co">#&gt; 38            Araba/Álava. Índice general. Índice.       Abril 2024 114.253</span></span>
-<span><span class="co">#&gt; 39                Badajoz. Índice general. Índice.       Abril 2024 116.525</span></span>
-<span><span class="co">#&gt; 40                 Madrid. Índice general. Índice.       Abril 2024 113.935</span></span>
-<span><span class="co">#&gt; 41                Bizkaia. Índice general. Índice.       Abril 2024 115.721</span></span>
-<span><span class="co">#&gt; 42              Cantabria. Índice general. Índice.       Abril 2024 115.393</span></span>
-<span><span class="co">#&gt; 43            Palmas, Las. Índice general. Índice.       Abril 2024 115.684</span></span>
-<span><span class="co">#&gt; 44                Segovia. Índice general. Índice.       Abril 2024 116.242</span></span>
-<span><span class="co">#&gt; 45               Palencia. Índice general. Índice.       Abril 2024 115.531</span></span>
-<span><span class="co">#&gt; 46                Sevilla. Índice general. Índice.       Abril 2024 115.936</span></span>
-<span><span class="co">#&gt; 47                   León. Índice general. Índice.       Abril 2024 117.894</span></span>
-<span><span class="co">#&gt; 48         Balears, Illes. Índice general. Índice.       Abril 2024 115.606</span></span>
-<span><span class="co">#&gt; 49              Barcelona. Índice general. Índice.       Abril 2024 114.536</span></span>
-<span><span class="co">#&gt; 50                Navarra. Índice general. Índice.       Abril 2024 115.591</span></span>
-<span><span class="co">#&gt; 51                Cáceres. Índice general. Índice.       Abril 2024 114.771</span></span>
-<span><span class="co">#&gt; 52                 Murcia. Índice general. Índice.       Abril 2024 116.118</span></span></code></pre></div>
+<span><span class="co">#&gt; 1               Salamanca. Índice general. Índice.        Mayo 2024 116.489</span></span>
+<span><span class="co">#&gt; 2                  Huelva. Índice general. Índice.        Mayo 2024 117.277</span></span>
+<span><span class="co">#&gt; 3             Ciudad Real. Índice general. Índice.        Mayo 2024 117.655</span></span>
+<span><span class="co">#&gt; 4        Alicante/Alacant. Índice general. Índice.        Mayo 2024 116.364</span></span>
+<span><span class="co">#&gt; 5                 Ourense. Índice general. Índice.        Mayo 2024 117.210</span></span>
+<span><span class="co">#&gt; 6  Santa Cruz de Tenerife. Índice general. Índice.        Mayo 2024 116.099</span></span>
+<span><span class="co">#&gt; 7               Coruña, A. Índice general. Índice.        Mayo 2024 116.251</span></span>
+<span><span class="co">#&gt; 8              Valladolid. Índice general. Índice.        Mayo 2024 115.919</span></span>
+<span><span class="co">#&gt; 9                  Huesca. Índice general. Índice.        Mayo 2024 116.638</span></span>
+<span><span class="co">#&gt; 10                  Cádiz. Índice general. Índice.        Mayo 2024 116.242</span></span>
+<span><span class="co">#&gt; 11                 Málaga. Índice general. Índice.        Mayo 2024 117.075</span></span>
+<span><span class="co">#&gt; 12                 Teruel. Índice general. Índice.        Mayo 2024 116.092</span></span>
+<span><span class="co">#&gt; 13               Albacete. Índice general. Índice.        Mayo 2024 117.424</span></span>
+<span><span class="co">#&gt; 14              Rioja, La. Índice general. Índice.        Mayo 2024 116.203</span></span>
+<span><span class="co">#&gt; 15             Pontevedra. Índice general. Índice.        Mayo 2024 117.285</span></span>
+<span><span class="co">#&gt; 16                Melilla. Índice general. Índice.        Mayo 2024 117.095</span></span>
+<span><span class="co">#&gt; 17                 Cuenca. Índice general. Índice.        Mayo 2024 116.880</span></span>
+<span><span class="co">#&gt; 18                 Toledo. Índice general. Índice.        Mayo 2024 118.544</span></span>
+<span><span class="co">#&gt; 19                Córdoba. Índice general. Índice.        Mayo 2024 116.843</span></span>
+<span><span class="co">#&gt; 20                  Ceuta. Índice general. Índice.        Mayo 2024 115.552</span></span>
+<span><span class="co">#&gt; 21                Granada. Índice general. Índice.        Mayo 2024 116.531</span></span>
+<span><span class="co">#&gt; 22                  Ávila. Índice general. Índice.        Mayo 2024 118.009</span></span>
+<span><span class="co">#&gt; 23              Tarragona. Índice general. Índice.        Mayo 2024 115.485</span></span>
+<span><span class="co">#&gt; 24                  Soria. Índice general. Índice.        Mayo 2024 116.185</span></span>
+<span><span class="co">#&gt; 25      Valencia/València. Índice general. Índice.        Mayo 2024 115.140</span></span>
+<span><span class="co">#&gt; 26            Guadalajara. Índice general. Índice.        Mayo 2024 117.282</span></span>
+<span><span class="co">#&gt; 27                 Burgos. Índice general. Índice.        Mayo 2024 115.963</span></span>
+<span><span class="co">#&gt; 28                   Lugo. Índice general. Índice.        Mayo 2024 117.034</span></span>
+<span><span class="co">#&gt; 29               Gipuzkoa. Índice general. Índice.        Mayo 2024 115.754</span></span>
+<span><span class="co">#&gt; 30                Almería. Índice general. Índice.        Mayo 2024 115.430</span></span>
+<span><span class="co">#&gt; 31                 Girona. Índice general. Índice.        Mayo 2024 115.667</span></span>
+<span><span class="co">#&gt; 32                 Lleida. Índice general. Índice.        Mayo 2024 117.145</span></span>
+<span><span class="co">#&gt; 33               Zaragoza. Índice general. Índice.        Mayo 2024 115.420</span></span>
+<span><span class="co">#&gt; 34                 Zamora. Índice general. Índice.        Mayo 2024 117.773</span></span>
+<span><span class="co">#&gt; 35     Castellón/Castelló. Índice general. Índice.        Mayo 2024 116.969</span></span>
+<span><span class="co">#&gt; 36                   Jaén. Índice general. Índice.        Mayo 2024 116.842</span></span>
+<span><span class="co">#&gt; 37               Asturias. Índice general. Índice.        Mayo 2024 115.410</span></span>
+<span><span class="co">#&gt; 38            Araba/Álava. Índice general. Índice.        Mayo 2024 114.908</span></span>
+<span><span class="co">#&gt; 39                Badajoz. Índice general. Índice.        Mayo 2024 116.919</span></span>
+<span><span class="co">#&gt; 40                 Madrid. Índice general. Índice.        Mayo 2024 114.149</span></span>
+<span><span class="co">#&gt; 41                Bizkaia. Índice general. Índice.        Mayo 2024 116.165</span></span>
+<span><span class="co">#&gt; 42              Cantabria. Índice general. Índice.        Mayo 2024 115.759</span></span>
+<span><span class="co">#&gt; 43            Palmas, Las. Índice general. Índice.        Mayo 2024 115.723</span></span>
+<span><span class="co">#&gt; 44                Segovia. Índice general. Índice.        Mayo 2024 116.669</span></span>
+<span><span class="co">#&gt; 45               Palencia. Índice general. Índice.        Mayo 2024 115.811</span></span>
+<span><span class="co">#&gt; 46                Sevilla. Índice general. Índice.        Mayo 2024 116.184</span></span>
+<span><span class="co">#&gt; 47                   León. Índice general. Índice.        Mayo 2024 118.305</span></span>
+<span><span class="co">#&gt; 48         Balears, Illes. Índice general. Índice.        Mayo 2024 116.027</span></span>
+<span><span class="co">#&gt; 49              Barcelona. Índice general. Índice.        Mayo 2024 114.971</span></span>
+<span><span class="co">#&gt; 50                Navarra. Índice general. Índice.        Mayo 2024 116.080</span></span>
+<span><span class="co">#&gt; 51                Cáceres. Índice general. Índice.        Mayo 2024 114.945</span></span>
+<span><span class="co">#&gt; 52                 Murcia. Índice general. Índice.        Mayo 2024 116.620</span></span></code></pre></div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>
