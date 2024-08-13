@@ -5,68 +5,52 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="ineapir">
 <title>How to filter data using shortcut names • ineapir</title>
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
-<!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.11/clipboard.min.js" integrity="sha512-7O5pXpc0oCRrxk8RUfDYFgn0nO1t+jLuIOQdOMRp4APB7uZ4vSjspzp5y6YDtDs4VzUSTbWzBFZ/LKJhnyFOKw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="How to filter data using shortcut names">
-<meta property="og:description" content="ineapir">
-<!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
-<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-<![endif]-->
+<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.4.2/css/all.min.css" rel="stylesheet">
+<link href="../deps/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet">
+<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="How to filter data using shortcut names">
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
-    
 
-    <nav class="navbar fixed-top navbar-light navbar-expand-lg bg-light" data-bs-theme="light"><div class="container">
-    
+
+    <nav class="navbar navbar-expand-lg fixed-top bg-light" data-bs-theme="light" aria-label="Site navigation"><div class="container">
+
     <a class="navbar-brand me-2" href="../index.html">ineapir</a>
 
     <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9000</small>
 
-    
+
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
-<li class="nav-item">
-  <a class="nav-link" href="../reference/index.html">Reference</a>
-</li>
+<li class="nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
 <li class="active nav-item dropdown">
-  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
-  <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="../articles/filter_data_shortcuts.html">How to filter data using shortcut names</a>
-    <a class="dropdown-item" href="../articles/filter_data.html">How to filter data</a>
-    <a class="dropdown-item" href="../articles/identify_codes.html">How to identify the codes of tables and series on the INE website</a>
-    <a class="dropdown-item" href="../articles/tips.html">Tips</a>
-    <a class="dropdown-item" href="../articles/usage.html">Usage examples</a>
-  </div>
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
+<li><a class="dropdown-item" href="../articles/filter_data_shortcuts.html">How to filter data using shortcut names</a></li>
+    <li><a class="dropdown-item" href="../articles/filter_data.html">How to filter data</a></li>
+    <li><a class="dropdown-item" href="../articles/identify_codes.html">How to identify the codes of tables and series on the INE website</a></li>
+    <li><a class="dropdown-item" href="../articles/tips.html">Tips</a></li>
+    <li><a class="dropdown-item" href="../articles/usage.html">Usage examples</a></li>
+  </ul>
 </li>
-<li class="nav-item">
-  <a class="nav-link" href="../news/index.html">Changelog</a>
-</li>
+<li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
       </ul>
-<form class="form-inline my-2 my-lg-0" role="search">
-        <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off">
-</form>
-
-      <ul class="navbar-nav">
-<li class="nav-item">
-  <a class="external-link nav-link" href="https://github.com/es-ine/ineapir/" aria-label="github">
-    <span class="fab fa fab fa-github fa-lg"></span>
-     
-  </a>
-</li>
+<ul class="navbar-nav">
+<li class="nav-item"><form class="form-inline" role="search">
+ <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json">
+</form></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://github.com/es-ine/ineapir/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
       </ul>
 </div>
 
-    
+
   </div>
 </nav><div class="container template-article">
 
@@ -75,10 +59,11 @@
 
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
-      <img src="" class="logo" alt=""><h1>How to filter data using shortcut names</h1>
+
+      <h1>How to filter data using shortcut names</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/es-ine/ineapir/blob/HEAD/vignettes/articles/filter_data_shortcuts.Rmd" class="external-link"><code>vignettes/articles/filter_data_shortcuts.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/es-ine/ineapir/blob/main/vignettes/articles/filter_data_shortcuts.Rmd" class="external-link"><code>vignettes/articles/filter_data_shortcuts.Rmd</code></a></small>
       <div class="d-none name"><code>filter_data_shortcuts.Rmd</code></div>
     </div>
 
@@ -336,11 +321,11 @@ general y de grupos ECOICOP</a> (Id 50902):</p>
 <span>                      tip <span class="op">=</span> <span class="st">"A"</span>, nlast <span class="op">=</span> <span class="fl">5</span>, validate <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="va">ipc</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Nombre"</span>, <span class="st">"T3_Periodo"</span>, <span class="st">"Anyo"</span>, <span class="st">"Valor"</span><span class="op">)</span><span class="op">]</span></span>
 <span><span class="co">#&gt;                                                Nombre T3_Periodo Anyo Valor</span></span>
-<span><span class="co">#&gt; 1   Total Nacional. Índice general. Variación anual.         M05 2024   3.6</span></span>
-<span><span class="co">#&gt; 1.1 Total Nacional. Índice general. Variación anual.         M04 2024   3.3</span></span>
-<span><span class="co">#&gt; 1.2 Total Nacional. Índice general. Variación anual.         M03 2024   3.2</span></span>
-<span><span class="co">#&gt; 1.3 Total Nacional. Índice general. Variación anual.         M02 2024   2.8</span></span>
-<span><span class="co">#&gt; 1.4 Total Nacional. Índice general. Variación anual.         M01 2024   3.4</span></span></code></pre></div>
+<span><span class="co">#&gt; 1   Total Nacional. Índice general. Variación anual.         M07 2024   2.8</span></span>
+<span><span class="co">#&gt; 1.1 Total Nacional. Índice general. Variación anual.         M06 2024   3.4</span></span>
+<span><span class="co">#&gt; 1.2 Total Nacional. Índice general. Variación anual.         M05 2024   3.6</span></span>
+<span><span class="co">#&gt; 1.3 Total Nacional. Índice general. Variación anual.         M04 2024   3.3</span></span>
+<span><span class="co">#&gt; 1.4 Total Nacional. Índice general. Variación anual.         M03 2024   3.2</span></span></code></pre></div>
 <p>Besides, we can also use the <em>values</em> wrapper.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Filter with the values wrapper</span></span>
@@ -351,11 +336,11 @@ general y de grupos ECOICOP</a> (Id 50902):</p>
 <span>                      tip <span class="op">=</span> <span class="st">"A"</span>, nlast <span class="op">=</span> <span class="fl">5</span>, validate <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="va">ipc</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Nombre"</span>, <span class="st">"T3_Periodo"</span>, <span class="st">"Anyo"</span>, <span class="st">"Valor"</span><span class="op">)</span><span class="op">]</span></span>
 <span><span class="co">#&gt;                                                Nombre T3_Periodo Anyo Valor</span></span>
-<span><span class="co">#&gt; 1   Total Nacional. Índice general. Variación anual.         M05 2024   3.6</span></span>
-<span><span class="co">#&gt; 1.1 Total Nacional. Índice general. Variación anual.         M04 2024   3.3</span></span>
-<span><span class="co">#&gt; 1.2 Total Nacional. Índice general. Variación anual.         M03 2024   3.2</span></span>
-<span><span class="co">#&gt; 1.3 Total Nacional. Índice general. Variación anual.         M02 2024   2.8</span></span>
-<span><span class="co">#&gt; 1.4 Total Nacional. Índice general. Variación anual.         M01 2024   3.4</span></span></code></pre></div>
+<span><span class="co">#&gt; 1   Total Nacional. Índice general. Variación anual.         M07 2024   2.8</span></span>
+<span><span class="co">#&gt; 1.1 Total Nacional. Índice general. Variación anual.         M06 2024   3.4</span></span>
+<span><span class="co">#&gt; 1.2 Total Nacional. Índice general. Variación anual.         M05 2024   3.6</span></span>
+<span><span class="co">#&gt; 1.3 Total Nacional. Índice general. Variación anual.         M04 2024   3.3</span></span>
+<span><span class="co">#&gt; 1.4 Total Nacional. Índice general. Variación anual.         M03 2024   3.2</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="example-two">Example two<a class="anchor" aria-label="anchor" href="#example-two"></a>
@@ -370,20 +355,18 @@ general y de grupos ECOICOP</a> (Id 50902):</p>
 <span><span class="va">pib</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_data_table.html">get_data_table</a></span><span class="op">(</span>idTable <span class="op">=</span> <span class="fl">30679</span>, filter <span class="op">=</span> <span class="va">filter</span>, unnest <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>                      tip <span class="op">=</span> <span class="st">"A"</span>, nlast <span class="op">=</span> <span class="fl">5</span>, validate <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">pib</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Nombre"</span>, <span class="st">"T3_Periodo"</span>, <span class="st">"Anyo"</span>, <span class="st">"Valor"</span><span class="op">)</span><span class="op">]</span><span class="op">)</span></span>
-<span><span class="co">#&gt;                                                                                                                                                                      Nombre</span></span>
-<span><span class="co">#&gt; 1              Total Nacional. Datos no ajustados de estacionalidad y calendario. Producto interior bruto a precios de mercado. Dato base. Índices de volumen encadenados. </span></span>
-<span><span class="co">#&gt; 1.1            Total Nacional. Datos no ajustados de estacionalidad y calendario. Producto interior bruto a precios de mercado. Dato base. Índices de volumen encadenados. </span></span>
-<span><span class="co">#&gt; 1.2            Total Nacional. Datos no ajustados de estacionalidad y calendario. Producto interior bruto a precios de mercado. Dato base. Índices de volumen encadenados. </span></span>
-<span><span class="co">#&gt; 1.3            Total Nacional. Datos no ajustados de estacionalidad y calendario. Producto interior bruto a precios de mercado. Dato base. Índices de volumen encadenados. </span></span>
-<span><span class="co">#&gt; 1.4            Total Nacional. Datos no ajustados de estacionalidad y calendario. Producto interior bruto a precios de mercado. Dato base. Índices de volumen encadenados. </span></span>
-<span><span class="co">#&gt; 2   Total Nacional. Datos no ajustados de estacionalidad y calendario. Producto interior bruto a precios de mercado. Variación trimestral. Índices de volumen encadenados. </span></span>
-<span><span class="co">#&gt;     T3_Periodo Anyo    Valor</span></span>
-<span><span class="co">#&gt; 1           T1 2024 112.4941</span></span>
-<span><span class="co">#&gt; 1.1         T4 2023 117.0608</span></span>
-<span><span class="co">#&gt; 1.2         T3 2023 112.8600</span></span>
-<span><span class="co">#&gt; 1.3         T2 2023 113.9016</span></span>
-<span><span class="co">#&gt; 1.4         T1 2023 109.8721</span></span>
-<span><span class="co">#&gt; 2           T1 2024  -3.9011</span></span></code></pre></div>
+<span><span class="co">#&gt;                                                                                                                                                              Nombre</span></span>
+<span><span class="co">#&gt; 1   Total Nacional. Datos ajustados de estacionalidad y calendario. Producto interior bruto a precios de mercado. Variación anual. Índices de volumen encadenados. </span></span>
+<span><span class="co">#&gt; 1.1 Total Nacional. Datos ajustados de estacionalidad y calendario. Producto interior bruto a precios de mercado. Variación anual. Índices de volumen encadenados. </span></span>
+<span><span class="co">#&gt; 1.2 Total Nacional. Datos ajustados de estacionalidad y calendario. Producto interior bruto a precios de mercado. Variación anual. Índices de volumen encadenados. </span></span>
+<span><span class="co">#&gt; 1.3 Total Nacional. Datos ajustados de estacionalidad y calendario. Producto interior bruto a precios de mercado. Variación anual. Índices de volumen encadenados. </span></span>
+<span><span class="co">#&gt; 1.4 Total Nacional. Datos ajustados de estacionalidad y calendario. Producto interior bruto a precios de mercado. Variación anual. Índices de volumen encadenados. </span></span>
+<span><span class="co">#&gt;     T3_Periodo Anyo  Valor</span></span>
+<span><span class="co">#&gt; 1           T2 2024 2.8873</span></span>
+<span><span class="co">#&gt; 1.1         T1 2024 2.5806</span></span>
+<span><span class="co">#&gt; 1.2         T4 2023 2.1685</span></span>
+<span><span class="co">#&gt; 1.3         T3 2023 1.9417</span></span>
+<span><span class="co">#&gt; 1.4         T2 2023 1.9659</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="example-three">Example three<a class="anchor" aria-label="anchor" href="#example-three"></a>
@@ -434,8 +417,8 @@ variable and a name as value.</p>
 <span><span class="co">#&gt; 1                       Total Nacional. Índice general. Variación anual. </span></span>
 <span><span class="co">#&gt; 2 Total Nacional. Índice general. Variación anual. Impuestos constantes. </span></span>
 <span><span class="co">#&gt;   T3_Periodo Anyo Valor</span></span>
-<span><span class="co">#&gt; 1       Mayo 2024   3.6</span></span>
-<span><span class="co">#&gt; 2       Mayo 2024   3.0</span></span></code></pre></div>
+<span><span class="co">#&gt; 1      Julio 2024   2.8</span></span>
+<span><span class="co">#&gt; 2      Julio 2024   2.5</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="example-two-1">Example two<a class="anchor" aria-label="anchor" href="#example-two-1"></a>
@@ -450,12 +433,7 @@ variable and a name as value.</p>
 <span>                              periodicity <span class="op">=</span> <span class="fl">3</span>, unnest <span class="op">=</span> <span class="cn">TRUE</span>, tip <span class="op">=</span> <span class="st">"A"</span>,</span>
 <span>                              validate <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="va">pib</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Nombre"</span>, <span class="st">"T3_Periodo"</span>, <span class="st">"Anyo"</span>, <span class="st">"Valor"</span><span class="op">)</span><span class="op">]</span></span>
-<span><span class="co">#&gt;                                                                                                                                                                       Nombre</span></span>
-<span><span class="co">#&gt; 2 Total Nacional. Base 2010. Datos ajustados de estacionalidad y calendario. Producto interior bruto a precios de mercado. Variación anual. Índices de volumen encadenados. </span></span>
-<span><span class="co">#&gt; 1            Total Nacional. Datos ajustados de estacionalidad y calendario. Producto interior bruto a precios de mercado. Variación anual. Índices de volumen encadenados. </span></span>
-<span><span class="co">#&gt;   T3_Periodo Anyo  Valor</span></span>
-<span><span class="co">#&gt; 2         T2 2019 2.2513</span></span>
-<span><span class="co">#&gt; 1         T2 2019     NA</span></span></code></pre></div>
+<span><span class="co">#&gt; NULL</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="example-three-1">Example three<a class="anchor" aria-label="anchor" href="#example-three-1"></a>
@@ -478,7 +456,7 @@ variable and a name as value.</p>
 <span><span class="co">#&gt; 2         T1 2023 48085361</span></span></code></pre></div>
 </div>
 </div>
-  </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
+  </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
 </div>
 
@@ -489,15 +467,15 @@ variable and a name as value.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.9.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
 </div>
 
     </footer>
 </div>
 
-  
 
-  
+
+
 
   </body>
 </html>
