@@ -1644,7 +1644,8 @@ unnest_data <- function(datain){
     sel <- tolower(names(datain)) != "data" & tolower(names(datain)) != "notas"
 
     # Dataframe header without the data and notas columns
-    dataout <- datain[c(),sel]
+    dataout <- as.data.frame(datain[c(),sel])
+    names(dataout) <- names(datain)[sel]
 
     # Data Dataframes of the list not empty
     datasel <- lengths(datain$Data) > 0
@@ -1657,14 +1658,21 @@ unnest_data <- function(datain){
 
     # Go through all the dataframes with data
     if(length(datacol) > 0){
+      # index of the dataframe with lower number of data columns
+      ind <- which.min(lengths(datacol))
+
+      # Data columns
+      col_data <-   as.data.frame(datacol[[ind]][c(),])
+      names(col_data) <- names(datacol[[ind]])
+
       # Adding Data column to the header
-      dataout <- cbind(dataout,datacol[[1]][c(),])
+      dataout <- cbind(dataout,col_data)
 
       # Repeat each row by the number of data values
       tmp <- datain[rep(seq_len(nrow(datain)), times = sapply(datain$Data, nrow)), sel]
 
-      # Unique dataframe of data
-      data <- do.call(rbind, datain$Data)
+      # Unique dataframe of data normalizing the data columns
+      data <- do.call(rbind, lapply(datain$Data, function(x) if (length(x) > 0) subset(x, select = names(col_data))))
 
       # Adding data
       dataout <- cbind(tmp,data)
@@ -1683,7 +1691,7 @@ unnest_data <- function(datain){
         ind <- which.max(lapply(datacol, nrow))
 
         # Dataframe with values
-        data <- datacol[[ind]]
+        data <- datacol[[ind]][names(col_data)]
 
         # Change value for NA
         data$Valor <- NA
