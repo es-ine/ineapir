@@ -8,8 +8,8 @@
 <title>Tips • ineapir</title>
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.4.2/css/all.min.css" rel="stylesheet">
-<link href="../deps/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Tips">
 </head>
 <body>
@@ -20,7 +20,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">ineapir</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -70,23 +70,136 @@
     
     
 <div class="section level2">
+<h2 id="use-of-datestart-and-dateend">Use of <code>dateStart</code> and <code>dateEnd</code><a class="anchor" aria-label="anchor" href="#use-of-datestart-and-dateend"></a>
+</h2>
+<p>The arguments <code>dateStart</code> and <code>dateEnd</code> are
+available in <code><a href="../reference/get_data_table.html">get_data_table()</a></code>,
+<code><a href="../reference/get_data_series.html">get_data_series()</a></code> and
+<code><a href="../reference/get_data_series_filter.html">get_data_series_filter()</a></code>, and allow you to filter data by
+date.</p>
+<ul>
+<li>Single date:</li>
+</ul>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/es-ine/ineapir" class="external-link">ineapir</a></span><span class="op">)</span></span>
+<span><span class="va">filter</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"3"</span> <span class="op">=</span> <span class="st">"74"</span> ,     <span class="co"># variable id = 3, value id = 74</span></span>
+<span>               <span class="st">"762"</span> <span class="op">=</span> <span class="st">"304092"</span> <span class="co"># variable id = 762, value id = 304092</span></span>
+<span>               <span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Request data using dates. The required format is yyyy/mm/dd.</span></span>
+<span><span class="va">ipc</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_data_table.html">get_data_table</a></span><span class="op">(</span>idTable <span class="op">=</span> <span class="fl">50902</span>, filter <span class="op">=</span> <span class="va">filter</span>, unnest <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>                      tip <span class="op">=</span> <span class="st">"A"</span>, validate <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>                      dateStart <span class="op">=</span> <span class="st">"2025/01/01"</span>, dateEnd <span class="op">=</span> <span class="st">"2025/01/01"</span><span class="op">)</span></span>
+<span><span class="va">ipc</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Nombre"</span>, <span class="st">"T3_Periodo"</span>, <span class="st">"Anyo"</span>, <span class="st">"Valor"</span><span class="op">)</span><span class="op">]</span></span>
+<span><span class="co">#&gt;                                              Nombre T3_Periodo Anyo Valor</span></span>
+<span><span class="co">#&gt; 1 Total Nacional. Índice general. Variación anual.         M01 2025   2.9</span></span></code></pre></div>
+<ul>
+<li>Single range of dates:</li>
+</ul>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Request data using dates. The required format is yyyy/mm/dd.</span></span>
+<span><span class="va">ipc</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_data_table.html">get_data_table</a></span><span class="op">(</span>idTable <span class="op">=</span> <span class="fl">50902</span>, filter <span class="op">=</span> <span class="va">filter</span>, unnest <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>                      tip <span class="op">=</span> <span class="st">"A"</span>, validate <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>                      dateStart <span class="op">=</span> <span class="st">"2024/01/01"</span>, dateEnd <span class="op">=</span> <span class="st">"2024/12/01"</span><span class="op">)</span></span>
+<span><span class="va">ipc</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Nombre"</span>, <span class="st">"T3_Periodo"</span>, <span class="st">"Anyo"</span>, <span class="st">"Valor"</span><span class="op">)</span><span class="op">]</span></span>
+<span><span class="co">#&gt;                                                 Nombre T3_Periodo Anyo Valor</span></span>
+<span><span class="co">#&gt; 1    Total Nacional. Índice general. Variación anual.         M12 2024   2.8</span></span>
+<span><span class="co">#&gt; 1.1  Total Nacional. Índice general. Variación anual.         M11 2024   2.4</span></span>
+<span><span class="co">#&gt; 1.2  Total Nacional. Índice general. Variación anual.         M10 2024   1.8</span></span>
+<span><span class="co">#&gt; 1.3  Total Nacional. Índice general. Variación anual.         M09 2024   1.5</span></span>
+<span><span class="co">#&gt; 1.4  Total Nacional. Índice general. Variación anual.         M08 2024   2.3</span></span>
+<span><span class="co">#&gt; 1.5  Total Nacional. Índice general. Variación anual.         M07 2024   2.8</span></span>
+<span><span class="co">#&gt; 1.6  Total Nacional. Índice general. Variación anual.         M06 2024   3.4</span></span>
+<span><span class="co">#&gt; 1.7  Total Nacional. Índice general. Variación anual.         M05 2024   3.6</span></span>
+<span><span class="co">#&gt; 1.8  Total Nacional. Índice general. Variación anual.         M04 2024   3.3</span></span>
+<span><span class="co">#&gt; 1.9  Total Nacional. Índice general. Variación anual.         M03 2024   3.2</span></span>
+<span><span class="co">#&gt; 1.10 Total Nacional. Índice general. Variación anual.         M02 2024   2.8</span></span>
+<span><span class="co">#&gt; 1.11 Total Nacional. Índice general. Variación anual.         M01 2024   3.4</span></span></code></pre></div>
+<ul>
+<li>Open range of dates:</li>
+</ul>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Request data using dates. The required format is yyyy/mm/dd.</span></span>
+<span><span class="va">ipc</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_data_table.html">get_data_table</a></span><span class="op">(</span>idTable <span class="op">=</span> <span class="fl">50902</span>, filter <span class="op">=</span> <span class="va">filter</span>, unnest <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>                      tip <span class="op">=</span> <span class="st">"A"</span>, validate <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>                      dateStart <span class="op">=</span> <span class="st">"2025/01/01"</span><span class="op">)</span></span>
+<span><span class="va">ipc</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Nombre"</span>, <span class="st">"T3_Periodo"</span>, <span class="st">"Anyo"</span>, <span class="st">"Valor"</span><span class="op">)</span><span class="op">]</span></span>
+<span><span class="co">#&gt;                                                Nombre T3_Periodo Anyo Valor</span></span>
+<span><span class="co">#&gt; 1   Total Nacional. Índice general. Variación anual.         M03 2025   2.3</span></span>
+<span><span class="co">#&gt; 1.1 Total Nacional. Índice general. Variación anual.         M02 2025   3.0</span></span>
+<span><span class="co">#&gt; 1.2 Total Nacional. Índice general. Variación anual.         M01 2025   2.9</span></span></code></pre></div>
+<ul>
+<li>Multiple dates:</li>
+</ul>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Request data using dates. The required format is yyyy/mm/dd.</span></span>
+<span><span class="va">ipc</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_data_table.html">get_data_table</a></span><span class="op">(</span>idTable <span class="op">=</span> <span class="fl">50902</span>, filter <span class="op">=</span> <span class="va">filter</span>, unnest <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>                      tip <span class="op">=</span> <span class="st">"A"</span>, validate <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>                      dateStart <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"2023/01/01"</span>, <span class="st">"2024/01/01"</span>, <span class="st">"2025/01/01"</span><span class="op">)</span>, </span>
+<span>                      dateEnd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"2023/01/01"</span>, <span class="st">"2024/01/01"</span>, <span class="st">"2025/01/01"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">ipc</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Nombre"</span>, <span class="st">"T3_Periodo"</span>, <span class="st">"Anyo"</span>, <span class="st">"Valor"</span><span class="op">)</span><span class="op">]</span></span>
+<span><span class="co">#&gt;                                                Nombre T3_Periodo Anyo Valor</span></span>
+<span><span class="co">#&gt; 1   Total Nacional. Índice general. Variación anual.         M01 2025   2.9</span></span>
+<span><span class="co">#&gt; 1.1 Total Nacional. Índice general. Variación anual.         M01 2024   3.4</span></span>
+<span><span class="co">#&gt; 1.2 Total Nacional. Índice general. Variación anual.         M01 2023   5.9</span></span></code></pre></div>
+<ul>
+<li>Multiple range of dates:</li>
+</ul>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Request data using dates. The required format is yyyy/mm/dd.</span></span>
+<span><span class="va">ipc</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_data_table.html">get_data_table</a></span><span class="op">(</span>idTable <span class="op">=</span> <span class="fl">50902</span>, filter <span class="op">=</span> <span class="va">filter</span>, unnest <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>                      tip <span class="op">=</span> <span class="st">"A"</span>, validate <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>                      dateStart <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"2023/01/01"</span>, <span class="st">"2024/01/01"</span>, <span class="st">"2025/01/01"</span><span class="op">)</span>,</span>
+<span>                      dateEnd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"2023/03/01"</span>, <span class="st">"2024/03/01"</span>, <span class="st">"2025/03/01"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">ipc</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Nombre"</span>, <span class="st">"T3_Periodo"</span>, <span class="st">"Anyo"</span>, <span class="st">"Valor"</span><span class="op">)</span><span class="op">]</span></span>
+<span><span class="co">#&gt;                                                Nombre T3_Periodo Anyo Valor</span></span>
+<span><span class="co">#&gt; 1   Total Nacional. Índice general. Variación anual.         M03 2025   2.3</span></span>
+<span><span class="co">#&gt; 1.1 Total Nacional. Índice general. Variación anual.         M02 2025   3.0</span></span>
+<span><span class="co">#&gt; 1.2 Total Nacional. Índice general. Variación anual.         M01 2025   2.9</span></span>
+<span><span class="co">#&gt; 1.3 Total Nacional. Índice general. Variación anual.         M03 2024   3.2</span></span>
+<span><span class="co">#&gt; 1.4 Total Nacional. Índice general. Variación anual.         M02 2024   2.8</span></span>
+<span><span class="co">#&gt; 1.5 Total Nacional. Índice general. Variación anual.         M01 2024   3.4</span></span>
+<span><span class="co">#&gt; 1.6 Total Nacional. Índice general. Variación anual.         M03 2023   3.3</span></span>
+<span><span class="co">#&gt; 1.7 Total Nacional. Índice general. Variación anual.         M02 2023   6.0</span></span>
+<span><span class="co">#&gt; 1.8 Total Nacional. Índice general. Variación anual.         M01 2023   5.9</span></span></code></pre></div>
+<ul>
+<li>Multiple range of dates and a final open range:</li>
+</ul>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Request data using dates. The required format is yyyy/mm/dd.</span></span>
+<span><span class="va">ipc</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_data_table.html">get_data_table</a></span><span class="op">(</span>idTable <span class="op">=</span> <span class="fl">50902</span>, filter <span class="op">=</span> <span class="va">filter</span>, unnest <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>                      tip <span class="op">=</span> <span class="st">"A"</span>, validate <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>                      dateStart <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"2023/01/01"</span>, <span class="st">"2024/01/01"</span>, <span class="st">"2025/01/01"</span><span class="op">)</span>, </span>
+<span>                      dateEnd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"2023/03/01"</span>, <span class="st">"2024/03/01"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">ipc</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Nombre"</span>, <span class="st">"T3_Periodo"</span>, <span class="st">"Anyo"</span>, <span class="st">"Valor"</span><span class="op">)</span><span class="op">]</span></span>
+<span><span class="co">#&gt;                                                Nombre T3_Periodo Anyo Valor</span></span>
+<span><span class="co">#&gt; 1   Total Nacional. Índice general. Variación anual.         M03 2025   2.3</span></span>
+<span><span class="co">#&gt; 1.1 Total Nacional. Índice general. Variación anual.         M02 2025   3.0</span></span>
+<span><span class="co">#&gt; 1.2 Total Nacional. Índice general. Variación anual.         M01 2025   2.9</span></span>
+<span><span class="co">#&gt; 1.3 Total Nacional. Índice general. Variación anual.         M03 2024   3.2</span></span>
+<span><span class="co">#&gt; 1.4 Total Nacional. Índice general. Variación anual.         M02 2024   2.8</span></span>
+<span><span class="co">#&gt; 1.5 Total Nacional. Índice general. Variación anual.         M01 2024   3.4</span></span>
+<span><span class="co">#&gt; 1.6 Total Nacional. Índice general. Variación anual.         M03 2023   3.3</span></span>
+<span><span class="co">#&gt; 1.7 Total Nacional. Índice general. Variación anual.         M02 2023   6.0</span></span>
+<span><span class="co">#&gt; 1.8 Total Nacional. Índice general. Variación anual.         M01 2023   5.9</span></span></code></pre></div>
+</div>
+<div class="section level2">
 <h2 id="use-of-verbose">Use of <code>verbose</code><a class="anchor" aria-label="anchor" href="#use-of-verbose"></a>
 </h2>
 <p>When the argument <code>verbose = TRUE</code> is passed to a
 function, a number of information is displayed in the console, including
 the URL used to call the API.</p>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/es-ine/ineapir" class="external-link">ineapir</a></span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Variables used in the operation IPC and verbose = TRUE</span></span>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Variables used in the operation IPC and verbose = TRUE</span></span>
 <span><span class="va">variables</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_metadata_variables.html">get_metadata_variables</a></span><span class="op">(</span>operation <span class="op">=</span> <span class="st">"IPC"</span>, verbose <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="co">#&gt; - Check lang: OK</span></span>
 <span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/OPERACIONES_DISPONIBLES?page=1&amp;ver=3</span></span>
 <span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/OPERACIONES_DISPONIBLES?page=2&amp;ver=3</span></span>
 <span><span class="co">#&gt; - Check operation: OK</span></span>
+<span><span class="co">#&gt; - Check det: OK</span></span>
 <span><span class="co">#&gt; - Check page: OK</span></span>
-<span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/VARIABLES_OPERACION/IPC?page=1&amp;ver=3</span></span>
-<span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/VARIABLES_OPERACION/IPC?page=2&amp;ver=3</span></span></code></pre></div>
+<span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/VARIABLES_OPERACION/IPC?det=0&amp;page=1&amp;ver=3</span></span>
+<span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/VARIABLES_OPERACION/IPC?det=0&amp;page=2&amp;ver=3</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="use-of-validate">Use of <code>validate</code><a class="anchor" aria-label="anchor" href="#use-of-validate"></a>
@@ -94,18 +207,18 @@ the URL used to call the API.</p>
 <p>If it is not necessary to validate the values of the arguments passed
 to a function, this validation can be turned off with
 <code>validate = FALSE</code>.</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Variables used in the operation IPC with verbose = TRUE and validate = FALSE</span></span>
 <span><span class="va">variables</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_metadata_variables.html">get_metadata_variables</a></span><span class="op">(</span>operation <span class="op">=</span> <span class="st">"IPC"</span>, verbose <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>                                    validate <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/VARIABLES_OPERACION/IPC?page=1&amp;ver=3</span></span>
-<span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/VARIABLES_OPERACION/IPC?page=2&amp;ver=3</span></span></code></pre></div>
+<span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/VARIABLES_OPERACION/IPC?det=0&amp;page=1&amp;ver=3</span></span>
+<span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/VARIABLES_OPERACION/IPC?det=0&amp;page=2&amp;ver=3</span></span></code></pre></div>
 <p>This is useful when we are filtering data and the filter we are using
 is the one we want. Turning off validation means making fewer API calls.
 For better performance, it is recommended to use codes in the filter
 instead of shortcuts and disable validation if we are sure that the
 filter is correct.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># The filter </span></span>
 <span><span class="va">filter</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"115"</span> <span class="op">=</span> <span class="st">"2"</span>,     <span class="co"># variable id = 115, value id = 2</span></span>
 <span>               <span class="st">"3"</span> <span class="op">=</span> <span class="st">"74"</span> ,     <span class="co"># variable id = 3, value id = 74</span></span>
@@ -119,8 +232,8 @@ filter is correct.</p>
 <span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/OPERACIONES_DISPONIBLES?page=1&amp;ver=3</span></span>
 <span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/OPERACIONES_DISPONIBLES?page=2&amp;ver=3</span></span>
 <span><span class="co">#&gt; - Check operation: OK</span></span>
-<span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/VARIABLES_OPERACION/IPC?page=1&amp;ver=3</span></span>
-<span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/VARIABLES_OPERACION/IPC?page=2&amp;ver=3</span></span>
+<span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/VARIABLES_OPERACION/IPC?det=0&amp;page=1&amp;ver=3</span></span>
+<span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/VARIABLES_OPERACION/IPC?det=0&amp;page=2&amp;ver=3</span></span>
 <span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/VALORES_VARIABLEOPERACION/3/IPC?det=0&amp;page=1&amp;ver=3</span></span>
 <span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/VALORES_VARIABLEOPERACION/3/IPC?det=0&amp;page=2&amp;ver=3</span></span>
 <span><span class="co">#&gt; - API URL: https://servicios.ine.es/wstempus/js/ES/VALORES_VARIABLEOPERACION/70/IPC?det=0&amp;page=1&amp;ver=3</span></span>
@@ -163,14 +276,14 @@ filter is correct.</p>
 </h2>
 <p>It is possible to retrieve information in English passing the
 argument <code>lang = "EN"</code> to certain functions.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Variables used in the operation IPC and lang = "EN"</span></span>
 <span><span class="va">variables</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_metadata_variables.html">get_metadata_variables</a></span><span class="op">(</span>operation <span class="op">=</span> <span class="st">"IPC"</span>, lang <span class="op">=</span> <span class="st">"EN"</span><span class="op">)</span></span>
 <span><span class="va">variables</span></span>
 <span><span class="co">#&gt;     Id                            Nombre Codigo</span></span>
 <span><span class="co">#&gt; 1    3                      Type of data       </span></span>
 <span><span class="co">#&gt; 2   70 Autonomous Communities and Cities   CCAA</span></span>
-<span><span class="co">#&gt; 3  115                         Provinces   PROV</span></span>
+<span><span class="co">#&gt; 3  115                         Provinces       </span></span>
 <span><span class="co">#&gt; 4  269               Special groups 2001       </span></span>
 <span><span class="co">#&gt; 5  270                     Headings 2001       </span></span>
 <span><span class="co">#&gt; 6  349                   Regional totals    NAC</span></span>
@@ -181,7 +294,7 @@ argument <code>lang = "EN"</code> to certain functions.</p>
 <span><span class="co">#&gt; 11 765                 Subclases ECOICOP</span></span></code></pre></div>
 <p>We can use the English language as well filtering data using
 shortcuts.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Filter with the values wrapper (CPI)</span></span>
 <span><span class="va">filter</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"annual change"</span> , <span class="st">"overall index"</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
@@ -197,11 +310,11 @@ shortcuts.</p>
 <span><span class="co">#&gt; 1.3 National Total. Overall index. Annual variation (for monthly series). </span></span>
 <span><span class="co">#&gt; 1.4 National Total. Overall index. Annual variation (for monthly series). </span></span>
 <span><span class="co">#&gt;     T3_Periodo Anyo Valor</span></span>
-<span><span class="co">#&gt; 1          M07 2024   2.8</span></span>
-<span><span class="co">#&gt; 1.1        M06 2024   3.4</span></span>
-<span><span class="co">#&gt; 1.2        M05 2024   3.6</span></span>
-<span><span class="co">#&gt; 1.3        M04 2024   3.3</span></span>
-<span><span class="co">#&gt; 1.4        M03 2024   3.2</span></span></code></pre></div>
+<span><span class="co">#&gt; 1          M03 2025   2.3</span></span>
+<span><span class="co">#&gt; 1.1        M02 2025   3.0</span></span>
+<span><span class="co">#&gt; 1.2        M01 2025   2.9</span></span>
+<span><span class="co">#&gt; 1.3        M12 2024   2.8</span></span>
+<span><span class="co">#&gt; 1.4        M11 2024   2.4</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="use-of-unnest">Use of <code>unnest</code><a class="anchor" aria-label="anchor" href="#use-of-unnest"></a>
@@ -211,7 +324,7 @@ shortcuts.</p>
 <code>get_data_series_filter</code>, the <code>$Data</code> column
 containing the data values is a list of data frames, one for each
 entry.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Filter with the values wrapper (CPI)</span></span>
 <span><span class="va">filter</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"variación anual"</span> , <span class="st">"variación mensual"</span>, <span class="st">"índice general"</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
@@ -228,18 +341,18 @@ entry.</p>
 <span> <span class="va">ipc</span><span class="op">$</span><span class="va">Data</span></span>
 <span><span class="co">#&gt; [[1]]</span></span>
 <span><span class="co">#&gt;                           Fecha T3_TipoDato T3_Periodo Anyo Valor</span></span>
-<span><span class="co">#&gt; 1 2024-07-01T00:00:00.000+02:00  Definitivo        M07 2024  -0.5</span></span>
-<span><span class="co">#&gt; 2 2024-06-01T00:00:00.000+02:00  Definitivo        M06 2024   0.4</span></span>
-<span><span class="co">#&gt; 3 2024-05-01T00:00:00.000+02:00  Definitivo        M05 2024   0.3</span></span>
+<span><span class="co">#&gt; 1 2025-03-01T00:00:00.000+01:00  Definitivo        M03 2025   0.1</span></span>
+<span><span class="co">#&gt; 2 2025-02-01T00:00:00.000+01:00  Definitivo        M02 2025   0.4</span></span>
+<span><span class="co">#&gt; 3 2025-01-01T00:00:00.000+01:00  Definitivo        M01 2025   0.2</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; [[2]]</span></span>
 <span><span class="co">#&gt;                           Fecha T3_TipoDato T3_Periodo Anyo Valor</span></span>
-<span><span class="co">#&gt; 1 2024-07-01T00:00:00.000+02:00  Definitivo        M07 2024   2.8</span></span>
-<span><span class="co">#&gt; 2 2024-06-01T00:00:00.000+02:00  Definitivo        M06 2024   3.4</span></span>
-<span><span class="co">#&gt; 3 2024-05-01T00:00:00.000+02:00  Definitivo        M05 2024   3.6</span></span></code></pre></div>
+<span><span class="co">#&gt; 1 2025-03-01T00:00:00.000+01:00  Definitivo        M03 2025   2.3</span></span>
+<span><span class="co">#&gt; 2 2025-02-01T00:00:00.000+01:00  Definitivo        M02 2025   3.0</span></span>
+<span><span class="co">#&gt; 3 2025-01-01T00:00:00.000+01:00  Definitivo        M01 2025   2.9</span></span></code></pre></div>
 <p>If we want to get only one data frame for all data values, we can
 pass the argument <code>unnest = TRUE</code>.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Filter with the values wrapper (CPI)</span></span>
 <span><span class="va">filter</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"variación anual"</span> , <span class="st">"variación mensual"</span>, <span class="st">"índice general"</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
@@ -250,12 +363,12 @@ pass the argument <code>unnest = TRUE</code>.</p>
 <span><span class="co"># Unique data frame with 6 rows</span></span>
 <span><span class="va">ipc</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Nombre"</span>, <span class="st">"T3_Periodo"</span>, <span class="st">"Anyo"</span>, <span class="st">"Valor"</span><span class="op">)</span><span class="op">]</span></span>
 <span><span class="co">#&gt;                                                  Nombre T3_Periodo Anyo Valor</span></span>
-<span><span class="co">#&gt; 1   Total Nacional. Índice general. Variación mensual.         M07 2024  -0.5</span></span>
-<span><span class="co">#&gt; 1.1 Total Nacional. Índice general. Variación mensual.         M06 2024   0.4</span></span>
-<span><span class="co">#&gt; 1.2 Total Nacional. Índice general. Variación mensual.         M05 2024   0.3</span></span>
-<span><span class="co">#&gt; 2     Total Nacional. Índice general. Variación anual.         M07 2024   2.8</span></span>
-<span><span class="co">#&gt; 2.1   Total Nacional. Índice general. Variación anual.         M06 2024   3.4</span></span>
-<span><span class="co">#&gt; 2.2   Total Nacional. Índice general. Variación anual.         M05 2024   3.6</span></span></code></pre></div>
+<span><span class="co">#&gt; 1   Total Nacional. Índice general. Variación mensual.         M03 2025   0.1</span></span>
+<span><span class="co">#&gt; 1.1 Total Nacional. Índice general. Variación mensual.         M02 2025   0.4</span></span>
+<span><span class="co">#&gt; 1.2 Total Nacional. Índice general. Variación mensual.         M01 2025   0.2</span></span>
+<span><span class="co">#&gt; 2     Total Nacional. Índice general. Variación anual.         M03 2025   2.3</span></span>
+<span><span class="co">#&gt; 2.1   Total Nacional. Índice general. Variación anual.         M02 2025   3.0</span></span>
+<span><span class="co">#&gt; 2.2   Total Nacional. Índice general. Variación anual.         M01 2025   2.9</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="use-of-metanames-and-metacodes">Use of <code>metanames</code> and <code>metacodes</code><a class="anchor" aria-label="anchor" href="#use-of-metanames-and-metacodes"></a>
@@ -265,7 +378,7 @@ additional columns that contain the names of the values extracted from
 the metadata information. To get additional columns containing the codes
 and ids of the values extracted from the metadata information we pass
 the argument <code>metacodes = TRUE</code>.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Filter for total population of men and women </span></span>
 <span><span class="va">filter</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>nacionalidad <span class="op">=</span> <span class="st">"total"</span>, sexo <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"hombres"</span>, <span class="st">"mujeres"</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
@@ -300,7 +413,7 @@ the argument <code>metacodes = TRUE</code>.</p>
 </h2>
 <p>When we use shortcuts names in the filter, we can also include as
 values regular expressions if this helps us filter the data better.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Filter with a regular expression for ages between 20 and 25 years old</span></span>
 <span><span class="va">filter</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>sexo <span class="op">=</span> <span class="st">"total"</span>, edad <span class="op">=</span> <span class="st">"2[0-5]+"</span><span class="op">)</span></span>
 <span></span>
@@ -311,12 +424,12 @@ values regular expressions if this helps us filter the data better.</p>
 <span><span class="co"># Only ages between 20 and 25 years old</span></span>
 <span><span class="va">pob</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Nombre"</span>, <span class="st">"Anyo"</span>, <span class="st">"Valor"</span><span class="op">)</span><span class="op">]</span></span>
 <span><span class="co">#&gt;                                                Nombre Anyo  Valor</span></span>
-<span><span class="co">#&gt; 1 Total Nacional. 20 años. Total. Población. Número.  2023 499051</span></span>
-<span><span class="co">#&gt; 2 Total Nacional. 21 años. Total. Población. Número.  2023 500702</span></span>
-<span><span class="co">#&gt; 3 Total Nacional. 22 años. Total. Población. Número.  2023 508918</span></span>
-<span><span class="co">#&gt; 4 Total Nacional. 23 años. Total. Población. Número.  2023 501369</span></span>
-<span><span class="co">#&gt; 5 Total Nacional. 24 años. Total. Población. Número.  2023 492950</span></span>
-<span><span class="co">#&gt; 6 Total Nacional. 25 años. Total. Población. Número.  2023 504965</span></span></code></pre></div>
+<span><span class="co">#&gt; 1 Total Nacional. 20 años. Total. Población. Número.  2024 525418</span></span>
+<span><span class="co">#&gt; 2 Total Nacional. 21 años. Total. Población. Número.  2024 514156</span></span>
+<span><span class="co">#&gt; 3 Total Nacional. 22 años. Total. Población. Número.  2024 517077</span></span>
+<span><span class="co">#&gt; 4 Total Nacional. 23 años. Total. Población. Número.  2024 526390</span></span>
+<span><span class="co">#&gt; 5 Total Nacional. 24 años. Total. Población. Número.  2024 519720</span></span>
+<span><span class="co">#&gt; 6 Total Nacional. 25 años. Total. Población. Número.  2024 511085</span></span></code></pre></div>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
@@ -329,7 +442,7 @@ values regular expressions if this helps us filter the data better.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
 </div>
 
     </footer>

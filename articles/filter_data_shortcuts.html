@@ -8,8 +8,8 @@
 <title>How to filter data using shortcut names • ineapir</title>
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.4.2/css/all.min.css" rel="stylesheet">
-<link href="../deps/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="How to filter data using shortcut names">
 </head>
 <body>
@@ -20,7 +20,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">ineapir</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -321,11 +321,11 @@ general y de grupos ECOICOP</a> (Id 50902):</p>
 <span>                      tip <span class="op">=</span> <span class="st">"A"</span>, nlast <span class="op">=</span> <span class="fl">5</span>, validate <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="va">ipc</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Nombre"</span>, <span class="st">"T3_Periodo"</span>, <span class="st">"Anyo"</span>, <span class="st">"Valor"</span><span class="op">)</span><span class="op">]</span></span>
 <span><span class="co">#&gt;                                                Nombre T3_Periodo Anyo Valor</span></span>
-<span><span class="co">#&gt; 1   Total Nacional. Índice general. Variación anual.         M07 2024   2.8</span></span>
-<span><span class="co">#&gt; 1.1 Total Nacional. Índice general. Variación anual.         M06 2024   3.4</span></span>
-<span><span class="co">#&gt; 1.2 Total Nacional. Índice general. Variación anual.         M05 2024   3.6</span></span>
-<span><span class="co">#&gt; 1.3 Total Nacional. Índice general. Variación anual.         M04 2024   3.3</span></span>
-<span><span class="co">#&gt; 1.4 Total Nacional. Índice general. Variación anual.         M03 2024   3.2</span></span></code></pre></div>
+<span><span class="co">#&gt; 1   Total Nacional. Índice general. Variación anual.         M03 2025   2.3</span></span>
+<span><span class="co">#&gt; 1.1 Total Nacional. Índice general. Variación anual.         M02 2025   3.0</span></span>
+<span><span class="co">#&gt; 1.2 Total Nacional. Índice general. Variación anual.         M01 2025   2.9</span></span>
+<span><span class="co">#&gt; 1.3 Total Nacional. Índice general. Variación anual.         M12 2024   2.8</span></span>
+<span><span class="co">#&gt; 1.4 Total Nacional. Índice general. Variación anual.         M11 2024   2.4</span></span></code></pre></div>
 <p>Besides, we can also use the <em>values</em> wrapper.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Filter with the values wrapper</span></span>
@@ -336,18 +336,78 @@ general y de grupos ECOICOP</a> (Id 50902):</p>
 <span>                      tip <span class="op">=</span> <span class="st">"A"</span>, nlast <span class="op">=</span> <span class="fl">5</span>, validate <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="va">ipc</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Nombre"</span>, <span class="st">"T3_Periodo"</span>, <span class="st">"Anyo"</span>, <span class="st">"Valor"</span><span class="op">)</span><span class="op">]</span></span>
 <span><span class="co">#&gt;                                                Nombre T3_Periodo Anyo Valor</span></span>
-<span><span class="co">#&gt; 1   Total Nacional. Índice general. Variación anual.         M07 2024   2.8</span></span>
-<span><span class="co">#&gt; 1.1 Total Nacional. Índice general. Variación anual.         M06 2024   3.4</span></span>
-<span><span class="co">#&gt; 1.2 Total Nacional. Índice general. Variación anual.         M05 2024   3.6</span></span>
-<span><span class="co">#&gt; 1.3 Total Nacional. Índice general. Variación anual.         M04 2024   3.3</span></span>
-<span><span class="co">#&gt; 1.4 Total Nacional. Índice general. Variación anual.         M03 2024   3.2</span></span></code></pre></div>
+<span><span class="co">#&gt; 1   Total Nacional. Índice general. Variación anual.         M03 2025   2.3</span></span>
+<span><span class="co">#&gt; 1.1 Total Nacional. Índice general. Variación anual.         M02 2025   3.0</span></span>
+<span><span class="co">#&gt; 1.2 Total Nacional. Índice general. Variación anual.         M01 2025   2.9</span></span>
+<span><span class="co">#&gt; 1.3 Total Nacional. Índice general. Variación anual.         M12 2024   2.8</span></span>
+<span><span class="co">#&gt; 1.4 Total Nacional. Índice general. Variación anual.         M11 2024   2.4</span></span></code></pre></div>
+<p>If we add a minus sign to a value, the value will be excluded from
+the filter.</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Filter with the values wrapper</span></span>
+<span><span class="va">filter</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"variación anual"</span> , <span class="st">"-índice general"</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Request data using the filter</span></span>
+<span><span class="va">ipc</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_data_table.html">get_data_table</a></span><span class="op">(</span>idTable <span class="op">=</span> <span class="fl">50902</span>, filter <span class="op">=</span> <span class="va">filter</span>, unnest <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>                      tip <span class="op">=</span> <span class="st">"A"</span>, nlast <span class="op">=</span> <span class="fl">2</span>, validate <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="va">ipc</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Nombre"</span>, <span class="st">"T3_Periodo"</span>, <span class="st">"Anyo"</span>, <span class="st">"Valor"</span><span class="op">)</span><span class="op">]</span></span>
+<span><span class="co">#&gt;                                                                                                                     Nombre</span></span>
+<span><span class="co">#&gt; 1                                                    Total Nacional. Alimentos y bebidas no alcohólicas. Variación anual. </span></span>
+<span><span class="co">#&gt; 1.1                                                  Total Nacional. Alimentos y bebidas no alcohólicas. Variación anual. </span></span>
+<span><span class="co">#&gt; 2                                                          Total Nacional. Bebidas alcohólicas y tabaco. Variación anual. </span></span>
+<span><span class="co">#&gt; 2.1                                                        Total Nacional. Bebidas alcohólicas y tabaco. Variación anual. </span></span>
+<span><span class="co">#&gt; 3                                                                     Total Nacional. Vestido y calzado. Variación anual. </span></span>
+<span><span class="co">#&gt; 3.1                                                                   Total Nacional. Vestido y calzado. Variación anual. </span></span>
+<span><span class="co">#&gt; 4                                Total Nacional. Vivienda, agua, electricidad, gas y otros combustibles. Variación anual. </span></span>
+<span><span class="co">#&gt; 4.1                              Total Nacional. Vivienda, agua, electricidad, gas y otros combustibles. Variación anual. </span></span>
+<span><span class="co">#&gt; 5    Total Nacional. Muebles, artículos del hogar y artículos para el mantenimiento corriente del hogar. Variación anual. </span></span>
+<span><span class="co">#&gt; 5.1  Total Nacional. Muebles, artículos del hogar y artículos para el mantenimiento corriente del hogar. Variación anual. </span></span>
+<span><span class="co">#&gt; 6                                                                               Total Nacional. Sanidad. Variación anual. </span></span>
+<span><span class="co">#&gt; 6.1                                                                             Total Nacional. Sanidad. Variación anual. </span></span>
+<span><span class="co">#&gt; 7                                                                            Total Nacional. Transporte. Variación anual. </span></span>
+<span><span class="co">#&gt; 7.1                                                                          Total Nacional. Transporte. Variación anual. </span></span>
+<span><span class="co">#&gt; 8                                                                        Total Nacional. Comunicaciones. Variación anual. </span></span>
+<span><span class="co">#&gt; 8.1                                                                      Total Nacional. Comunicaciones. Variación anual. </span></span>
+<span><span class="co">#&gt; 9                                                                        Total Nacional. Ocio y cultura. Variación anual. </span></span>
+<span><span class="co">#&gt; 9.1                                                                      Total Nacional. Ocio y cultura. Variación anual. </span></span>
+<span><span class="co">#&gt; 10                                                                            Total Nacional. Enseñanza. Variación anual. </span></span>
+<span><span class="co">#&gt; 10.1                                                                          Total Nacional. Enseñanza. Variación anual. </span></span>
+<span><span class="co">#&gt; 11                                                               Total Nacional. Restaurantes y hoteles. Variación anual. </span></span>
+<span><span class="co">#&gt; 11.1                                                             Total Nacional. Restaurantes y hoteles. Variación anual. </span></span>
+<span><span class="co">#&gt; 12                                                             Total Nacional. Otros bienes y servicios. Variación anual. </span></span>
+<span><span class="co">#&gt; 12.1                                                           Total Nacional. Otros bienes y servicios. Variación anual. </span></span>
+<span><span class="co">#&gt;      T3_Periodo Anyo Valor</span></span>
+<span><span class="co">#&gt; 1           M03 2025   2.4</span></span>
+<span><span class="co">#&gt; 1.1         M02 2025   2.2</span></span>
+<span><span class="co">#&gt; 2           M03 2025   3.1</span></span>
+<span><span class="co">#&gt; 2.1         M02 2025   3.0</span></span>
+<span><span class="co">#&gt; 3           M03 2025   0.2</span></span>
+<span><span class="co">#&gt; 3.1         M02 2025   0.1</span></span>
+<span><span class="co">#&gt; 4           M03 2025   5.7</span></span>
+<span><span class="co">#&gt; 4.1         M02 2025   9.8</span></span>
+<span><span class="co">#&gt; 5           M03 2025   0.6</span></span>
+<span><span class="co">#&gt; 5.1         M02 2025   0.5</span></span>
+<span><span class="co">#&gt; 6           M03 2025   1.9</span></span>
+<span><span class="co">#&gt; 6.1         M02 2025   1.9</span></span>
+<span><span class="co">#&gt; 7           M03 2025  -0.9</span></span>
+<span><span class="co">#&gt; 7.1         M02 2025   0.3</span></span>
+<span><span class="co">#&gt; 8           M03 2025   2.0</span></span>
+<span><span class="co">#&gt; 8.1         M02 2025   2.0</span></span>
+<span><span class="co">#&gt; 9           M03 2025  -0.3</span></span>
+<span><span class="co">#&gt; 9.1         M02 2025   1.4</span></span>
+<span><span class="co">#&gt; 10          M03 2025   2.5</span></span>
+<span><span class="co">#&gt; 10.1        M02 2025   2.5</span></span>
+<span><span class="co">#&gt; 11          M03 2025   4.1</span></span>
+<span><span class="co">#&gt; 11.1        M02 2025   4.1</span></span>
+<span><span class="co">#&gt; 12          M03 2025   3.8</span></span>
+<span><span class="co">#&gt; 12.1        M02 2025   3.6</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="example-two">Example two<a class="anchor" aria-label="anchor" href="#example-two"></a>
 </h3>
 <p>We are going to filter the table <a href="https://www.ine.es/jaxiT3/Tabla.htm?t=30679" class="external-link">PIB pm Oferta
 (Indices de volumen encadenado)</a> (Id 30679):</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Filter with the values wrapper (GDP)</span></span>
 <span><span class="va">filter</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"producto interior"</span>, <span class="st">"datos ajustados"</span>, <span class="st">"variación anual"</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
@@ -373,7 +433,7 @@ general y de grupos ECOICOP</a> (Id 50902):</p>
 </h3>
 <p>We are going to filter the table <a href="https://www.ine.es/jaxiT3/Tabla.htm?t=56934" class="external-link">Población residente
 por fecha, sexo y edad (desde 1971)</a> (Id 56934)</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Filter with the values wrapper (population)</span></span>
 <span><span class="va">filter</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"todas las edades"</span>, <span class="st">"total"</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
@@ -388,11 +448,11 @@ por fecha, sexo y edad (desde 1971)</a> (Id 56934)</p>
 <span><span class="co">#&gt; 1.3 Total Nacional. Todas las edades. Total. Población. Número. </span></span>
 <span><span class="co">#&gt; 1.4 Total Nacional. Todas las edades. Total. Población. Número. </span></span>
 <span><span class="co">#&gt;          T3_Periodo Anyo    Valor</span></span>
-<span><span class="co">#&gt; 1     1 de enero de 2023 48085361</span></span>
-<span><span class="co">#&gt; 1.1 1 de octubre de 2022 47940295</span></span>
-<span><span class="co">#&gt; 1.2   1 de julio de 2022 47781354</span></span>
-<span><span class="co">#&gt; 1.3   1 de abril de 2022 47609145</span></span>
-<span><span class="co">#&gt; 1.4   1 de enero de 2022 47486727</span></span></code></pre></div>
+<span><span class="co">#&gt; 1     1 de enero de 2024 48619695</span></span>
+<span><span class="co">#&gt; 1.1 1 de octubre de 2023 48486865</span></span>
+<span><span class="co">#&gt; 1.2   1 de julio de 2023 48320520</span></span>
+<span><span class="co">#&gt; 1.3   1 de abril de 2023 48205962</span></span>
+<span><span class="co">#&gt; 1.4   1 de enero de 2023 48085361</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level2">
@@ -404,7 +464,7 @@ variable and a name as value.</p>
 <div class="section level3">
 <h3 id="example-one-1">Example one<a class="anchor" aria-label="anchor" href="#example-one-1"></a>
 </h3>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Filter with the values wrapper (CPI)</span></span>
 <span><span class="va">filter</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"variación anual"</span> , <span class="st">"índice general"</span>, <span class="st">"total nacional"</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
@@ -417,13 +477,13 @@ variable and a name as value.</p>
 <span><span class="co">#&gt; 1                       Total Nacional. Índice general. Variación anual. </span></span>
 <span><span class="co">#&gt; 2 Total Nacional. Índice general. Variación anual. Impuestos constantes. </span></span>
 <span><span class="co">#&gt;   T3_Periodo Anyo Valor</span></span>
-<span><span class="co">#&gt; 1      Julio 2024   2.8</span></span>
-<span><span class="co">#&gt; 2      Julio 2024   2.5</span></span></code></pre></div>
+<span><span class="co">#&gt; 1      Marzo 2025   2.3</span></span>
+<span><span class="co">#&gt; 2      Marzo 2025   2.0</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="example-two-1">Example two<a class="anchor" aria-label="anchor" href="#example-two-1"></a>
 </h3>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Filter with the values wrapper (GDP)</span></span>
 <span><span class="va">filter</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"producto interior"</span>, <span class="st">"datos ajustados"</span>,</span>
 <span>                       <span class="st">"volumen encadenado"</span>, <span class="st">"variación anual"</span><span class="op">)</span><span class="op">)</span></span>
@@ -433,12 +493,17 @@ variable and a name as value.</p>
 <span>                              periodicity <span class="op">=</span> <span class="fl">3</span>, unnest <span class="op">=</span> <span class="cn">TRUE</span>, tip <span class="op">=</span> <span class="st">"A"</span>,</span>
 <span>                              validate <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="va">pib</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Nombre"</span>, <span class="st">"T3_Periodo"</span>, <span class="st">"Anyo"</span>, <span class="st">"Valor"</span><span class="op">)</span><span class="op">]</span></span>
-<span><span class="co">#&gt; NULL</span></span></code></pre></div>
+<span><span class="co">#&gt;                                                                                                                                                                       Nombre</span></span>
+<span><span class="co">#&gt; 1            Total Nacional. Datos ajustados de estacionalidad y calendario. Producto interior bruto a precios de mercado. Variación anual. Índices de volumen encadenados. </span></span>
+<span><span class="co">#&gt; 2 Total Nacional. Base 2010. Datos ajustados de estacionalidad y calendario. Producto interior bruto a precios de mercado. Variación anual. Índices de volumen encadenados. </span></span>
+<span><span class="co">#&gt;   T3_Periodo Anyo  Valor</span></span>
+<span><span class="co">#&gt; 1         T4 2024 3.3915</span></span>
+<span><span class="co">#&gt; 2         T2 2019 2.2513</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="example-three-1">Example three<a class="anchor" aria-label="anchor" href="#example-three-1"></a>
 </h3>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Filter with the values wrapper combine with individual shortcuts (population)</span></span>
 <span><span class="va">filter</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"todas las edades"</span>, <span class="st">"total nacional"</span><span class="op">)</span>, nacionalidad <span class="op">=</span> <span class="st">"total"</span>,</span>
 <span>               sexo <span class="op">=</span> <span class="st">"total"</span>, paisnacimiento <span class="op">=</span> <span class="st">"total"</span> <span class="op">)</span></span>
@@ -452,8 +517,8 @@ variable and a name as value.</p>
 <span><span class="co">#&gt; 1 Total Nacional. Total. Todas las edades. Total. Total. Población. Número. </span></span>
 <span><span class="co">#&gt; 2 Total Nacional. Total. Todas las edades. Total. Total. Población. Número. </span></span>
 <span><span class="co">#&gt;   T3_Periodo Anyo    Valor</span></span>
-<span><span class="co">#&gt; 1         T1 2023 48085361</span></span>
-<span><span class="co">#&gt; 2         T1 2023 48085361</span></span></code></pre></div>
+<span><span class="co">#&gt; 1         T1 2024 48619695</span></span>
+<span><span class="co">#&gt; 2         T1 2024 48619695</span></span></code></pre></div>
 </div>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
@@ -467,7 +532,7 @@ variable and a name as value.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
 </div>
 
     </footer>
