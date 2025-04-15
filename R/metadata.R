@@ -57,6 +57,7 @@ get_metadata_operations <- function(operation = NULL, lang = "ES", geo = NULL, p
 #' available operations see [get_metadata_operations()].
 #' If no operation is specified then all the variables will be shown.
 #' @param lang (string): language of the retrieved data. Set to 'ES' for Spanish or set to 'EN' for English.
+#' @param det (int): level of detail. Valid values: 0, 1 or 2.
 #' @param page (int): page number. The retrieved result of the query is paginated (page=0 retrieves all pages).
 #' @param validate (logical): validate input parameters. A FALSE value means fewer API calls.
 #' @param verbose (logical): print additional information, including the URL to call the API service.
@@ -69,7 +70,7 @@ get_metadata_operations <- function(operation = NULL, lang = "ES", geo = NULL, p
 #' get_metadata_variables(operation = "IPC")
 #' }
 #'
-get_metadata_variables <- function(operation = NULL, lang = "ES", page = 0, validate = TRUE, verbose = FALSE){
+get_metadata_variables <- function(operation = NULL, lang = "ES", det = 0, page = 0, validate = TRUE, verbose = FALSE){
   # List of values to define the call to the API
   definition <- list()
   definition <- append(definition, list(lang = lang))
@@ -79,6 +80,7 @@ get_metadata_variables <- function(operation = NULL, lang = "ES", page = 0, vali
 
   # List of parameters to call the API
   parameters <- list()
+  parameters <- append(parameters, list(det = det))
   parameters <- append(parameters, list(page = page))
 
   # List of addons

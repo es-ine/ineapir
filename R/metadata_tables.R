@@ -104,6 +104,7 @@ get_metadata_table_groups <- function(idTable = NULL, lang = "ES", validate = TR
 #' ids click this [link](https://uvima.github.io/ineapir/articles/identify_codes.html).
 #' @param idGroup (int): id of the group of variables. To get all groups
 #' for a specific table see [get_metadata_table_groups()].
+#' @param det (int): level of detail. Valid values: 0, 1 or 2.
 #' @param lang (string): language of the retrieved data. Set to 'ES' for Spanish or set to 'EN' for English.
 #' @param validate (logical): validate input parameters. A FALSE value means fewer API calls.
 #' @param verbose (logical): print additional information, including the URL to call the API service.
@@ -115,7 +116,7 @@ get_metadata_table_groups <- function(idTable = NULL, lang = "ES", validate = TR
 #' get_metadata_table_values(idTable = 50902, idGroup = 110889)
 #' }
 #'
-get_metadata_table_values <- function(idTable = NULL, idGroup = NULL, lang = "ES", validate = TRUE, verbose = FALSE){
+get_metadata_table_values <- function(idTable = NULL, idGroup = NULL, det = 0, lang = "ES", validate = TRUE, verbose = FALSE){
 
   # List of values to define the call to the API
   definition <- list()
@@ -126,6 +127,7 @@ get_metadata_table_values <- function(idTable = NULL, idGroup = NULL, lang = "ES
 
   # List of parameters to call the API
   parameters <- list()
+  parameters <- append(parameters, list(det = det))
 
   # List of addons
   addons <- list(validate = validate, verbose = verbose)
@@ -194,6 +196,7 @@ get_metadata_operation_table <- function(idTable = NULL, lang = "ES", validate =
 #'
 #' @param idTable (int): id of the table. For further information about
 #' ids click this [link](https://uvima.github.io/ineapir/articles/identify_codes.html).
+#' @param det (int): level of detail. Valid values: 0, 1 or 2.
 #' @param filter (list): list of variables and values.
 #' ### Filtering data from tables
 #' When we request data from tables there is the possibility of filtering data
@@ -238,10 +241,29 @@ get_metadata_operation_table <- function(idTable = NULL, lang = "ES", validate =
 #' get_metadata_table_varval(idTable = 52056, filter = list(NAC = "00"))
 #' }
 #'
-get_metadata_table_varval <- function(idTable = NULL, filter = NULL, lang = "ES", validate = TRUE, verbose = FALSE){
+get_metadata_table_varval <- function(idTable = NULL, det = 0, filter = NULL, lang = "ES", validate = TRUE, verbose = FALSE){
+  # List of values to define the call to the API
+  definition <- list()
+  definition <- append(definition, list(lang = lang))
+  definition <- append(definition, list(input = idTable))
+  definition <- append(definition, list(tag = "idTable"))
+
+  # List of parameters to call the API
+  parameters <- list()
+  parameters <- append(parameters, if(is.null(filter)) list(filter = filter) else list(filter = list(idTable = idTable, filter = filter)))
+  parameters <- append(parameters, list(det = det))
+
+  # List of addons
+  addons <- list(validate = validate, verbose = verbose)
+
+  # List of definitions and parameters
+  request <- list(definition = definition, parameters = parameters, addons = addons)
+
+  # Check request
+  request <- check_request(request)
 
   # Get the metadata information of the table
-  df <- get_metadata_variable_values_table(idTable, filter, verbose, validate, lang)
+  df <- get_metadata_variable_values_table(idTable, filter, verbose, validate, lang, det = det, request = request)
 
   return(df$values)
 }

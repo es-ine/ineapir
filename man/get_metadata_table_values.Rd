@@ -7,6 +7,7 @@
 get_metadata_table_values(
   idTable = NULL,
   idGroup = NULL,
+  det = 0,
   lang = "ES",
   validate = TRUE,
   verbose = FALSE
@@ -18,6 +19,8 @@ ids click this \href{https://uvima.github.io/ineapir/articles/identify_codes.htm
 
 \item{idGroup}{(int): id of the group of variables. To get all groups
 for a specific table see \code{\link[=get_metadata_table_groups]{get_metadata_table_groups()}}.}
+
+\item{det}{(int): level of detail. Valid values: 0, 1 or 2.}
 
 \item{lang}{(string): language of the retrieved data. Set to 'ES' for Spanish or set to 'EN' for English.}
 

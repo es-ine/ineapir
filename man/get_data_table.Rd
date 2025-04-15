@@ -8,7 +8,9 @@ get_data_table(
   idTable = NULL,
   filter = NULL,
   nlast = NULL,
-  det = NULL,
+  dateStart = NULL,
+  dateEnd = NULL,
+  det = 0,
   tip = NULL,
   lang = "ES",
   validate = TRUE,
@@ -84,6 +86,19 @@ for tempus tables and alphanumeric codes for px and tpx tables.
 
 \item{nlast}{(int): number of periods to retrieve. By default it retrieves all available periods.}
 
+\item{dateStart}{(string): the initial date of the requested data. The required
+format is yyyy/mm/dd. Additionally, dateStart can be a vector of dates, where
+each date represents the start date of individual ranges where the end date should be found
+at the same position in the dateEnd vector. If dateStart and dateEnd are equal,
+the specified dates are retrieved. If no end date is entered,
+all dates will be queried, from the corresponding start date to the last available period.}
+
+\item{dateEnd}{(string): the end date of the requested data. The required
+format is yyyy/mm/dd. Additionally, dateEnd can be a vector of dates, where
+each date represents the end date of individual ranges where the initial date should be found
+at the same position in the dateStart vector. The length of the dateEnd vector
+must be less than or equal to the length of the dateStart vector.}
+
 \item{det}{(int): level of detail. Valid values: 0, 1 or 2.}
 
 \item{tip}{(string): set to 'A' for friendly output (e.g. readable dates),
@@ -115,6 +130,20 @@ Get data from a specific table
 \examples{
 \dontrun{
 get_data_table(idTable = 50902)
+get_data_table(idTable = 50902, unnest = TRUE, tip= "A",
+filter <- list("3" = "74", "762" = "304092"), dateStart = "2024/01/01")
+get_data_table(idTable = 50902, unnest = TRUE, tip= "A",
+filter <- list("3" = "74", "762" = "304092"),
+ dateStart = "2023/01/01", dateEnd = "2023/05/01")
+get_data_table(idTable = 50902, unnest = TRUE, tip= "A",
+filter <- list("3" = "74", "762" = "304092"),
+dateStart = c("2023/01/01","2024/01/01"), dateEnd = c("2023/01/01","2024/01/01"))
+get_data_table(idTable = 50902, unnest = TRUE, tip= "A",
+filter <- list("3" = "74", "762" = "304092"),
+dateStart = c("2023/01/01","2024/01/01"), dateEnd = c("2023/03/01","2024/03/01"))
+get_data_table(idTable = 50902, unnest = TRUE, tip= "A",
+filter <- list("3" = "74", "762" = "304092"),
+dateStart = c("2023/01/01","2024/01/01"), dateEnd = c("2023/03/01"))
 get_data_table(idTable = 50902, nlast = 2, unnest = TRUE, metanames = TRUE,
                metacodes = TRUE, tip = "M")
 get_data_table(idTable = 8105, filter = list("18"="454"), verbose = TRUE)

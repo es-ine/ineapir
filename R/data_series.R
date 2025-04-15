@@ -6,9 +6,16 @@
 #' codes click this [link](https://uvima.github.io/ineapir/articles/identify_codes.html).
 #' @param nlast (int): number of periods to retrieve. By default is set to 1 period.
 #' @param dateStart (string): the initial date of the requested data. The required
-#' format is yyyy/mm/dd.
+#' format is yyyy/mm/dd. Additionally, dateStart can be a vector of dates, where
+#' each date represents the start date of individual ranges where the end date should be found
+#' at the same position in the dateEnd vector. If dateStart and dateEnd are equal,
+#' the specified dates are retrieved. If no end date is entered,
+#' all dates will be queried, from the corresponding start date to the last available period.
 #' @param dateEnd (string): the end date of the requested data. The required
-#' format is yyyy/mm/dd.
+#' format is yyyy/mm/dd. Additionally, dateEnd can be a vector of dates, where
+#' each date represents the end date of individual ranges where the initial date should be found
+#' at the same position in the dateStart vector. The length of the dateEnd vector
+#' must be less than or equal to the length of the dateStart vector.
 #' @param det (int): level of detail. Valid values: 0, 1 or 2.
 #' @param tip (string): set to 'A' for friendly output (e.g. readable dates),
 #' set to 'M' to include metadata or set to 'AM' for both.
@@ -22,7 +29,15 @@
 #' @examples \dontrun{
 #' get_data_series(codSeries = "IPC251856")
 #' get_data_series(codSeries = "IPC251856", nlast = 5)
-#' get_data_series(codSeries = "IPC251856", dateStart = "2023/01/01", dateEnd = "2023/05/01")
+#' get_data_series(codSeries = "IPC251856", dateStart = "2024/01/01")
+#' get_data_series(codSeries = "IPC251856", dateStart = "2023/01/01",
+#' dateEnd = "2023/05/01")
+#' get_data_series(codSeries = "IPC251856", dateStart = c("2023/01/01","2024/01/01"),
+#' dateEnd = c("2023/01/01","2024/01/01"))
+#' get_data_series(codSeries = "IPC251856", dateStart = c("2023/01/01","2024/01/01"),
+#' dateEnd = c("2023/03/01","2024/03/01"))
+#' get_data_series(codSeries = "IPC251856", dateStart = c("2023/01/01","2024/01/01"),
+#' dateEnd = c("2023/03/01"))
 #' }
 #'
 #' @export
@@ -91,6 +106,17 @@ get_data_series <- function(codSeries = NULL, nlast = 1, dateStart = NULL, dateE
 #' 1 (monthly), 3 (quarterly), 6 (bi-annual), 12 (annual). To obtain a list
 #' of periodicities see [get_metadata_periodicity()].
 #' @param nlast (int): number of periods to retrieve. By default is set to 1 period.
+#' @param dateStart (string): the initial date of the requested data. The required
+#' format is yyyy/mm/dd. Additionally, dateStart can be a vector of dates, where
+#' each date represents the start date of individual ranges where the end date should be found
+#' at the same position in the dateEnd vector. If dateStart and dateEnd are equal,
+#' the specified dates are retrieved. If no end date is entered,
+#' all dates will be queried, from the corresponding start date to the last available period.
+#' @param dateEnd (string): the end date of the requested data. The required
+#' format is yyyy/mm/dd. Additionally, dateEnd can be a vector of dates, where
+#' each date represents the end date of individual ranges where the initial date should be found
+#' at the same position in the dateStart vector. The length of the dateEnd vector
+#' must be less than or equal to the length of the dateStart vector.
 #' @param det (int): level of detail. Valid values: 0, 1 or 2.
 #' @param tip (string): set to 'A' for friendly output (e.g. readable dates),
 #' set to 'M' to include metadata or set to 'AM' for both.
@@ -111,7 +137,7 @@ get_data_series <- function(codSeries = NULL, nlast = 1, dateStart = NULL, dateE
 #'                        filter = list("115"= "28", "3" = "84", "762" = "304092"))
 #' }
 #'
-get_data_series_filter <- function(operation = NULL, filter = NULL, periodicity = NULL, nlast = 1, det = 0, tip = NULL, lang = "ES", page = 1, validate = TRUE, verbose = FALSE, unnest = FALSE){
+get_data_series_filter <- function(operation = NULL, filter = NULL, periodicity = NULL, nlast = 1, dateStart = NULL, dateEnd = NULL, det = 0, tip = NULL, lang = "ES", page = 1, validate = TRUE, verbose = FALSE, unnest = FALSE){
 
   # List of values to define the call to the API
   definition <- list()
@@ -124,7 +150,9 @@ get_data_series_filter <- function(operation = NULL, filter = NULL, periodicity 
   parameters <- list()
   parameters <- append(parameters, list(filter = list(operation = operation, filter = filter)))
   parameters <- append(parameters, list(p = list(operation = operation, p = periodicity)))
-  parameters <- append(parameters, list(nult = nlast))
+  parameters <- append(parameters, if(is.null(dateStart) & is.null(dateEnd)) list(date = dateStart) else list(date = list(dateStart = dateStart, dateEnd = dateEnd)))
+  parameters <- append(parameters, if(is.null(dateStart) & is.null(dateEnd)) list(nult = nlast) else list(nult = NULL))
+  #parameters <- append(parameters, list(nult = nlast))
   parameters <- append(parameters, list(det = det))
   parameters <- append(parameters, list(tip = tip))
   parameters <- append(parameters, if(page == 0) list(page = 1) else list(page = page))

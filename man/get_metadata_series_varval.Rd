@@ -7,6 +7,7 @@
 get_metadata_series_varval(
   operation = NULL,
   lang = "ES",
+  det = 0,
   validate = TRUE,
   verbose = FALSE
 )
@@ -16,6 +17,8 @@ get_metadata_series_varval(
 available operations see \code{\link[=get_metadata_operations]{get_metadata_operations()}}.}
 
 \item{lang}{(string): language of the retrieved data. Set to 'ES' for Spanish or set to 'EN' for English.}
+
+\item{det}{(int): level of detail. Valid values: 0, 1 or 2.}
 
 \item{validate}{(logical): validate input parameters. A FALSE value means fewer API calls.}
 

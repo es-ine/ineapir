@@ -7,6 +7,28 @@ API_version <- 3
 # Number of rows per page
 page_lenght = 500
 
+# column names for different API version
+column_names <- list("3" = list("variable.code" = list("es" = "Variable.Codigo"),
+                                "variable.id" = list("es" = "Variable.Id"),
+                                "variable.fk" = list("es" = "Fk_Variable"),
+                                "variable.name" = list("es" = "Variable.Nombre"),
+                                "value.code" = list("es" = "Codigo"),
+                                "value.id" = list("es" = "Id"),
+                                "value.name" = list("es" = "Nombre"),
+                                "id" = list("es" = "Id"),
+                                "ioe" = list("es" = "Cod_IOE"),
+                                "codigo" = list("es" = "Codigo")),
+                     "4" = list("variable.code" = list("es" = "Variable.Codigo"),
+                                "variable.id" = list("es" = "Variable.Id"),
+                                "variable.fk" = list("es" = "FK_Variable"),
+                                "variable.name" = list("es" = "Variable.Nombre"),
+                                "value.code" = list("es" = "Codigo"),
+                                "value.id" = list("es" = "Id"),
+                                "value.name" = list("es" = "Nombre"),
+                                "id" = list("es" = "Id"),
+                                "ioe" = list("es" = "Cod_IOE"),
+                                "codigo" = list("es" = "Codigo")))
+
 # Shortcuts used in filters
 shortcuts_filter <- list(nac = "349",                 # national
                          prov = "115" ,                      # provinces
@@ -238,12 +260,18 @@ get_parameters_query <- function(request){
       if(x == "date"){
         val <- build_date(val)
 
+        # manage array of dates
+        for(i in 1:length(val)){
+          parameters <- append(parameters, list(date = val[i]))
+        }
+
         # Since the list also contains the operation
       }else if(x == "p"){
         val <- val[[x]]
+        parameters[[x]] <- val
+      }else{
+        parameters[[x]] <- val
       }
-
-      parameters[[x]] <- val
     }
   }
 
@@ -259,11 +287,12 @@ get_parameters_filter <- function(request){
 
   val <- request$parameters[["filter"]]
 
+  lval <- NULL
   if(!is.null(val)){
-    val <- build_filter(val, request$definition, request$addons, request$check$parameters$filter)
+    lval <- build_filter(val, request$definition, request$addons, request$check$parameters$filter, det = request$parameters$det)
   }
 
-  return(val)
+  return(lval)
 }
 
 # Get url and its components
@@ -279,6 +308,7 @@ get_url <- function(request){
 
   # Get the filter of the query
   parfilter <- get_parameters_filter(request)
+  parfilter <- parfilter$filter
 
   # Update the path with the endpoint
   url$path <- paste0(url$path, definition)
@@ -312,13 +342,13 @@ get_url <- function(request){
 # Return the dates in the format used by the API
 build_date <- function(date){
   dateStart <- format.Date(date$dateStart,'%Y%m%d')
-  dateEnd <- format.Date(date$dateEnd,'%Y%m%d')
+  dateEnd <- append(format.Date(date$dateEnd,'%Y%m%d'), rep("", length(date$dateStart)- length(date$dateEnd)))
 
-  return(paste0(dateStart, ":", dateEnd))
+  return(paste(dateStart, dateEnd, sep = ":"))
 }
 
 # Return the cross of variables and values in the format used by the API
-build_filter <- function(parameter, definition, addons, checkfilter){
+build_filter <- function(parameter, definition, addons, checkfilter, det = 0){
   # Values to return
   val <- character()
   lval <- list()
@@ -352,8 +382,11 @@ build_filter <- function(parameter, definition, addons, checkfilter){
     # If there are shortcuts present in the filter
     shortcut <- check_shortcut(filter, definition)
 
+    # Take into account negative values
+    shortcut <- if(is_negative_filter_values(filter)) TRUE else shortcut
+
     # Dataframe with the values
-    dfval <- get_filter_values(parameter, definition$lang, shortcut, verbose = FALSE, progress = addons$verbose)
+    dfval <- get_filter_values(parameter, definition$lang, shortcut, verbose = FALSE, progress = addons$verbose, det = det)
 
     if(!is.null(dfval)){
       origin <- dfval$origin
@@ -365,9 +398,8 @@ build_filter <- function(parameter, definition, addons, checkfilter){
   i <- 1
   j <- 1
   for(n in names(filter)){
-
     # check if in the filter there are shortcuts
-    short <- is.element(tolower(n), c(names(shortcuts_filter), shortcut_wrapper))
+    short <- is.element(n, c(names(shortcuts_filter), shortcut_wrapper))
 
     # It is necessary to include shortcut in the case of a px table with a code equal to a shortcut (eg sexo)
     if(shortcut && short){
@@ -376,23 +408,32 @@ build_filter <- function(parameter, definition, addons, checkfilter){
         filterout <- list()
 
         if(origin == "tablepx"){
+          # column name depending on det parameter
+          colname <- column_names[["3"]][["variable.code"]][["es"]]
+
           # Select codes
-          varid <- unique(dfval$Variable.Codigo)
+          varid <- unique(dfval[[colname]])
 
           # We select only the values of variables present in the filter
-          dfvalfilter <- subset(dfval, dfval$Variable.Codigo %in% varid)
+          dfvalfilter <- subset(dfval, dfval[[colname]] %in% varid)
 
         }else if(origin == "tablepxid"){
+          # column name depending on det parameter
+          colname <- column_names[["3"]][["variable.id"]][["es"]]
+
           # Select codes
-          varid <- c(unique(dfval$Variable.Codigo), unique(dfval$Variable.Id))
+          varid <- c(unique(dfval[[column_names[["3"]][["variable.code"]][["es"]]]]), unique(dfval[[colname]]))
 
           # We select only the values of variables present in the filter
-          dfvalfilter <- subset(dfval, dfval$Variable.Codigo %in% varid | dfval$Variable.Id %in% varid)
+          dfvalfilter <- subset(dfval, dfval[[column_names[["3"]][["variable.code"]][["es"]]]] %in% varid | dfval[[colname]] %in% varid)
 
         }else{
+           # column name depending on det parameter
+           colname <- if(det > 0 ) column_names[["3"]][["variable.id"]][["es"]] else column_names[["3"]][["variable.fk"]][["es"]]
+
           if(tolower(n) %in% shortcut_wrapper){
             # Select ids
-            varid <- unique(dfval$Fk_Variable)
+            varid <- unique(dfval[[colname]])
 
           }else{
             # id of variables
@@ -400,7 +441,7 @@ build_filter <- function(parameter, definition, addons, checkfilter){
           }
 
           # We select only the values of variables present in the filter
-          dfvalfilter <- subset(dfval, dfval$Fk_Variable %in% varid)
+          dfvalfilter <- subset(dfval, dfval[[colname]] %in% varid)
         }
 
         # Reset the values found
@@ -408,6 +449,12 @@ build_filter <- function(parameter, definition, addons, checkfilter){
 
         # Find a match between the filter inputs and the possible values
         for(f in filter[[n]]){
+
+          # check if there is any negative value
+          neg <- grepl("^-.*", as.character(f))
+
+          # remove minus sign
+          f <- if(sum(neg) > 0) gsub("^-", "", as.character(f)) else f
 
           ### Way one:  find a value for the largest word
           # Split the phrase
@@ -417,14 +464,14 @@ build_filter <- function(parameter, definition, addons, checkfilter){
           valshort1 <- valshort1[which.max(nchar(valshort1))]
 
           # Find a match for the largest word and the possible values
-          ind1 <- grepl(valshort1, dfvalfilter$Nombre, ignore.case = TRUE)
+          ind1 <- grepl(valshort1, dfvalfilter[[column_names[["3"]][["value.name"]][["es"]]]], ignore.case = TRUE)
 
           # Dataframe with the matches
           dfvalgrep1 <- subset(dfvalfilter, ind1)
 
           ### Way two: find a value for the entire string
           # Find a match for the entire phrase and the possible values
-          ind2 <- grepl(f, dfvalfilter$Nombre, ignore.case = TRUE)
+          ind2 <- grepl(f, dfvalfilter[[column_names[["3"]][["value.name"]][["es"]]]], ignore.case = TRUE)
 
           # Dataframe with the matches
           dfvalgrep2 <- subset(dfvalfilter, ind2)
@@ -438,16 +485,16 @@ build_filter <- function(parameter, definition, addons, checkfilter){
 
           }else if(nrow(dfvalgrep1) > 0 && nrow(dfvalgrep2) > 0){
             if(origin == "tablepx"){
-              dfvalgrep2 <- subset(dfvalgrep2, select = c("Codigo", "Variable.Codigo"))
-              dfvalgreptmp <- merge(dfvalgrep1, dfvalgrep2, by = c("Codigo", "Variable.Codigo"))
+              dfvalgrep2 <- subset(dfvalgrep2, select = c(column_names[["3"]][["value.code"]][["es"]], colname))
+              dfvalgreptmp <- merge(dfvalgrep1, dfvalgrep2, by = c(column_names[["3"]][["value.code"]][["es"]], colname))
 
             }else if(origin == "tablepxid"){
-              dfvalgrep2 <- subset(dfvalgrep2, select = c("Id", "Variable.Id"))
-              dfvalgreptmp <- merge(dfvalgrep1, dfvalgrep2, by = c("Id", "Variable.Id"))
+              dfvalgrep2 <- subset(dfvalgrep2, select = c(column_names[["3"]][["value.id"]][["es"]], colname))
+              dfvalgreptmp <- merge(dfvalgrep1, dfvalgrep2, by = c(column_names[["3"]][["value.id"]][["es"]], colname))
 
             }else{
-              dfvalgrep2 <- subset(dfvalgrep2, select = c("Id", "Fk_Variable"))
-              dfvalgreptmp <- merge(dfvalgrep1, dfvalgrep2, by = c("Id", "Fk_Variable"))
+              dfvalgrep2 <- subset(dfvalgrep2, select = c(column_names[["3"]][["value.id"]][["es"]], colname))
+              dfvalgreptmp <- merge(dfvalgrep1, dfvalgrep2, by = c(column_names[["3"]][["value.id"]][["es"]], colname))
             }
           }else{
             dfvalgreptmp <- dfvalgrep1
@@ -456,13 +503,13 @@ build_filter <- function(parameter, definition, addons, checkfilter){
           # If there is no match result look in the id
           if(nrow(dfvalgreptmp) == 0){
             if(origin == "tablepx"){
-              dfvalgreptmp <- subset(dfvalfilter, grepl(paste0("^",f,"$"), dfvalfilter$Codigo))
+              dfvalgreptmp <- subset(dfvalfilter, grepl(paste0("^",f,"$"), dfvalfilter[[column_names[["3"]][["value.code"]][["es"]]]]))
 
             }else if(origin == "tablepxid"){
-              dfvalgreptmp <- subset(dfvalfilter, grepl(paste0("^",f,"$"), c(dfvalfilter$Codigo, dfvalfilter$Id)))
+              dfvalgreptmp <- subset(dfvalfilter, grepl(paste0("^",f,"$"), c(dfvalfilter[[column_names[["3"]][["value.code"]][["es"]]]], dfvalfilter[[column_names[["3"]][["value.id"]][["es"]]]])))
 
             }else{
-              dfvalgreptmp <- subset(dfvalfilter, grepl(paste0("^",f,"$"), dfvalfilter$Id))
+              dfvalgreptmp <- subset(dfvalfilter, grepl(paste0("^",f,"$"), dfvalfilter[[column_names[["3"]][["value.id"]][["es"]]]]))
             }
           }
 
@@ -479,30 +526,30 @@ build_filter <- function(parameter, definition, addons, checkfilter){
               for(r in 1:nrow(dfvalgreptmp)){
                 if(origin == "tablepx"){
                   # Variable code
-                  var <- dfvalgreptmp$Variable.Codigo[r]
+                  var <- dfvalgreptmp[[colname]][r]
 
                   # Value code
-                  filterout[[var]] <- dfvalgreptmp$Codigo[r]
+                  filterout[[var]] <- if(sum(neg) > 0) paste0("-", dfvalgreptmp[[column_names[["3"]][["value.code"]][["es"]]]][r]) else dfvalgreptmp[[column_names[["3"]][["value.code"]][["es"]]]][r]
 
                 }else if(origin == "tablepxid"){
                   # Variable id
-                  var <- dfvalgreptmp$Variable.Id[r]
+                  var <- dfvalgreptmp[[colname]][r]
 
                   # Value id
-                  filterout[[var]] <- dfvalgreptmp$Id[r]
+                  filterout[[var]] <- if(sum(neg) > 0) paste0("-", dfvalgreptmp[[column_names[["3"]][["value.id"]][["es"]]]][r]) else dfvalgreptmp[[column_names[["3"]][["value.id"]][["es"]]]][r]
 
                 }else{
                   # Variable id
-                  var <- dfvalgreptmp$Fk_Variable[r]
+                  var <- dfvalgreptmp[[colname]][r]
 
                   # Value id
-                  filterout[[var]] <- dfvalgreptmp$Id[r]
+                  filterout[[var]] <- if(sum(neg) > 0) paste0("-", dfvalgreptmp[[column_names[["3"]][["value.id"]][["es"]]]][r]) else dfvalgreptmp[[column_names[["3"]][["value.id"]][["es"]]]][r]
 
                   if(exists("dfvalgrep") && is.data.frame(get("dfvalgrep")) ){
 
                     # If the variable id has been used in the filter, set the same counter
-                    if(is.element(var, dfvalgrep$Fk_Variable)){
-                      i <- dfvalgrep[dfvalgrep$Fk_Variable == var,]$i[1]
+                    if(is.element(var, dfvalgrep[[colname]])){
+                      i <- dfvalgrep[dfvalgrep[[colname]] == var,]$i[1]
                       dfvalgreptmp$i[r] <- i
                     }else{
                       if(nrow(dfvalgrep) > 0){
@@ -515,15 +562,65 @@ build_filter <- function(parameter, definition, addons, checkfilter){
                 # Check the filter comes from a table or a series
                 parurl <- if(is.element("idtable",parnames)) "tv" else paste0("g", i)
 
+                # check if there are negative values and remove
+                filterout_neg <- check_negative_values(dfval, var, filterout[[var]], origin)
+
                 # Build the filter with the format of the API
-                tmp <- paste0(parurl, "=", var, ":", filterout[[var]])
+                #tmp <- paste0(parurl, "=", var, ":", filterout[[var]])
+                tmp <- paste0(parurl, "=", filterout_neg)
 
                 # Vector with all the values in the format of the API
                 val <- append(val, tmp)
 
-                # List with all the values
-                lval <- append(lval, list(paste0(var, ":", filterout[[var]])))
-                names(lval)[length(lval)] <- parurl
+                if(length(lval) > 0){
+                  # in case we have to remove repeated values included in the negative check
+                  if(sum(neg) > 0){
+                    # elements in the filter with variable equal to var
+                    fvar <- lapply(strsplit(unlist(lval), ":"), function(x) x[1] == var)
+
+                    # elements in the filter with variable not equal to var
+                    fnovar <- lapply(strsplit(unlist(lval), ":"), function(x) x[1] != var)
+
+                    lval1 <- list()
+                    if(sum(unlist(fvar)) > 0){
+                      # select from filter only the values for variable var
+                      ulval <- lval[unlist(fvar)]
+
+                      # format of the API
+                      ulval <- paste0(names(ulval),"=",unlist(ulval))
+
+                      # remove values with negative sign from filter
+                      ulval <- intersect(ulval, tmp)
+
+                      # format of the filter to return
+                      lval1 <- lapply(strsplit(ulval, "="), `[[`, 2)
+                      names(lval1) <- unlist(lapply(strsplit(ulval, "="), `[[`, 1))
+
+                    }else{
+                      lval1 <- lapply(strsplit(tmp, "="), `[[`, 2)
+                      names(lval1) <- unlist(lapply(strsplit(tmp, "="), `[[`, 1))
+                    }
+
+                    # union
+                    lval <- append(lval[unlist(fnovar)], lval1)
+
+                  }else{
+                    # List with all the values
+                    #for(fo in filterout[[var]]){
+                    for(fo in filterout_neg){
+                      #lval <- append(lval, list(paste0(var, ":", fo)))
+                      lval <- append(lval, list(fo))
+                      names(lval)[length(lval)] <- parurl
+                    }
+                  }
+                }else{
+                  # List with all the values
+                  for(fo in filterout_neg){
+                    #lval <- append(lval, list(paste0(var, ":", fo)))
+                    lval <- append(lval, list(fo))
+                    names(lval)[length(lval)] <- parurl
+                  }
+                }
               }
             }
           }else{
@@ -566,15 +663,21 @@ build_filter <- function(parameter, definition, addons, checkfilter){
       # Check the filter comes from a table or a series
       parurl <- if(is.element("idtable",parnames)) "tv" else paste0("g", i)
 
+      # check if there are negative values and remove
+      filter_neg <- check_negative_values(dfval, n, filter[[n]], origin)
+
       # Build the filter with the format of the API
-      tmp <- paste0(parurl, "=", n, ":", filter[[n]])
+      #tmp <- paste0(parurl, "=", n, ":", filter[[n]])
+      tmp <- paste0(parurl, "=", filter_neg)
 
       # Vector with all the values in the format of the API
       val <- append(val, tmp)
 
-      for(f in filter[[n]]){
+      #for(f in filter[[n]]){
+        for(f in filter_neg){
         # List with all the values
-        lval <- append(lval, list(paste0(n, ":", f)))
+        #lval <- append(lval, list(paste0(n, ":", f)))
+        lval <- append(lval, list(f))
         names(lval)[length(lval)] <- parurl
 
         if(addons$verbose){
@@ -592,11 +695,11 @@ build_filter <- function(parameter, definition, addons, checkfilter){
     cat("- Processing filter: 100%         \n")
   }
 
-  return(lval)
+  return(list(filter = lval, df = dfval))
 }
 
 # Get the all values used in a table or operation
-get_filter_values <- function(parameter, lang, shortcut, verbose, progress = TRUE){
+get_filter_values <- function(parameter, lang, shortcut, verbose, progress = TRUE, det = 0){
 
   # id to identify a table or a operation
   id <- parameter[[1]]
@@ -616,12 +719,12 @@ get_filter_values <- function(parameter, lang, shortcut, verbose, progress = TRU
     if(is.element("idtable",parnames)){
 
       # Get the metadata information of the table
-      dfval <- get_metadata_variable_values_table(idTable = id, verbose = verbose, validate = FALSE, lang = lang, progress = progress)
+      dfval <- get_metadata_variable_values_table(idTable = id, verbose = verbose, validate = FALSE, lang = lang, progress = progress, det = det)
 
       # The filter comes from a series
     }else{
       # We obtain the variables and values from the operation of the series
-      dfval <- get_metadata_variable_values_operation(operation = id, verbose = verbose, validate = FALSE, lang, progress)
+      dfval <- get_metadata_variable_values_operation(operation = id, verbose = verbose, validate = FALSE, lang, progress = progress, det = det)
     }
   }
 
@@ -697,7 +800,7 @@ check_parameters <- function(parameters, addons, definition){
                      "tip" = check_tip(val, addons$verbose),
                      "geo" = check_geo(val, addons$verbose),
                      "page" = check_page(val, addons$verbose),
-                     "filter" = check_filter(val, addons$verbose, definition)
+                     "filter" = check_filter(val, addons$verbose, definition, parameters$det)
         )
         # Check results to return
         result <- append(result, r)
@@ -819,21 +922,21 @@ check_operation <- function(operation, active_null = FALSE, verbose){
     cod <- FALSE
 
     # Check id
-    tmp <- opes$Id[trimws(opes$Id) != ""]
+    tmp <- opes$Id[trimws(opes[[column_names[["3"]][["id"]][["es"]]]]) != ""]
 
     if(!is.element(operation,tmp)){
       id <- TRUE
     }
 
     # Check cod_IOE
-    tmp <- paste0("IOE", opes$Cod_IOE[trimws(opes$Cod_IOE) != ""])
+    tmp <- paste0("IOE", opes[[column_names[["3"]][["ioe"]][["es"]]]][trimws(opes[[column_names[["3"]][["ioe"]][["es"]]]]) != ""])
 
     if(!is.element(operation,tmp)){
       ioe <- TRUE
     }
 
     # Check code
-    tmp <- opes$Codigo[trimws(opes$Codigo) != ""]
+    tmp <- opes[[column_names[["3"]][["codigo"]][["es"]]]][trimws(opes[[column_names[["3"]][["codigo"]][["es"]]]]) != ""]
 
     if(!is.element(operation,tmp)){
       cod <- TRUE
@@ -890,7 +993,7 @@ check_variablesoperation <- function(operation, variable, verbose){
   if(!is.null(variable)){
     vars <- get_metadata_variables(operation = operation, validate = FALSE, verbose = verbose, page = 0)
 
-    if(!is.element(variable, vars$Id)){
+    if(!is.element(variable, vars[[column_names[["3"]][["id"]][["es"]]]])){
       result <- FALSE
       stop(sprintf("%s is not a valid variable for operation %s. Valid ids: %s", variable, operation, paste0(vars$Id, collapse = ", ")))
     }
@@ -913,7 +1016,7 @@ check_variable <- function(variable, verbose){
   if(!is.null(variable)){
     vars <- get_metadata_variables(validate = FALSE, verbose = verbose, page = 0)
 
-    if(!is.element(variable, vars$Id)){
+    if(!is.element(variable, vars[[column_names[["3"]][["id"]][["es"]]]])){
       result <- FALSE
       stop(sprintf("%s variable not exists", variable))
     }
@@ -937,7 +1040,7 @@ check_publication <- function(publication, verbose){
     # Get all the publications
     pubs <- get_metadata_publications(validate = FALSE, verbose = verbose, page = 0)
 
-    if(!is.element(publication, pubs$Id)){
+    if(!is.element(publication, pubs[[column_names[["3"]][["id"]][["es"]]]])){
       result <- FALSE
       stop(sprintf("%s publication not exists", publication))
     }
@@ -984,7 +1087,7 @@ check_idtable_idgroup <- function(input, verbose){
     # Get all the groups of the table
     groups <- get_metadata_table_groups(idTable = idTable, validate = FALSE, verbose = verbose)
 
-    if(!is.element(idGroup, groups$Id)){
+    if(!is.element(idGroup, groups[[column_names[["3"]][["id"]][["es"]]]])){
       result <- FALSE
       stop(sprintf("%s is not a valid group for table %s. Valid ids: %s", idGroup, idTable, paste0(groups$Id, collapse = ", ")))
     }
@@ -1011,9 +1114,16 @@ check_dates <- function(date, verbose){
 
   if(!is.null(dateEnd)){
     if(!is.null(dateStart)){
-      if(dateStart > dateEnd){
+      if(length(dateEnd) > length(dateStart)){
         result <- FALSE
-        stop("dateStart must be previous to dateEnd.")
+        stop("the length of dateEnd must be less than or equal to the length of dateStart.")
+      }else{
+        for(i in 1:length(dateEnd)){
+          if(dateStart[i] > dateEnd[i]){
+            result <- FALSE
+            stop(sprintf("dateStart (%s) must be previous to dateEnd (%s) or the same.", dateStart[i], dateEnd[i]))
+          }
+        }
       }
     }else{
       result <- FALSE
@@ -1030,27 +1140,29 @@ check_dates <- function(date, verbose){
 
 # Check the input format of the date
 check_date_format <- function(name, date){
-  # Remove white spaces
-  date <- if(!is.null(date)) gsub("\\s+", "", date) else date
+  for(f in date){
+    # Remove white spaces
+    #f <- if(!is.null(f)) gsub("\\s+", "", f) else f
 
-  # Input format must be yyyy/mm/dd
-  format <- if(!is.null(date)) grepl("[0-9]{4}/[0-9]{2}/[0-9]{2}", date) else FALSE
+    # Input format must be yyyy/mm/dd
+    format <- if(!is.null(f)) grepl("[0-9]{4}/[0-9]{2}/[0-9]{2}", f) else FALSE
 
-  if(format){
-    y <- substr(date, 1, 4)
-    m <- substr(date, 6, 7)
-    d <- substr(date, 9, 10)
+    if(format){
+      y <- substr(f, 1, 4)
+      m <- substr(f, 6, 7)
+      d <- substr(f, 9, 10)
 
-    if(m > 12){
-      stop(sprintf("%s month can not be greater than 12", name))
-    }
+      if(m > 12){
+        stop(sprintf("%s month can not be greater than 12", name))
+      }
 
-    if(d > 31){
-      stop(sprintf("%s day can not be greater than 31", name))
-    }
-  }else{
-    if(!is.null(date)){
-      stop(sprintf("%s format is not correct. Date format must be as follow: yyyy/mm/dd", name))
+      if(d > 31){
+        stop(sprintf("%s day can not be greater than 31", name))
+      }
+    }else{
+      if(!is.null(f)){
+        stop(sprintf("%s format is not correct. Date format must be as follow: yyyy/mm/dd", name))
+      }
     }
   }
 }
@@ -1064,9 +1176,9 @@ check_periodicity <- function(operation, p, verbose){
     # Get periodicities of an operation
     periodicity <- get_metadata_periodicity(operation = operation, validate = FALSE, verbose = verbose)
 
-    if(!is.element(p, periodicity$Id)){
+    if(!is.element(p, periodicity[[column_names[["3"]][["id"]][["es"]]]])){
       result <- FALSE
-      stop(sprintf("%s is not a valid periodicity for operation %s. Valid ids: %s", p, operation, paste0(periodicity$Id, collapse = ", ")))
+      stop(sprintf("%s is not a valid periodicity for operation %s. Valid ids: %s", p, operation, paste0(periodicity[[column_names[["3"]][["id"]][["es"]]]], collapse = ", ")))
     }
   }else{
     result <- FALSE
@@ -1185,11 +1297,17 @@ check_page <- function(n, verbose){
 }
 
 # Check if the filter argument is valid
-check_filter <- function(parameter, verbose, definition){
+check_filter <- function(parameter, verbose, definition, det = 0){
   result <- TRUE
 
   # If there are shortcuts in the filter
   shortcut <- FALSE
+
+  # check if there are negative values in the filter
+  if(is_negative_filter_values(parameter[[2]])){
+    # remove the negative signs
+    parameter[[2]] <- remove_filter_negative_values(parameter[[2]])
+  }
 
   # id to identify a table or a operation
   id <- parameter[[1]]
@@ -1201,7 +1319,7 @@ check_filter <- function(parameter, verbose, definition){
   parnames <- tolower(names(parameter))
 
   # Get the values from metadata of tables or operations
-  df <- get_filter_values(parameter, definition$lang, shortcut = TRUE, verbose = verbose, progress = FALSE)
+  df <- get_filter_values(parameter, definition$lang, shortcut = TRUE, verbose = verbose, progress = FALSE, det = det)
 
   # Make sure the response is valid or null
   if(check_result(df$values)){
@@ -1222,7 +1340,7 @@ check_filter <- function(parameter, verbose, definition){
 
       # The filter comes from a tempus table
     }else if(df$origin == "tablet3"){
-      check <- check_table_tempus_filter(parameter, verbose, df$values)
+      check <- check_table_tempus_filter(parameter, verbose, df$values, det = det)
 
       result <- check$result
       shortcut <- check$shortcut
@@ -1230,7 +1348,7 @@ check_filter <- function(parameter, verbose, definition){
 
     # The filter comes from a series
     else if(df$origin == "series") {
-      check <- check_series_filter(parameter, verbose, df$values)
+      check <- check_series_filter(parameter, verbose, df$values, det = det)
 
       result <- check$result
       shortcut <- check$shortcut
@@ -1289,16 +1407,15 @@ check_table_px_filter <- function(idTable, pxfilter, verbose, df){
 
   # The filter must be a list
   if(is.list(pxfilter)){
-
     # Variables of the filter
     var <- names(pxfilter)
 
     # Go through all the variables
     for(v in var){
       # If the variable in the filter is not in the metadata is not valid
-      if(!is.element(v, c(df$Variable.Codigo, shortcut_wrapper))){
+      if(!is.element(v, c(df[[column_names[["3"]][["variable.code"]][["es"]]]], shortcut_wrapper))){
         result <- FALSE
-        msg <- sprintf("%s is not a valid variable for %s idTable. Valid variable codes: %s",v,idTable, paste0(unique(df$Variable.Codigo), collapse = ", "))
+        msg <- sprintf("%s is not a valid variable for %s idTable. Valid variable codes: %s",v,idTable, paste0(unique(df[[column_names[["3"]][["variable.code"]][["es"]]]]), collapse = ", "))
         msg <- if(is.element(v, names(shortcuts_filter))) paste0(msg,"\nThe only shortcut valid for this table is the wrapper 'values'") else msg
         stop(msg)
       }
@@ -1310,7 +1427,7 @@ check_table_px_filter <- function(idTable, pxfilter, verbose, df){
       shortcut <- shortcut | short
 
       # subset of the metadata for an specific variable
-      metavar <- if(v %in% shortcut_wrapper) df else df[df$Variable.Codigo == v,]
+      metavar <- if(v %in% shortcut_wrapper) df else df[df[[column_names[["3"]][["variable.code"]][["es"]]]] == v,]
 
       # Go through all the values in the filter for the specific variable
       for(val in pxfilter[[v]]){
@@ -1320,11 +1437,11 @@ check_table_px_filter <- function(idTable, pxfilter, verbose, df){
 
         validnames <- TRUE
         for(vs in valshort){
-          validnames <- validnames & sum(grepl(vs, metavar$Nombre, ignore.case = TRUE)) > 0
+          validnames <- validnames & sum(grepl(vs, metavar[[column_names[["3"]][["value.name"]][["es"]]]], ignore.case = TRUE)) > 0
         }
 
         # If the value in the filter is not in the metadata is not valid
-        if(val != "" && !(is.element(val, metavar$Codigo) || validnames )){
+        if(val != "" && !(is.element(val, metavar[[column_names[["3"]][["value.code"]][["es"]]]]) || validnames )){
           result <- FALSE
           stop(sprintf("%s is not a valid value for variable %s", val, v))
         }
@@ -1352,6 +1469,7 @@ check_table_px_id_filter <- function(idTable, pxfilter, verbose, df){
   # The filter must be a list
   if(is.list(pxfilter)){
 
+    # check for alias ~ in the filter
     pxfilter <- check_alias_filter(pxfilter)
 
     # Variables of the filter
@@ -1360,13 +1478,13 @@ check_table_px_id_filter <- function(idTable, pxfilter, verbose, df){
     # Go through all the variables
     for(v in var){
       # If the variable in the filter is not in the metadata is not valid
-      if(!is.element(v, c(df$Variable.Codigo, df$Variable.Id, shortcut_wrapper))){
+      if(!is.element(v, c(df[[column_names[["3"]][["variable.code"]][["es"]]]], df[[column_names[["3"]][["variable.id"]][["es"]]]], shortcut_wrapper))){
         result <- FALSE
         msg <- sprintf("%s is not a valid variable for %s idTable. Valid variable codes: %s. Valid variable ids: %s",
                        v,
                        idTable,
-                       paste0(unique(df$Variable.Codigo[nchar(df$Variable.Codigo) > 0]), collapse = ", "),
-                       paste0(unique(df$Variable.Id), collapse = ", "))
+                       paste0(unique(df[[column_names[["3"]][["variable.code"]][["es"]]]][nchar(df[[column_names[["3"]][["variable.code"]][["es"]]]]) > 0]), collapse = ", "),
+                       paste0(unique(df[[column_names[["3"]][["variable.code"]][["es"]]]]), collapse = ", "))
         msg <- if(is.element(v, names(shortcuts_filter))) paste0(msg,"\nThe only shortcut valid for this table is the wrapper 'values'") else msg
         stop(msg)
       }
@@ -1378,7 +1496,7 @@ check_table_px_id_filter <- function(idTable, pxfilter, verbose, df){
       shortcut <- shortcut | short
 
       # subset of the metadata for an specific variable
-      metavar <- if(v %in% shortcut_wrapper) df else df[df$Variable.Codigo == v | df$Variable.Id == v,]
+      metavar <- if(v %in% shortcut_wrapper) df else df[df[[column_names[["3"]][["variable.code"]][["es"]]]] == v | df[[column_names[["3"]][["variable.code"]][["es"]]]] == v,]
 
       # Go through all the values in the filter for the specific variable
       for(val in pxfilter[[v]]){
@@ -1387,11 +1505,11 @@ check_table_px_id_filter <- function(idTable, pxfilter, verbose, df){
 
         validnames <- TRUE
         for(vs in valshort){
-          validnames <- validnames & sum(grepl(vs, metavar$Nombre, ignore.case = TRUE)) > 0
+          validnames <- validnames & sum(grepl(vs, metavar[[column_names[["3"]][["value.name"]][["es"]]]], ignore.case = TRUE)) > 0
         }
 
         # If the value in the filter is not in the metadata is not valid
-        if(val != "" && !(is.element(val, c(metavar$Codigo, metavar$Id)) || validnames )){
+        if(val != "" && !(is.element(val, c(metavar[[column_names[["3"]][["value.code"]][["es"]]]], metavar[[column_names[["3"]][["value.id"]][["es"]]]])) || validnames )){
           result <- FALSE
           stop(sprintf("%s is not a valid value for variable %s", val, v))
         }
@@ -1410,7 +1528,7 @@ check_table_px_id_filter <- function(idTable, pxfilter, verbose, df){
 }
 
 # Check if the filter argument is valid for a tempus table
-check_table_tempus_filter <- function(parameter, verbose, df){
+check_table_tempus_filter <- function(parameter, verbose, df, det = 0){
   result <- TRUE
 
   # If there are shortcuts in the filter
@@ -1427,7 +1545,7 @@ check_table_tempus_filter <- function(parameter, verbose, df){
 
   # The filter must be a list
   if(is.list(filter)){
-    check <- check_tempus_filter(id, filter, parnames, df)
+    check <- check_tempus_filter(id, filter, parnames, df, det = det)
     shortcut <- check$shortcut
 
   }else{
@@ -1443,7 +1561,7 @@ check_table_tempus_filter <- function(parameter, verbose, df){
 }
 
 # Check if the filter argument is valid for a series
-check_series_filter <- function(parameter, verbose, df){
+check_series_filter <- function(parameter, verbose, df, det = 0){
   result <- TRUE
 
   # If there are shortcuts in the filter
@@ -1460,7 +1578,6 @@ check_series_filter <- function(parameter, verbose, df){
 
   # The filter must be a list
   if(is.list(filter)){
-
     # Variables of the filter
     var <- names(filter)
 
@@ -1469,7 +1586,7 @@ check_series_filter <- function(parameter, verbose, df){
 
     # The list must contain at least two values in the filter
     if(length(var) > 1 || (length(var) < 2 && length(val) > 1)){
-      check <- check_tempus_filter(id, filter, parnames, df)
+      check <- check_tempus_filter(id, filter, parnames, df, det = det)
       shortcut <- check$shortcut
 
     }else{
@@ -1490,11 +1607,14 @@ check_series_filter <- function(parameter, verbose, df){
 }
 
 # Check if the filter argument is valid
-check_tempus_filter <- function(id, filter, parnames, df){
+check_tempus_filter <- function(id, filter, parnames, df, det = 0){
   result <- TRUE
 
   # If there are shortcuts in the filter
   shortcut <- FALSE
+
+  # column name depending on det parameter
+  colname <- if(det > 0 ) column_names[["3"]][["variable.id"]][["es"]] else column_names[["3"]][["variable.fk"]][["es"]]
 
   # Variables of the filter
   var <- names(filter)
@@ -1509,7 +1629,7 @@ check_tempus_filter <- function(id, filter, parnames, df){
     if(short){
       # The values wrapper is present
       if(tolower(v) %in% shortcut_wrapper){
-        variable <- unique(df$Fk_Variable)
+        variable <- unique(df[[colname]])
 
         # A shortcut is present
       }else{
@@ -1520,32 +1640,33 @@ check_tempus_filter <- function(id, filter, parnames, df){
     }
 
     # The variable id is in the metadata information
-    validvar <- intersect(variable, df$Fk_Variable)
+    validvar <- intersect(variable, df[[colname]])
 
-    if(!(is.element(v, df$Fk_Variable) || length(validvar) > 0 )){
+    if(!(is.element(v, df[[colname]]) || length(validvar) > 0 )){
       result <- FALSE
       stop(sprintf("%s is not a valid variable for %s %s",v, parnames[1],id))
     }
 
     # If the shortcut name includes more than one variable
     # obtain the metadata information for all the variables
-    metavar <- subset(df, df$Fk_Variable %in% validvar)
+    metavar <- subset(df, df[[colname]] %in% validvar)
 
     # Go through all the values of an specific variable
     for(val in filter[[v]]){
       # Multiple values
       for(f in val){
+
         # Split the value
         valshort <- if(nchar(f) > 0 ) unlist(strsplit(as.character(f), "\\s+")) else f
 
         validnames <- TRUE
         # Check each part of the value
         for(vs in valshort){
-          validnames <- validnames & sum(grepl(vs, metavar$Nombre, ignore.case = TRUE)) > 0
+          validnames <- validnames & sum(grepl(vs, metavar[[column_names[["3"]][["value.name"]][["es"]]]], ignore.case = TRUE)) > 0
         }
 
         # The id or the shortcut name of the value must exist in the metadata information
-        if(f != "" && !(is.element(f, metavar$Id) || validnames)){
+        if(f != "" && !(is.element(f, metavar[[column_names[["3"]][["value.id"]][["es"]]]]) || validnames)){
           result <- FALSE
 
           if(is.element("idtable",parnames)){
@@ -1780,7 +1901,7 @@ check_alias_filter <- function(f){
   }else{
     if(sum(login) > 0){
       # Get variables without aliases
-      var <- unlist(lapply(n, function(x) gsub("~id|~cod","",tolower(x))))
+      var <- unlist(lapply(n, function(x) gsub("~id|~cod","",x)))
 
       # Check if the aliases are valid
       if(length(grep("~", var)) > 0){
@@ -1903,7 +2024,7 @@ extract_metadata <- function(datain, request){
         dfcodes <- do.call(rbind,
                            lapply(metadata,
                                   function(x) subset(x,
-                                                     x$Variable.Id %in% unique(values$Fk_Variable),
+                                                     x[[column_names[["3"]][["variable.id"]][["es"]]]] %in% unique(values[[column_names[["3"]][["variable.fk"]][["es"]]]]),
                                                      select = metacols)))
         # New name of the column
         newname <- unlist(subset(checktable$groups, checktable$groups$Id == g, select = c("Nombre")))
@@ -1948,7 +2069,7 @@ extract_metadata <- function(datain, request){
       dfcodes <- do.call(rbind,
                          lapply(metadata,
                                 function(x) subset(x,
-                                                   x$Variable.Id %in% var,
+                                                   x[[column_names[["3"]][["variable.id"]][["es"]]]] %in% var,
                                                    select = metacols)))
 
       # Rename column with variable code
@@ -1967,7 +2088,7 @@ extract_metadata <- function(datain, request){
 }
 
 # Get metadata information about the variables and values present in a table
-get_metadata_variable_values_table <- function(idTable, filter = NULL, verbose, validate, lang, progress = FALSE){
+get_metadata_variable_values_table <- function(idTable, filter = NULL, verbose, validate, lang, progress = FALSE, det = 0, request = NULL){
 
   # Check the type of the table
   checktable <- check_type_table(idTable = idTable, validate = validate, verbose = verbose, lang = lang)
@@ -1981,52 +2102,266 @@ get_metadata_variable_values_table <- function(idTable, filter = NULL, verbose, 
     if(checktable$ispxtable){
       origin <- checktable$origin
 
-      if(progress){
-        cat(sprintf("- Processing filter: %s%%        \r", 50))
-      }
+      # internal call of the funtion
+      #if(is.null(request)){
 
-      # Obtain metadata information
-      df <- get_metadata_series_table(idTable = idTable, filter = filter, tip = "M", validate = FALSE, verbose = verbose, lang = lang)
+        if(progress){
+          cat(sprintf("- Processing filter: %s%%        \r", 50))
+        }
 
-      # Check if exits and id for variables
-      existsvarid <- exists_variables_id(df$MetaData)
+        # Obtain metadata information
+        df <- get_metadata_series_table(idTable = idTable, filter = filter, tip = "M", validate = FALSE, verbose = verbose, lang = lang)
 
-      # If exists variable's id and value's id add new origin and include ids in the selection
-      if(exists_values_id(df$MetaData) && existsvarid$result) {
-        selcol <- c("Nombre", "Codigo", "Id", "Variable.Nombre","Variable.Codigo", existsvarid$name)
-        origin <- "tablepxid"
+        # Check if exits and id for variables
+        existsvarid <- exists_variables_id(df$MetaData)
 
-      }else{
-        selcol <- c("Nombre", "Codigo", "Variable.Nombre","Variable.Codigo")
-      }
+        # If exists variable's id and value's id add new origin and include ids in the selection
+        if(exists_values_id(df$MetaData) && existsvarid$result) {
+          #selcol <- c("Nombre", "Codigo", "Id", "Variable.Nombre","Variable.Codigo", existsvarid$name)
+          selcol <- names(df$MetaData[[1]])[grepl("id|nombre|codigo|variable", names(df$MetaData[[1]]), ignore.case = TRUE)]
+          origin <- "tablepxid"
 
-      # Get the metadata with information of variables and values
-      dfvalues <- lapply(df$MetaData,
-                         function(x) subset(x, select = selcol))
+        }else{
+          #selcol <- c("Nombre", "Codigo", "Variable.Nombre","Variable.Codigo")
+          selcol <- names(df$MetaData[[1]])[grepl("id|nombre|codigo|variable", names(df$MetaData[[1]]), ignore.case = TRUE)]
+        }
 
-      dfvalues <- unique(do.call(rbind, dfvalues))
+        # Get the metadata with information of variables and values
+        dfvalues <- lapply(df$MetaData,
+                           function(x) subset(x, select = selcol))
 
-      # The table is stored in tempus
+        dfvalues <- unique(do.call(rbind, dfvalues))
+
+      # call from get_metadata_table_varval
+      # }else{
+      #   # if(is.null(filter)){
+      #     if(progress){
+      #       cat(sprintf("- Processing filter: %s%%        \r", 50))
+      #     }
+      #
+      #     # Obtain metadata information
+      #     df <- get_metadata_series_table(idTable = idTable, filter = filter, tip = "M", validate = FALSE, verbose = verbose, lang = lang)
+      #
+      #     # Check if exits and id for variables
+      #     existsvarid <- exists_variables_id(df$MetaData)
+      #
+      #     # If exists variable's id and value's id add new origin and include ids in the selection
+      #     if(exists_values_id(df$MetaData) && existsvarid$result) {
+      #       selcol <- names(df$MetaData[[1]])[grepl("id|nombre|codigo|variable", names(df$MetaData[[1]]), ignore.case = TRUE)]
+      #       origin <- "tablepxid"
+      #
+      #     }else{
+      #       selcol <- names(df$MetaData[[1]])[grepl("id|nombre|codigo|variable", names(df$MetaData[[1]]), ignore.case = TRUE)]
+      #     }
+      #
+      #     # Get the metadata with information of variables and values
+      #     dfvalues <- lapply(df$MetaData,
+      #                        function(x) subset(x, select = selcol))
+      #
+      #     dfvalues <- unique(do.call(rbind, dfvalues))
+
+        # }else{
+        #   if(validate){
+        #     # rerieve the filter values
+        #     lvarval <- get_parameters_filter(request)
+        #
+        #     # filter values
+        #     fvarval <- lvarval$filter
+        #
+        #     # dataframe of variables and values ids
+        #     dfvalues <-lvarval$df
+        #
+        #     if(origin == "tablepxid"){
+        #       # create column variable_id:value_id
+        #       dfvalues$varval <- paste(as.character(dfvalues[, column_names[["3"]][["variable.id"]][["es"]]]), as.character(dfvalues[, column_names[["3"]][["value.id"]][["es"]]]), sep = ":")
+        #
+        #     }else{
+        #       # create column variable_cod:value_cod
+        #       dfvalues$varval <- paste(as.character(dfvalues[, column_names[["3"]][["variable.code"]][["es"]]]), as.character(dfvalues[, column_names[["3"]][["value.code"]][["es"]]]), sep = ":")
+        #     }
+        #
+        #     # vector of var_id:val_id
+        #     fvarval <- unique(unname(unlist(fvarval)))
+        #
+        #     # vector of var_id
+        #     fvar <- unique(unlist(lapply(strsplit(fvarval, ":"), `[[`, 1)))
+        #
+        #     # retrieve varval in the filter
+        #     df1 <- subset(dfvalues, dfvalues$varval %in% fvarval)
+        #
+        #     if(origin == "tablepxid"){
+        #       # retrieve variables not in the filter
+        #       df2 <- subset(dfvalues, !(dfvalues[[column_names[["3"]][["variable.id"]][["es"]]]] %in% fvar))
+        #     }else{
+        #       # retrieve variables not in the filter
+        #       df2 <- subset(dfvalues, !(dfvalues[[column_names[["3"]][["variable.code"]][["es"]]]] %in% fvar))
+        #     }
+        #
+        #     dfvalues <- rbind(df1, df2)
+        #     dfvalues$varval <- NULL
+        #     rm(df1)
+        #     rm(df2)
+        #
+        #   }else{
+        #     if(progress){
+        #       cat(sprintf("- Processing filter: %s%%        \r", 50))
+        #     }
+        #
+        #     # Obtain metadata information
+        #     df <- get_metadata_series_table(idTable = idTable, filter = filter, tip = "M", validate = FALSE, verbose = verbose, lang = lang)
+        #
+        #     # Check if exits and id for variables
+        #     existsvarid <- exists_variables_id(df$MetaData)
+        #
+        #     # If exists variable's id and value's id add new origin and include ids in the selection
+        #     if(exists_values_id(df$MetaData) && existsvarid$result) {
+        #       selcol <- names(df$MetaData[[1]])[grepl("id|nombre|codigo|variable", names(df$MetaData[[1]]), ignore.case = TRUE)]
+        #       origin <- "tablepxid"
+        #
+        #     }else{
+        #       selcol <- names(df$MetaData[[1]])[grepl("id|nombre|codigo|variable", names(df$MetaData[[1]]), ignore.case = TRUE)]
+        #     }
+        #
+        #     # Get the metadata with information of variables and values
+        #     dfvalues <- lapply(df$MetaData,
+        #                        function(x) subset(x, select = selcol))
+        #
+        #     dfvalues <- unique(do.call(rbind, dfvalues))
+        #   }
+        # }
+      #}
+    # The table is stored in tempus
     }else{
       origin <- checktable$origin
 
-      i <- 1
-      for(g in checktable$groups$Id){
-        if(progress){
-          cat(sprintf("- Processing filter: %s%%        \r", round(i/nrow(checktable$groups)*50,0)))
-          i <- i + 1
+      # internal call of the funtion
+      if(is.null(request)){
+
+        i <- 1
+        for(g in checktable$groups$Id){
+          if(progress){
+            cat(sprintf("- Processing filter: %s%%        \r", round(i/nrow(checktable$groups)*50,0)))
+            i <- i + 1
+          }
+
+          df <- get_metadata_table_values(idTable = idTable, idGroup = g, det = det, validate = FALSE, lang = lang, verbose = verbose)
+
+          if(!is.null(df)){
+            #df <- subset(df, select = c("Id", "Fk_Variable", "Nombre", "Codigo"))
+            df <- subset(df, select = names(df)[grepl("id|nombre|codigo|variable", names(df), ignore.case = TRUE)])
+            df$group <- g
+          }
+
+          if (exists("dfvalues") && is.data.frame(get("dfvalues"))){
+            dfvalues <- rbind(dfvalues,df)
+          }else{
+            dfvalues <- df
+          }
         }
 
-        df <- get_metadata_table_values(idTable = idTable, idGroup = g, validate = FALSE, lang = lang, verbose = verbose)
+        # create column fk_variable:id
+        if(det > 0 ){
+          dfvalues$varval <- paste(as.character(dfvalues[, column_names[["3"]][["variable.id"]][["es"]]]), as.character(dfvalues[, column_names[["3"]][["value.id"]][["es"]]]), sep = ":")
 
-        if(!is.null(df)){
-          df <- subset(df, select = c("Id", "Fk_Variable", "Nombre", "Codigo"))
-        }
-
-        if (exists("dfvalues") && is.data.frame(get("dfvalues"))){
-          dfvalues <- rbind(dfvalues,df)
         }else{
-          dfvalues <- df
+          dfvalues$varval <- paste(as.character(dfvalues[, column_names[["3"]][["variable.fk"]][["es"]]]), as.character(dfvalues[, column_names[["3"]][["value.id"]][["es"]]]), sep = ":")
+        }
+
+      # call from get_metadata_table_varval
+      }else{
+        if(is.null(filter)){
+          i <- 1
+          for(g in checktable$groups$Id){
+            if(progress){
+              cat(sprintf("- Processing filter: %s%%        \r", round(i/nrow(checktable$groups)*50,0)))
+              i <- i + 1
+            }
+
+            df <- get_metadata_table_values(idTable = idTable, idGroup = g, det = det, validate = FALSE, lang = lang, verbose = verbose)
+
+            if(!is.null(df)){
+              #df <- subset(df, select = c("Id", "Fk_Variable", "Nombre", "Codigo"))
+              df <- subset(df, select = names(df)[grepl("id|nombre|codigo|variable", names(df), ignore.case = TRUE)])
+            }
+
+            if (exists("dfvalues") && is.data.frame(get("dfvalues"))){
+              dfvalues <- rbind(dfvalues,df)
+            }else{
+              dfvalues <- df
+            }
+          }
+        }else{
+
+          # rerieve the filter values
+          lvarval <- get_parameters_filter(request)
+
+          # filter values
+          fvarval <- lvarval$filter
+
+          if(validate){
+            # dataframe of variables and values ids
+            dfvalues <-lvarval$df
+          }else{
+            i <- 1
+            for(g in checktable$groups$Id){
+              if(progress){
+                cat(sprintf("- Processing filter: %s%%        \r", round(i/nrow(checktable$groups)*50,0)))
+                i <- i + 1
+              }
+
+              df <- get_metadata_table_values(idTable = idTable, idGroup = g, det = det, validate = FALSE, lang = lang, verbose = verbose)
+
+              if(!is.null(df)){
+                #df <- subset(df, select = c("Id", "Fk_Variable", "Nombre", "Codigo"))
+                df <- subset(df, select = names(df)[grepl("id|nombre|codigo|variable", names(df), ignore.case = TRUE)])
+                df$group <- g
+              }
+
+              if (exists("dfvalues") && is.data.frame(get("dfvalues"))){
+                dfvalues <- rbind(dfvalues,df)
+              }else{
+                dfvalues <- df
+              }
+            }
+          }
+
+          # vector of var_id:val_id
+          fvarval <- unique(unname(unlist(fvarval)))
+
+          # vector of var_id
+          fvar <- unique(unlist(lapply(strsplit(fvarval, ":"), `[[`, 1)))
+
+          # create column fk_variable:id
+          if(det > 0 ){
+            dfvalues$varval <- paste(as.character(dfvalues[, column_names[["3"]][["variable.id"]][["es"]]]), as.character(dfvalues[, column_names[["3"]][["value.id"]][["es"]]]), sep = ":")
+
+            # group id of the variables in the filter
+            fgroup <- subset(dfvalues, dfvalues[[column_names[["3"]][["variable.id"]][["es"]]]] %in% fvar, select = "group")
+
+          }else{
+            dfvalues$varval <- paste(as.character(dfvalues[, column_names[["3"]][["variable.fk"]][["es"]]]), as.character(dfvalues[, column_names[["3"]][["value.id"]][["es"]]]), sep = ":")
+
+            # group id of the variables in the filter
+            fgroup <- subset(dfvalues, dfvalues[[column_names[["3"]][["variable.fk"]][["es"]]]] %in% fvar, select = "group")
+          }
+
+          fgroup <- unique(unlist(fgroup))
+
+          # retrieve varval in the filter
+          df1 <- subset(dfvalues, dfvalues$varval %in% fvarval)
+
+          # retrieve variables not in the filter
+          if(det > 0 ){
+            df2 <- subset(dfvalues, !(dfvalues[[column_names[["3"]][["variable.id"]][["es"]]]] %in% fvar) & !(dfvalues$group %in% fgroup))
+          }else{
+            df2 <- subset(dfvalues, !(dfvalues[[column_names[["3"]][["variable.fk"]][["es"]]]] %in% fvar) & !(dfvalues$group %in% fgroup))
+          }
+
+          dfvalues <- rbind(df1, df2)
+          dfvalues$varval <- NULL
+          dfvalues$group <- NULL
+          rm(df1)
+          rm(df2)
         }
       }
     }
@@ -2036,7 +2371,7 @@ get_metadata_variable_values_table <- function(idTable, filter = NULL, verbose, 
 }
 
 # Get metadata information about the variables and values present in an operation
-get_metadata_variable_values_operation <- function(operation, verbose, validate, lang, progress = FALSE){
+get_metadata_variable_values_operation <- function(operation, verbose, validate, lang, progress = FALSE, det = 0, request = NULL){
 
   dfvalues <- NULL
 
@@ -2051,8 +2386,19 @@ get_metadata_variable_values_operation <- function(operation, verbose, validate,
       i <- i + 1
     }
 
-    tmp <- get_metadata_values(operation = operation, variable = var, validate = FALSE, verbose = verbose, lang = lang, page = 0)
-    tmp <- subset(tmp, select = c("Id","Fk_Variable","Nombre","Codigo"))
+    tmp <- get_metadata_values(operation = operation, variable = var, validate = FALSE, verbose = verbose, lang = lang, page = 0, det = det)
+
+    selcol <- names(tmp)[grepl("id|nombre|codigo|variable", names(tmp), ignore.case = TRUE)]
+    tmp <- subset(tmp, select = selcol)
+    #tmp <- subset(tmp, select = c("Id","Fk_Variable","Nombre","Codigo"))
+
+    # create column fk_variable:id
+    if(det > 0 ){
+      tmp$varval <- paste(as.character(tmp[, column_names[["3"]][["variable.id"]][["es"]]]), as.character(tmp[, column_names[["3"]][["value.id"]][["es"]]]), sep = ":")
+
+    }else{
+      tmp$varval <- paste(as.character(tmp[, column_names[["3"]][["variable.fk"]][["es"]]]), as.character(tmp[, column_names[["3"]][["value.id"]][["es"]]]), sep = ":")
+    }
 
     if (exists("dfvalues") && is.data.frame(get("dfvalues"))){
       dfvalues <- rbind(dfvalues,tmp)
@@ -2061,8 +2407,119 @@ get_metadata_variable_values_operation <- function(operation, verbose, validate,
     }
   }
 
+  if(!is.null(request)){
+    dfvalues$varval <- NULL
+  }
+
   return(list(origin = "series", values = dfvalues))
 }
 
+# chek if there are negatives values in the filter and remove them
+check_negative_values <- function(dfval, variable, values, origin){
+
+  # check if there is any negative value
+  neg <- grepl("^-.*", as.character(values))
+
+  if(sum(neg) > 0){
+    # remove minus sign
+    neg_values <- gsub("^-", "", as.character(values[neg]))
+
+    dfvalues <- NULL
+    if(!is.null(dfval)){
+      if(origin == "tablepx"){
+        # We select only the values of variables present in the filter
+        dfvalfilter <- subset(dfval,
+                              dfval[[column_names[["3"]][["variable.code"]][["es"]]]] %in% variable)
+
+        # remove negative values
+        dfvalues <- subset(dfvalfilter[[column_names[["3"]][["value.code"]][["es"]]]],
+                           !(dfvalfilter[[column_names[["3"]][["value.code"]][["es"]]]] %in% neg_values))
+
+        dfvalues <- paste0(variable, ":", dfvalues)
+
+      }else if(origin == "tablepxid"){
+        check_alias <- grepl("~id$|~cod$", variable)
+
+        # variables and values without aliases
+        variable <- gsub("~id$|~cod$","",as.character(variable))
+        neg_values <- gsub("~id$|~cod$","",neg_values)
+
+        # We select only the values of variables present in the filter
+        dfvalfilter <- subset(dfval, dfval[[column_names[["3"]][["variable.code"]][["es"]]]] %in% variable | dfval[[column_names[["3"]][["variable.id"]][["es"]]]] %in% variable)
+
+        if(check_alias){
+          # remove negative values.
+          dfvalues <- subset(dfvalfilter[[column_names[["3"]][["value.id"]][["es"]]]],
+                              !(dfvalfilter[[column_names[["3"]][["value.id"]][["es"]]]] %in% neg_values))
+
+          # include alias ~
+          dfvalues <- if(length(dfvalues) > 0)  paste0(paste0(variable, "~id"), ":", paste0(dfvalues, "~id")) else NULL
+
+        # Case with codes
+        }else{
+          # remove negative values
+          dfvalues <- subset(dfvalfilter[[column_names[["3"]][["value.code"]][["es"]]]],
+                              !(dfvalfilter[[column_names[["3"]][["value.code"]][["es"]]]] %in% neg_values) & grepl("\\S+", dfvalfilter[[column_names[["3"]][["value.code"]][["es"]]]]))
+
+          dfvalues <- if(length(dfvalues) > 0) paste0(variable, ":", dfvalues) else NULL
+        }
+
+      }else if(origin == "series"){
+        # column name depending on det parameter
+        colname <- if(sum(grepl(column_names[["3"]][["variable.fk"]][["es"]], names(dfval), ignore.case = TRUE)) > 0) column_names[["3"]][["variable.fk"]][["es"]] else column_names[["3"]][["variable.id"]][["es"]]
+
+        # We select only the values of variables present in the filter
+        dfvalfilter <- subset(dfval, dfval[[colname]] %in% variable)
+
+        # remove negative values
+        dfvalues <- subset(dfvalfilter,
+                           !(dfvalfilter[[column_names[["3"]][["value.id"]][["es"]]]] %in% neg_values), select = "varval")
+
+        dfvalues <- unique(unlist(dfvalues))
+
+      }else{
+        # group id of the variables in the filter
+        fgroup <- subset(dfval, dfval[[column_names[["3"]][["value.id"]][["es"]]]] %in% neg_values, select = "group")
+
+        # We select only the values of variable present in the filter
+        dfvalfilter <- subset(dfval, dfval$group %in% unique(unlist(fgroup)))
+
+        # remove negative values
+        dfvalues <- subset(dfvalfilter,
+                           !(dfvalfilter[[column_names[["3"]][["value.id"]][["es"]]]] %in% neg_values), select = "varval")
+
+        dfvalues <- unique(unlist(dfvalues))
+      }
+    }
+  }else{
+    dfvalues <- paste0(variable, ":", values)
+  }
+
+  return(dfvalues)
+}
+
+# remove negative sign from filter values
+remove_filter_negative_values <- function(filter){
+
+  if(is.list(filter)){
+    # remove minus sign
+    nfilter <- lapply(filter, function(x) gsub("^-", "", as.character(x)))
+  }else{
+    nfilter <- filter
+  }
+
+  return(nfilter)
+}
+
+# check if in the filter there are negative values
+is_negative_filter_values <- function(filter){
+  r <- FALSE
+  if(is.list(filter)){
+    s <- sum(unlist(lapply(filter, function(x) grepl("^-.*", as.character(x)))))
+    r <- if(s > 0) TRUE else FALSE
+  }
+
+  return(r)
+}
 
 

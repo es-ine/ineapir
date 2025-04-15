@@ -9,6 +9,8 @@ get_data_series_filter(
   filter = NULL,
   periodicity = NULL,
   nlast = 1,
+  dateStart = NULL,
+  dateEnd = NULL,
   det = 0,
   tip = NULL,
   lang = "ES",
@@ -58,6 +60,19 @@ Let’s also remark that for better performance is recommended to use numeric co
 of periodicities see \code{\link[=get_metadata_periodicity]{get_metadata_periodicity()}}.}
 
 \item{nlast}{(int): number of periods to retrieve. By default is set to 1 period.}
+
+\item{dateStart}{(string): the initial date of the requested data. The required
+format is yyyy/mm/dd. Additionally, dateStart can be a vector of dates, where
+each date represents the start date of individual ranges where the end date should be found
+at the same position in the dateEnd vector. If dateStart and dateEnd are equal,
+the specified dates are retrieved. If no end date is entered,
+all dates will be queried, from the corresponding start date to the last available period.}
+
+\item{dateEnd}{(string): the end date of the requested data. The required
+format is yyyy/mm/dd. Additionally, dateEnd can be a vector of dates, where
+each date represents the end date of individual ranges where the initial date should be found
+at the same position in the dateStart vector. The length of the dateEnd vector
+must be less than or equal to the length of the dateStart vector.}
 
 \item{det}{(int): level of detail. Valid values: 0, 1 or 2.}
 

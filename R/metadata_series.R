@@ -340,6 +340,7 @@ get_metadata_series_filter <- function(operation = NULL, filter = NULL, periodic
 #' @param operation (string): code of the operation. To obtain a list of
 #' available operations see [get_metadata_operations()].
 #' @param lang (string): language of the retrieved data. Set to 'ES' for Spanish or set to 'EN' for English.
+#' @param det (int): level of detail. Valid values: 0, 1 or 2.
 #' @param validate (logical): validate input parameters. A FALSE value means fewer API calls.
 #' @param verbose (logical): print additional information, including the URL to call the API service.
 #'
@@ -351,10 +352,27 @@ get_metadata_series_filter <- function(operation = NULL, filter = NULL, periodic
 #' get_metadata_series_varval(operation = "IPC")
 #' }
 #'
-get_metadata_series_varval <- function(operation = NULL, lang = "ES", validate = TRUE, verbose = FALSE){
+get_metadata_series_varval <- function(operation = NULL, lang = "ES", det = 0, validate = TRUE, verbose = FALSE){
+  # List of values to define the call to the API
+  definition <- list()
+  definition <- append(definition, list(lang = lang))
+  definition <- append(definition, list(input = operation))
+  definition <- append(definition, list(tag = "operation"))
 
+  # List of parameters to call the API
+  parameters <- list()
+  parameters <- append(parameters, list(det = det))
+
+  # List of addons
+  addons <- list(validate = validate, verbose = verbose)
+
+  # List of definitions and parameters
+  request <- list(definition = definition, parameters = parameters, addons = addons)
+
+  # Check request
+  request <- check_request(request)
   # Get the metadata information of the table
-  df <- get_metadata_variable_values_operation(operation, verbose, validate, lang)
+  df <- get_metadata_variable_values_operation(operation, verbose, validate, lang, det = det, request = request)
 
   return(df$values)
 }

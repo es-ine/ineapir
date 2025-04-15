@@ -46,6 +46,17 @@
 #' Let’s also remark that for better performance is recommended to use numeric ids
 #' for tempus tables and alphanumeric codes for px and tpx tables.
 #' @param nlast (int): number of periods to retrieve. By default it retrieves all available periods.
+#' @param dateStart (string): the initial date of the requested data. The required
+#' format is yyyy/mm/dd. Additionally, dateStart can be a vector of dates, where
+#' each date represents the start date of individual ranges where the end date should be found
+#' at the same position in the dateEnd vector. If dateStart and dateEnd are equal,
+#' the specified dates are retrieved. If no end date is entered,
+#' all dates will be queried, from the corresponding start date to the last available period.
+#' @param dateEnd (string): the end date of the requested data. The required
+#' format is yyyy/mm/dd. Additionally, dateEnd can be a vector of dates, where
+#' each date represents the end date of individual ranges where the initial date should be found
+#' at the same position in the dateStart vector. The length of the dateEnd vector
+#' must be less than or equal to the length of the dateStart vector.
 #' @param det (int): level of detail. Valid values: 0, 1 or 2.
 #' @param tip (string): set to 'A' for friendly output (e.g. readable dates),
 #'  set to 'M' to include metadata or set to 'AM' for both.
@@ -66,6 +77,20 @@
 #'
 #' @examples \dontrun{
 #' get_data_table(idTable = 50902)
+#' get_data_table(idTable = 50902, unnest = TRUE, tip= "A",
+#' filter <- list("3" = "74", "762" = "304092"), dateStart = "2024/01/01")
+#' get_data_table(idTable = 50902, unnest = TRUE, tip= "A",
+#' filter <- list("3" = "74", "762" = "304092"),
+#'  dateStart = "2023/01/01", dateEnd = "2023/05/01")
+#' get_data_table(idTable = 50902, unnest = TRUE, tip= "A",
+#' filter <- list("3" = "74", "762" = "304092"),
+#' dateStart = c("2023/01/01","2024/01/01"), dateEnd = c("2023/01/01","2024/01/01"))
+#' get_data_table(idTable = 50902, unnest = TRUE, tip= "A",
+#' filter <- list("3" = "74", "762" = "304092"),
+#' dateStart = c("2023/01/01","2024/01/01"), dateEnd = c("2023/03/01","2024/03/01"))
+#' get_data_table(idTable = 50902, unnest = TRUE, tip= "A",
+#' filter <- list("3" = "74", "762" = "304092"),
+#' dateStart = c("2023/01/01","2024/01/01"), dateEnd = c("2023/03/01"))
 #' get_data_table(idTable = 50902, nlast = 2, unnest = TRUE, metanames = TRUE,
 #'                metacodes = TRUE, tip = "M")
 #' get_data_table(idTable = 8105, filter = list("18"="454"), verbose = TRUE)
@@ -77,7 +102,7 @@
 #'                              sexo = c("mujeres", "hombres")))
 #' }
 #'
-get_data_table <- function(idTable = NULL, filter = NULL, nlast = NULL, det = NULL, tip = NULL, lang = "ES", validate = TRUE, verbose = FALSE, unnest = FALSE, metanames = FALSE, metacodes = FALSE){
+get_data_table <- function(idTable = NULL, filter = NULL, nlast = NULL, dateStart = NULL, dateEnd = NULL, det = 0, tip = NULL, lang = "ES", validate = TRUE, verbose = FALSE, unnest = FALSE, metanames = FALSE, metacodes = FALSE){
 
   # List of values to define the call to the API
   definition <- list()
@@ -89,7 +114,9 @@ get_data_table <- function(idTable = NULL, filter = NULL, nlast = NULL, det = NU
   # List of parameters to call the API
   parameters <- list()
   parameters <- append(parameters, if(is.null(filter)) list(filter = filter) else list(filter = list(idTable = idTable, filter = filter)))
-  parameters <- append(parameters, list(nult = nlast))
+  parameters <- append(parameters, if(is.null(dateStart) & is.null(dateEnd)) list(date = dateStart) else list(date = list(dateStart = dateStart, dateEnd = dateEnd)))
+  parameters <- append(parameters, if(is.null(dateStart) & is.null(dateEnd)) list(nult = nlast) else list(nult = NULL))
+  #parameters <- append(parameters, list(nult = nlast))
   parameters <- append(parameters, list(det = det))
   parameters <- append(parameters, list(tip = tip))
 

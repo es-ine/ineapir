@@ -93,7 +93,17 @@ ipc <- get_data_table(idTable = 50902, filter = filter, unnest = TRUE,
                       tip = "A", nlast = 5, validate = FALSE)
 ipc[,c("Nombre", "T3_Periodo", "Anyo", "Valor")]
 ```
+If we add a minus sign to a value, the value will be excluded from the filter.
 
+```{r tabla_filter_2b}
+# Filter with the values wrapper
+filter <- list(values = c("variación anual" , "-índice general"))
+
+# Request data using the filter
+ipc <- get_data_table(idTable = 50902, filter = filter, unnest = TRUE,
+                      tip = "A", nlast = 2, validate = FALSE)
+ipc[,c("Nombre", "T3_Periodo", "Anyo", "Valor")]
+```
 ### Example two
 We are going to filter the table [PIB pm Oferta (Indices de volumen encadenado)](https://www.ine.es/jaxiT3/Tabla.htm?t=30679) (Id 30679):
 

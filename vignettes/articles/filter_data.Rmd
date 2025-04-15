@@ -50,6 +50,20 @@ ipc <- get_data_table(idTable = 50902, filter = filter, unnest = TRUE,
 ipc[,c("Nombre", "T3_Periodo", "Anyo", "Valor")]
 ```
 
+- **NOTE** If we add a minus sign to a value, the value will be excluded from the filter.
+
+```{r tabla_filter_1b}
+# The filter is a list()
+filter <- list("3" = "74" ,     # variable id = 3, value id = 74
+               "762" = "-304092" # variable id = 762, value id = 304092
+               )
+
+# Request data using the filter
+ipc <- get_data_table(idTable = 50902, filter = filter, unnest = TRUE,
+                      tip = "A", nlast = 2, validate = FALSE)
+ipc[,c("Nombre", "T3_Periodo", "Anyo", "Valor")]
+```
+
 ### Case two (pc-axis file)
 
 - **URL:** https://www.ine.es/jaxi/Tabla.htm?path=/t20/e245/p08/l0/&file=01001.px
@@ -81,6 +95,22 @@ filter <- list(sexo = "ambossexos",
 # Request data using the filter
 poblacion <- get_data_table(idTable = "t20/e245/p08/l0/01001.px", unnest = TRUE,
                             tip = "A", nlast = 5, filter = filter,
+                            validate = FALSE)
+poblacion
+```
+
+- **NOTE** If we add a minus sign to a value, the value will be excluded from the filter.
+
+```{r tabla_filter_3b}
+# Build the filter with the codes of variables and values
+filter <- list(sexo = "-ambossexos",              
+               espanolesextranjeros = "total",   
+               edad3gruposdeedad = "totaledades" 
+               ) 
+
+# Request data using the filter
+poblacion <- get_data_table(idTable = "t20/e245/p08/l0/01001.px", unnest = TRUE,
+                            tip = "A", nlast = 1, filter = filter,
                             validate = FALSE)
 poblacion
 ```
@@ -118,6 +148,22 @@ filter <- list(tipodematerial = c("1biomasa", "2mineralesmetalicosmineralenbruto
 materiales <- get_data_table(idTable = 33387, unnest = TRUE, tip = "A",
                              nlast = 1, filter = filter, validate = FALSE)
 materiales
+```
+
+- **NOTE** If we add a minus sign to a value, the value will be excluded from the filter.
+
+```{r tabla_filter_5c}
+# Build the filter with the codes of variables and values
+# A variable can take more than one value
+filter <- list(tipodematerial = c("-1biomasa", "-2mineralesmetalicosmineralenbruto",
+                                  "-3mineralesnometalicos", "-4combustiblesfosiles")
+               )
+
+
+# Request data using the filter
+materiales <- get_data_table(idTable = 33387, unnest = TRUE, tip = "A",
+                             nlast = 1, filter = filter, validate = FALSE)
+head(materiales)
 ```
 
 - **URL:** https://www.ine.es/jaxi/Tabla.htm?tpx=52056&L=0

@@ -6,6 +6,7 @@
 \usage{
 get_metadata_table_varval(
   idTable = NULL,
+  det = 0,
   filter = NULL,
   lang = "ES",
   validate = TRUE,
@@ -15,6 +16,8 @@ get_metadata_table_varval(
 \arguments{
 \item{idTable}{(int): id of the table. For further information about
 ids click this \href{https://uvima.github.io/ineapir/articles/identify_codes.html}{link}.}
+
+\item{det}{(int): level of detail. Valid values: 0, 1 or 2.}
 
 \item{filter}{(list): list of variables and values.
 \subsection{Filtering data from tables}{

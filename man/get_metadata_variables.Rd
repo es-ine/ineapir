@@ -7,6 +7,7 @@
 get_metadata_variables(
   operation = NULL,
   lang = "ES",
+  det = 0,
   page = 0,
   validate = TRUE,
   verbose = FALSE
@@ -19,6 +20,8 @@ available operations see \code{\link[=get_metadata_operations]{get_metadata_oper
 If no operation is specified then all the variables will be shown.}
 
 \item{lang}{(string): language of the retrieved data. Set to 'ES' for Spanish or set to 'EN' for English.}
+
+\item{det}{(int): level of detail. Valid values: 0, 1 or 2.}
 
 \item{page}{(int): page number. The retrieved result of the query is paginated (page=0 retrieves all pages).}
 

@@ -9,14 +9,82 @@ knitr::opts_chunk$set(
 )
 ```
 
+## Use of `dateStart` and `dateEnd` 
+
+The arguments `dateStart` and `dateEnd` are available in `get_data_table()`, 
+`get_data_series()` and `get_data_series_filter()`, and allow you to filter data by date.
+
+
+- Single date:
+```{r date1}
+library(ineapir)
+filter <- list("3" = "74" ,     # variable id = 3, value id = 74
+               "762" = "304092" # variable id = 762, value id = 304092
+               )
+
+# Request data using dates. The required format is yyyy/mm/dd.
+ipc <- get_data_table(idTable = 50902, filter = filter, unnest = TRUE,
+                      tip = "A", validate = FALSE,
+                      dateStart = "2025/01/01", dateEnd = "2025/01/01")
+ipc[,c("Nombre", "T3_Periodo", "Anyo", "Valor")]
+
+```
+- Single range of dates:
+```{r date2}
+# Request data using dates. The required format is yyyy/mm/dd.
+ipc <- get_data_table(idTable = 50902, filter = filter, unnest = TRUE,
+                      tip = "A", validate = FALSE,
+                      dateStart = "2024/01/01", dateEnd = "2024/12/01")
+ipc[,c("Nombre", "T3_Periodo", "Anyo", "Valor")]
+
+```
+- Open range of dates:
+```{r date3}
+# Request data using dates. The required format is yyyy/mm/dd.
+ipc <- get_data_table(idTable = 50902, filter = filter, unnest = TRUE,
+                      tip = "A", validate = FALSE,
+                      dateStart = "2025/01/01")
+ipc[,c("Nombre", "T3_Periodo", "Anyo", "Valor")]
+
+```
+
+- Multiple dates:
+```{r date4}
+# Request data using dates. The required format is yyyy/mm/dd.
+ipc <- get_data_table(idTable = 50902, filter = filter, unnest = TRUE,
+                      tip = "A", validate = FALSE,
+                      dateStart = c("2023/01/01", "2024/01/01", "2025/01/01"), 
+                      dateEnd = c("2023/01/01", "2024/01/01", "2025/01/01"))
+ipc[,c("Nombre", "T3_Periodo", "Anyo", "Valor")]
+
+```
+- Multiple range of dates:
+```{r date5}
+# Request data using dates. The required format is yyyy/mm/dd.
+ipc <- get_data_table(idTable = 50902, filter = filter, unnest = TRUE,
+                      tip = "A", validate = FALSE,
+                      dateStart = c("2023/01/01", "2024/01/01", "2025/01/01"),
+                      dateEnd = c("2023/03/01", "2024/03/01", "2025/03/01"))
+ipc[,c("Nombre", "T3_Periodo", "Anyo", "Valor")]
+
+```
+- Multiple range of dates and a final open range:
+```{r date6}
+# Request data using dates. The required format is yyyy/mm/dd.
+ipc <- get_data_table(idTable = 50902, filter = filter, unnest = TRUE,
+                      tip = "A", validate = FALSE,
+                      dateStart = c("2023/01/01", "2024/01/01", "2025/01/01"), 
+                      dateEnd = c("2023/03/01", "2024/03/01"))
+ipc[,c("Nombre", "T3_Periodo", "Anyo", "Valor")]
+
+```
+
 ## Use of `verbose`
 
 When the argument `verbose = TRUE` is passed to a function, a number of 
 information is displayed in the console, including the URL used to call the API.
 
 ```{r verbose}
-library(ineapir)
-
 # Variables used in the operation IPC and verbose = TRUE
 variables <- get_metadata_variables(operation = "IPC", verbose = TRUE)
 ```
