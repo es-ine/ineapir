@@ -1,6 +1,7 @@
 <urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
 <url><loc>https://inedifusion.github.io/ineapir/404.html</loc></url>
 <url><loc>https://inedifusion.github.io/ineapir/LICENSE.html</loc></url>
+<url><loc>https://inedifusion.github.io/ineapir/articles/classifications.html</loc></url>
 <url><loc>https://inedifusion.github.io/ineapir/articles/filter_data.html</loc></url>
 <url><loc>https://inedifusion.github.io/ineapir/articles/filter_data_shortcuts.html</loc></url>
 <url><loc>https://inedifusion.github.io/ineapir/articles/identify_codes.html</loc></url>
@@ -14,6 +15,7 @@
 <url><loc>https://inedifusion.github.io/ineapir/reference/get_data_series_filter.html</loc></url>
 <url><loc>https://inedifusion.github.io/ineapir/reference/get_data_table.html</loc></url>
 <url><loc>https://inedifusion.github.io/ineapir/reference/get_filter_shortcuts.html</loc></url>
+<url><loc>https://inedifusion.github.io/ineapir/reference/get_metadata_classifications.html</loc></url>
 <url><loc>https://inedifusion.github.io/ineapir/reference/get_metadata_operation_table.html</loc></url>
 <url><loc>https://inedifusion.github.io/ineapir/reference/get_metadata_operations.html</loc></url>
 <url><loc>https://inedifusion.github.io/ineapir/reference/get_metadata_periodicity.html</loc></url>

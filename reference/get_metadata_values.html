@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">ineapir</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -18,7 +18,8 @@
       <ul class="navbar-nav me-auto"><li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
 <li class="nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
-  <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/filter_data_shortcuts.html">How to filter data using shortcut names</a></li>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/classifications.html">Classifications and hierarchy trees</a></li>
+    <li><a class="dropdown-item" href="../articles/filter_data_shortcuts.html">How to filter data using shortcut names</a></li>
     <li><a class="dropdown-item" href="../articles/filter_data.html">How to filter data</a></li>
     <li><a class="dropdown-item" href="../articles/identify_codes.html">How to identify the codes of tables and series on the INE website</a></li>
     <li><a class="dropdown-item" href="../articles/tips.html">Tips</a></li>
@@ -50,11 +51,15 @@
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">get_metadata_values</span><span class="op">(</span></span>
 <span>  operation <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  variable <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  value <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  det <span class="op">=</span> <span class="fl">0</span>,</span>
 <span>  lang <span class="op">=</span> <span class="st">"ES"</span>,</span>
 <span>  page <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  classification <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  validate <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  verbose <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span>  verbose <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  hierarchy <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  filter <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -73,6 +78,12 @@ available operations see <code><a href="get_metadata_operations.html">get_metada
 available variables see <code><a href="get_metadata_variables.html">get_metadata_variables()</a></code>.</p></dd>
 
 
+<dt id="arg-value">value<a class="anchor" aria-label="anchor" href="#arg-value"></a></dt>
+<dd><p>(int): id of a value. If an id value is specified, the children
+of the value are requested. To obtain a list of
+available values for a variable use <code>get_metadata_values(variable = id_variable)</code>.</p></dd>
+
+
 <dt id="arg-det">det<a class="anchor" aria-label="anchor" href="#arg-det"></a></dt>
 <dd><p>(int): level of detail. Valid values: 0, 1 or 2.</p></dd>
 
@@ -85,12 +96,30 @@ available variables see <code><a href="get_metadata_variables.html">get_metadata
 <dd><p>(int): page number. The retrieved result of the query is paginated (page=0 retrieves all pages).</p></dd>
 
 
+<dt id="arg-classification">classification<a class="anchor" aria-label="anchor" href="#arg-classification"></a></dt>
+<dd><p>(int): id of a classification. To obtain a list of available
+classifications see <code><a href="get_metadata_classifications.html">get_metadata_classifications()</a></code>.</p></dd>
+
+
 <dt id="arg-validate">validate<a class="anchor" aria-label="anchor" href="#arg-validate"></a></dt>
 <dd><p>(logical): validate input parameters. A FALSE value means fewer API calls.</p></dd>
 
 
 <dt id="arg-verbose">verbose<a class="anchor" aria-label="anchor" href="#arg-verbose"></a></dt>
 <dd><p>(logical): print additional information, including the URL to call the API service.</p></dd>
+
+
+<dt id="arg-hierarchy">hierarchy<a class="anchor" aria-label="anchor" href="#arg-hierarchy"></a></dt>
+<dd><p>(int): depth of the hierarchy tree.</p></dd>
+
+
+<dt id="arg-filter">filter<a class="anchor" aria-label="anchor" href="#arg-filter"></a></dt>
+<dd><p>(list): list of variables and values. When we request the hierarchy tree
+there is the possibility of filtering using metadata information about the variables and their values
+that define the series.
+The format is <code>list(id_variable1 = id_value1, id_variable2 = id_value2)</code>. Besides:</p><ul><li><p>A variable can take more than one value: <code>list(id_variable1 = c(id_value11, id_value12), id_variable2 = id_value2)</code>.</p></li>
+<li><p>A variable can take a empty character "" to get all its possible values: <code>list(id_variable1 = id_value1, id_variable2 = "")</code>.</p></li>
+</ul></dd>
 
 </dl></div>
     <div class="section level2">
@@ -116,7 +145,7 @@ available variables see <code><a href="get_metadata_variables.html">get_metadata
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.2.</p>
 </div>
 
     </footer></div>

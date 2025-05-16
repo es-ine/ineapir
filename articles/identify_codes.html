@@ -20,7 +20,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">ineapir</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -33,7 +33,8 @@
 <li class="active nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
-<li><a class="dropdown-item" href="../articles/filter_data_shortcuts.html">How to filter data using shortcut names</a></li>
+<li><a class="dropdown-item" href="../articles/classifications.html">Classifications and hierarchy trees</a></li>
+    <li><a class="dropdown-item" href="../articles/filter_data_shortcuts.html">How to filter data using shortcut names</a></li>
     <li><a class="dropdown-item" href="../articles/filter_data.html">How to filter data</a></li>
     <li><a class="dropdown-item" href="../articles/identify_codes.html">How to identify the codes of tables and series on the INE website</a></li>
     <li><a class="dropdown-item" href="../articles/tips.html">Tips</a></li>
@@ -90,15 +91,15 @@ no matter what variables/values have been selected in the table.</p>
 <strong>50902</strong>
 </li>
 </ul>
-<p><img src="img%2Fcode_table_1.png" style="width:100.0%"></p>
+<p><img src="img/code_table_1.png" style="width:100.0%"></p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/es-ine/ineapir" class="external-link">ineapir</a></span><span class="op">)</span></span>
 <span><span class="co"># Request table data with id = 50902</span></span>
 <span><span class="va">table</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_data_table.html">get_data_table</a></span><span class="op">(</span>idTable <span class="op">=</span> <span class="fl">50902</span>, nlast <span class="op">=</span> <span class="fl">1</span>, unnest <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="va">table</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Nombre"</span>, <span class="st">"FK_Periodo"</span>, <span class="st">"Anyo"</span>, <span class="st">"Valor"</span><span class="op">)</span><span class="op">]</span></span>
-<span><span class="co">#&gt;                                                Nombre FK_Periodo Anyo  Valor</span></span>
-<span><span class="co">#&gt; 1            Total Nacional. Índice general. Índice.           3 2025 117.26</span></span>
-<span><span class="co">#&gt; 2 Total Nacional. Índice general. Variación mensual.           3 2025   0.10</span></span></code></pre></div>
+<span><span class="co">#&gt;                                                Nombre FK_Periodo Anyo   Valor</span></span>
+<span><span class="co">#&gt; 1            Total Nacional. Índice general. Índice.           4 2025 117.997</span></span>
+<span><span class="co">#&gt; 2 Total Nacional. Índice general. Variación mensual.           4 2025   0.600</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="case-two-pc-axis-file">Case two (pc-axis file)<a class="anchor" aria-label="anchor" href="#case-two-pc-axis-file"></a>
@@ -113,7 +114,7 @@ no matter what variables/values have been selected in the table.</p>
 <strong>t20/e245/p08/l0/01001.px</strong>
 </li>
 </ul>
-<p><img src="img%2Fcode_table_2.png" style="width:100.0%"></p>
+<p><img src="img/code_table_2.png" style="width:100.0%"></p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Request table data with id = t20/e245/p08/l0/01001.px</span></span>
 <span><span class="va">table</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_data_table.html">get_data_table</a></span><span class="op">(</span>idTable <span class="op">=</span> <span class="st">"t20/e245/p08/l0/01001.px"</span>, nlast <span class="op">=</span> <span class="fl">1</span>, unnest <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
@@ -135,7 +136,7 @@ no matter what variables/values have been selected in the table.</p>
 <strong>33387</strong>
 </li>
 </ul>
-<p><img src="img%2Fcode_table_3.png" style="width:100.0%"></p>
+<p><img src="img/code_table_3.png" style="width:100.0%"></p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Request table data with id = 33387</span></span>
 <span><span class="va">table</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_data_table.html">get_data_table</a></span><span class="op">(</span>idTable <span class="op">=</span> <span class="fl">33387</span>, nlast <span class="op">=</span> <span class="fl">1</span>, unnest <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
@@ -162,13 +163,13 @@ query.</li>
 <li>The pop-up window shows, among other information, the identification
 code of the series associated with the cell that was clicked on.</li>
 </ol>
-<p><img src="img%2Fcode_series_1.png" style="width:100.0%"></p>
+<p><img src="img/code_series_1.png" style="width:100.0%"></p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Request series data with code = IPC251856</span></span>
 <span><span class="va">serie</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_data_series.html">get_data_series</a></span><span class="op">(</span>codSeries <span class="op">=</span> <span class="st">"IPC251856"</span>, unnest <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="va">serie</span><span class="op">[</span><span class="fl">1</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Nombre"</span>, <span class="st">"FK_Periodo"</span>, <span class="st">"Anyo"</span>, <span class="st">"Valor"</span><span class="op">)</span><span class="op">]</span></span>
 <span><span class="co">#&gt;                                              Nombre FK_Periodo Anyo Valor</span></span>
-<span><span class="co">#&gt; 1 Total Nacional. Índice general. Variación anual.           3 2025   2.3</span></span></code></pre></div>
+<span><span class="co">#&gt; 1 Total Nacional. Índice general. Variación anual.           4 2025   2.2</span></span></code></pre></div>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
@@ -181,7 +182,7 @@ code of the series associated with the cell that was clicked on.</li>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.2.</p>
 </div>
 
     </footer>
