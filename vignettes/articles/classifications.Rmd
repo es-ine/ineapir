@@ -1,0 +1,129 @@
+---
+title: "Classifications and hierarchy trees"
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Classifications
+There are variables whose values can change over time. An example is the name
+of a municipality. For these cases, there is the concept of classifications,
+which allows access to the values of a specific classification. We can request
+the available classifications with the `get_metadata_classifications()` function.
+
+```{r classifications1}
+library(ineapir)
+
+# Get classifications
+classifications <- get_metadata_classifications(lang = "EN")
+head(classifications)
+```
+
+In the case of municipalities, there is a classification for each year, so we
+can retrieve the municipalities for a particular year using the
+`get_metadata_values()` function and the `classification` argument.
+
+```{r classifications2}
+# Select the classifications with name 'Geographical yyyy'
+classifications <- get_metadata_classifications(lang = "EN")
+head(classifications[grepl("geographical", classifications$Nombre,
+                           ignore.case = TRUE),])
+
+# Municipalities: id=19
+# To retrieve the municipalities of 2007 we use the classificacion with id=29
+municipalities <- get_metadata_values(variable = 19, classification = 29)
+head(municipalities)
+
+```
+
+## Hierarchy trees
+There are certain values that belong to a hierarchical structure and can
+have parents and children. To obtain the children of a specific value, we 
+can use the `get_metadata_values()` function with the `variable` and `value`
+arguments. For example, if we want to find the provinces of Galicia:
+```{r tree1}
+# Variable: Autonomous communities (id=70)
+# Value: Galicia (id=9008)
+# Get the children of id=9008 (provinces of Galicia)
+provinces <- get_metadata_values(variable = 70, value = 9008)
+provinces
+```
+
+If we want to go deeper into the hierarchical structure we can use the
+`hierarchy` argument, which represents the depth.
+
+```{r tree2}
+# Variable: Autonomous communities (id=70)
+# Value: Galicia (id=9008)
+# Get the children of each province (municipalities of Galicia)
+municipalities <- get_metadata_values(variable = 70, value = 9008, hierarchy = 1)
+head(municipalities)
+```
+
+
+If we want the root of the tree to be the variable, we do not specify any value.
+```{r tree3}
+# Variable: Autonomous communities (id=70)
+# Get the children of each Autonomous communities (provinces)
+provinces <- get_metadata_values(variable = 70, hierarchy = 1)
+head(provinces)
+```
+
+
+Additionally, we can filter out the variables and values that only interest
+us with the `filter` argument.
+
+
+1. Example 1.
+```{r tree4}
+# We define the filter as a list of variables and values
+filter <- list("70" = 9008 # variable id = 70, value id = 9008 (Galicia)
+               )
+# Get the children of id=9008 (provinces of Galicia)
+provinces <- get_metadata_values(variable = 70, filter = filter, hierarchy = 1,
+                                 validate = FALSE)
+head(provinces)
+```
+
+
+2. Example 2.
+```{r tree5}
+# We define the filter as a list of variables and values
+filter <- list("115" =  "" # variable id = 115, all values
+               )
+# Get the children of id=70 (provinces of Spain)
+provinces <- get_metadata_values(variable = 70, filter = filter, hierarchy = 1,
+                                 validate = FALSE)
+head(provinces)
+```
+
+
+3. Example 3.
+```{r tree6}
+# We define the filter as a list of variables and values
+filter <- list("70" = 9008, # variable id = 70, value id = 9008 (Galicia) 
+               "115" = 28 # variable id = 115, value id = 28 (Lugo)
+               )
+# Get the children of id=28 (municipalities of Lugo province)
+municipalities <- get_metadata_values(variable = 70, filter = filter, 
+                                      hierarchy = 2, validate = FALSE)
+head(municipalities)
+```
+
+4. Example 4.
+```{r tree7}
+# We define the filter as a list of variables and values
+filter <- list("70" = 9008, # variable id = 70, value id = 9008 (Galicia)  
+               "115" =  28 , # variable id = 115, value id = 28 (Lugo)
+               "19" = 570 # variable id = 19, value id = 570 (Lugo)
+               )
+# Get the children of id=570 (census sections of Lugo municipality)
+sections <- get_metadata_values(variable = 70, filter = filter, hierarchy = 4,
+                                validate = FALSE)
+head(sections)
+```
+

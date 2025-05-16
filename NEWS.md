@@ -1,3 +1,10 @@
+# ineapir 0.2.0
+* Added the function `get_metadata_classifications()`.
+* Added new funcionality to `get_metadata_values()`: request values 
+hierarchy trees.
+* Added the arguments `value`, `classification`, `hierarchy` and `filter`
+to `get_metadata_values()`.
+
 # ineapir 0.1.0
 * Added the arguments `dateStart` y `dateEnd` to `get_data_table()` and allow
 multiple range of dates.

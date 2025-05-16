@@ -108,11 +108,23 @@ get_metadata_variables <- function(operation = NULL, lang = "ES", det = 0, page 
 #' available operations see [get_metadata_operations()].
 #' @param variable (int): id of a variable. To obtain a list of
 #' available variables see [get_metadata_variables()].
+#' @param value (int): id of a value. If an id value is specified, the children
+#' of the value are requested. To obtain a list of
+#' available values for a variable use `get_metadata_values(variable = id_variable)`.
 #' @param det (int): level of detail. Valid values: 0, 1 or 2.
 #' @param lang (string): language of the retrieved data. Set to 'ES' for Spanish or set to 'EN' for English.
 #' @param page (int): page number. The retrieved result of the query is paginated (page=0 retrieves all pages).
+#' @param classification (int): id of a classification. To obtain a list of available
+#' classifications see [get_metadata_classifications()].
 #' @param validate (logical): validate input parameters. A FALSE value means fewer API calls.
 #' @param verbose (logical): print additional information, including the URL to call the API service.
+#' @param hierarchy (int): depth of the hierarchy tree.
+#' @param filter (list): list of variables and values. When we request the hierarchy tree
+#' there is the possibility of filtering using metadata information about the variables and their values
+#' that define the series.
+#' The format is `list(id_variable1 = id_value1, id_variable2 = id_value2)`. Besides:
+#' - A variable can take more than one value: `list(id_variable1 = c(id_value11, id_value12), id_variable2 = id_value2)`.
+#' - A variable can take a empty character "" to get all its possible values: `list(id_variable1 = id_value1, id_variable2 = "")`.
 #'
 #' @return Data frame with information of the available values for the variable specified in the function
 #' @export
@@ -122,21 +134,33 @@ get_metadata_variables <- function(operation = NULL, lang = "ES", det = 0, page 
 #' get_metadata_values(operation = "IPC", variable = 115)
 #' }
 #'
-get_metadata_values <- function(operation = NULL, variable =  NULL, det = 0, lang = "ES", page = 0, validate = TRUE, verbose = FALSE){
+get_metadata_values <- function(operation = NULL, variable =  NULL, value = NULL, det = 0, lang = "ES", page = 0, classification = NULL, validate = TRUE, verbose = FALSE, hierarchy = NULL, filter = NULL){
   # List of values to define the call to the API
   definition <- list()
   definition <- append(definition, list(lang = lang))
-  definition <- append(definition, if(is.null(operation)) list(fun = "VALORES_VARIABLE") else list(fun = "VALORES_VARIABLEOPERACION"))
-  definition <- append(definition, list(input = list(variable = variable, operation = operation)))
+
+  if(is.null(operation)){
+    if(is.null(value)){
+      definition <- append(definition, list(fun = "VALORES_VARIABLE"))
+    }else{
+      definition <- append(definition, list(fun = "VALORES_HIJOS"))
+    }
+  }else{
+    definition <- append(definition, list(fun = "VALORES_VARIABLEOPERACION"))
+  }
+
+  definition <- append(definition, if(is.null(operation)) list(input = list(variable = variable, value = value)) else list(input = list(variable = variable, operation = operation)))
   definition <- append(definition, list(tag = "variable_operation"))
 
   # List of parameters to call the API
   parameters <- list()
   parameters <- append(parameters, list(det = det))
   parameters <- append(parameters, list(page = page))
+  parameters <- append(parameters, list(clasif = list(operation = operation, clasif = classification)))
 
   # List of addons
-  addons <- list(validate = validate, verbose = verbose)
+  addons <- list(validate = validate, verbose = verbose, hierarchy = hierarchy)
+  addons <- append(addons, if(is.null(filter)) list(filter = filter) else list(filter = list(variable = variable, filter = filter)))
 
   # List of definitions and parameters
   request <- list(definition = definition, parameters = parameters, addons = addons)
@@ -148,7 +172,16 @@ get_metadata_values <- function(operation = NULL, variable =  NULL, det = 0, lan
   url <- get_url(request)
 
   # Obtain the retrieved data calling the API
-  data <- get_api_data_all_pages(url, request)
+  data <- NULL
+  if(is.null(operation)){
+    if(is.null(value)){
+      data <- get_api_data_all_pages(url, request)
+    }else{
+      data <- get_api_data(url, request)
+    }
+  }else{
+    data <- get_api_data_all_pages(url, request)
+  }
 
   return(data)
 }
@@ -361,6 +394,51 @@ get_filter_shortcuts <- function(lang = "ES", validate = TRUE, verbose = FALSE){
   return(df)
 }
 
+#' Get all available classifications
+#'
+#' @param operation (string): Code of the operation. Provide code to get all
+#' the classifications for the given operation. To obtain a list of
+#' available operations see [get_metadata_operations()].
+#' If no operation is specified then all the classifications will be shown.
+#' @param lang (string): language of the retrieved data. Set to 'ES' for Spanish or set to 'EN' for English.
+#' @param validate (logical): validate input parameters. A FALSE value means fewer API calls.
+#' @param verbose (logical): print additional information, including the URL to call the API service.
+#'
+#' @return Data frame with information of the available classifications
+#' @export
+#'
+#' @examples \dontrun{
+#' get_metadata_classifications()
+#' get_metadata_classifications(operation = "IPC")
+#' }
+#'
+get_metadata_classifications <- function(operation = NULL, lang = "ES", validate = TRUE, verbose = FALSE){
+  # List of values to define the call to the API
+  definition <- list()
+  definition <- append(definition, list(lang = lang))
+  definition <- append(definition, if(is.null(operation)) list(fun = "CLASIFICACIONES") else list(fun = "CLASIFICACIONES_OPERACION"))
+  definition <- append(definition, list(input = operation))
+  definition <- append(definition, list(tag = "operation_active_null"))
 
+  # List of parameters to call the API
+  parameters <- list()
+
+  # List of addons
+  addons <- list(validate = validate, verbose = verbose)
+
+  # List of definitions and parameters
+  request <- list(definition = definition, parameters = parameters, addons = addons)
+
+  # Check request
+  request <- check_request(request)
+
+  # Build the complete URL to call the API
+  url <- get_url(request)
+
+  # Obtain the retrieved data calling the API
+  data <- get_api_data(url, request)
+
+  return(data)
+}
 
 

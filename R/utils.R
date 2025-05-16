@@ -17,7 +17,9 @@ column_names <- list("3" = list("variable.code" = list("es" = "Variable.Codigo")
                                 "value.name" = list("es" = "Nombre"),
                                 "id" = list("es" = "Id"),
                                 "ioe" = list("es" = "Cod_IOE"),
-                                "codigo" = list("es" = "Codigo")),
+                                "codigo" = list("es" = "Codigo"),
+                                "jerarquia.fk" = list("es" = "FK_JerarquiaPadres"),
+                                "jerarquia" = list("es" = "JerarquiaPadres")),
                      "4" = list("variable.code" = list("es" = "Variable.Codigo"),
                                 "variable.id" = list("es" = "Variable.Id"),
                                 "variable.fk" = list("es" = "FK_Variable"),
@@ -27,7 +29,9 @@ column_names <- list("3" = list("variable.code" = list("es" = "Variable.Codigo")
                                 "value.name" = list("es" = "Nombre"),
                                 "id" = list("es" = "Id"),
                                 "ioe" = list("es" = "Cod_IOE"),
-                                "codigo" = list("es" = "Codigo")))
+                                "codigo" = list("es" = "Codigo"),
+                                "jerarquia.fk" = list("es" = "FK_JerarquiaPadres"),
+                                "jerarquia" = list("es" = "JerarquiaPadres")))
 
 # Shortcuts used in filters
 shortcuts_filter <- list(nac = "349",                 # national
@@ -174,6 +178,12 @@ get_api_data <- function(url, request){
     if(!is.null(request$addons$unnest) && request$addons$unnest){
       result <- unnest_data(result)
     }
+
+    # get the hierarchy tree of values
+    if(!is.null(request$addons$hierarchy)){
+      result <- get_values_hierarchy(result, request)
+    }
+
   }
 
   return(result)
@@ -266,7 +276,7 @@ get_parameters_query <- function(request){
         }
 
         # Since the list also contains the operation
-      }else if(x == "p"){
+      }else if(x %in% c("p", "clasif")){
         val <- val[[x]]
         parameters[[x]] <- val
       }else{
@@ -386,7 +396,7 @@ build_filter <- function(parameter, definition, addons, checkfilter, det = 0){
     shortcut <- if(is_negative_filter_values(filter)) TRUE else shortcut
 
     # Dataframe with the values
-    dfval <- get_filter_values(parameter, definition$lang, shortcut, verbose = FALSE, progress = addons$verbose, det = det)
+    dfval <- get_filter_values(parameter, definition$lang, shortcut, verbose = FALSE, progress = addons$verbose, det = det, addons)
 
     if(!is.null(dfval)){
       origin <- dfval$origin
@@ -699,7 +709,7 @@ build_filter <- function(parameter, definition, addons, checkfilter, det = 0){
 }
 
 # Get the all values used in a table or operation
-get_filter_values <- function(parameter, lang, shortcut, verbose, progress = TRUE, det = 0){
+get_filter_values <- function(parameter, lang, shortcut, verbose, progress = TRUE, det = 0, addons = NULL){
 
   # id to identify a table or a operation
   id <- parameter[[1]]
@@ -722,9 +732,12 @@ get_filter_values <- function(parameter, lang, shortcut, verbose, progress = TRU
       dfval <- get_metadata_variable_values_table(idTable = id, verbose = verbose, validate = FALSE, lang = lang, progress = progress, det = det)
 
       # The filter comes from a series
-    }else{
+    }else if (is.element("operation",parnames)){
       # We obtain the variables and values from the operation of the series
       dfval <- get_metadata_variable_values_operation(operation = id, verbose = verbose, validate = FALSE, lang, progress = progress, det = det)
+    }else{
+      # We obtain the variables and values from hierarchy tree
+      dfval <- get_metadata_variable_values_hierarchy(variable = id, verbose = verbose, validate = FALSE, lang, progress = progress, det = det, hierarchy = addons$hierarchy)
     }
   }
 
@@ -800,7 +813,8 @@ check_parameters <- function(parameters, addons, definition){
                      "tip" = check_tip(val, addons$verbose),
                      "geo" = check_geo(val, addons$verbose),
                      "page" = check_page(val, addons$verbose),
-                     "filter" = check_filter(val, addons$verbose, definition, parameters$det)
+                     "filter" = check_filter(val, addons, definition, parameters$det),
+                     "clasif" = check_classification(val[[1]], val[[2]], addons$verbose)
         )
         # Check results to return
         result <- append(result, r)
@@ -816,20 +830,27 @@ check_parameters <- function(parameters, addons, definition){
 check_addons <- function(parameters, addons, definition){
   result <- list()
 
-  for(x in names(addons)){
-    val <- addons[[x]]
+  # Validate or not the addons
+  check <- addons$validate
 
-    if(!is.null(val)){
-      r <- switch (x,
-                   "validate" = check_islogical(x, val),
-                   "verbose" = check_islogical(x, val),
-                   "unnest" = check_islogical(x, val),
-                   "metanames"= check_extractmetadata(x, val, parameters$tip),
-                   "metacodes"= check_extractmetadata(x, val, parameters$tip)
-      )
-      # Check results to return
-      result <- append(result, r)
-      names(result)[length(result)] <- x
+  if(check){
+    for(x in names(addons)){
+      val <- addons[[x]]
+
+      if(!is.null(val)){
+        r <- switch (x,
+                     "validate" = check_islogical(x, val),
+                     "verbose" = check_islogical(x, val),
+                     "unnest" = check_islogical(x, val),
+                     "metanames"= check_extractmetadata(x, val, parameters$tip),
+                     "metacodes"= check_extractmetadata(x, val, parameters$tip),
+                     "hierarchy" = check_hierarchy(val, addons$verbose),
+                     "filter" = check_filter(val, addons, definition, parameters$det)
+        )
+        # Check results to return
+        result <- append(result, r)
+        names(result)[length(result)] <- x
+      }
     }
   }
 
@@ -969,7 +990,10 @@ check_variables_operation <- function(input, verbose){
   variable <- input$variable
 
   # Operation id
-  operation <- input$operation
+  operation <- if("operation" %in% names(input)) input$operation else NULL
+
+  # Value id
+  value <- if("value" %in% names(input)) input$value else NULL
 
   if(!is.null(operation)){
     # First we check if the operation is valid
@@ -981,6 +1005,11 @@ check_variables_operation <- function(input, verbose){
   }else{
     # Check if the variable is valid
     result <- check_variable(variable, verbose)
+
+    if(!is.null(value)){
+      # Check if the value is valid
+      result <- check_value(variable, value, verbose)
+    }
   }
 
   return(result)
@@ -1032,6 +1061,25 @@ check_variable <- function(variable, verbose){
   return(result)
 }
 
+# Check if a variable is valid for an operation
+check_value <- function(variable, value, verbose){
+  result <- TRUE
+
+  if(!is.null(value)){
+    vars <- get_metadata_values(variable = variable, validate = FALSE, verbose = verbose, page = 0)
+
+    if(!is.element(value, vars[[column_names[["3"]][["id"]][["es"]]]])){
+      result <- FALSE
+      stop(sprintf("%s is not a valid value for variable %s. Valid ids: %s", value, variable, paste0(vars$Id, collapse = ", ")))
+    }
+  }
+
+  if(verbose){
+    cat(sprintf("- Check value: OK\n"))
+  }
+
+  return(result)
+}
 # check if a publication is valid
 check_publication <- function(publication, verbose){
   result <- TRUE
@@ -1297,7 +1345,7 @@ check_page <- function(n, verbose){
 }
 
 # Check if the filter argument is valid
-check_filter <- function(parameter, verbose, definition, det = 0){
+check_filter <- function(parameter, addons, definition, det = 0){
   result <- TRUE
 
   # If there are shortcuts in the filter
@@ -1319,28 +1367,28 @@ check_filter <- function(parameter, verbose, definition, det = 0){
   parnames <- tolower(names(parameter))
 
   # Get the values from metadata of tables or operations
-  df <- get_filter_values(parameter, definition$lang, shortcut = TRUE, verbose = verbose, progress = FALSE, det = det)
+  df <- get_filter_values(parameter, definition$lang, shortcut = TRUE, verbose = addons$verbose, progress = FALSE, det = det, addons = addons)
 
   # Make sure the response is valid or null
   if(check_result(df$values)){
 
     # The filter comes from a px table
     if(df$origin == "tablepx"){
-      check <- check_table_px_filter(id, filter, verbose, df$values)
+      check <- check_table_px_filter(id, filter, addons$verbose, df$values)
 
       result <- check$result
       shortcut <- check$shortcut
 
       # The filter comes from a px table with ids
     }else if(df$origin == "tablepxid"){
-      check <- check_table_px_id_filter(id, filter, verbose, df$values)
+      check <- check_table_px_id_filter(id, filter, addons$verbose, df$values)
 
       result <- check$result
       shortcut <- check$shortcut
 
       # The filter comes from a tempus table
     }else if(df$origin == "tablet3"){
-      check <- check_table_tempus_filter(parameter, verbose, df$values, det = det)
+      check <- check_table_tempus_filter(parameter, addons$verbose, df$values, det = det)
 
       result <- check$result
       shortcut <- check$shortcut
@@ -1348,7 +1396,14 @@ check_filter <- function(parameter, verbose, definition, det = 0){
 
     # The filter comes from a series
     else if(df$origin == "series") {
-      check <- check_series_filter(parameter, verbose, df$values, det = det)
+      check <- check_series_filter(parameter, addons$verbose, df$values, det = det)
+
+      result <- check$result
+      shortcut <- check$shortcut
+    }
+    # The filter comes from variables
+    else if(df$origin == "variables") {
+      check <- check_variables_filter(parameter, addons$verbose, df$values, det = det)
 
       result <- check$result
       shortcut <- check$shortcut
@@ -1359,6 +1414,53 @@ check_filter <- function(parameter, verbose, definition, det = 0){
   df$shortcut <- shortcut
 
   return(list(df))
+}
+
+# check if the classification argument is valid
+check_classification <- function(operation, clasif, verbose){
+
+  result <- TRUE
+
+  if(!is.null(clasif)){
+    # Get periodicities of an operation
+    classification <- get_metadata_classifications(operation = operation, validate = FALSE, verbose = verbose)
+
+    if(!is.element(clasif, classification[[column_names[["3"]][["id"]][["es"]]]])){
+      result <- FALSE
+
+      if(is.null(operation)){
+        stop(sprintf("%s is not a valid classification. Valid ids: %s", clasif, paste0(classification[[column_names[["3"]][["id"]][["es"]]]], collapse = ", ")))
+      }else{
+        stop(sprintf("%s is not a valid classification for operation %s. Valid ids: %s", clasif, operation, paste0(classification[[column_names[["3"]][["id"]][["es"]]]], collapse = ", ")))
+      }
+    }
+  }
+
+  if(verbose){
+    cat(sprintf("- Check classification: OK\n"))
+  }
+  return(result)
+}
+
+# Check if the det argument is valid
+check_hierarchy <- function(depth, verbose){
+  result <- TRUE
+
+  if(!is.numeric(depth)){
+    result <- FALSE
+    stop("hierarchy must be a number between 0 and 10")
+  }else{
+    if(depth < 0 || depth > 10){
+      result <- FALSE
+      stop("hierarchy value must be between 0 and 10")
+    }
+  }
+
+  if(verbose){
+    cat(sprintf("- Check hierarchy: OK\n"))
+  }
+
+  return(result)
 }
 
 # Confirm if the metadata of the table contains information about the values id
@@ -1598,6 +1700,39 @@ check_series_filter <- function(parameter, verbose, df, det = 0){
     stop("filter must be a list")
   }
 
+
+  if(verbose){
+    cat(sprintf("- Check filter: OK\n"))
+  }
+
+  return(list(result = result, shortcut = shortcut))
+}
+
+# Check if the filter argument is valid for variables
+check_variables_filter <- function(parameter, verbose, df, det = 0){
+  result <- TRUE
+
+  # If there are shortcuts in the filter
+  shortcut <- FALSE
+
+  # id to identify a table or a operation
+  id <- parameter[[1]]
+
+  # List of variables and values
+  filter <- parameter[[2]]
+
+  # Names in the list of the parameter
+  parnames <- tolower(names(parameter))
+
+  # The filter must be a list
+  if(is.list(filter)){
+    check <- check_tempus_filter(id, filter, parnames, df, det = det)
+    shortcut <- check$shortcut
+
+  }else{
+    result <- FALSE
+    stop("filter must be a list")
+  }
 
   if(verbose){
     cat(sprintf("- Check filter: OK\n"))
@@ -2414,6 +2549,51 @@ get_metadata_variable_values_operation <- function(operation, verbose, validate,
   return(list(origin = "series", values = dfvalues))
 }
 
+# Get metadata information about the variables and values present in a hierarchy tree
+get_metadata_variable_values_hierarchy <- function(variable, hierarchy, verbose, validate, lang, progress = FALSE, det = 0){
+
+  dfvalues <- NULL
+
+  values <- get_metadata_values(variable = variable, validate = FALSE, verbose = verbose, lang = lang, page = 0, det = det, hierarchy = hierarchy)
+
+
+  # We obtain the values of all the variables
+  for(i in 0:hierarchy){
+    if(progress){
+      cat(sprintf("- Processing filter: %s%%        \r", round(i/hierarchy*50,0)))
+    }
+
+    tmp <- subset(values, select = grepl(paste0("_", i, "$"), names(values)))
+    names(tmp) <- gsub(paste0("_", i, "$"), "", names(tmp))
+    tmp$level <- i
+
+    selcol <- names(tmp)[grepl("id|nombre|codigo|variable|jerarquia|level", names(tmp), ignore.case = TRUE)]
+
+    tmp <- unique(subset(tmp, select = selcol))
+
+
+    # create column fk_variable:id
+    if(det > 0 ){
+      tmp$varval <- paste(as.character(tmp[, column_names[["3"]][["variable.id"]][["es"]]]), as.character(tmp[, column_names[["3"]][["value.id"]][["es"]]]), sep = ":")
+      valfathers <- if(sum(grepl(column_names[["3"]][["jerarquia"]][["es"]], names(tmp))) > 0) sapply(tmp[[column_names[["3"]][["jerarquia"]][["es"]]]],`[[`, column_names[["3"]][["id"]][["es"]]) else NA
+
+    }else{
+      tmp$varval <- paste(as.character(tmp[, column_names[["3"]][["variable.fk"]][["es"]]]), as.character(tmp[, column_names[["3"]][["value.id"]][["es"]]]), sep = ":")
+      valfathers <- if(sum(grepl(column_names[["3"]][["jerarquia.fk"]][["es"]], names(tmp))) > 0) tmp[[column_names[["3"]][["jerarquia.fk"]][["es"]]]] else NA
+    }
+
+    tmp$fathers <- valfathers
+
+    if (exists("dfvalues") && is.data.frame(get("dfvalues"))){
+      dfvalues <- rbind(dfvalues,tmp)
+    }else{
+      dfvalues <- tmp
+    }
+  }
+
+  return(list(origin = "variables", values = dfvalues))
+}
+
 # chek if there are negatives values in the filter and remove them
 check_negative_values <- function(dfval, variable, values, origin){
 
@@ -2464,7 +2644,7 @@ check_negative_values <- function(dfval, variable, values, origin){
           dfvalues <- if(length(dfvalues) > 0) paste0(variable, ":", dfvalues) else NULL
         }
 
-      }else if(origin == "series"){
+      }else if(origin %in% c("series", "variables")){
         # column name depending on det parameter
         colname <- if(sum(grepl(column_names[["3"]][["variable.fk"]][["es"]], names(dfval), ignore.case = TRUE)) > 0) column_names[["3"]][["variable.fk"]][["es"]] else column_names[["3"]][["variable.id"]][["es"]]
 
@@ -2522,4 +2702,135 @@ is_negative_filter_values <- function(filter){
   return(r)
 }
 
+# get values hierarchy tree
+get_values_hierarchy <- function(father, request){
 
+  # depth of the hierarchy tree
+  depth <- request$addons$hierarchy
+
+  # get the filter
+  filter <- NULL
+  dfilter <- NULL
+
+  if(!is.null(request$addons$filter)){
+    filter <- get_addons_filter(request)
+
+    # data frame
+    dfilter <- filter$df
+
+    # variables and values to filter
+    filter <- filter$filter
+
+    # dataframe use as father
+    father <- if(is.null(dfilter)) father else subset(dfilter, dfilter$level == 0, !grepl("varval|level|fathers", names(dfilter), ignore.case = TRUE))
+  }
+
+  # First level column names
+  names(father) <- paste(names(father), 0, sep = "_")
+
+  # copy of input data
+  data <- father
+
+  # column names
+  cols <- names(father)
+
+  # for each level of the tree we get the children
+  for (l in 1:depth){
+    children <- get_children(l - 1, father, request$addons$verbose, filter, request$parameters$det, dfilter)
+
+    # vector of column names
+    cols <- append(cols, names(children))
+    cols <- subset(cols, !grepl("padre", cols))
+
+    # join the data by id of the father
+    if(!is.null(children)){
+      data <- merge(data, children, by.x = paste("Id", l - 1, sep = "_"), by.y = paste("padre", l, sep = "_"))
+      data <- data[,cols]
+      father <- children
+    }
+  }
+
+  return(data)
+}
+
+get_children <- function(depth, df, verbose, filter, det, dfilter = NULL){
+  data <- NULL
+
+  # variables of the filter
+  varfilter <- if(is.null(filter)) NULL else sapply(strsplit(unlist(filter), ":"), `[`, 1)
+
+  # values of the filter
+  valfilter <- if(is.null(filter)) NULL else sapply(strsplit(unlist(filter), ":"), `[`, 2)
+
+  # column name of the variable
+  varcol <- if(det > 0 ) paste(column_names[["3"]][["variable.id"]][["es"]], depth, sep = "_") else paste(column_names[["3"]][["variable.fk"]][["es"]], depth, sep = "_")
+
+  # column name of the value
+  valcol <- paste(column_names[["3"]][["value.id"]][["es"]], depth, sep = "_")
+
+  # filter variables
+  v <- unique(df[[varcol]])
+  v <- if(sum(is.element(varfilter, v)) > 0) intersect(varfilter, v) else v
+
+  for( var in v){
+    s <- subset(df, df[[varcol]] == var)
+
+    # filter values
+    va <- unique(s[[valcol]])
+    va <- if(sum(is.element(valfilter, va)) > 0) intersect(valfilter, va) else va
+
+    for(val in va){
+      if(is.null(dfilter)){
+        tmp <- get_metadata_values(variable = var, value = val, verbose = verbose, validate = FALSE, det = det)
+
+      }else{
+        # we use the dataframe from the filter
+        tmp <- subset(dfilter, dfilter$level == depth + 1)
+
+        # filter values
+        rowsel <- sapply(tmp$fathers, function(x) is.element(val, x))
+        tmp <-subset(tmp, rowsel, !grepl("varval|level|fathers", names(dfilter), ignore.case = TRUE))
+      }
+
+      if(!is.null(tmp)){
+        # extract the father of the children
+        if(det > 0){
+          valfathers <- if(sum(grepl(column_names[["3"]][["jerarquia"]][["es"]], names(tmp))) > 0) sapply(tmp[[column_names[["3"]][["jerarquia"]][["es"]]]],`[[`, column_names[["3"]][["id"]][["es"]]) else NA
+        }else{
+          valfathers <- if(sum(grepl(column_names[["3"]][["jerarquia.fk"]][["es"]], names(tmp))) > 0) tmp[[column_names[["3"]][["jerarquia.fk"]][["es"]]]] else NA
+        }
+
+        tmp$padre <- unlist(sapply(valfathers , function(x) intersect(val, x)))
+
+        # filter variables in the last level
+        v2 <- if(det > 0)  unique(tmp[[column_names[["3"]][["variable.id"]][["es"]]]]) else unique(tmp[[column_names[["3"]][["variable.fk"]][["es"]]]])
+        v2 <- if(sum(is.element(varfilter, v2)) > 0) intersect(varfilter, v2) else v2
+
+        if(det > 0){
+          tmp <-subset(tmp, tmp[[column_names[["3"]][["variable.id"]][["es"]]]] %in% v2)
+        }else{
+          tmp <-subset(tmp, tmp[[column_names[["3"]][["variable.fk"]][["es"]]]] %in% v2)
+        }
+        names(tmp) <- paste(names(tmp), depth + 1, sep = "_")
+        data <- rbind(data, tmp)
+
+      }
+    }
+  }
+
+  return(data)
+}
+
+
+# Get url filter
+get_addons_filter <- function(request){
+
+  val <- request$addons[["filter"]]
+
+  lval <- NULL
+  if(!is.null(val)){
+    lval <- build_filter(val, request$definition, request$addons, request$check$addons$filter, det = request$parameters$det)
+  }
+
+  return(lval)
+}

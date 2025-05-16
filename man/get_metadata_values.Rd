@@ -7,11 +7,15 @@
 get_metadata_values(
   operation = NULL,
   variable = NULL,
+  value = NULL,
   det = 0,
   lang = "ES",
   page = 0,
+  classification = NULL,
   validate = TRUE,
-  verbose = FALSE
+  verbose = FALSE,
+  hierarchy = NULL,
+  filter = NULL
 )
 }
 \arguments{
@@ -22,15 +26,33 @@ available operations see \code{\link[=get_metadata_operations]{get_metadata_oper
 \item{variable}{(int): id of a variable. To obtain a list of
 available variables see \code{\link[=get_metadata_variables]{get_metadata_variables()}}.}
 
+\item{value}{(int): id of a value. If an id value is specified, the children
+of the value are requested. To obtain a list of
+available values for a variable use \code{get_metadata_values(variable = id_variable)}.}
+
 \item{det}{(int): level of detail. Valid values: 0, 1 or 2.}
 
 \item{lang}{(string): language of the retrieved data. Set to 'ES' for Spanish or set to 'EN' for English.}
 
 \item{page}{(int): page number. The retrieved result of the query is paginated (page=0 retrieves all pages).}
 
+\item{classification}{(int): id of a classification. To obtain a list of available
+classifications see \code{\link[=get_metadata_classifications]{get_metadata_classifications()}}.}
+
 \item{validate}{(logical): validate input parameters. A FALSE value means fewer API calls.}
 
 \item{verbose}{(logical): print additional information, including the URL to call the API service.}
+
+\item{hierarchy}{(int): depth of the hierarchy tree.}
+
+\item{filter}{(list): list of variables and values. When we request the hierarchy tree
+there is the possibility of filtering using metadata information about the variables and their values
+that define the series.
+The format is \code{list(id_variable1 = id_value1, id_variable2 = id_value2)}. Besides:
+\itemize{
+\item A variable can take more than one value: \code{list(id_variable1 = c(id_value11, id_value12), id_variable2 = id_value2)}.
+\item A variable can take a empty character "" to get all its possible values: \code{list(id_variable1 = id_value1, id_variable2 = "")}.
+}}
 }
 \value{
 Data frame with information of the available values for the variable specified in the function
