@@ -2,7 +2,7 @@
 API_URL = "https://servicios.ine.es/wstempus/js"
 
 # API version
-API_version <- 3
+API_version <- "3"
 
 # Number of rows per page
 page_lenght = 500
@@ -419,7 +419,7 @@ build_filter <- function(parameter, definition, addons, checkfilter, det = 0){
 
         if(origin == "tablepx"){
           # column name depending on det parameter
-          colname <- column_names[["3"]][["variable.code"]][["es"]]
+          colname <- column_names[[API_version]][["variable.code"]][["es"]]
 
           # Select codes
           varid <- unique(dfval[[colname]])
@@ -429,17 +429,17 @@ build_filter <- function(parameter, definition, addons, checkfilter, det = 0){
 
         }else if(origin == "tablepxid"){
           # column name depending on det parameter
-          colname <- column_names[["3"]][["variable.id"]][["es"]]
+          colname <- column_names[[API_version]][["variable.id"]][["es"]]
 
           # Select codes
-          varid <- c(unique(dfval[[column_names[["3"]][["variable.code"]][["es"]]]]), unique(dfval[[colname]]))
+          varid <- c(unique(dfval[[column_names[[API_version]][["variable.code"]][["es"]]]]), unique(dfval[[colname]]))
 
           # We select only the values of variables present in the filter
-          dfvalfilter <- subset(dfval, dfval[[column_names[["3"]][["variable.code"]][["es"]]]] %in% varid | dfval[[colname]] %in% varid)
+          dfvalfilter <- subset(dfval, dfval[[column_names[[API_version]][["variable.code"]][["es"]]]] %in% varid | dfval[[colname]] %in% varid)
 
         }else{
            # column name depending on det parameter
-           colname <- if(det > 0 ) column_names[["3"]][["variable.id"]][["es"]] else column_names[["3"]][["variable.fk"]][["es"]]
+           colname <- if(det > 0 ) column_names[[API_version]][["variable.id"]][["es"]] else column_names[[API_version]][["variable.fk"]][["es"]]
 
           if(tolower(n) %in% shortcut_wrapper){
             # Select ids
@@ -474,14 +474,14 @@ build_filter <- function(parameter, definition, addons, checkfilter, det = 0){
           valshort1 <- valshort1[which.max(nchar(valshort1))]
 
           # Find a match for the largest word and the possible values
-          ind1 <- grepl(valshort1, dfvalfilter[[column_names[["3"]][["value.name"]][["es"]]]], ignore.case = TRUE)
+          ind1 <- grepl(valshort1, dfvalfilter[[column_names[[API_version]][["value.name"]][["es"]]]], ignore.case = TRUE)
 
           # Dataframe with the matches
           dfvalgrep1 <- subset(dfvalfilter, ind1)
 
           ### Way two: find a value for the entire string
           # Find a match for the entire phrase and the possible values
-          ind2 <- grepl(f, dfvalfilter[[column_names[["3"]][["value.name"]][["es"]]]], ignore.case = TRUE)
+          ind2 <- grepl(f, dfvalfilter[[column_names[[API_version]][["value.name"]][["es"]]]], ignore.case = TRUE)
 
           # Dataframe with the matches
           dfvalgrep2 <- subset(dfvalfilter, ind2)
@@ -495,16 +495,16 @@ build_filter <- function(parameter, definition, addons, checkfilter, det = 0){
 
           }else if(nrow(dfvalgrep1) > 0 && nrow(dfvalgrep2) > 0){
             if(origin == "tablepx"){
-              dfvalgrep2 <- subset(dfvalgrep2, select = c(column_names[["3"]][["value.code"]][["es"]], colname))
-              dfvalgreptmp <- merge(dfvalgrep1, dfvalgrep2, by = c(column_names[["3"]][["value.code"]][["es"]], colname))
+              dfvalgrep2 <- subset(dfvalgrep2, select = c(column_names[[API_version]][["value.code"]][["es"]], colname))
+              dfvalgreptmp <- merge(dfvalgrep1, dfvalgrep2, by = c(column_names[[API_version]][["value.code"]][["es"]], colname))
 
             }else if(origin == "tablepxid"){
-              dfvalgrep2 <- subset(dfvalgrep2, select = c(column_names[["3"]][["value.id"]][["es"]], colname))
-              dfvalgreptmp <- merge(dfvalgrep1, dfvalgrep2, by = c(column_names[["3"]][["value.id"]][["es"]], colname))
+              dfvalgrep2 <- subset(dfvalgrep2, select = c(column_names[[API_version]][["value.id"]][["es"]], colname))
+              dfvalgreptmp <- merge(dfvalgrep1, dfvalgrep2, by = c(column_names[[API_version]][["value.id"]][["es"]], colname))
 
             }else{
-              dfvalgrep2 <- subset(dfvalgrep2, select = c(column_names[["3"]][["value.id"]][["es"]], colname))
-              dfvalgreptmp <- merge(dfvalgrep1, dfvalgrep2, by = c(column_names[["3"]][["value.id"]][["es"]], colname))
+              dfvalgrep2 <- subset(dfvalgrep2, select = c(column_names[[API_version]][["value.id"]][["es"]], colname))
+              dfvalgreptmp <- merge(dfvalgrep1, dfvalgrep2, by = c(column_names[[API_version]][["value.id"]][["es"]], colname))
             }
           }else{
             dfvalgreptmp <- dfvalgrep1
@@ -513,13 +513,13 @@ build_filter <- function(parameter, definition, addons, checkfilter, det = 0){
           # If there is no match result look in the id
           if(nrow(dfvalgreptmp) == 0){
             if(origin == "tablepx"){
-              dfvalgreptmp <- subset(dfvalfilter, grepl(paste0("^",f,"$"), dfvalfilter[[column_names[["3"]][["value.code"]][["es"]]]]))
+              dfvalgreptmp <- subset(dfvalfilter, grepl(paste0("^",f,"$"), dfvalfilter[[column_names[[API_version]][["value.code"]][["es"]]]]))
 
             }else if(origin == "tablepxid"){
-              dfvalgreptmp <- subset(dfvalfilter, grepl(paste0("^",f,"$"), c(dfvalfilter[[column_names[["3"]][["value.code"]][["es"]]]], dfvalfilter[[column_names[["3"]][["value.id"]][["es"]]]])))
+              dfvalgreptmp <- subset(dfvalfilter, grepl(paste0("^",f,"$"), c(dfvalfilter[[column_names[[API_version]][["value.code"]][["es"]]]], dfvalfilter[[column_names[[API_version]][["value.id"]][["es"]]]])))
 
             }else{
-              dfvalgreptmp <- subset(dfvalfilter, grepl(paste0("^",f,"$"), dfvalfilter[[column_names[["3"]][["value.id"]][["es"]]]]))
+              dfvalgreptmp <- subset(dfvalfilter, grepl(paste0("^",f,"$"), dfvalfilter[[column_names[[API_version]][["value.id"]][["es"]]]]))
             }
           }
 
@@ -539,21 +539,21 @@ build_filter <- function(parameter, definition, addons, checkfilter, det = 0){
                   var <- dfvalgreptmp[[colname]][r]
 
                   # Value code
-                  filterout[[var]] <- if(sum(neg) > 0) paste0("-", dfvalgreptmp[[column_names[["3"]][["value.code"]][["es"]]]][r]) else dfvalgreptmp[[column_names[["3"]][["value.code"]][["es"]]]][r]
+                  filterout[[var]] <- if(sum(neg) > 0) paste0("-", dfvalgreptmp[[column_names[[API_version]][["value.code"]][["es"]]]][r]) else dfvalgreptmp[[column_names[[API_version]][["value.code"]][["es"]]]][r]
 
                 }else if(origin == "tablepxid"){
                   # Variable id
                   var <- dfvalgreptmp[[colname]][r]
 
                   # Value id
-                  filterout[[var]] <- if(sum(neg) > 0) paste0("-", dfvalgreptmp[[column_names[["3"]][["value.id"]][["es"]]]][r]) else dfvalgreptmp[[column_names[["3"]][["value.id"]][["es"]]]][r]
+                  filterout[[var]] <- if(sum(neg) > 0) paste0("-", dfvalgreptmp[[column_names[[API_version]][["value.id"]][["es"]]]][r]) else dfvalgreptmp[[column_names[[API_version]][["value.id"]][["es"]]]][r]
 
                 }else{
                   # Variable id
                   var <- dfvalgreptmp[[colname]][r]
 
                   # Value id
-                  filterout[[var]] <- if(sum(neg) > 0) paste0("-", dfvalgreptmp[[column_names[["3"]][["value.id"]][["es"]]]][r]) else dfvalgreptmp[[column_names[["3"]][["value.id"]][["es"]]]][r]
+                  filterout[[var]] <- if(sum(neg) > 0) paste0("-", dfvalgreptmp[[column_names[[API_version]][["value.id"]][["es"]]]][r]) else dfvalgreptmp[[column_names[[API_version]][["value.id"]][["es"]]]][r]
 
                   if(exists("dfvalgrep") && is.data.frame(get("dfvalgrep")) ){
 
@@ -943,21 +943,21 @@ check_operation <- function(operation, active_null = FALSE, verbose){
     cod <- FALSE
 
     # Check id
-    tmp <- opes$Id[trimws(opes[[column_names[["3"]][["id"]][["es"]]]]) != ""]
+    tmp <- opes$Id[trimws(opes[[column_names[[API_version]][["id"]][["es"]]]]) != ""]
 
     if(!is.element(operation,tmp)){
       id <- TRUE
     }
 
     # Check cod_IOE
-    tmp <- paste0("IOE", opes[[column_names[["3"]][["ioe"]][["es"]]]][trimws(opes[[column_names[["3"]][["ioe"]][["es"]]]]) != ""])
+    tmp <- paste0("IOE", opes[[column_names[[API_version]][["ioe"]][["es"]]]][trimws(opes[[column_names[[API_version]][["ioe"]][["es"]]]]) != ""])
 
     if(!is.element(operation,tmp)){
       ioe <- TRUE
     }
 
     # Check code
-    tmp <- opes[[column_names[["3"]][["codigo"]][["es"]]]][trimws(opes[[column_names[["3"]][["codigo"]][["es"]]]]) != ""]
+    tmp <- opes[[column_names[[API_version]][["codigo"]][["es"]]]][trimws(opes[[column_names[[API_version]][["codigo"]][["es"]]]]) != ""]
 
     if(!is.element(operation,tmp)){
       cod <- TRUE
@@ -1022,7 +1022,7 @@ check_variablesoperation <- function(operation, variable, verbose){
   if(!is.null(variable)){
     vars <- get_metadata_variables(operation = operation, validate = FALSE, verbose = verbose, page = 0)
 
-    if(!is.element(variable, vars[[column_names[["3"]][["id"]][["es"]]]])){
+    if(!is.element(variable, vars[[column_names[[API_version]][["id"]][["es"]]]])){
       result <- FALSE
       stop(sprintf("%s is not a valid variable for operation %s. Valid ids: %s", variable, operation, paste0(vars$Id, collapse = ", ")))
     }
@@ -1045,7 +1045,7 @@ check_variable <- function(variable, verbose){
   if(!is.null(variable)){
     vars <- get_metadata_variables(validate = FALSE, verbose = verbose, page = 0)
 
-    if(!is.element(variable, vars[[column_names[["3"]][["id"]][["es"]]]])){
+    if(!is.element(variable, vars[[column_names[[API_version]][["id"]][["es"]]]])){
       result <- FALSE
       stop(sprintf("%s variable not exists", variable))
     }
@@ -1068,7 +1068,7 @@ check_value <- function(variable, value, verbose){
   if(!is.null(value)){
     vars <- get_metadata_values(variable = variable, validate = FALSE, verbose = verbose, page = 0)
 
-    if(!is.element(value, vars[[column_names[["3"]][["id"]][["es"]]]])){
+    if(!is.element(value, vars[[column_names[[API_version]][["id"]][["es"]]]])){
       result <- FALSE
       stop(sprintf("%s is not a valid value for variable %s. Valid ids: %s", value, variable, paste0(vars$Id, collapse = ", ")))
     }
@@ -1088,7 +1088,7 @@ check_publication <- function(publication, verbose){
     # Get all the publications
     pubs <- get_metadata_publications(validate = FALSE, verbose = verbose, page = 0)
 
-    if(!is.element(publication, pubs[[column_names[["3"]][["id"]][["es"]]]])){
+    if(!is.element(publication, pubs[[column_names[[API_version]][["id"]][["es"]]]])){
       result <- FALSE
       stop(sprintf("%s publication not exists", publication))
     }
@@ -1135,7 +1135,7 @@ check_idtable_idgroup <- function(input, verbose){
     # Get all the groups of the table
     groups <- get_metadata_table_groups(idTable = idTable, validate = FALSE, verbose = verbose)
 
-    if(!is.element(idGroup, groups[[column_names[["3"]][["id"]][["es"]]]])){
+    if(!is.element(idGroup, groups[[column_names[[API_version]][["id"]][["es"]]]])){
       result <- FALSE
       stop(sprintf("%s is not a valid group for table %s. Valid ids: %s", idGroup, idTable, paste0(groups$Id, collapse = ", ")))
     }
@@ -1224,9 +1224,9 @@ check_periodicity <- function(operation, p, verbose){
     # Get periodicities of an operation
     periodicity <- get_metadata_periodicity(operation = operation, validate = FALSE, verbose = verbose)
 
-    if(!is.element(p, periodicity[[column_names[["3"]][["id"]][["es"]]]])){
+    if(!is.element(p, periodicity[[column_names[[API_version]][["id"]][["es"]]]])){
       result <- FALSE
-      stop(sprintf("%s is not a valid periodicity for operation %s. Valid ids: %s", p, operation, paste0(periodicity[[column_names[["3"]][["id"]][["es"]]]], collapse = ", ")))
+      stop(sprintf("%s is not a valid periodicity for operation %s. Valid ids: %s", p, operation, paste0(periodicity[[column_names[[API_version]][["id"]][["es"]]]], collapse = ", ")))
     }
   }else{
     result <- FALSE
@@ -1425,13 +1425,13 @@ check_classification <- function(operation, clasif, verbose){
     # Get periodicities of an operation
     classification <- get_metadata_classifications(operation = operation, validate = FALSE, verbose = verbose)
 
-    if(!is.element(clasif, classification[[column_names[["3"]][["id"]][["es"]]]])){
+    if(!is.element(clasif, classification[[column_names[[API_version]][["id"]][["es"]]]])){
       result <- FALSE
 
       if(is.null(operation)){
-        stop(sprintf("%s is not a valid classification. Valid ids: %s", clasif, paste0(classification[[column_names[["3"]][["id"]][["es"]]]], collapse = ", ")))
+        stop(sprintf("%s is not a valid classification. Valid ids: %s", clasif, paste0(classification[[column_names[[API_version]][["id"]][["es"]]]], collapse = ", ")))
       }else{
-        stop(sprintf("%s is not a valid classification for operation %s. Valid ids: %s", clasif, operation, paste0(classification[[column_names[["3"]][["id"]][["es"]]]], collapse = ", ")))
+        stop(sprintf("%s is not a valid classification for operation %s. Valid ids: %s", clasif, operation, paste0(classification[[column_names[[API_version]][["id"]][["es"]]]], collapse = ", ")))
       }
     }
   }
@@ -1515,9 +1515,9 @@ check_table_px_filter <- function(idTable, pxfilter, verbose, df){
     # Go through all the variables
     for(v in var){
       # If the variable in the filter is not in the metadata is not valid
-      if(!is.element(v, c(df[[column_names[["3"]][["variable.code"]][["es"]]]], shortcut_wrapper))){
+      if(!is.element(v, c(df[[column_names[[API_version]][["variable.code"]][["es"]]]], shortcut_wrapper))){
         result <- FALSE
-        msg <- sprintf("%s is not a valid variable for %s idTable. Valid variable codes: %s",v,idTable, paste0(unique(df[[column_names[["3"]][["variable.code"]][["es"]]]]), collapse = ", "))
+        msg <- sprintf("%s is not a valid variable for %s idTable. Valid variable codes: %s",v,idTable, paste0(unique(df[[column_names[[API_version]][["variable.code"]][["es"]]]]), collapse = ", "))
         msg <- if(is.element(v, names(shortcuts_filter))) paste0(msg,"\nThe only shortcut valid for this table is the wrapper 'values'") else msg
         stop(msg)
       }
@@ -1529,7 +1529,7 @@ check_table_px_filter <- function(idTable, pxfilter, verbose, df){
       shortcut <- shortcut | short
 
       # subset of the metadata for an specific variable
-      metavar <- if(v %in% shortcut_wrapper) df else df[df[[column_names[["3"]][["variable.code"]][["es"]]]] == v,]
+      metavar <- if(v %in% shortcut_wrapper) df else df[df[[column_names[[API_version]][["variable.code"]][["es"]]]] == v,]
 
       # Go through all the values in the filter for the specific variable
       for(val in pxfilter[[v]]){
@@ -1539,11 +1539,11 @@ check_table_px_filter <- function(idTable, pxfilter, verbose, df){
 
         validnames <- TRUE
         for(vs in valshort){
-          validnames <- validnames & sum(grepl(vs, metavar[[column_names[["3"]][["value.name"]][["es"]]]], ignore.case = TRUE)) > 0
+          validnames <- validnames & sum(grepl(vs, metavar[[column_names[[API_version]][["value.name"]][["es"]]]], ignore.case = TRUE)) > 0
         }
 
         # If the value in the filter is not in the metadata is not valid
-        if(val != "" && !(is.element(val, metavar[[column_names[["3"]][["value.code"]][["es"]]]]) || validnames )){
+        if(val != "" && !(is.element(val, metavar[[column_names[[API_version]][["value.code"]][["es"]]]]) || validnames )){
           result <- FALSE
           stop(sprintf("%s is not a valid value for variable %s", val, v))
         }
@@ -1580,13 +1580,13 @@ check_table_px_id_filter <- function(idTable, pxfilter, verbose, df){
     # Go through all the variables
     for(v in var){
       # If the variable in the filter is not in the metadata is not valid
-      if(!is.element(v, c(df[[column_names[["3"]][["variable.code"]][["es"]]]], df[[column_names[["3"]][["variable.id"]][["es"]]]], shortcut_wrapper))){
+      if(!is.element(v, c(df[[column_names[[API_version]][["variable.code"]][["es"]]]], df[[column_names[[API_version]][["variable.id"]][["es"]]]], shortcut_wrapper))){
         result <- FALSE
         msg <- sprintf("%s is not a valid variable for %s idTable. Valid variable codes: %s. Valid variable ids: %s",
                        v,
                        idTable,
-                       paste0(unique(df[[column_names[["3"]][["variable.code"]][["es"]]]][nchar(df[[column_names[["3"]][["variable.code"]][["es"]]]]) > 0]), collapse = ", "),
-                       paste0(unique(df[[column_names[["3"]][["variable.code"]][["es"]]]]), collapse = ", "))
+                       paste0(unique(df[[column_names[[API_version]][["variable.code"]][["es"]]]][nchar(df[[column_names[[API_version]][["variable.code"]][["es"]]]]) > 0]), collapse = ", "),
+                       paste0(unique(df[[column_names[[API_version]][["variable.code"]][["es"]]]]), collapse = ", "))
         msg <- if(is.element(v, names(shortcuts_filter))) paste0(msg,"\nThe only shortcut valid for this table is the wrapper 'values'") else msg
         stop(msg)
       }
@@ -1598,7 +1598,7 @@ check_table_px_id_filter <- function(idTable, pxfilter, verbose, df){
       shortcut <- shortcut | short
 
       # subset of the metadata for an specific variable
-      metavar <- if(v %in% shortcut_wrapper) df else df[df[[column_names[["3"]][["variable.code"]][["es"]]]] == v | df[[column_names[["3"]][["variable.code"]][["es"]]]] == v,]
+      metavar <- if(v %in% shortcut_wrapper) df else df[df[[column_names[[API_version]][["variable.code"]][["es"]]]] == v | df[[column_names[[API_version]][["variable.code"]][["es"]]]] == v,]
 
       # Go through all the values in the filter for the specific variable
       for(val in pxfilter[[v]]){
@@ -1607,11 +1607,11 @@ check_table_px_id_filter <- function(idTable, pxfilter, verbose, df){
 
         validnames <- TRUE
         for(vs in valshort){
-          validnames <- validnames & sum(grepl(vs, metavar[[column_names[["3"]][["value.name"]][["es"]]]], ignore.case = TRUE)) > 0
+          validnames <- validnames & sum(grepl(vs, metavar[[column_names[[API_version]][["value.name"]][["es"]]]], ignore.case = TRUE)) > 0
         }
 
         # If the value in the filter is not in the metadata is not valid
-        if(val != "" && !(is.element(val, c(metavar[[column_names[["3"]][["value.code"]][["es"]]]], metavar[[column_names[["3"]][["value.id"]][["es"]]]])) || validnames )){
+        if(val != "" && !(is.element(val, c(metavar[[column_names[[API_version]][["value.code"]][["es"]]]], metavar[[column_names[[API_version]][["value.id"]][["es"]]]])) || validnames )){
           result <- FALSE
           stop(sprintf("%s is not a valid value for variable %s", val, v))
         }
@@ -1749,7 +1749,7 @@ check_tempus_filter <- function(id, filter, parnames, df, det = 0){
   shortcut <- FALSE
 
   # column name depending on det parameter
-  colname <- if(det > 0 ) column_names[["3"]][["variable.id"]][["es"]] else column_names[["3"]][["variable.fk"]][["es"]]
+  colname <- if(det > 0 ) column_names[[API_version]][["variable.id"]][["es"]] else column_names[[API_version]][["variable.fk"]][["es"]]
 
   # Variables of the filter
   var <- names(filter)
@@ -1797,11 +1797,11 @@ check_tempus_filter <- function(id, filter, parnames, df, det = 0){
         validnames <- TRUE
         # Check each part of the value
         for(vs in valshort){
-          validnames <- validnames & sum(grepl(vs, metavar[[column_names[["3"]][["value.name"]][["es"]]]], ignore.case = TRUE)) > 0
+          validnames <- validnames & sum(grepl(vs, metavar[[column_names[[API_version]][["value.name"]][["es"]]]], ignore.case = TRUE)) > 0
         }
 
         # The id or the shortcut name of the value must exist in the metadata information
-        if(f != "" && !(is.element(f, metavar[[column_names[["3"]][["value.id"]][["es"]]]]) || validnames)){
+        if(f != "" && !(is.element(f, metavar[[column_names[[API_version]][["value.id"]][["es"]]]]) || validnames)){
           result <- FALSE
 
           if(is.element("idtable",parnames)){
@@ -2107,7 +2107,7 @@ extract_metadata <- function(datain, request){
       existsvarid <- exists_variables_id(metadata)
 
       # Column to extract metadata
-      varmeta <- if(exists_values_id(metadata) && existsvarid$result) existsvarid$name else "Variable.Codigo"
+      varmeta <- if(exists_values_id(metadata) && existsvarid$result) existsvarid$name else column_names[[API_version]][["variable.code"]][["es"]]
 
       if(exists_values_id(metadata)){
         metacols <- append(metacols, "Id")
@@ -2159,7 +2159,7 @@ extract_metadata <- function(datain, request){
         dfcodes <- do.call(rbind,
                            lapply(metadata,
                                   function(x) subset(x,
-                                                     x[[column_names[["3"]][["variable.id"]][["es"]]]] %in% unique(values[[column_names[["3"]][["variable.fk"]][["es"]]]]),
+                                                     x[[column_names[[API_version]][["variable.id"]][["es"]]]] %in% unique(values[[column_names[[API_version]][["variable.fk"]][["es"]]]]),
                                                      select = metacols)))
         # New name of the column
         newname <- unlist(subset(checktable$groups, checktable$groups$Id == g, select = c("Nombre")))
@@ -2204,7 +2204,7 @@ extract_metadata <- function(datain, request){
       dfcodes <- do.call(rbind,
                          lapply(metadata,
                                 function(x) subset(x,
-                                                   x[[column_names[["3"]][["variable.id"]][["es"]]]] %in% var,
+                                                   x[[column_names[[API_version]][["variable.id"]][["es"]]]] %in% var,
                                                    select = metacols)))
 
       # Rename column with variable code
@@ -2308,11 +2308,11 @@ get_metadata_variable_values_table <- function(idTable, filter = NULL, verbose, 
         #
         #     if(origin == "tablepxid"){
         #       # create column variable_id:value_id
-        #       dfvalues$varval <- paste(as.character(dfvalues[, column_names[["3"]][["variable.id"]][["es"]]]), as.character(dfvalues[, column_names[["3"]][["value.id"]][["es"]]]), sep = ":")
+        #       dfvalues$varval <- paste(as.character(dfvalues[, column_names[[API_version]][["variable.id"]][["es"]]]), as.character(dfvalues[, column_names[[API_version]][["value.id"]][["es"]]]), sep = ":")
         #
         #     }else{
         #       # create column variable_cod:value_cod
-        #       dfvalues$varval <- paste(as.character(dfvalues[, column_names[["3"]][["variable.code"]][["es"]]]), as.character(dfvalues[, column_names[["3"]][["value.code"]][["es"]]]), sep = ":")
+        #       dfvalues$varval <- paste(as.character(dfvalues[, column_names[[API_version]][["variable.code"]][["es"]]]), as.character(dfvalues[, column_names[[API_version]][["value.code"]][["es"]]]), sep = ":")
         #     }
         #
         #     # vector of var_id:val_id
@@ -2326,10 +2326,10 @@ get_metadata_variable_values_table <- function(idTable, filter = NULL, verbose, 
         #
         #     if(origin == "tablepxid"){
         #       # retrieve variables not in the filter
-        #       df2 <- subset(dfvalues, !(dfvalues[[column_names[["3"]][["variable.id"]][["es"]]]] %in% fvar))
+        #       df2 <- subset(dfvalues, !(dfvalues[[column_names[[API_version]][["variable.id"]][["es"]]]] %in% fvar))
         #     }else{
         #       # retrieve variables not in the filter
-        #       df2 <- subset(dfvalues, !(dfvalues[[column_names[["3"]][["variable.code"]][["es"]]]] %in% fvar))
+        #       df2 <- subset(dfvalues, !(dfvalues[[column_names[[API_version]][["variable.code"]][["es"]]]] %in% fvar))
         #     }
         #
         #     dfvalues <- rbind(df1, df2)
@@ -2396,10 +2396,10 @@ get_metadata_variable_values_table <- function(idTable, filter = NULL, verbose, 
 
         # create column fk_variable:id
         if(det > 0 ){
-          dfvalues$varval <- paste(as.character(dfvalues[, column_names[["3"]][["variable.id"]][["es"]]]), as.character(dfvalues[, column_names[["3"]][["value.id"]][["es"]]]), sep = ":")
+          dfvalues$varval <- paste(as.character(dfvalues[, column_names[[API_version]][["variable.id"]][["es"]]]), as.character(dfvalues[, column_names[[API_version]][["value.id"]][["es"]]]), sep = ":")
 
         }else{
-          dfvalues$varval <- paste(as.character(dfvalues[, column_names[["3"]][["variable.fk"]][["es"]]]), as.character(dfvalues[, column_names[["3"]][["value.id"]][["es"]]]), sep = ":")
+          dfvalues$varval <- paste(as.character(dfvalues[, column_names[[API_version]][["variable.fk"]][["es"]]]), as.character(dfvalues[, column_names[[API_version]][["value.id"]][["es"]]]), sep = ":")
         }
 
       # call from get_metadata_table_varval
@@ -2468,16 +2468,16 @@ get_metadata_variable_values_table <- function(idTable, filter = NULL, verbose, 
 
           # create column fk_variable:id
           if(det > 0 ){
-            dfvalues$varval <- paste(as.character(dfvalues[, column_names[["3"]][["variable.id"]][["es"]]]), as.character(dfvalues[, column_names[["3"]][["value.id"]][["es"]]]), sep = ":")
+            dfvalues$varval <- paste(as.character(dfvalues[, column_names[[API_version]][["variable.id"]][["es"]]]), as.character(dfvalues[, column_names[[API_version]][["value.id"]][["es"]]]), sep = ":")
 
             # group id of the variables in the filter
-            fgroup <- subset(dfvalues, dfvalues[[column_names[["3"]][["variable.id"]][["es"]]]] %in% fvar, select = "group")
+            fgroup <- subset(dfvalues, dfvalues[[column_names[[API_version]][["variable.id"]][["es"]]]] %in% fvar, select = "group")
 
           }else{
-            dfvalues$varval <- paste(as.character(dfvalues[, column_names[["3"]][["variable.fk"]][["es"]]]), as.character(dfvalues[, column_names[["3"]][["value.id"]][["es"]]]), sep = ":")
+            dfvalues$varval <- paste(as.character(dfvalues[, column_names[[API_version]][["variable.fk"]][["es"]]]), as.character(dfvalues[, column_names[[API_version]][["value.id"]][["es"]]]), sep = ":")
 
             # group id of the variables in the filter
-            fgroup <- subset(dfvalues, dfvalues[[column_names[["3"]][["variable.fk"]][["es"]]]] %in% fvar, select = "group")
+            fgroup <- subset(dfvalues, dfvalues[[column_names[[API_version]][["variable.fk"]][["es"]]]] %in% fvar, select = "group")
           }
 
           fgroup <- unique(unlist(fgroup))
@@ -2487,9 +2487,9 @@ get_metadata_variable_values_table <- function(idTable, filter = NULL, verbose, 
 
           # retrieve variables not in the filter
           if(det > 0 ){
-            df2 <- subset(dfvalues, !(dfvalues[[column_names[["3"]][["variable.id"]][["es"]]]] %in% fvar) & !(dfvalues$group %in% fgroup))
+            df2 <- subset(dfvalues, !(dfvalues[[column_names[[API_version]][["variable.id"]][["es"]]]] %in% fvar) & !(dfvalues$group %in% fgroup))
           }else{
-            df2 <- subset(dfvalues, !(dfvalues[[column_names[["3"]][["variable.fk"]][["es"]]]] %in% fvar) & !(dfvalues$group %in% fgroup))
+            df2 <- subset(dfvalues, !(dfvalues[[column_names[[API_version]][["variable.fk"]][["es"]]]] %in% fvar) & !(dfvalues$group %in% fgroup))
           }
 
           dfvalues <- rbind(df1, df2)
@@ -2529,10 +2529,10 @@ get_metadata_variable_values_operation <- function(operation, verbose, validate,
 
     # create column fk_variable:id
     if(det > 0 ){
-      tmp$varval <- paste(as.character(tmp[, column_names[["3"]][["variable.id"]][["es"]]]), as.character(tmp[, column_names[["3"]][["value.id"]][["es"]]]), sep = ":")
+      tmp$varval <- paste(as.character(tmp[, column_names[[API_version]][["variable.id"]][["es"]]]), as.character(tmp[, column_names[[API_version]][["value.id"]][["es"]]]), sep = ":")
 
     }else{
-      tmp$varval <- paste(as.character(tmp[, column_names[["3"]][["variable.fk"]][["es"]]]), as.character(tmp[, column_names[["3"]][["value.id"]][["es"]]]), sep = ":")
+      tmp$varval <- paste(as.character(tmp[, column_names[[API_version]][["variable.fk"]][["es"]]]), as.character(tmp[, column_names[[API_version]][["value.id"]][["es"]]]), sep = ":")
     }
 
     if (exists("dfvalues") && is.data.frame(get("dfvalues"))){
@@ -2574,12 +2574,12 @@ get_metadata_variable_values_hierarchy <- function(variable, hierarchy, verbose,
 
     # create column fk_variable:id
     if(det > 0 ){
-      tmp$varval <- paste(as.character(tmp[, column_names[["3"]][["variable.id"]][["es"]]]), as.character(tmp[, column_names[["3"]][["value.id"]][["es"]]]), sep = ":")
-      valfathers <- if(sum(grepl(column_names[["3"]][["jerarquia"]][["es"]], names(tmp))) > 0) sapply(tmp[[column_names[["3"]][["jerarquia"]][["es"]]]],`[[`, column_names[["3"]][["id"]][["es"]]) else NA
+      tmp$varval <- paste(as.character(tmp[, column_names[[API_version]][["variable.id"]][["es"]]]), as.character(tmp[, column_names[[API_version]][["value.id"]][["es"]]]), sep = ":")
+      valfathers <- if(sum(grepl(column_names[[API_version]][["jerarquia"]][["es"]], names(tmp))) > 0) sapply(tmp[[column_names[[API_version]][["jerarquia"]][["es"]]]],`[[`, column_names[[API_version]][["id"]][["es"]]) else NA
 
     }else{
-      tmp$varval <- paste(as.character(tmp[, column_names[["3"]][["variable.fk"]][["es"]]]), as.character(tmp[, column_names[["3"]][["value.id"]][["es"]]]), sep = ":")
-      valfathers <- if(sum(grepl(column_names[["3"]][["jerarquia.fk"]][["es"]], names(tmp))) > 0) tmp[[column_names[["3"]][["jerarquia.fk"]][["es"]]]] else NA
+      tmp$varval <- paste(as.character(tmp[, column_names[[API_version]][["variable.fk"]][["es"]]]), as.character(tmp[, column_names[[API_version]][["value.id"]][["es"]]]), sep = ":")
+      valfathers <- if(sum(grepl(column_names[[API_version]][["jerarquia.fk"]][["es"]], names(tmp))) > 0) tmp[[column_names[[API_version]][["jerarquia.fk"]][["es"]]]] else NA
     }
 
     tmp$fathers <- valfathers
@@ -2609,11 +2609,11 @@ check_negative_values <- function(dfval, variable, values, origin){
       if(origin == "tablepx"){
         # We select only the values of variables present in the filter
         dfvalfilter <- subset(dfval,
-                              dfval[[column_names[["3"]][["variable.code"]][["es"]]]] %in% variable)
+                              dfval[[column_names[[API_version]][["variable.code"]][["es"]]]] %in% variable)
 
         # remove negative values
-        dfvalues <- subset(dfvalfilter[[column_names[["3"]][["value.code"]][["es"]]]],
-                           !(dfvalfilter[[column_names[["3"]][["value.code"]][["es"]]]] %in% neg_values))
+        dfvalues <- subset(dfvalfilter[[column_names[[API_version]][["value.code"]][["es"]]]],
+                           !(dfvalfilter[[column_names[[API_version]][["value.code"]][["es"]]]] %in% neg_values))
 
         dfvalues <- paste0(variable, ":", dfvalues)
 
@@ -2625,12 +2625,12 @@ check_negative_values <- function(dfval, variable, values, origin){
         neg_values <- gsub("~id$|~cod$","",neg_values)
 
         # We select only the values of variables present in the filter
-        dfvalfilter <- subset(dfval, dfval[[column_names[["3"]][["variable.code"]][["es"]]]] %in% variable | dfval[[column_names[["3"]][["variable.id"]][["es"]]]] %in% variable)
+        dfvalfilter <- subset(dfval, dfval[[column_names[[API_version]][["variable.code"]][["es"]]]] %in% variable | dfval[[column_names[[API_version]][["variable.id"]][["es"]]]] %in% variable)
 
         if(check_alias){
           # remove negative values.
-          dfvalues <- subset(dfvalfilter[[column_names[["3"]][["value.id"]][["es"]]]],
-                              !(dfvalfilter[[column_names[["3"]][["value.id"]][["es"]]]] %in% neg_values))
+          dfvalues <- subset(dfvalfilter[[column_names[[API_version]][["value.id"]][["es"]]]],
+                              !(dfvalfilter[[column_names[[API_version]][["value.id"]][["es"]]]] %in% neg_values))
 
           # include alias ~
           dfvalues <- if(length(dfvalues) > 0)  paste0(paste0(variable, "~id"), ":", paste0(dfvalues, "~id")) else NULL
@@ -2638,35 +2638,35 @@ check_negative_values <- function(dfval, variable, values, origin){
         # Case with codes
         }else{
           # remove negative values
-          dfvalues <- subset(dfvalfilter[[column_names[["3"]][["value.code"]][["es"]]]],
-                              !(dfvalfilter[[column_names[["3"]][["value.code"]][["es"]]]] %in% neg_values) & grepl("\\S+", dfvalfilter[[column_names[["3"]][["value.code"]][["es"]]]]))
+          dfvalues <- subset(dfvalfilter[[column_names[[API_version]][["value.code"]][["es"]]]],
+                              !(dfvalfilter[[column_names[[API_version]][["value.code"]][["es"]]]] %in% neg_values) & grepl("\\S+", dfvalfilter[[column_names[[API_version]][["value.code"]][["es"]]]]))
 
           dfvalues <- if(length(dfvalues) > 0) paste0(variable, ":", dfvalues) else NULL
         }
 
       }else if(origin %in% c("series", "variables")){
         # column name depending on det parameter
-        colname <- if(sum(grepl(column_names[["3"]][["variable.fk"]][["es"]], names(dfval), ignore.case = TRUE)) > 0) column_names[["3"]][["variable.fk"]][["es"]] else column_names[["3"]][["variable.id"]][["es"]]
+        colname <- if(sum(grepl(column_names[[API_version]][["variable.fk"]][["es"]], names(dfval), ignore.case = TRUE)) > 0) column_names[[API_version]][["variable.fk"]][["es"]] else column_names[[API_version]][["variable.id"]][["es"]]
 
         # We select only the values of variables present in the filter
         dfvalfilter <- subset(dfval, dfval[[colname]] %in% variable)
 
         # remove negative values
         dfvalues <- subset(dfvalfilter,
-                           !(dfvalfilter[[column_names[["3"]][["value.id"]][["es"]]]] %in% neg_values), select = "varval")
+                           !(dfvalfilter[[column_names[[API_version]][["value.id"]][["es"]]]] %in% neg_values), select = "varval")
 
         dfvalues <- unique(unlist(dfvalues))
 
       }else{
         # group id of the variables in the filter
-        fgroup <- subset(dfval, dfval[[column_names[["3"]][["value.id"]][["es"]]]] %in% neg_values, select = "group")
+        fgroup <- subset(dfval, dfval[[column_names[[API_version]][["value.id"]][["es"]]]] %in% neg_values, select = "group")
 
         # We select only the values of variable present in the filter
         dfvalfilter <- subset(dfval, dfval$group %in% unique(unlist(fgroup)))
 
         # remove negative values
         dfvalues <- subset(dfvalfilter,
-                           !(dfvalfilter[[column_names[["3"]][["value.id"]][["es"]]]] %in% neg_values), select = "varval")
+                           !(dfvalfilter[[column_names[[API_version]][["value.id"]][["es"]]]] %in% neg_values), select = "varval")
 
         dfvalues <- unique(unlist(dfvalues))
       }
@@ -2763,10 +2763,10 @@ get_children <- function(depth, df, verbose, filter, det, dfilter = NULL){
   valfilter <- if(is.null(filter)) NULL else sapply(strsplit(unlist(filter), ":"), `[`, 2)
 
   # column name of the variable
-  varcol <- if(det > 0 ) paste(column_names[["3"]][["variable.id"]][["es"]], depth, sep = "_") else paste(column_names[["3"]][["variable.fk"]][["es"]], depth, sep = "_")
+  varcol <- if(det > 0 ) paste(column_names[[API_version]][["variable.id"]][["es"]], depth, sep = "_") else paste(column_names[[API_version]][["variable.fk"]][["es"]], depth, sep = "_")
 
   # column name of the value
-  valcol <- paste(column_names[["3"]][["value.id"]][["es"]], depth, sep = "_")
+  valcol <- paste(column_names[[API_version]][["value.id"]][["es"]], depth, sep = "_")
 
   # filter variables
   v <- unique(df[[varcol]])
@@ -2795,21 +2795,21 @@ get_children <- function(depth, df, verbose, filter, det, dfilter = NULL){
       if(!is.null(tmp)){
         # extract the father of the children
         if(det > 0){
-          valfathers <- if(sum(grepl(column_names[["3"]][["jerarquia"]][["es"]], names(tmp))) > 0) sapply(tmp[[column_names[["3"]][["jerarquia"]][["es"]]]],`[[`, column_names[["3"]][["id"]][["es"]]) else NA
+          valfathers <- if(sum(grepl(column_names[[API_version]][["jerarquia"]][["es"]], names(tmp))) > 0) sapply(tmp[[column_names[[API_version]][["jerarquia"]][["es"]]]],`[[`, column_names[[API_version]][["id"]][["es"]]) else NA
         }else{
-          valfathers <- if(sum(grepl(column_names[["3"]][["jerarquia.fk"]][["es"]], names(tmp))) > 0) tmp[[column_names[["3"]][["jerarquia.fk"]][["es"]]]] else NA
+          valfathers <- if(sum(grepl(column_names[[API_version]][["jerarquia.fk"]][["es"]], names(tmp))) > 0) tmp[[column_names[[API_version]][["jerarquia.fk"]][["es"]]]] else NA
         }
 
         tmp$padre <- unlist(sapply(valfathers , function(x) intersect(val, x)))
 
         # filter variables in the last level
-        v2 <- if(det > 0)  unique(tmp[[column_names[["3"]][["variable.id"]][["es"]]]]) else unique(tmp[[column_names[["3"]][["variable.fk"]][["es"]]]])
+        v2 <- if(det > 0)  unique(tmp[[column_names[[API_version]][["variable.id"]][["es"]]]]) else unique(tmp[[column_names[[API_version]][["variable.fk"]][["es"]]]])
         v2 <- if(sum(is.element(varfilter, v2)) > 0) intersect(varfilter, v2) else v2
 
         if(det > 0){
-          tmp <-subset(tmp, tmp[[column_names[["3"]][["variable.id"]][["es"]]]] %in% v2)
+          tmp <-subset(tmp, tmp[[column_names[[API_version]][["variable.id"]][["es"]]]] %in% v2)
         }else{
-          tmp <-subset(tmp, tmp[[column_names[["3"]][["variable.fk"]][["es"]]]] %in% v2)
+          tmp <-subset(tmp, tmp[[column_names[[API_version]][["variable.fk"]][["es"]]]] %in% v2)
         }
         names(tmp) <- paste(names(tmp), depth + 1, sep = "_")
         data <- rbind(data, tmp)
@@ -2819,7 +2819,7 @@ get_children <- function(depth, df, verbose, filter, det, dfilter = NULL){
   }
 
   # filter variables in the last level
-  varcol_new <- if(det > 0) paste(column_names[["3"]][["variable.id"]][["es"]], depth + 1, sep = "_") else paste(column_names[["3"]][["variable.fk"]][["es"]], depth + 1, sep = "_")
+  varcol_new <- if(det > 0) paste(column_names[[API_version]][["variable.id"]][["es"]], depth + 1, sep = "_") else paste(column_names[[API_version]][["variable.fk"]][["es"]], depth + 1, sep = "_")
 
   v3 <- unique(data[[varcol_new]])
   v3 <- if(sum(is.element(varfilter, v3)) > 0) intersect(varfilter, v3) else v3
