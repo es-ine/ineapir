@@ -20,7 +20,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">ineapir</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -123,11 +123,11 @@ of the table that interest us to build the filter.</li>
 <span>                      tip <span class="op">=</span> <span class="st">"A"</span>, nlast <span class="op">=</span> <span class="fl">5</span>, validate <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="va">ipc</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Nombre"</span>, <span class="st">"T3_Periodo"</span>, <span class="st">"Anyo"</span>, <span class="st">"Valor"</span><span class="op">)</span><span class="op">]</span></span>
 <span><span class="co">#&gt;                                                Nombre T3_Periodo Anyo Valor</span></span>
-<span><span class="co">#&gt; 1   Total Nacional. Índice general. Variación anual.         M04 2025   2.2</span></span>
-<span><span class="co">#&gt; 1.1 Total Nacional. Índice general. Variación anual.         M03 2025   2.3</span></span>
-<span><span class="co">#&gt; 1.2 Total Nacional. Índice general. Variación anual.         M02 2025   3.0</span></span>
-<span><span class="co">#&gt; 1.3 Total Nacional. Índice general. Variación anual.         M01 2025   2.9</span></span>
-<span><span class="co">#&gt; 1.4 Total Nacional. Índice general. Variación anual.         M12 2024   2.8</span></span></code></pre></div>
+<span><span class="co">#&gt; 1   Total Nacional. Índice general. Variación anual.         M06 2025   2.2</span></span>
+<span><span class="co">#&gt; 1.1 Total Nacional. Índice general. Variación anual.         M05 2025   2.0</span></span>
+<span><span class="co">#&gt; 1.2 Total Nacional. Índice general. Variación anual.         M04 2025   2.2</span></span>
+<span><span class="co">#&gt; 1.3 Total Nacional. Índice general. Variación anual.         M03 2025   2.3</span></span>
+<span><span class="co">#&gt; 1.4 Total Nacional. Índice general. Variación anual.         M02 2025   3.0</span></span></code></pre></div>
 <ul>
 <li>
 <strong>NOTE</strong> If we add a minus sign to a value, the value
@@ -143,56 +143,32 @@ will be excluded from the filter.</li>
 <span><span class="va">ipc</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_data_table.html">get_data_table</a></span><span class="op">(</span>idTable <span class="op">=</span> <span class="fl">50902</span>, filter <span class="op">=</span> <span class="va">filter</span>, unnest <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>                      tip <span class="op">=</span> <span class="st">"A"</span>, nlast <span class="op">=</span> <span class="fl">2</span>, validate <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="va">ipc</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Nombre"</span>, <span class="st">"T3_Periodo"</span>, <span class="st">"Anyo"</span>, <span class="st">"Valor"</span><span class="op">)</span><span class="op">]</span></span>
-<span><span class="co">#&gt;                                                                                                                     Nombre</span></span>
-<span><span class="co">#&gt; 1                                                    Total Nacional. Alimentos y bebidas no alcohólicas. Variación anual. </span></span>
-<span><span class="co">#&gt; 1.1                                                  Total Nacional. Alimentos y bebidas no alcohólicas. Variación anual. </span></span>
-<span><span class="co">#&gt; 2                                                          Total Nacional. Bebidas alcohólicas y tabaco. Variación anual. </span></span>
-<span><span class="co">#&gt; 2.1                                                        Total Nacional. Bebidas alcohólicas y tabaco. Variación anual. </span></span>
-<span><span class="co">#&gt; 3                                                                     Total Nacional. Vestido y calzado. Variación anual. </span></span>
-<span><span class="co">#&gt; 3.1                                                                   Total Nacional. Vestido y calzado. Variación anual. </span></span>
-<span><span class="co">#&gt; 4                                Total Nacional. Vivienda, agua, electricidad, gas y otros combustibles. Variación anual. </span></span>
-<span><span class="co">#&gt; 4.1                              Total Nacional. Vivienda, agua, electricidad, gas y otros combustibles. Variación anual. </span></span>
-<span><span class="co">#&gt; 5    Total Nacional. Muebles, artículos del hogar y artículos para el mantenimiento corriente del hogar. Variación anual. </span></span>
-<span><span class="co">#&gt; 5.1  Total Nacional. Muebles, artículos del hogar y artículos para el mantenimiento corriente del hogar. Variación anual. </span></span>
-<span><span class="co">#&gt; 6                                                                               Total Nacional. Sanidad. Variación anual. </span></span>
-<span><span class="co">#&gt; 6.1                                                                             Total Nacional. Sanidad. Variación anual. </span></span>
-<span><span class="co">#&gt; 7                                                                            Total Nacional. Transporte. Variación anual. </span></span>
-<span><span class="co">#&gt; 7.1                                                                          Total Nacional. Transporte. Variación anual. </span></span>
-<span><span class="co">#&gt; 8                                                                        Total Nacional. Comunicaciones. Variación anual. </span></span>
-<span><span class="co">#&gt; 8.1                                                                      Total Nacional. Comunicaciones. Variación anual. </span></span>
-<span><span class="co">#&gt; 9                                                                        Total Nacional. Ocio y cultura. Variación anual. </span></span>
-<span><span class="co">#&gt; 9.1                                                                      Total Nacional. Ocio y cultura. Variación anual. </span></span>
-<span><span class="co">#&gt; 10                                                                            Total Nacional. Enseñanza. Variación anual. </span></span>
-<span><span class="co">#&gt; 10.1                                                                          Total Nacional. Enseñanza. Variación anual. </span></span>
-<span><span class="co">#&gt; 11                                                               Total Nacional. Restaurantes y hoteles. Variación anual. </span></span>
-<span><span class="co">#&gt; 11.1                                                             Total Nacional. Restaurantes y hoteles. Variación anual. </span></span>
-<span><span class="co">#&gt; 12                                                             Total Nacional. Otros bienes y servicios. Variación anual. </span></span>
-<span><span class="co">#&gt; 12.1                                                           Total Nacional. Otros bienes y servicios. Variación anual. </span></span>
-<span><span class="co">#&gt;      T3_Periodo Anyo Valor</span></span>
-<span><span class="co">#&gt; 1           M04 2025   2.0</span></span>
-<span><span class="co">#&gt; 1.1         M03 2025   2.4</span></span>
-<span><span class="co">#&gt; 2           M04 2025   2.6</span></span>
-<span><span class="co">#&gt; 2.1         M03 2025   3.1</span></span>
-<span><span class="co">#&gt; 3           M04 2025   0.3</span></span>
-<span><span class="co">#&gt; 3.1         M03 2025   0.2</span></span>
-<span><span class="co">#&gt; 4           M04 2025   4.2</span></span>
-<span><span class="co">#&gt; 4.1         M03 2025   5.7</span></span>
-<span><span class="co">#&gt; 5           M04 2025   0.5</span></span>
-<span><span class="co">#&gt; 5.1         M03 2025   0.6</span></span>
-<span><span class="co">#&gt; 6           M04 2025   2.0</span></span>
-<span><span class="co">#&gt; 6.1         M03 2025   1.9</span></span>
-<span><span class="co">#&gt; 7           M04 2025  -1.6</span></span>
-<span><span class="co">#&gt; 7.1         M03 2025  -0.9</span></span>
-<span><span class="co">#&gt; 8           M04 2025   2.1</span></span>
-<span><span class="co">#&gt; 8.1         M03 2025   2.0</span></span>
-<span><span class="co">#&gt; 9           M04 2025   2.7</span></span>
-<span><span class="co">#&gt; 9.1         M03 2025  -0.3</span></span>
-<span><span class="co">#&gt; 10          M04 2025   2.5</span></span>
-<span><span class="co">#&gt; 10.1        M03 2025   2.5</span></span>
-<span><span class="co">#&gt; 11          M04 2025   4.5</span></span>
-<span><span class="co">#&gt; 11.1        M03 2025   4.1</span></span>
-<span><span class="co">#&gt; 12          M04 2025   3.6</span></span>
-<span><span class="co">#&gt; 12.1        M03 2025   3.8</span></span></code></pre></div>
+<span><span class="co">#&gt;                                                                                                                   Nombre</span></span>
+<span><span class="co">#&gt; 1                                                  Total Nacional. Alimentos y bebidas no alcohólicas. Variación anual. </span></span>
+<span><span class="co">#&gt; 2                                                        Total Nacional. Bebidas alcohólicas y tabaco. Variación anual. </span></span>
+<span><span class="co">#&gt; 3                                                                   Total Nacional. Vestido y calzado. Variación anual. </span></span>
+<span><span class="co">#&gt; 4                              Total Nacional. Vivienda, agua, electricidad, gas y otros combustibles. Variación anual. </span></span>
+<span><span class="co">#&gt; 5  Total Nacional. Muebles, artículos del hogar y artículos para el mantenimiento corriente del hogar. Variación anual. </span></span>
+<span><span class="co">#&gt; 6                                                                             Total Nacional. Sanidad. Variación anual. </span></span>
+<span><span class="co">#&gt; 7                                                                          Total Nacional. Transporte. Variación anual. </span></span>
+<span><span class="co">#&gt; 8                                                                      Total Nacional. Comunicaciones. Variación anual. </span></span>
+<span><span class="co">#&gt; 9                                                                      Total Nacional. Ocio y cultura. Variación anual. </span></span>
+<span><span class="co">#&gt; 10                                                                          Total Nacional. Enseñanza. Variación anual. </span></span>
+<span><span class="co">#&gt; 11                                                             Total Nacional. Restaurantes y hoteles. Variación anual. </span></span>
+<span><span class="co">#&gt; 12                                                           Total Nacional. Otros bienes y servicios. Variación anual. </span></span>
+<span><span class="co">#&gt;    T3_Periodo Anyo Valor</span></span>
+<span><span class="co">#&gt; 1         M05 2025   2.5</span></span>
+<span><span class="co">#&gt; 2         M05 2025   3.6</span></span>
+<span><span class="co">#&gt; 3         M05 2025   0.5</span></span>
+<span><span class="co">#&gt; 4         M05 2025   3.8</span></span>
+<span><span class="co">#&gt; 5         M05 2025   0.6</span></span>
+<span><span class="co">#&gt; 6         M05 2025   1.9</span></span>
+<span><span class="co">#&gt; 7         M05 2025  -2.0</span></span>
+<span><span class="co">#&gt; 8         M05 2025   2.0</span></span>
+<span><span class="co">#&gt; 9         M05 2025   0.5</span></span>
+<span><span class="co">#&gt; 10        M05 2025   2.5</span></span>
+<span><span class="co">#&gt; 11        M05 2025   4.3</span></span>
+<span><span class="co">#&gt; 12        M05 2025   3.6</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="case-two-pc-axis-file">Case two (pc-axis file)<a class="anchor" aria-label="anchor" href="#case-two-pc-axis-file"></a>
@@ -512,7 +488,7 @@ interest us to build the filter.</li>
 <span>                              unnest <span class="op">=</span> <span class="cn">TRUE</span>, tip <span class="op">=</span> <span class="st">"A"</span>, validate <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="va">ipc</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Nombre"</span>, <span class="st">"T3_Periodo"</span>, <span class="st">"Anyo"</span>, <span class="st">"Valor"</span><span class="op">)</span><span class="op">]</span></span>
 <span><span class="co">#&gt;                                           Nombre T3_Periodo Anyo Valor</span></span>
-<span><span class="co">#&gt; 1 Araba/Álava. Índice general. Variación anual.        abr. 2025   2.8</span></span></code></pre></div>
+<span><span class="co">#&gt; 1 Araba/Álava. Índice general. Variación anual.        may. 2025   2.4</span></span></code></pre></div>
 <ul>
 <li>A variable can take more than one value (valid to filter data from
 tables as well).</li>
@@ -529,9 +505,9 @@ tables as well).</li>
 <span>                              unnest <span class="op">=</span> <span class="cn">TRUE</span>, tip <span class="op">=</span> <span class="st">"A"</span>, validate <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="va">ipc</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Nombre"</span>, <span class="st">"T3_Periodo"</span>, <span class="st">"Anyo"</span>, <span class="st">"Valor"</span><span class="op">)</span><span class="op">]</span></span>
 <span><span class="co">#&gt;                                                Nombre T3_Periodo Anyo Valor</span></span>
-<span><span class="co">#&gt; 1 Alicante/Alacant. Índice general. Variación anual.        abr. 2025   2.1</span></span>
-<span><span class="co">#&gt; 2         Albacete. Índice general. Variación anual.        abr. 2025   1.9</span></span>
-<span><span class="co">#&gt; 3      Araba/Álava. Índice general. Variación anual.        abr. 2025   2.8</span></span></code></pre></div>
+<span><span class="co">#&gt; 1 Alicante/Alacant. Índice general. Variación anual.        may. 2025   1.9</span></span>
+<span><span class="co">#&gt; 2         Albacete. Índice general. Variación anual.        may. 2025   1.7</span></span>
+<span><span class="co">#&gt; 3      Araba/Álava. Índice general. Variación anual.        may. 2025   2.4</span></span></code></pre></div>
 <ul>
 <li>A variable can take a empty character <code>""</code> to get all its
 possible values (valid to filter data from tables as well).</li>
@@ -548,58 +524,58 @@ possible values (valid to filter data from tables as well).</li>
 <span>                              unnest <span class="op">=</span> <span class="cn">TRUE</span>, tip <span class="op">=</span> <span class="st">"A"</span>, validate <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="va">ipc</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Nombre"</span>, <span class="st">"T3_Periodo"</span>, <span class="st">"Anyo"</span>, <span class="st">"Valor"</span><span class="op">)</span><span class="op">]</span></span>
 <span><span class="co">#&gt;                                              Nombre T3_Periodo Anyo   Valor</span></span>
-<span><span class="co">#&gt; 1               Salamanca. Índice general. Índice.        abr. 2025 118.586</span></span>
-<span><span class="co">#&gt; 2                  Huelva. Índice general. Índice.        abr. 2025 119.284</span></span>
-<span><span class="co">#&gt; 3             Ciudad Real. Índice general. Índice.        abr. 2025 119.268</span></span>
-<span><span class="co">#&gt; 4        Alicante/Alacant. Índice general. Índice.        abr. 2025 118.531</span></span>
-<span><span class="co">#&gt; 5                 Ourense. Índice general. Índice.        abr. 2025 119.218</span></span>
-<span><span class="co">#&gt; 6  Santa Cruz de Tenerife. Índice general. Índice.        abr. 2025 117.829</span></span>
-<span><span class="co">#&gt; 7               Coruña, A. Índice general. Índice.        abr. 2025 118.112</span></span>
-<span><span class="co">#&gt; 8              Valladolid. Índice general. Índice.        abr. 2025 118.462</span></span>
-<span><span class="co">#&gt; 9                  Huesca. Índice general. Índice.        abr. 2025 119.289</span></span>
-<span><span class="co">#&gt; 10                  Cádiz. Índice general. Índice.        abr. 2025 118.801</span></span>
-<span><span class="co">#&gt; 11                 Málaga. Índice general. Índice.        abr. 2025 120.117</span></span>
-<span><span class="co">#&gt; 12                 Teruel. Índice general. Índice.        abr. 2025 117.951</span></span>
-<span><span class="co">#&gt; 13               Albacete. Índice general. Índice.        abr. 2025 119.516</span></span>
-<span><span class="co">#&gt; 14              Rioja, La. Índice general. Índice.        abr. 2025 118.334</span></span>
-<span><span class="co">#&gt; 15             Pontevedra. Índice general. Índice.        abr. 2025 119.166</span></span>
-<span><span class="co">#&gt; 16                Melilla. Índice general. Índice.        abr. 2025 119.645</span></span>
-<span><span class="co">#&gt; 17                 Cuenca. Índice general. Índice.        abr. 2025 118.893</span></span>
-<span><span class="co">#&gt; 18                 Toledo. Índice general. Índice.        abr. 2025 120.261</span></span>
-<span><span class="co">#&gt; 19                Córdoba. Índice general. Índice.        abr. 2025 118.682</span></span>
-<span><span class="co">#&gt; 20                  Ceuta. Índice general. Índice.        abr. 2025 118.365</span></span>
-<span><span class="co">#&gt; 21                Granada. Índice general. Índice.        abr. 2025 118.522</span></span>
-<span><span class="co">#&gt; 22                  Ávila. Índice general. Índice.        abr. 2025 119.827</span></span>
-<span><span class="co">#&gt; 23              Tarragona. Índice general. Índice.        abr. 2025 117.410</span></span>
-<span><span class="co">#&gt; 24                  Soria. Índice general. Índice.        abr. 2025 117.857</span></span>
-<span><span class="co">#&gt; 25      Valencia/València. Índice general. Índice.        abr. 2025 117.804</span></span>
-<span><span class="co">#&gt; 26            Guadalajara. Índice general. Índice.        abr. 2025 119.820</span></span>
-<span><span class="co">#&gt; 27                 Burgos. Índice general. Índice.        abr. 2025 118.021</span></span>
-<span><span class="co">#&gt; 28                   Lugo. Índice general. Índice.        abr. 2025 119.015</span></span>
-<span><span class="co">#&gt; 29               Gipuzkoa. Índice general. Índice.        abr. 2025 118.445</span></span>
-<span><span class="co">#&gt; 30                Almería. Índice general. Índice.        abr. 2025 117.123</span></span>
-<span><span class="co">#&gt; 31                 Girona. Índice general. Índice.        abr. 2025 118.045</span></span>
-<span><span class="co">#&gt; 32                 Lleida. Índice general. Índice.        abr. 2025 119.144</span></span>
-<span><span class="co">#&gt; 33               Zaragoza. Índice general. Índice.        abr. 2025 118.014</span></span>
-<span><span class="co">#&gt; 34                 Zamora. Índice general. Índice.        abr. 2025 119.444</span></span>
-<span><span class="co">#&gt; 35     Castellón/Castelló. Índice general. Índice.        abr. 2025 119.807</span></span>
-<span><span class="co">#&gt; 36                   Jaén. Índice general. Índice.        abr. 2025 118.782</span></span>
-<span><span class="co">#&gt; 37               Asturias. Índice general. Índice.        abr. 2025 118.191</span></span>
-<span><span class="co">#&gt; 38            Araba/Álava. Índice general. Índice.        abr. 2025 117.475</span></span>
-<span><span class="co">#&gt; 39                Badajoz. Índice general. Índice.        abr. 2025 119.604</span></span>
-<span><span class="co">#&gt; 40                 Madrid. Índice general. Índice.        abr. 2025 116.428</span></span>
-<span><span class="co">#&gt; 41                Bizkaia. Índice general. Índice.        abr. 2025 118.636</span></span>
-<span><span class="co">#&gt; 42              Cantabria. Índice general. Índice.        abr. 2025 117.703</span></span>
-<span><span class="co">#&gt; 43            Palmas, Las. Índice general. Índice.        abr. 2025 117.850</span></span>
-<span><span class="co">#&gt; 44                Segovia. Índice general. Índice.        abr. 2025 118.338</span></span>
-<span><span class="co">#&gt; 45               Palencia. Índice general. Índice.        abr. 2025 117.435</span></span>
-<span><span class="co">#&gt; 46                Sevilla. Índice general. Índice.        abr. 2025 118.315</span></span>
-<span><span class="co">#&gt; 47                   León. Índice general. Índice.        abr. 2025 120.199</span></span>
-<span><span class="co">#&gt; 48         Balears, Illes. Índice general. Índice.        abr. 2025 118.786</span></span>
-<span><span class="co">#&gt; 49              Barcelona. Índice general. Índice.        abr. 2025 116.988</span></span>
-<span><span class="co">#&gt; 50                Navarra. Índice general. Índice.        abr. 2025 118.464</span></span>
-<span><span class="co">#&gt; 51                Cáceres. Índice general. Índice.        abr. 2025 117.213</span></span>
-<span><span class="co">#&gt; 52                 Murcia. Índice general. Índice.        abr. 2025 117.902</span></span></code></pre></div>
+<span><span class="co">#&gt; 1               Salamanca. Índice general. Índice.        may. 2025 119.414</span></span>
+<span><span class="co">#&gt; 2                  Huelva. Índice general. Índice.        may. 2025 119.544</span></span>
+<span><span class="co">#&gt; 3             Ciudad Real. Índice general. Índice.        may. 2025 119.467</span></span>
+<span><span class="co">#&gt; 4        Alicante/Alacant. Índice general. Índice.        may. 2025 118.560</span></span>
+<span><span class="co">#&gt; 5                 Ourense. Índice general. Índice.        may. 2025 119.219</span></span>
+<span><span class="co">#&gt; 6  Santa Cruz de Tenerife. Índice general. Índice.        may. 2025 117.789</span></span>
+<span><span class="co">#&gt; 7               Coruña, A. Índice general. Índice.        may. 2025 118.090</span></span>
+<span><span class="co">#&gt; 8              Valladolid. Índice general. Índice.        may. 2025 118.442</span></span>
+<span><span class="co">#&gt; 9                  Huesca. Índice general. Índice.        may. 2025 119.189</span></span>
+<span><span class="co">#&gt; 10                  Cádiz. Índice general. Índice.        may. 2025 119.059</span></span>
+<span><span class="co">#&gt; 11                 Málaga. Índice general. Índice.        may. 2025 120.251</span></span>
+<span><span class="co">#&gt; 12                 Teruel. Índice general. Índice.        may. 2025 117.968</span></span>
+<span><span class="co">#&gt; 13               Albacete. Índice general. Índice.        may. 2025 119.433</span></span>
+<span><span class="co">#&gt; 14              Rioja, La. Índice general. Índice.        may. 2025 118.309</span></span>
+<span><span class="co">#&gt; 15             Pontevedra. Índice general. Índice.        may. 2025 119.280</span></span>
+<span><span class="co">#&gt; 16                Melilla. Índice general. Índice.        may. 2025 119.242</span></span>
+<span><span class="co">#&gt; 17                 Cuenca. Índice general. Índice.        may. 2025 118.788</span></span>
+<span><span class="co">#&gt; 18                 Toledo. Índice general. Índice.        may. 2025 120.328</span></span>
+<span><span class="co">#&gt; 19                Córdoba. Índice general. Índice.        may. 2025 119.032</span></span>
+<span><span class="co">#&gt; 20                  Ceuta. Índice general. Índice.        may. 2025 118.805</span></span>
+<span><span class="co">#&gt; 21                Granada. Índice general. Índice.        may. 2025 118.560</span></span>
+<span><span class="co">#&gt; 22                  Ávila. Índice general. Índice.        may. 2025 119.612</span></span>
+<span><span class="co">#&gt; 23              Tarragona. Índice general. Índice.        may. 2025 117.533</span></span>
+<span><span class="co">#&gt; 24                  Soria. Índice general. Índice.        may. 2025 117.921</span></span>
+<span><span class="co">#&gt; 25      Valencia/València. Índice general. Índice.        may. 2025 117.851</span></span>
+<span><span class="co">#&gt; 26            Guadalajara. Índice general. Índice.        may. 2025 119.517</span></span>
+<span><span class="co">#&gt; 27                 Burgos. Índice general. Índice.        may. 2025 117.926</span></span>
+<span><span class="co">#&gt; 28                   Lugo. Índice general. Índice.        may. 2025 119.251</span></span>
+<span><span class="co">#&gt; 29               Gipuzkoa. Índice general. Índice.        may. 2025 118.530</span></span>
+<span><span class="co">#&gt; 30                Almería. Índice general. Índice.        may. 2025 117.253</span></span>
+<span><span class="co">#&gt; 31                 Girona. Índice general. Índice.        may. 2025 118.051</span></span>
+<span><span class="co">#&gt; 32                 Lleida. Índice general. Índice.        may. 2025 119.487</span></span>
+<span><span class="co">#&gt; 33               Zaragoza. Índice general. Índice.        may. 2025 118.007</span></span>
+<span><span class="co">#&gt; 34                 Zamora. Índice general. Índice.        may. 2025 119.617</span></span>
+<span><span class="co">#&gt; 35     Castellón/Castelló. Índice general. Índice.        may. 2025 120.195</span></span>
+<span><span class="co">#&gt; 36                   Jaén. Índice general. Índice.        may. 2025 118.972</span></span>
+<span><span class="co">#&gt; 37               Asturias. Índice general. Índice.        may. 2025 117.974</span></span>
+<span><span class="co">#&gt; 38            Araba/Álava. Índice general. Índice.        may. 2025 117.634</span></span>
+<span><span class="co">#&gt; 39                Badajoz. Índice general. Índice.        may. 2025 119.749</span></span>
+<span><span class="co">#&gt; 40                 Madrid. Índice general. Índice.        may. 2025 116.476</span></span>
+<span><span class="co">#&gt; 41                Bizkaia. Índice general. Índice.        may. 2025 119.011</span></span>
+<span><span class="co">#&gt; 42              Cantabria. Índice general. Índice.        may. 2025 117.559</span></span>
+<span><span class="co">#&gt; 43            Palmas, Las. Índice general. Índice.        may. 2025 117.577</span></span>
+<span><span class="co">#&gt; 44                Segovia. Índice general. Índice.        may. 2025 118.631</span></span>
+<span><span class="co">#&gt; 45               Palencia. Índice general. Índice.        may. 2025 118.108</span></span>
+<span><span class="co">#&gt; 46                Sevilla. Índice general. Índice.        may. 2025 118.556</span></span>
+<span><span class="co">#&gt; 47                   León. Índice general. Índice.        may. 2025 120.353</span></span>
+<span><span class="co">#&gt; 48         Balears, Illes. Índice general. Índice.        may. 2025 118.830</span></span>
+<span><span class="co">#&gt; 49              Barcelona. Índice general. Índice.        may. 2025 117.027</span></span>
+<span><span class="co">#&gt; 50                Navarra. Índice general. Índice.        may. 2025 118.360</span></span>
+<span><span class="co">#&gt; 51                Cáceres. Índice general. Índice.        may. 2025 117.332</span></span>
+<span><span class="co">#&gt; 52                 Murcia. Índice general. Índice.        may. 2025 118.147</span></span></code></pre></div>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
@@ -612,7 +588,7 @@ possible values (valid to filter data from tables as well).</li>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.2.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
     </footer>

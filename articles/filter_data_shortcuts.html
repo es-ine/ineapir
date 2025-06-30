@@ -20,7 +20,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">ineapir</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -322,11 +322,11 @@ general y de grupos ECOICOP</a> (Id 50902):</p>
 <span>                      tip <span class="op">=</span> <span class="st">"A"</span>, nlast <span class="op">=</span> <span class="fl">5</span>, validate <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="va">ipc</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Nombre"</span>, <span class="st">"T3_Periodo"</span>, <span class="st">"Anyo"</span>, <span class="st">"Valor"</span><span class="op">)</span><span class="op">]</span></span>
 <span><span class="co">#&gt;                                                Nombre T3_Periodo Anyo Valor</span></span>
-<span><span class="co">#&gt; 1   Total Nacional. Índice general. Variación anual.         M04 2025   2.2</span></span>
-<span><span class="co">#&gt; 1.1 Total Nacional. Índice general. Variación anual.         M03 2025   2.3</span></span>
-<span><span class="co">#&gt; 1.2 Total Nacional. Índice general. Variación anual.         M02 2025   3.0</span></span>
-<span><span class="co">#&gt; 1.3 Total Nacional. Índice general. Variación anual.         M01 2025   2.9</span></span>
-<span><span class="co">#&gt; 1.4 Total Nacional. Índice general. Variación anual.         M12 2024   2.8</span></span></code></pre></div>
+<span><span class="co">#&gt; 1   Total Nacional. Índice general. Variación anual.         M06 2025   2.2</span></span>
+<span><span class="co">#&gt; 1.1 Total Nacional. Índice general. Variación anual.         M05 2025   2.0</span></span>
+<span><span class="co">#&gt; 1.2 Total Nacional. Índice general. Variación anual.         M04 2025   2.2</span></span>
+<span><span class="co">#&gt; 1.3 Total Nacional. Índice general. Variación anual.         M03 2025   2.3</span></span>
+<span><span class="co">#&gt; 1.4 Total Nacional. Índice general. Variación anual.         M02 2025   3.0</span></span></code></pre></div>
 <p>Besides, we can also use the <em>values</em> wrapper.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Filter with the values wrapper</span></span>
@@ -337,11 +337,11 @@ general y de grupos ECOICOP</a> (Id 50902):</p>
 <span>                      tip <span class="op">=</span> <span class="st">"A"</span>, nlast <span class="op">=</span> <span class="fl">5</span>, validate <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="va">ipc</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Nombre"</span>, <span class="st">"T3_Periodo"</span>, <span class="st">"Anyo"</span>, <span class="st">"Valor"</span><span class="op">)</span><span class="op">]</span></span>
 <span><span class="co">#&gt;                                                Nombre T3_Periodo Anyo Valor</span></span>
-<span><span class="co">#&gt; 1   Total Nacional. Índice general. Variación anual.         M04 2025   2.2</span></span>
-<span><span class="co">#&gt; 1.1 Total Nacional. Índice general. Variación anual.         M03 2025   2.3</span></span>
-<span><span class="co">#&gt; 1.2 Total Nacional. Índice general. Variación anual.         M02 2025   3.0</span></span>
-<span><span class="co">#&gt; 1.3 Total Nacional. Índice general. Variación anual.         M01 2025   2.9</span></span>
-<span><span class="co">#&gt; 1.4 Total Nacional. Índice general. Variación anual.         M12 2024   2.8</span></span></code></pre></div>
+<span><span class="co">#&gt; 1   Total Nacional. Índice general. Variación anual.         M06 2025   2.2</span></span>
+<span><span class="co">#&gt; 1.1 Total Nacional. Índice general. Variación anual.         M05 2025   2.0</span></span>
+<span><span class="co">#&gt; 1.2 Total Nacional. Índice general. Variación anual.         M04 2025   2.2</span></span>
+<span><span class="co">#&gt; 1.3 Total Nacional. Índice general. Variación anual.         M03 2025   2.3</span></span>
+<span><span class="co">#&gt; 1.4 Total Nacional. Índice general. Variación anual.         M02 2025   3.0</span></span></code></pre></div>
 <p>If we add a minus sign to a value, the value will be excluded from
 the filter.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
@@ -352,56 +352,32 @@ the filter.</p>
 <span><span class="va">ipc</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_data_table.html">get_data_table</a></span><span class="op">(</span>idTable <span class="op">=</span> <span class="fl">50902</span>, filter <span class="op">=</span> <span class="va">filter</span>, unnest <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>                      tip <span class="op">=</span> <span class="st">"A"</span>, nlast <span class="op">=</span> <span class="fl">2</span>, validate <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="va">ipc</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Nombre"</span>, <span class="st">"T3_Periodo"</span>, <span class="st">"Anyo"</span>, <span class="st">"Valor"</span><span class="op">)</span><span class="op">]</span></span>
-<span><span class="co">#&gt;                                                                                                                     Nombre</span></span>
-<span><span class="co">#&gt; 1                                                    Total Nacional. Alimentos y bebidas no alcohólicas. Variación anual. </span></span>
-<span><span class="co">#&gt; 1.1                                                  Total Nacional. Alimentos y bebidas no alcohólicas. Variación anual. </span></span>
-<span><span class="co">#&gt; 2                                                          Total Nacional. Bebidas alcohólicas y tabaco. Variación anual. </span></span>
-<span><span class="co">#&gt; 2.1                                                        Total Nacional. Bebidas alcohólicas y tabaco. Variación anual. </span></span>
-<span><span class="co">#&gt; 3                                                                     Total Nacional. Vestido y calzado. Variación anual. </span></span>
-<span><span class="co">#&gt; 3.1                                                                   Total Nacional. Vestido y calzado. Variación anual. </span></span>
-<span><span class="co">#&gt; 4                                Total Nacional. Vivienda, agua, electricidad, gas y otros combustibles. Variación anual. </span></span>
-<span><span class="co">#&gt; 4.1                              Total Nacional. Vivienda, agua, electricidad, gas y otros combustibles. Variación anual. </span></span>
-<span><span class="co">#&gt; 5    Total Nacional. Muebles, artículos del hogar y artículos para el mantenimiento corriente del hogar. Variación anual. </span></span>
-<span><span class="co">#&gt; 5.1  Total Nacional. Muebles, artículos del hogar y artículos para el mantenimiento corriente del hogar. Variación anual. </span></span>
-<span><span class="co">#&gt; 6                                                                               Total Nacional. Sanidad. Variación anual. </span></span>
-<span><span class="co">#&gt; 6.1                                                                             Total Nacional. Sanidad. Variación anual. </span></span>
-<span><span class="co">#&gt; 7                                                                            Total Nacional. Transporte. Variación anual. </span></span>
-<span><span class="co">#&gt; 7.1                                                                          Total Nacional. Transporte. Variación anual. </span></span>
-<span><span class="co">#&gt; 8                                                                        Total Nacional. Comunicaciones. Variación anual. </span></span>
-<span><span class="co">#&gt; 8.1                                                                      Total Nacional. Comunicaciones. Variación anual. </span></span>
-<span><span class="co">#&gt; 9                                                                        Total Nacional. Ocio y cultura. Variación anual. </span></span>
-<span><span class="co">#&gt; 9.1                                                                      Total Nacional. Ocio y cultura. Variación anual. </span></span>
-<span><span class="co">#&gt; 10                                                                            Total Nacional. Enseñanza. Variación anual. </span></span>
-<span><span class="co">#&gt; 10.1                                                                          Total Nacional. Enseñanza. Variación anual. </span></span>
-<span><span class="co">#&gt; 11                                                               Total Nacional. Restaurantes y hoteles. Variación anual. </span></span>
-<span><span class="co">#&gt; 11.1                                                             Total Nacional. Restaurantes y hoteles. Variación anual. </span></span>
-<span><span class="co">#&gt; 12                                                             Total Nacional. Otros bienes y servicios. Variación anual. </span></span>
-<span><span class="co">#&gt; 12.1                                                           Total Nacional. Otros bienes y servicios. Variación anual. </span></span>
-<span><span class="co">#&gt;      T3_Periodo Anyo Valor</span></span>
-<span><span class="co">#&gt; 1           M04 2025   2.0</span></span>
-<span><span class="co">#&gt; 1.1         M03 2025   2.4</span></span>
-<span><span class="co">#&gt; 2           M04 2025   2.6</span></span>
-<span><span class="co">#&gt; 2.1         M03 2025   3.1</span></span>
-<span><span class="co">#&gt; 3           M04 2025   0.3</span></span>
-<span><span class="co">#&gt; 3.1         M03 2025   0.2</span></span>
-<span><span class="co">#&gt; 4           M04 2025   4.2</span></span>
-<span><span class="co">#&gt; 4.1         M03 2025   5.7</span></span>
-<span><span class="co">#&gt; 5           M04 2025   0.5</span></span>
-<span><span class="co">#&gt; 5.1         M03 2025   0.6</span></span>
-<span><span class="co">#&gt; 6           M04 2025   2.0</span></span>
-<span><span class="co">#&gt; 6.1         M03 2025   1.9</span></span>
-<span><span class="co">#&gt; 7           M04 2025  -1.6</span></span>
-<span><span class="co">#&gt; 7.1         M03 2025  -0.9</span></span>
-<span><span class="co">#&gt; 8           M04 2025   2.1</span></span>
-<span><span class="co">#&gt; 8.1         M03 2025   2.0</span></span>
-<span><span class="co">#&gt; 9           M04 2025   2.7</span></span>
-<span><span class="co">#&gt; 9.1         M03 2025  -0.3</span></span>
-<span><span class="co">#&gt; 10          M04 2025   2.5</span></span>
-<span><span class="co">#&gt; 10.1        M03 2025   2.5</span></span>
-<span><span class="co">#&gt; 11          M04 2025   4.5</span></span>
-<span><span class="co">#&gt; 11.1        M03 2025   4.1</span></span>
-<span><span class="co">#&gt; 12          M04 2025   3.6</span></span>
-<span><span class="co">#&gt; 12.1        M03 2025   3.8</span></span></code></pre></div>
+<span><span class="co">#&gt;                                                                                                                   Nombre</span></span>
+<span><span class="co">#&gt; 1                                                  Total Nacional. Alimentos y bebidas no alcohólicas. Variación anual. </span></span>
+<span><span class="co">#&gt; 2                                                        Total Nacional. Bebidas alcohólicas y tabaco. Variación anual. </span></span>
+<span><span class="co">#&gt; 3                                                                   Total Nacional. Vestido y calzado. Variación anual. </span></span>
+<span><span class="co">#&gt; 4                              Total Nacional. Vivienda, agua, electricidad, gas y otros combustibles. Variación anual. </span></span>
+<span><span class="co">#&gt; 5  Total Nacional. Muebles, artículos del hogar y artículos para el mantenimiento corriente del hogar. Variación anual. </span></span>
+<span><span class="co">#&gt; 6                                                                             Total Nacional. Sanidad. Variación anual. </span></span>
+<span><span class="co">#&gt; 7                                                                          Total Nacional. Transporte. Variación anual. </span></span>
+<span><span class="co">#&gt; 8                                                                      Total Nacional. Comunicaciones. Variación anual. </span></span>
+<span><span class="co">#&gt; 9                                                                      Total Nacional. Ocio y cultura. Variación anual. </span></span>
+<span><span class="co">#&gt; 10                                                                          Total Nacional. Enseñanza. Variación anual. </span></span>
+<span><span class="co">#&gt; 11                                                             Total Nacional. Restaurantes y hoteles. Variación anual. </span></span>
+<span><span class="co">#&gt; 12                                                           Total Nacional. Otros bienes y servicios. Variación anual. </span></span>
+<span><span class="co">#&gt;    T3_Periodo Anyo Valor</span></span>
+<span><span class="co">#&gt; 1         M05 2025   2.5</span></span>
+<span><span class="co">#&gt; 2         M05 2025   3.6</span></span>
+<span><span class="co">#&gt; 3         M05 2025   0.5</span></span>
+<span><span class="co">#&gt; 4         M05 2025   3.8</span></span>
+<span><span class="co">#&gt; 5         M05 2025   0.6</span></span>
+<span><span class="co">#&gt; 6         M05 2025   1.9</span></span>
+<span><span class="co">#&gt; 7         M05 2025  -2.0</span></span>
+<span><span class="co">#&gt; 8         M05 2025   2.0</span></span>
+<span><span class="co">#&gt; 9         M05 2025   0.5</span></span>
+<span><span class="co">#&gt; 10        M05 2025   2.5</span></span>
+<span><span class="co">#&gt; 11        M05 2025   4.3</span></span>
+<span><span class="co">#&gt; 12        M05 2025   3.6</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="example-two">Example two<a class="anchor" aria-label="anchor" href="#example-two"></a>
@@ -478,8 +454,8 @@ variable and a name as value.</p>
 <span><span class="co">#&gt; 1                       Total Nacional. Índice general. Variación anual. </span></span>
 <span><span class="co">#&gt; 2 Total Nacional. Índice general. Variación anual. Impuestos constantes. </span></span>
 <span><span class="co">#&gt;   T3_Periodo Anyo Valor</span></span>
-<span><span class="co">#&gt; 1       abr. 2025   2.2</span></span>
-<span><span class="co">#&gt; 2       abr. 2025   2.0</span></span></code></pre></div>
+<span><span class="co">#&gt; 1       jun. 2025   2.2</span></span>
+<span><span class="co">#&gt; 2        M05 2025   1.8</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="example-two-1">Example two<a class="anchor" aria-label="anchor" href="#example-two-1"></a>
@@ -498,7 +474,7 @@ variable and a name as value.</p>
 <span><span class="co">#&gt; 1            Total Nacional. Datos ajustados de estacionalidad y calendario. Producto interior bruto a precios de mercado. Variación anual. Índices de volumen encadenados. </span></span>
 <span><span class="co">#&gt; 2 Total Nacional. Base 2010. Datos ajustados de estacionalidad y calendario. Producto interior bruto a precios de mercado. Variación anual. Índices de volumen encadenados. </span></span>
 <span><span class="co">#&gt;   T3_Periodo Anyo  Valor</span></span>
-<span><span class="co">#&gt; 1         T1 2025 2.8381</span></span>
+<span><span class="co">#&gt; 1         T1 2025 2.7814</span></span>
 <span><span class="co">#&gt; 2         T2 2019 2.2513</span></span></code></pre></div>
 </div>
 <div class="section level3">
@@ -533,7 +509,7 @@ variable and a name as value.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.2.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
     </footer>
