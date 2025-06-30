@@ -2818,6 +2818,14 @@ get_children <- function(depth, df, verbose, filter, det, dfilter = NULL){
     }
   }
 
+  # filter variables in the last level
+  varcol_new <- if(det > 0) paste(column_names[["3"]][["variable.id"]][["es"]], depth + 1, sep = "_") else paste(column_names[["3"]][["variable.fk"]][["es"]], depth + 1, sep = "_")
+
+  v3 <- unique(data[[varcol_new]])
+  v3 <- if(sum(is.element(varfilter, v3)) > 0) intersect(varfilter, v3) else v3
+
+  data <-subset(data, data[[varcol_new]] %in% v3)
+
   return(data)
 }
 

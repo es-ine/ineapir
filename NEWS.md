@@ -1,3 +1,6 @@
+# ineapir 0.2.1
+* Debugged error in the filter argument of the get_metadata values() function.
+
 # ineapir 0.2.0
 * Added the function `get_metadata_classifications()`.
 * Added new funcionality to `get_metadata_values()`: request values 
