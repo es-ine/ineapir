@@ -20,7 +20,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">ineapir</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -270,6 +270,8 @@ table.</li>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Get metadata information of the table</span></span>
 <span><span class="va">metadata</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_metadata_table_varval.html">get_metadata_table_varval</a></span><span class="op">(</span>idTable <span class="op">=</span> <span class="fl">33387</span><span class="op">)</span></span>
+<span><span class="co">#&gt; No encoding supplied: defaulting to UTF-8.</span></span>
+<span><span class="co">#&gt; A error occurred calling the API (status 404).</span></span>
 <span><span class="va">metadata</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grepl</a></span><span class="op">(</span><span class="st">"^\\d{1}\\D+"</span>,<span class="va">metadata</span><span class="op">$</span><span class="va">Codigo</span><span class="op">)</span>,<span class="op">]</span></span>
 <span><span class="co">#&gt;                                         Nombre</span></span>
 <span><span class="co">#&gt; 2                                  1.  Biomasa</span></span>
@@ -285,6 +287,12 @@ table.</li>
 <code class="sourceCode R"><span><span class="co"># NOTE: for tpx tables we can use a filter.</span></span>
 <span><span class="va">metadata</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_metadata_table_varval.html">get_metadata_table_varval</a></span><span class="op">(</span>idTable <span class="op">=</span> <span class="fl">33387</span>,</span>
 <span>                                      filter <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>tipodematerial <span class="op">=</span> <span class="st">"1biomasa"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; No encoding supplied: defaulting to UTF-8.</span></span>
+<span><span class="co">#&gt; A error occurred calling the API (status 404).</span></span>
+<span><span class="co">#&gt; No encoding supplied: defaulting to UTF-8.</span></span>
+<span><span class="co">#&gt; A error occurred calling the API (status 404).</span></span>
+<span><span class="co">#&gt; No encoding supplied: defaulting to UTF-8.</span></span>
+<span><span class="co">#&gt; A error occurred calling the API (status 404).</span></span>
 <span><span class="va">metadata</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grepl</a></span><span class="op">(</span><span class="st">"^\\d{1}\\D+"</span>,<span class="va">metadata</span><span class="op">$</span><span class="va">Codigo</span><span class="op">)</span>,<span class="op">]</span></span>
 <span><span class="co">#&gt;        Nombre   Codigo  Variable.Nombre Variable.Codigo</span></span>
 <span><span class="co">#&gt; 1 1.  Biomasa 1biomasa tipo de material  tipodematerial</span></span></code></pre></div>
@@ -302,6 +310,8 @@ table.</li>
 <span><span class="co"># Request data using the filter</span></span>
 <span><span class="va">materiales</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_data_table.html">get_data_table</a></span><span class="op">(</span>idTable <span class="op">=</span> <span class="fl">33387</span>, unnest <span class="op">=</span> <span class="cn">TRUE</span>, tip <span class="op">=</span> <span class="st">"A"</span>,</span>
 <span>                             nlast <span class="op">=</span> <span class="fl">1</span>, filter <span class="op">=</span> <span class="va">filter</span>, validate <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="co">#&gt; No encoding supplied: defaulting to UTF-8.</span></span>
+<span><span class="co">#&gt; A error occurred calling the API (status 404).</span></span>
 <span><span class="va">materiales</span></span>
 <span><span class="co">#&gt;                                       Nombre NombrePeriodo     Valor</span></span>
 <span><span class="co">#&gt; 1                                1.  Biomasa 2023 (avance) 107483869</span></span>
@@ -324,6 +334,10 @@ will be excluded from the filter.</li>
 <span><span class="co"># Request data using the filter</span></span>
 <span><span class="va">materiales</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_data_table.html">get_data_table</a></span><span class="op">(</span>idTable <span class="op">=</span> <span class="fl">33387</span>, unnest <span class="op">=</span> <span class="cn">TRUE</span>, tip <span class="op">=</span> <span class="st">"A"</span>,</span>
 <span>                             nlast <span class="op">=</span> <span class="fl">1</span>, filter <span class="op">=</span> <span class="va">filter</span>, validate <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="co">#&gt; No encoding supplied: defaulting to UTF-8.</span></span>
+<span><span class="co">#&gt; A error occurred calling the API (status 404).</span></span>
+<span><span class="co">#&gt; No encoding supplied: defaulting to UTF-8.</span></span>
+<span><span class="co">#&gt; A error occurred calling the API (status 404).</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">materiales</span><span class="op">)</span></span>
 <span><span class="co">#&gt;                        Nombre NombrePeriodo     Valor</span></span>
 <span><span class="co">#&gt; 1         EXTRACCION NACIONAL 2023 (avance) 344121611</span></span>
@@ -348,6 +362,12 @@ see that when we obtain the metadata information from a table.</li>
 <span><span class="co"># the information retrieval.</span></span>
 <span><span class="va">metadata</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_metadata_table_varval.html">get_metadata_table_varval</a></span><span class="op">(</span>idTable <span class="op">=</span> <span class="fl">52056</span>,</span>
 <span>                                      filter <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>NAC <span class="op">=</span> <span class="st">"00"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; No encoding supplied: defaulting to UTF-8.</span></span>
+<span><span class="co">#&gt; A error occurred calling the API (status 404).</span></span>
+<span><span class="co">#&gt; No encoding supplied: defaulting to UTF-8.</span></span>
+<span><span class="co">#&gt; A error occurred calling the API (status 404).</span></span>
+<span><span class="co">#&gt; No encoding supplied: defaulting to UTF-8.</span></span>
+<span><span class="co">#&gt; A error occurred calling the API (status 404).</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">metadata</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/order.html" class="external-link">order</a></span><span class="op">(</span><span class="va">metadata</span><span class="op">$</span><span class="va">Variable.Id</span><span class="op">)</span>,<span class="op">]</span>,<span class="fl">4</span><span class="op">)</span></span>
 <span><span class="co">#&gt;       Id         Nombre Codigo Variable.Id Variable.Nombre Variable.Codigo</span></span>
 <span><span class="co">#&gt; 6  11406 Valor absoluto                  3    Tipo de dato                </span></span>
@@ -371,6 +391,8 @@ id.</li>
 <span><span class="co"># Request data using the filter</span></span>
 <span><span class="va">explotaciones</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_data_table.html">get_data_table</a></span><span class="op">(</span>idTable <span class="op">=</span> <span class="fl">52056</span>, unnest <span class="op">=</span> <span class="cn">TRUE</span>, tip <span class="op">=</span> <span class="st">"A"</span>,</span>
 <span>                             nlast <span class="op">=</span> <span class="fl">1</span>, filter <span class="op">=</span> <span class="va">filter</span>, validate <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="co">#&gt; No encoding supplied: defaulting to UTF-8.</span></span>
+<span><span class="co">#&gt; A error occurred calling the API (status 404).</span></span>
 <span><span class="va">explotaciones</span></span>
 <span><span class="co">#&gt;                                                                                          Nombre</span></span>
 <span><span class="co">#&gt; 1   Total Nacional, Total tramos UTAT, Total mano de obra, Total, Explotaciones, Valor absoluto</span></span>
@@ -399,7 +421,7 @@ which the series belong.</li>
 <span><span class="co">#&gt;     Id                           Nombre Codigo</span></span>
 <span><span class="co">#&gt; 1    3                     Tipo de dato       </span></span>
 <span><span class="co">#&gt; 2   70 Comunidades y Ciudades Autónomas   CCAA</span></span>
-<span><span class="co">#&gt; 3  115                       Provincias       </span></span>
+<span><span class="co">#&gt; 3  115                       Provincias   PROV</span></span>
 <span><span class="co">#&gt; 4  269           Grupos especiales 2001       </span></span>
 <span><span class="co">#&gt; 5  270                    Rúbricas 2001       </span></span>
 <span><span class="co">#&gt; 6  349            Totales Territoriales    NAC</span></span>

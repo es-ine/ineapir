@@ -11,8 +11,8 @@
 <script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Obtaining data published by the National Statistics Institute">
-<meta name="description" content="Set of functions to obtain open statistical data and metadata disseminated by the National Statistics Institute of Spain.">
-<meta property="og:description" content="Set of functions to obtain open statistical data and metadata disseminated by the National Statistics Institute of Spain.">
+<meta name="description" content="Set of functions to get open statistical data and metadata disseminated by the National Statistics Institute of Spain (INE). The functions return data frames with the requested information thanks to calls to the INE API.">
+<meta property="og:description" content="Set of functions to get open statistical data and metadata disseminated by the National Statistics Institute of Spain (INE). The functions return data frames with the requested information thanks to calls to the INE API.">
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
@@ -22,7 +22,7 @@
 
     <a class="navbar-brand me-2" href="index.html">ineapir</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -58,10 +58,10 @@
 </nav><div class="container template-home">
 <div class="row">
   <main id="main" class="col-md-9"><div class="section level1">
-<div class="page-header"><h1 id="ineapir-">ineapir <img src="reference/figures/hex_logo.png" align="right" width="120"><a class="anchor" aria-label="anchor" href="#ineapir-"></a>
+<div class="page-header"><h1 id="ineapir-">ineapir <img src="reference/figures/hex_logo.png" align="right" width="120" alt="ineapir logo"><a class="anchor" aria-label="anchor" href="#ineapir-"></a>
 </h1></div>
 <!-- badges: start -->
-<!-- badges: end -->
+
 <div class="section level2">
 <h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
 </h2>
@@ -80,7 +80,7 @@
 <div class="section level2">
 <h2 id="cheatsheet">Cheatsheet<a class="anchor" aria-label="anchor" href="#cheatsheet"></a>
 </h2>
-<p><a href="https://raw.githubusercontent.com/es-ine/ineapir/main/man/figures/ineapir.pdf" class="external-link"><img src="reference/figures/ineapir_thumbnail.png" width="315"></a></p>
+<p><a href="https://raw.githubusercontent.com/es-ine/ineapir/main/man/figures/ineapir.pdf" class="external-link"><img src="reference/figures/ineapir_thumbnail.png" width="315" alt="Cheatsheet"></a></p>
 </div>
 <div class="section level2">
 <h2 id="data-request-examples">Data request examples<a class="anchor" aria-label="anchor" href="#data-request-examples"></a>
@@ -106,12 +106,12 @@
 <span><span class="co"># of the different periods of each series</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">table</span><span class="op">$</span><span class="va">Data</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="co">#&gt;                           Fecha T3_TipoDato T3_Periodo Anyo   Valor</span></span>
-<span><span class="co">#&gt; 1 2024-03-01T00:00:00.000+01:00  Definitivo        M03 2024 114.674</span></span>
-<span><span class="co">#&gt; 2 2024-02-01T00:00:00.000+01:00  Definitivo        M02 2024 113.807</span></span>
-<span><span class="co">#&gt; 3 2024-01-01T00:00:00.000+01:00  Definitivo        M01 2024 113.404</span></span>
-<span><span class="co">#&gt; 4 2023-12-01T00:00:00.000+01:00  Definitivo        M12 2023 113.308</span></span>
-<span><span class="co">#&gt; 5 2023-11-01T00:00:00.000+01:00  Definitivo        M11 2023 113.280</span></span>
-<span><span class="co">#&gt; 6 2023-10-01T00:00:00.000+02:00  Definitivo        M10 2023 113.676</span></span>
+<span><span class="co">#&gt; 1 2025-05-01T00:00:00.000+02:00  Definitivo        M05 2025 118.077</span></span>
+<span><span class="co">#&gt; 2 2025-04-01T00:00:00.000+02:00  Definitivo        M04 2025 117.997</span></span>
+<span><span class="co">#&gt; 3 2025-03-01T00:00:00.000+01:00  Definitivo        M03 2025 117.260</span></span>
+<span><span class="co">#&gt; 4 2025-02-01T00:00:00.000+01:00  Definitivo        M02 2025 117.191</span></span>
+<span><span class="co">#&gt; 5 2025-01-01T00:00:00.000+01:00  Definitivo        M01 2025 116.733</span></span>
+<span><span class="co">#&gt; 6 2024-12-01T00:00:00.000+01:00  Definitivo        M12 2024 116.534</span></span>
 <span></span>
 <span><span class="co"># We can concatenate all data frames into one using unnest = TRUE</span></span>
 <span><span class="va">table</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_data_table.html">get_data_table</a></span><span class="op">(</span>idTable <span class="op">=</span> <span class="fl">50902</span>, tip <span class="op">=</span> <span class="st">"A"</span>, unnest <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
@@ -124,12 +124,12 @@
 <span><span class="co">#&gt; 1.4 IPC251852 Total Nacional. Índice general. Índice. </span></span>
 <span><span class="co">#&gt; 1.5 IPC251852 Total Nacional. Índice general. Índice. </span></span>
 <span><span class="co">#&gt;                             Fecha   Valor</span></span>
-<span><span class="co">#&gt; 1   2024-03-01T00:00:00.000+01:00 114.674</span></span>
-<span><span class="co">#&gt; 1.1 2024-02-01T00:00:00.000+01:00 113.807</span></span>
-<span><span class="co">#&gt; 1.2 2024-01-01T00:00:00.000+01:00 113.404</span></span>
-<span><span class="co">#&gt; 1.3 2023-12-01T00:00:00.000+01:00 113.308</span></span>
-<span><span class="co">#&gt; 1.4 2023-11-01T00:00:00.000+01:00 113.280</span></span>
-<span><span class="co">#&gt; 1.5 2023-10-01T00:00:00.000+02:00 113.676</span></span></code></pre></div>
+<span><span class="co">#&gt; 1   2025-05-01T00:00:00.000+02:00 118.077</span></span>
+<span><span class="co">#&gt; 1.1 2025-04-01T00:00:00.000+02:00 117.997</span></span>
+<span><span class="co">#&gt; 1.2 2025-03-01T00:00:00.000+01:00 117.260</span></span>
+<span><span class="co">#&gt; 1.3 2025-02-01T00:00:00.000+01:00 117.191</span></span>
+<span><span class="co">#&gt; 1.4 2025-01-01T00:00:00.000+01:00 116.733</span></span>
+<span><span class="co">#&gt; 1.5 2024-12-01T00:00:00.000+01:00 116.534</span></span></code></pre></div>
 <p>To get the last n data from a table it is necessary to pass the <code>nlast</code> argument as well.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># We use the function get_data_table with arguments idTable and nlast</span></span>
@@ -138,8 +138,8 @@
 <span><span class="co">#&gt;         COD                                   Nombre</span></span>
 <span><span class="co">#&gt; 1 IPC251852 Total Nacional. Índice general. Índice.</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">table</span><span class="op">$</span><span class="va">Data</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span>
-<span><span class="co">#&gt;          Fecha FK_TipoDato FK_Periodo Anyo   Valor Secreto</span></span>
-<span><span class="co">#&gt; 1 1.709248e+12           1          3 2024 114.674   FALSE</span></span></code></pre></div>
+<span><span class="co">#&gt;         Fecha FK_TipoDato FK_Periodo Anyo   Valor Secreto</span></span>
+<span><span class="co">#&gt; 1 1.74605e+12           1          5 2025 118.077   FALSE</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="obtaining-data-from-a-series">Obtaining data from a series<a class="anchor" aria-label="anchor" href="#obtaining-data-from-a-series"></a>
@@ -150,18 +150,18 @@
 <span><span class="va">series</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_data_series.html">get_data_series</a></span><span class="op">(</span>codSeries <span class="op">=</span> <span class="st">"IPC251856"</span>, tip <span class="op">=</span> <span class="st">"A"</span><span class="op">)</span></span>
 <span><span class="va">series</span><span class="op">$</span><span class="va">Data</span></span>
 <span><span class="co">#&gt;                           Fecha T3_TipoDato T3_Periodo Anyo Valor</span></span>
-<span><span class="co">#&gt; 1 2024-04-01T00:00:00.000+02:00      Avance        M04 2024   3.3</span></span></code></pre></div>
+<span><span class="co">#&gt; 1 2025-06-01T00:00:00.000+02:00      Avance        M06 2025   2.2</span></span></code></pre></div>
 <p>To get the last n data from a series it is necessary to pass the <code>nlast</code> argument as well.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># We use the function get_data_series with arguments codSeries and nlast</span></span>
 <span><span class="va">series</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_data_series.html">get_data_series</a></span><span class="op">(</span>codSeries <span class="op">=</span> <span class="st">"IPC251856"</span>, tip <span class="op">=</span> <span class="st">"A"</span>, nlast <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
 <span><span class="va">series</span><span class="op">$</span><span class="va">Data</span></span>
 <span><span class="co">#&gt;                           Fecha T3_TipoDato T3_Periodo Anyo Valor</span></span>
-<span><span class="co">#&gt; 1 2023-12-01T00:00:00.000+01:00  Definitivo        M12 2023   3.1</span></span>
-<span><span class="co">#&gt; 2 2024-01-01T00:00:00.000+01:00  Definitivo        M01 2024   3.4</span></span>
-<span><span class="co">#&gt; 3 2024-02-01T00:00:00.000+01:00  Definitivo        M02 2024   2.8</span></span>
-<span><span class="co">#&gt; 4 2024-03-01T00:00:00.000+01:00  Definitivo        M03 2024   3.2</span></span>
-<span><span class="co">#&gt; 5 2024-04-01T00:00:00.000+02:00      Avance        M04 2024   3.3</span></span>
+<span><span class="co">#&gt; 1 2025-02-01T00:00:00.000+01:00  Definitivo        M02 2025   3.0</span></span>
+<span><span class="co">#&gt; 2 2025-03-01T00:00:00.000+01:00  Definitivo        M03 2025   2.3</span></span>
+<span><span class="co">#&gt; 3 2025-04-01T00:00:00.000+02:00  Definitivo        M04 2025   2.2</span></span>
+<span><span class="co">#&gt; 4 2025-05-01T00:00:00.000+02:00  Definitivo        M05 2025   2.0</span></span>
+<span><span class="co">#&gt; 5 2025-06-01T00:00:00.000+02:00      Avance        M06 2025   2.2</span></span>
 <span></span>
 <span><span class="co"># Using unnest = TRUE</span></span>
 <span><span class="va">series</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_data_series.html">get_data_series</a></span><span class="op">(</span>codSeries <span class="op">=</span> <span class="st">"IPC251856"</span>, tip <span class="op">=</span> <span class="st">"A"</span>, nlast <span class="op">=</span> <span class="fl">5</span>,</span>
@@ -174,11 +174,11 @@
 <span><span class="co">#&gt; 1.3 IPC251856 Total Nacional. Índice general. Variación anual. </span></span>
 <span><span class="co">#&gt; 1.4 IPC251856 Total Nacional. Índice general. Variación anual. </span></span>
 <span><span class="co">#&gt;                             Fecha Valor</span></span>
-<span><span class="co">#&gt; 1   2023-12-01T00:00:00.000+01:00   3.1</span></span>
-<span><span class="co">#&gt; 1.1 2024-01-01T00:00:00.000+01:00   3.4</span></span>
-<span><span class="co">#&gt; 1.2 2024-02-01T00:00:00.000+01:00   2.8</span></span>
-<span><span class="co">#&gt; 1.3 2024-03-01T00:00:00.000+01:00   3.2</span></span>
-<span><span class="co">#&gt; 1.4 2024-04-01T00:00:00.000+02:00   3.3</span></span></code></pre></div>
+<span><span class="co">#&gt; 1   2025-02-01T00:00:00.000+01:00   3.0</span></span>
+<span><span class="co">#&gt; 1.1 2025-03-01T00:00:00.000+01:00   2.3</span></span>
+<span><span class="co">#&gt; 1.2 2025-04-01T00:00:00.000+02:00   2.2</span></span>
+<span><span class="co">#&gt; 1.3 2025-05-01T00:00:00.000+02:00   2.0</span></span>
+<span><span class="co">#&gt; 1.4 2025-06-01T00:00:00.000+02:00   2.2</span></span></code></pre></div>
 <p>Additionally, it is possible to obtain data from a series between two dates. The date must have and specific format (<em>yyyy/mm/dd</em>). If the end date is not specified we obtain all the data from the start date.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># We use the function get_data_series with arguments codSeries, dateStart and dataEnd</span></span>
@@ -204,13 +204,20 @@
 <code class="sourceCode R"><span><span class="co"># We use the function get_metadata_operations</span></span>
 <span><span class="va">operations</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_metadata_operations.html">get_metadata_operations</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">operations</span><span class="op">)</span></span>
-<span><span class="co">#&gt;   Id Cod_IOE                                                 Nombre Codigo  Url</span></span>
-<span><span class="co">#&gt; 1  4   30147           Estadística de Efectos de Comercio Impagados     EI &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 2  6   30211                     Índice de Coste Laboral Armonizado   ICLA &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 3  7   30168 Estadística de Transmisión de Derechos de la Propiedad   ETDP &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 4 10   30256                                    Indicadores Urbanos     UA &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 5 13   30219                Estadística del Procedimiento Concursal    EPC &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 6 14   30182                Índices de Precios del Sector Servicios    IPS &lt;NA&gt;</span></span></code></pre></div>
+<span><span class="co">#&gt;   Id Cod_IOE                                                 Nombre Codigo</span></span>
+<span><span class="co">#&gt; 1  4   30147           Estadística de Efectos de Comercio Impagados     EI</span></span>
+<span><span class="co">#&gt; 2  6   30211                     Índice de Coste Laboral Armonizado   ICLA</span></span>
+<span><span class="co">#&gt; 3  7   30168 Estadística de Transmisión de Derechos de la Propiedad   ETDP</span></span>
+<span><span class="co">#&gt; 4 10   30256                                    Indicadores Urbanos     UA</span></span>
+<span><span class="co">#&gt; 5 13   30219                Estadística del Procedimiento Concursal    EPC</span></span>
+<span><span class="co">#&gt; 6 14   30182                Índices de Precios del Sector Servicios    IPS</span></span>
+<span><span class="co">#&gt;                                                                                                     Url</span></span>
+<span><span class="co">#&gt; 1                                                                                                  &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 2                                                                                                  &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 3                                                                                                  &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 4 https://www.ine.es/dyngs/INEbase/es/operacion.htm?c=Estadistica_C&amp;cid=1254736176957&amp;idp=1254735976608</span></span>
+<span><span class="co">#&gt; 5                                                                                                  &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 6                                                                                                  &lt;NA&gt;</span></span></code></pre></div>
 <p>An operation can be identify by a numerical code (‘<em>Id</em>’), an alphabetic code (‘<em>Codigo</em>’) or by the code of the statistical operation in the Inventory of Statistical Operations (IOE + ‘<em>Cod_IOE</em>’). To obtain information about only one operation we have to pass the <code>operation</code> argument with one of these codes.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># We use the function get_metadata_operations with argument operation</span></span>
@@ -231,8 +238,8 @@
 <span><span class="co">#&gt; 1 349            Totales Territoriales    NAC</span></span>
 <span><span class="co">#&gt; 2 954                            Total       </span></span>
 <span><span class="co">#&gt; 3  70 Comunidades y Ciudades Autónomas   CCAA</span></span>
-<span><span class="co">#&gt; 4 955       Cultivos, pastos y huertos       </span></span>
-<span><span class="co">#&gt; 5 115                       Provincias   PROV</span></span>
+<span><span class="co">#&gt; 4 516                     Nacionalidad      1</span></span>
+<span><span class="co">#&gt; 5 955       Cultivos, pastos y huertos       </span></span>
 <span><span class="co">#&gt; 6 956              SAU y Otras tierras</span></span></code></pre></div>
 <p>A variable can be identify by a numerical code (‘<em>Id</em>’). In addition, if we pass the <code>operation</code> argument we obtain the variables used in an operation.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
@@ -293,13 +300,20 @@
 <code class="sourceCode R"><span><span class="co"># We use the function get_metadata_tables with argument operation</span></span>
 <span><span class="va">tables</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_metadata_tables_operation.html">get_metadata_tables_operation</a></span><span class="op">(</span>operation <span class="op">=</span> <span class="st">"IPC"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">tables</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Id"</span>,<span class="st">"Nombre"</span><span class="op">)</span><span class="op">]</span><span class="op">)</span></span>
-<span><span class="co">#&gt;      Id                                                                 Nombre</span></span>
-<span><span class="co">#&gt; 1 24077                    Índice general nacional. Series desde enero de 1961</span></span>
-<span><span class="co">#&gt; 2 25331                             Ponderaciones: general y de grupos ECOICOP</span></span>
-<span><span class="co">#&gt; 3 35083        Índices nacionales: Componentes para el análisis de la COVID-19</span></span>
-<span><span class="co">#&gt; 4 49130                        Índices nacionales: general y de grupos ECOICOP</span></span>
-<span><span class="co">#&gt; 5 50902                        Índices nacionales: general y de grupos ECOICOP</span></span>
-<span><span class="co">#&gt; 6 50908 Índices nacionales a impuestos constantes: general y de grupos ECOICOP</span></span></code></pre></div>
+<span><span class="co">#&gt;      Id</span></span>
+<span><span class="co">#&gt; 1 24077</span></span>
+<span><span class="co">#&gt; 2 25331</span></span>
+<span><span class="co">#&gt; 3 35083</span></span>
+<span><span class="co">#&gt; 4 50902</span></span>
+<span><span class="co">#&gt; 5 50908</span></span>
+<span><span class="co">#&gt; 6 50911</span></span>
+<span><span class="co">#&gt;                                                                      Nombre</span></span>
+<span><span class="co">#&gt; 1                       Índice general nacional. Series desde enero de 1961</span></span>
+<span><span class="co">#&gt; 2                                Ponderaciones: general y de grupos ECOICOP</span></span>
+<span><span class="co">#&gt; 3           Índices nacionales: Componentes para el análisis de la COVID-19</span></span>
+<span><span class="co">#&gt; 4                           Índices nacionales: general y de grupos ECOICOP</span></span>
+<span><span class="co">#&gt; 5    Índices nacionales a impuestos constantes: general y de grupos ECOICOP</span></span>
+<span><span class="co">#&gt; 6 Tasa de variacion del índice general nacional. Series desde enero de 1961</span></span></code></pre></div>
 <p>A table is defined by different groups or selection combo boxes and each of them by the values that one or several variables take. To obtain the variables and values present in a table first we have to query the groups that define the table using the function <code><a href="reference/get_metadata_table_groups.html">get_metadata_table_groups()</a></code>.</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># We use the function get_metadata_table_groups with argument idTable</span></span>
@@ -402,7 +416,12 @@
 </ul>
 </div>
 
-
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="https://github.com/es-ine/ineapir/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/es-ine/ineapir/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
+</ul>
+</div>
 
   </aside>
 </div>
