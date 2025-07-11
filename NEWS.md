@@ -1,3 +1,7 @@
+# ineapir 0.2.2
+* Added testing of the package
+* Package description updated
+
 # ineapir 0.2.1
 * Debugged error in the filter argument of the get_metadata values() function.
 
@@ -16,5 +20,4 @@ multiple range of dates.
 * Added the argument `det`to `get_metadata_variables()`.
 
 # ineapir 0.0.0.9000
-
 * Added a `NEWS.md` file to track changes to the package.

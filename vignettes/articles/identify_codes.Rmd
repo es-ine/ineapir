@@ -26,7 +26,7 @@ identifying its ID.
 - **URL:** https://www.ine.es/jaxiT3/Tabla.htm?t=50902
 - **ID:** URL *t* parameter **50902**
 
-![](img/code_table_1.png){width=100%}
+![Identification code of a Tempus table](img/code_table_1.png){width=100%}
 
 ```{r table_data_1}
 library(ineapir)
@@ -40,7 +40,7 @@ table[1:2,c("Nombre", "FK_Periodo", "Anyo", "Valor")]
 - **ID:** concatenate URL parameters *path* and *file* into one single ID
   **t20/e245/p08/l0/01001.px**
 
-![](img/code_table_2.png){width=100%}
+![Identification code of a px table](img/code_table_2.png){width=100%}
 
 ```{r table_data_2}
 # Request table data with id = t20/e245/p08/l0/01001.px
@@ -54,7 +54,7 @@ head(table, 3)
 - **URL:** https://www.ine.es/jaxi/Tabla.htm?tpx=33387&L=0
 - **ID:** URL *tpx* parameter **33387**
 
-![](img/code_table_3.png){width=100%}
+![Identification code of a tpx table](img/code_table_3.png){width=100%}
 
 ```{r table_data_3}
 # Request table data with id = 33387
@@ -75,7 +75,7 @@ containing the series of interest.
 4. The pop-up window shows, among other information, the identification code of
 the series associated with the cell that was clicked on.
 
-![](img/code_series_1.png){width=100%}
+![Identification code of a Tempus series](img/code_series_1.png){width=100%}
 
 ```{r serie_data_1}
 # Request series data with code = IPC251856

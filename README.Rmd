@@ -13,9 +13,10 @@ knitr::opts_chunk$set(
 )
 ```
 
-# ineapir <img src="man/figures/hex_logo.png" align="right" width = "120"/>
+# ineapir <img src="man/figures/hex_logo.png" align="right" width = "120" alt = "ineapir logo"/>
 
 <!-- badges: start -->
+[![R-CMD-check](https://github.com/es-ine/ineapir/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/es-ine/ineapir/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 ## Overview
@@ -44,7 +45,7 @@ remotes::install_local(path = "path/to/file.zip")
 
 ## Cheatsheet
 
-<a href="https://raw.githubusercontent.com/es-ine/ineapir/main/man/figures/ineapir.pdf"><img src="man/figures/ineapir_thumbnail.png" width="315"/></a>
+<a href="https://raw.githubusercontent.com/es-ine/ineapir/main/man/figures/ineapir.pdf"><img src="man/figures/ineapir_thumbnail.png" width="315" alt = "Cheatsheet"/></a>
 
 ## Data request examples
 

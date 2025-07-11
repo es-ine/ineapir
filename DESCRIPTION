@@ -1,10 +1,12 @@
 Package: ineapir
 Title: Obtaining data published by the National Statistics Institute
-Version: 0.2.1
+Version: 0.2.2
 Authors@R: c(
     person("David", "Crespo", email = "github.ine@ine.es", role = c("aut", "cre")),
     person("Instituto Nacional de Estadistica, INE", role = c("cph")))
-Description: Set of functions to obtain open statistical data and metadata disseminated by the National Statistics Institute of Spain.
+Description: Set of functions to get open statistical data and metadata disseminated
+    by the National Statistics Institute of Spain (INE). The functions return data frames
+    with the requested information thanks to calls to the INE API.
 License: EUPL (== 1.2)
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
@@ -15,3 +17,6 @@ Imports:
 Config/Needs/website: rmarkdown
 URL: https://github.com/es-ine/ineapir, https://es-ine.github.io/ineapir/
 BugReports: https://github.com/es-ine/ineapir/issues
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3

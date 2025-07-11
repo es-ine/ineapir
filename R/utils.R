@@ -166,7 +166,7 @@ get_api_data <- function(url, request){
   )
 
   # Check the result retrieved for the API
-  if(check_result(result)){
+  if(check_result(result, response)){
 
     # extract metadata to columns
     if((!is.null(request$addons$metanames) && request$addons$metanames) ||
@@ -858,7 +858,7 @@ check_addons <- function(parameters, addons, definition){
 }
 
 #Check the result retrieved for the API
-check_result <- function(result){
+check_result <- function(result, response = 200){
   check <- FALSE
 
   if(!is.null(result)){
@@ -869,6 +869,10 @@ check_result <- function(result){
       if(is.list(result) && !is.data.frame(result) && length(result) > 0){
         check <- TRUE
       }
+    }
+  }else{
+    if(response$status != 200){
+      message(sprintf("A error occurred calling the API (status %s).", response$status))
     }
   }
 

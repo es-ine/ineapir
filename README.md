@@ -1,9 +1,11 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# ineapir <img src="man/figures/hex_logo.png" align="right" width = "120"/>
+# ineapir <img src="man/figures/hex_logo.png" align="right" width = "120" alt = "ineapir logo"/>
 
 <!-- badges: start -->
+
+[![R-CMD-check](https://github.com/es-ine/ineapir/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/es-ine/ineapir/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 ## Overview
@@ -31,7 +33,7 @@ remotes::install_local(path = "path/to/file.zip")
 
 ## Cheatsheet
 
-<a href="https://raw.githubusercontent.com/es-ine/ineapir/main/man/figures/ineapir.pdf"><img src="man/figures/ineapir_thumbnail.png" width="315"/></a>
+<a href="https://raw.githubusercontent.com/es-ine/ineapir/main/man/figures/ineapir.pdf"><img src="man/figures/ineapir_thumbnail.png" width="315" alt = "Cheatsheet"/></a>
 
 ## Data request examples
 
@@ -62,12 +64,12 @@ table[1,c("COD", "Nombre")]
 # of the different periods of each series
 head(table$Data[[1]])
 #>                           Fecha T3_TipoDato T3_Periodo Anyo   Valor
-#> 1 2024-03-01T00:00:00.000+01:00  Definitivo        M03 2024 114.674
-#> 2 2024-02-01T00:00:00.000+01:00  Definitivo        M02 2024 113.807
-#> 3 2024-01-01T00:00:00.000+01:00  Definitivo        M01 2024 113.404
-#> 4 2023-12-01T00:00:00.000+01:00  Definitivo        M12 2023 113.308
-#> 5 2023-11-01T00:00:00.000+01:00  Definitivo        M11 2023 113.280
-#> 6 2023-10-01T00:00:00.000+02:00  Definitivo        M10 2023 113.676
+#> 1 2025-05-01T00:00:00.000+02:00  Definitivo        M05 2025 118.077
+#> 2 2025-04-01T00:00:00.000+02:00  Definitivo        M04 2025 117.997
+#> 3 2025-03-01T00:00:00.000+01:00  Definitivo        M03 2025 117.260
+#> 4 2025-02-01T00:00:00.000+01:00  Definitivo        M02 2025 117.191
+#> 5 2025-01-01T00:00:00.000+01:00  Definitivo        M01 2025 116.733
+#> 6 2024-12-01T00:00:00.000+01:00  Definitivo        M12 2024 116.534
 
 # We can concatenate all data frames into one using unnest = TRUE
 table <- get_data_table(idTable = 50902, tip = "A", unnest = TRUE)
@@ -80,12 +82,12 @@ head(table[,c("COD", "Nombre", "Fecha", "Valor")])
 #> 1.4 IPC251852 Total Nacional. Índice general. Índice. 
 #> 1.5 IPC251852 Total Nacional. Índice general. Índice. 
 #>                             Fecha   Valor
-#> 1   2024-03-01T00:00:00.000+01:00 114.674
-#> 1.1 2024-02-01T00:00:00.000+01:00 113.807
-#> 1.2 2024-01-01T00:00:00.000+01:00 113.404
-#> 1.3 2023-12-01T00:00:00.000+01:00 113.308
-#> 1.4 2023-11-01T00:00:00.000+01:00 113.280
-#> 1.5 2023-10-01T00:00:00.000+02:00 113.676
+#> 1   2025-05-01T00:00:00.000+02:00 118.077
+#> 1.1 2025-04-01T00:00:00.000+02:00 117.997
+#> 1.2 2025-03-01T00:00:00.000+01:00 117.260
+#> 1.3 2025-02-01T00:00:00.000+01:00 117.191
+#> 1.4 2025-01-01T00:00:00.000+01:00 116.733
+#> 1.5 2024-12-01T00:00:00.000+01:00 116.534
 ```
 
 To get the last n data from a table it is necessary to pass the `nlast`
@@ -98,8 +100,8 @@ table[1,c("COD", "Nombre")]
 #>         COD                                   Nombre
 #> 1 IPC251852 Total Nacional. Índice general. Índice.
 head(table$Data[[1]])
-#>          Fecha FK_TipoDato FK_Periodo Anyo   Valor Secreto
-#> 1 1.709248e+12           1          3 2024 114.674   FALSE
+#>         Fecha FK_TipoDato FK_Periodo Anyo   Valor Secreto
+#> 1 1.74605e+12           1          5 2025 118.077   FALSE
 ```
 
 ### Obtaining data from a series
@@ -113,7 +115,7 @@ function `get_data_series()`.
 series <- get_data_series(codSeries = "IPC251856", tip = "A")
 series$Data
 #>                           Fecha T3_TipoDato T3_Periodo Anyo Valor
-#> 1 2024-04-01T00:00:00.000+02:00      Avance        M04 2024   3.3
+#> 1 2025-06-01T00:00:00.000+02:00      Avance        M06 2025   2.2
 ```
 
 To get the last n data from a series it is necessary to pass the `nlast`
@@ -124,11 +126,11 @@ argument as well.
 series <- get_data_series(codSeries = "IPC251856", tip = "A", nlast = 5)
 series$Data
 #>                           Fecha T3_TipoDato T3_Periodo Anyo Valor
-#> 1 2023-12-01T00:00:00.000+01:00  Definitivo        M12 2023   3.1
-#> 2 2024-01-01T00:00:00.000+01:00  Definitivo        M01 2024   3.4
-#> 3 2024-02-01T00:00:00.000+01:00  Definitivo        M02 2024   2.8
-#> 4 2024-03-01T00:00:00.000+01:00  Definitivo        M03 2024   3.2
-#> 5 2024-04-01T00:00:00.000+02:00      Avance        M04 2024   3.3
+#> 1 2025-02-01T00:00:00.000+01:00  Definitivo        M02 2025   3.0
+#> 2 2025-03-01T00:00:00.000+01:00  Definitivo        M03 2025   2.3
+#> 3 2025-04-01T00:00:00.000+02:00  Definitivo        M04 2025   2.2
+#> 4 2025-05-01T00:00:00.000+02:00  Definitivo        M05 2025   2.0
+#> 5 2025-06-01T00:00:00.000+02:00      Avance        M06 2025   2.2
 
 # Using unnest = TRUE
 series <- get_data_series(codSeries = "IPC251856", tip = "A", nlast = 5,
@@ -141,11 +143,11 @@ head(series[,c("COD", "Nombre", "Fecha", "Valor")])
 #> 1.3 IPC251856 Total Nacional. Índice general. Variación anual. 
 #> 1.4 IPC251856 Total Nacional. Índice general. Variación anual. 
 #>                             Fecha Valor
-#> 1   2023-12-01T00:00:00.000+01:00   3.1
-#> 1.1 2024-01-01T00:00:00.000+01:00   3.4
-#> 1.2 2024-02-01T00:00:00.000+01:00   2.8
-#> 1.3 2024-03-01T00:00:00.000+01:00   3.2
-#> 1.4 2024-04-01T00:00:00.000+02:00   3.3
+#> 1   2025-02-01T00:00:00.000+01:00   3.0
+#> 1.1 2025-03-01T00:00:00.000+01:00   2.3
+#> 1.2 2025-04-01T00:00:00.000+02:00   2.2
+#> 1.3 2025-05-01T00:00:00.000+02:00   2.0
+#> 1.4 2025-06-01T00:00:00.000+02:00   2.2
 ```
 
 Additionally, it is possible to obtain data from a series between two
@@ -182,13 +184,20 @@ get all the operations using the function `get_metadata_operations()`.
 # We use the function get_metadata_operations
 operations <- get_metadata_operations()
 head(operations)
-#>   Id Cod_IOE                                                 Nombre Codigo  Url
-#> 1  4   30147           Estadística de Efectos de Comercio Impagados     EI <NA>
-#> 2  6   30211                     Índice de Coste Laboral Armonizado   ICLA <NA>
-#> 3  7   30168 Estadística de Transmisión de Derechos de la Propiedad   ETDP <NA>
-#> 4 10   30256                                    Indicadores Urbanos     UA <NA>
-#> 5 13   30219                Estadística del Procedimiento Concursal    EPC <NA>
-#> 6 14   30182                Índices de Precios del Sector Servicios    IPS <NA>
+#>   Id Cod_IOE                                                 Nombre Codigo
+#> 1  4   30147           Estadística de Efectos de Comercio Impagados     EI
+#> 2  6   30211                     Índice de Coste Laboral Armonizado   ICLA
+#> 3  7   30168 Estadística de Transmisión de Derechos de la Propiedad   ETDP
+#> 4 10   30256                                    Indicadores Urbanos     UA
+#> 5 13   30219                Estadística del Procedimiento Concursal    EPC
+#> 6 14   30182                Índices de Precios del Sector Servicios    IPS
+#>                                                                                                     Url
+#> 1                                                                                                  <NA>
+#> 2                                                                                                  <NA>
+#> 3                                                                                                  <NA>
+#> 4 https://www.ine.es/dyngs/INEbase/es/operacion.htm?c=Estadistica_C&cid=1254736176957&idp=1254735976608
+#> 5                                                                                                  <NA>
+#> 6                                                                                                  <NA>
 ```
 
 An operation can be identify by a numerical code (‘*Id*’), an alphabetic
@@ -218,8 +227,8 @@ head(variables)
 #> 1 349            Totales Territoriales    NAC
 #> 2 954                            Total       
 #> 3  70 Comunidades y Ciudades Autónomas   CCAA
-#> 4 955       Cultivos, pastos y huertos       
-#> 5 115                       Provincias   PROV
+#> 4 516                     Nacionalidad      1
+#> 5 955       Cultivos, pastos y huertos       
 #> 6 956              SAU y Otras tierras
 ```
 
@@ -295,13 +304,20 @@ function `get_metadata_tables_operation()`.
 # We use the function get_metadata_tables with argument operation
 tables <- get_metadata_tables_operation(operation = "IPC")
 head(tables[,c("Id","Nombre")])
-#>      Id                                                                 Nombre
-#> 1 24077                    Índice general nacional. Series desde enero de 1961
-#> 2 25331                             Ponderaciones: general y de grupos ECOICOP
-#> 3 35083        Índices nacionales: Componentes para el análisis de la COVID-19
-#> 4 49130                        Índices nacionales: general y de grupos ECOICOP
-#> 5 50902                        Índices nacionales: general y de grupos ECOICOP
-#> 6 50908 Índices nacionales a impuestos constantes: general y de grupos ECOICOP
+#>      Id
+#> 1 24077
+#> 2 25331
+#> 3 35083
+#> 4 50902
+#> 5 50908
+#> 6 50911
+#>                                                                      Nombre
+#> 1                       Índice general nacional. Series desde enero de 1961
+#> 2                                Ponderaciones: general y de grupos ECOICOP
+#> 3           Índices nacionales: Componentes para el análisis de la COVID-19
+#> 4                           Índices nacionales: general y de grupos ECOICOP
+#> 5    Índices nacionales a impuestos constantes: general y de grupos ECOICOP
+#> 6 Tasa de variacion del índice general nacional. Series desde enero de 1961
 ```
 
 A table is defined by different groups or selection combo boxes and each
