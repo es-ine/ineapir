@@ -20,7 +20,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">ineapir</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.3</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -123,11 +123,11 @@ of the table that interest us to build the filter.</li>
 <span>                      tip <span class="op">=</span> <span class="st">"A"</span>, nlast <span class="op">=</span> <span class="fl">5</span>, validate <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="va">ipc</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Nombre"</span>, <span class="st">"T3_Periodo"</span>, <span class="st">"Anyo"</span>, <span class="st">"Valor"</span><span class="op">)</span><span class="op">]</span></span>
 <span><span class="co">#&gt;                                                Nombre T3_Periodo Anyo Valor</span></span>
-<span><span class="co">#&gt; 1   Total Nacional. Índice general. Variación anual.         M06 2025   2.2</span></span>
-<span><span class="co">#&gt; 1.1 Total Nacional. Índice general. Variación anual.         M05 2025   2.0</span></span>
-<span><span class="co">#&gt; 1.2 Total Nacional. Índice general. Variación anual.         M04 2025   2.2</span></span>
-<span><span class="co">#&gt; 1.3 Total Nacional. Índice general. Variación anual.         M03 2025   2.3</span></span>
-<span><span class="co">#&gt; 1.4 Total Nacional. Índice general. Variación anual.         M02 2025   3.0</span></span></code></pre></div>
+<span><span class="co">#&gt; 1   Total Nacional. Índice general. Variación anual.         M07 2025   2.7</span></span>
+<span><span class="co">#&gt; 1.1 Total Nacional. Índice general. Variación anual.         M06 2025   2.3</span></span>
+<span><span class="co">#&gt; 1.2 Total Nacional. Índice general. Variación anual.         M05 2025   2.0</span></span>
+<span><span class="co">#&gt; 1.3 Total Nacional. Índice general. Variación anual.         M04 2025   2.2</span></span>
+<span><span class="co">#&gt; 1.4 Total Nacional. Índice general. Variación anual.         M03 2025   2.3</span></span></code></pre></div>
 <ul>
 <li>
 <strong>NOTE</strong> If we add a minus sign to a value, the value
@@ -157,18 +157,18 @@ will be excluded from the filter.</li>
 <span><span class="co">#&gt; 11                                                             Total Nacional. Restaurantes y hoteles. Variación anual. </span></span>
 <span><span class="co">#&gt; 12                                                           Total Nacional. Otros bienes y servicios. Variación anual. </span></span>
 <span><span class="co">#&gt;    T3_Periodo Anyo Valor</span></span>
-<span><span class="co">#&gt; 1         M05 2025   2.5</span></span>
-<span><span class="co">#&gt; 2         M05 2025   3.6</span></span>
-<span><span class="co">#&gt; 3         M05 2025   0.5</span></span>
-<span><span class="co">#&gt; 4         M05 2025   3.8</span></span>
-<span><span class="co">#&gt; 5         M05 2025   0.6</span></span>
-<span><span class="co">#&gt; 6         M05 2025   1.9</span></span>
-<span><span class="co">#&gt; 7         M05 2025  -2.0</span></span>
-<span><span class="co">#&gt; 8         M05 2025   2.0</span></span>
-<span><span class="co">#&gt; 9         M05 2025   0.5</span></span>
-<span><span class="co">#&gt; 10        M05 2025   2.5</span></span>
-<span><span class="co">#&gt; 11        M05 2025   4.3</span></span>
-<span><span class="co">#&gt; 12        M05 2025   3.6</span></span></code></pre></div>
+<span><span class="co">#&gt; 1         M06 2025   2.8</span></span>
+<span><span class="co">#&gt; 2         M06 2025   4.3</span></span>
+<span><span class="co">#&gt; 3         M06 2025   0.5</span></span>
+<span><span class="co">#&gt; 4         M06 2025   4.2</span></span>
+<span><span class="co">#&gt; 5         M06 2025   0.7</span></span>
+<span><span class="co">#&gt; 6         M06 2025   2.1</span></span>
+<span><span class="co">#&gt; 7         M06 2025  -0.8</span></span>
+<span><span class="co">#&gt; 8         M06 2025   2.0</span></span>
+<span><span class="co">#&gt; 9         M06 2025   0.5</span></span>
+<span><span class="co">#&gt; 10        M06 2025   2.5</span></span>
+<span><span class="co">#&gt; 11        M06 2025   4.1</span></span>
+<span><span class="co">#&gt; 12        M06 2025   3.5</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="case-two-pc-axis-file">Case two (pc-axis file)<a class="anchor" aria-label="anchor" href="#case-two-pc-axis-file"></a>
@@ -270,8 +270,6 @@ table.</li>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Get metadata information of the table</span></span>
 <span><span class="va">metadata</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_metadata_table_varval.html">get_metadata_table_varval</a></span><span class="op">(</span>idTable <span class="op">=</span> <span class="fl">33387</span><span class="op">)</span></span>
-<span><span class="co">#&gt; No encoding supplied: defaulting to UTF-8.</span></span>
-<span><span class="co">#&gt; A error occurred calling the API (status 404).</span></span>
 <span><span class="va">metadata</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grepl</a></span><span class="op">(</span><span class="st">"^\\d{1}\\D+"</span>,<span class="va">metadata</span><span class="op">$</span><span class="va">Codigo</span><span class="op">)</span>,<span class="op">]</span></span>
 <span><span class="co">#&gt;                                         Nombre</span></span>
 <span><span class="co">#&gt; 2                                  1.  Biomasa</span></span>
@@ -287,12 +285,6 @@ table.</li>
 <code class="sourceCode R"><span><span class="co"># NOTE: for tpx tables we can use a filter.</span></span>
 <span><span class="va">metadata</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_metadata_table_varval.html">get_metadata_table_varval</a></span><span class="op">(</span>idTable <span class="op">=</span> <span class="fl">33387</span>,</span>
 <span>                                      filter <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>tipodematerial <span class="op">=</span> <span class="st">"1biomasa"</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; No encoding supplied: defaulting to UTF-8.</span></span>
-<span><span class="co">#&gt; A error occurred calling the API (status 404).</span></span>
-<span><span class="co">#&gt; No encoding supplied: defaulting to UTF-8.</span></span>
-<span><span class="co">#&gt; A error occurred calling the API (status 404).</span></span>
-<span><span class="co">#&gt; No encoding supplied: defaulting to UTF-8.</span></span>
-<span><span class="co">#&gt; A error occurred calling the API (status 404).</span></span>
 <span><span class="va">metadata</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grepl</a></span><span class="op">(</span><span class="st">"^\\d{1}\\D+"</span>,<span class="va">metadata</span><span class="op">$</span><span class="va">Codigo</span><span class="op">)</span>,<span class="op">]</span></span>
 <span><span class="co">#&gt;        Nombre   Codigo  Variable.Nombre Variable.Codigo</span></span>
 <span><span class="co">#&gt; 1 1.  Biomasa 1biomasa tipo de material  tipodematerial</span></span></code></pre></div>
@@ -310,8 +302,6 @@ table.</li>
 <span><span class="co"># Request data using the filter</span></span>
 <span><span class="va">materiales</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_data_table.html">get_data_table</a></span><span class="op">(</span>idTable <span class="op">=</span> <span class="fl">33387</span>, unnest <span class="op">=</span> <span class="cn">TRUE</span>, tip <span class="op">=</span> <span class="st">"A"</span>,</span>
 <span>                             nlast <span class="op">=</span> <span class="fl">1</span>, filter <span class="op">=</span> <span class="va">filter</span>, validate <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; No encoding supplied: defaulting to UTF-8.</span></span>
-<span><span class="co">#&gt; A error occurred calling the API (status 404).</span></span>
 <span><span class="va">materiales</span></span>
 <span><span class="co">#&gt;                                       Nombre NombrePeriodo     Valor</span></span>
 <span><span class="co">#&gt; 1                                1.  Biomasa 2023 (avance) 107483869</span></span>
@@ -334,10 +324,6 @@ will be excluded from the filter.</li>
 <span><span class="co"># Request data using the filter</span></span>
 <span><span class="va">materiales</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_data_table.html">get_data_table</a></span><span class="op">(</span>idTable <span class="op">=</span> <span class="fl">33387</span>, unnest <span class="op">=</span> <span class="cn">TRUE</span>, tip <span class="op">=</span> <span class="st">"A"</span>,</span>
 <span>                             nlast <span class="op">=</span> <span class="fl">1</span>, filter <span class="op">=</span> <span class="va">filter</span>, validate <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; No encoding supplied: defaulting to UTF-8.</span></span>
-<span><span class="co">#&gt; A error occurred calling the API (status 404).</span></span>
-<span><span class="co">#&gt; No encoding supplied: defaulting to UTF-8.</span></span>
-<span><span class="co">#&gt; A error occurred calling the API (status 404).</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">materiales</span><span class="op">)</span></span>
 <span><span class="co">#&gt;                        Nombre NombrePeriodo     Valor</span></span>
 <span><span class="co">#&gt; 1         EXTRACCION NACIONAL 2023 (avance) 344121611</span></span>
@@ -362,12 +348,6 @@ see that when we obtain the metadata information from a table.</li>
 <span><span class="co"># the information retrieval.</span></span>
 <span><span class="va">metadata</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_metadata_table_varval.html">get_metadata_table_varval</a></span><span class="op">(</span>idTable <span class="op">=</span> <span class="fl">52056</span>,</span>
 <span>                                      filter <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>NAC <span class="op">=</span> <span class="st">"00"</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; No encoding supplied: defaulting to UTF-8.</span></span>
-<span><span class="co">#&gt; A error occurred calling the API (status 404).</span></span>
-<span><span class="co">#&gt; No encoding supplied: defaulting to UTF-8.</span></span>
-<span><span class="co">#&gt; A error occurred calling the API (status 404).</span></span>
-<span><span class="co">#&gt; No encoding supplied: defaulting to UTF-8.</span></span>
-<span><span class="co">#&gt; A error occurred calling the API (status 404).</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">metadata</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/order.html" class="external-link">order</a></span><span class="op">(</span><span class="va">metadata</span><span class="op">$</span><span class="va">Variable.Id</span><span class="op">)</span>,<span class="op">]</span>,<span class="fl">4</span><span class="op">)</span></span>
 <span><span class="co">#&gt;       Id         Nombre Codigo Variable.Id Variable.Nombre Variable.Codigo</span></span>
 <span><span class="co">#&gt; 6  11406 Valor absoluto                  3    Tipo de dato                </span></span>
@@ -391,8 +371,6 @@ id.</li>
 <span><span class="co"># Request data using the filter</span></span>
 <span><span class="va">explotaciones</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_data_table.html">get_data_table</a></span><span class="op">(</span>idTable <span class="op">=</span> <span class="fl">52056</span>, unnest <span class="op">=</span> <span class="cn">TRUE</span>, tip <span class="op">=</span> <span class="st">"A"</span>,</span>
 <span>                             nlast <span class="op">=</span> <span class="fl">1</span>, filter <span class="op">=</span> <span class="va">filter</span>, validate <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; No encoding supplied: defaulting to UTF-8.</span></span>
-<span><span class="co">#&gt; A error occurred calling the API (status 404).</span></span>
 <span><span class="va">explotaciones</span></span>
 <span><span class="co">#&gt;                                                                                          Nombre</span></span>
 <span><span class="co">#&gt; 1   Total Nacional, Total tramos UTAT, Total mano de obra, Total, Explotaciones, Valor absoluto</span></span>
@@ -510,7 +488,7 @@ interest us to build the filter.</li>
 <span>                              unnest <span class="op">=</span> <span class="cn">TRUE</span>, tip <span class="op">=</span> <span class="st">"A"</span>, validate <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="va">ipc</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Nombre"</span>, <span class="st">"T3_Periodo"</span>, <span class="st">"Anyo"</span>, <span class="st">"Valor"</span><span class="op">)</span><span class="op">]</span></span>
 <span><span class="co">#&gt;                                           Nombre T3_Periodo Anyo Valor</span></span>
-<span><span class="co">#&gt; 1 Araba/Álava. Índice general. Variación anual.        may. 2025   2.4</span></span></code></pre></div>
+<span><span class="co">#&gt; 1 Araba/Álava. Índice general. Variación anual.        jun. 2025     3</span></span></code></pre></div>
 <ul>
 <li>A variable can take more than one value (valid to filter data from
 tables as well).</li>
@@ -527,9 +505,9 @@ tables as well).</li>
 <span>                              unnest <span class="op">=</span> <span class="cn">TRUE</span>, tip <span class="op">=</span> <span class="st">"A"</span>, validate <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="va">ipc</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Nombre"</span>, <span class="st">"T3_Periodo"</span>, <span class="st">"Anyo"</span>, <span class="st">"Valor"</span><span class="op">)</span><span class="op">]</span></span>
 <span><span class="co">#&gt;                                                Nombre T3_Periodo Anyo Valor</span></span>
-<span><span class="co">#&gt; 1 Alicante/Alacant. Índice general. Variación anual.        may. 2025   1.9</span></span>
-<span><span class="co">#&gt; 2         Albacete. Índice general. Variación anual.        may. 2025   1.7</span></span>
-<span><span class="co">#&gt; 3      Araba/Álava. Índice general. Variación anual.        may. 2025   2.4</span></span></code></pre></div>
+<span><span class="co">#&gt; 1 Alicante/Alacant. Índice general. Variación anual.        jun. 2025   2.2</span></span>
+<span><span class="co">#&gt; 2         Albacete. Índice general. Variación anual.        jun. 2025   2.1</span></span>
+<span><span class="co">#&gt; 3      Araba/Álava. Índice general. Variación anual.        jun. 2025   3.0</span></span></code></pre></div>
 <ul>
 <li>A variable can take a empty character <code>""</code> to get all its
 possible values (valid to filter data from tables as well).</li>
@@ -546,58 +524,58 @@ possible values (valid to filter data from tables as well).</li>
 <span>                              unnest <span class="op">=</span> <span class="cn">TRUE</span>, tip <span class="op">=</span> <span class="st">"A"</span>, validate <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="va">ipc</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Nombre"</span>, <span class="st">"T3_Periodo"</span>, <span class="st">"Anyo"</span>, <span class="st">"Valor"</span><span class="op">)</span><span class="op">]</span></span>
 <span><span class="co">#&gt;                                              Nombre T3_Periodo Anyo   Valor</span></span>
-<span><span class="co">#&gt; 1               Salamanca. Índice general. Índice.        may. 2025 119.414</span></span>
-<span><span class="co">#&gt; 2                  Huelva. Índice general. Índice.        may. 2025 119.544</span></span>
-<span><span class="co">#&gt; 3             Ciudad Real. Índice general. Índice.        may. 2025 119.467</span></span>
-<span><span class="co">#&gt; 4        Alicante/Alacant. Índice general. Índice.        may. 2025 118.560</span></span>
-<span><span class="co">#&gt; 5                 Ourense. Índice general. Índice.        may. 2025 119.219</span></span>
-<span><span class="co">#&gt; 6  Santa Cruz de Tenerife. Índice general. Índice.        may. 2025 117.789</span></span>
-<span><span class="co">#&gt; 7               Coruña, A. Índice general. Índice.        may. 2025 118.090</span></span>
-<span><span class="co">#&gt; 8              Valladolid. Índice general. Índice.        may. 2025 118.442</span></span>
-<span><span class="co">#&gt; 9                  Huesca. Índice general. Índice.        may. 2025 119.189</span></span>
-<span><span class="co">#&gt; 10                  Cádiz. Índice general. Índice.        may. 2025 119.059</span></span>
-<span><span class="co">#&gt; 11                 Málaga. Índice general. Índice.        may. 2025 120.251</span></span>
-<span><span class="co">#&gt; 12                 Teruel. Índice general. Índice.        may. 2025 117.968</span></span>
-<span><span class="co">#&gt; 13               Albacete. Índice general. Índice.        may. 2025 119.433</span></span>
-<span><span class="co">#&gt; 14              Rioja, La. Índice general. Índice.        may. 2025 118.309</span></span>
-<span><span class="co">#&gt; 15             Pontevedra. Índice general. Índice.        may. 2025 119.280</span></span>
-<span><span class="co">#&gt; 16                Melilla. Índice general. Índice.        may. 2025 119.242</span></span>
-<span><span class="co">#&gt; 17                 Cuenca. Índice general. Índice.        may. 2025 118.788</span></span>
-<span><span class="co">#&gt; 18                 Toledo. Índice general. Índice.        may. 2025 120.328</span></span>
-<span><span class="co">#&gt; 19                Córdoba. Índice general. Índice.        may. 2025 119.032</span></span>
-<span><span class="co">#&gt; 20                  Ceuta. Índice general. Índice.        may. 2025 118.805</span></span>
-<span><span class="co">#&gt; 21                Granada. Índice general. Índice.        may. 2025 118.560</span></span>
-<span><span class="co">#&gt; 22                  Ávila. Índice general. Índice.        may. 2025 119.612</span></span>
-<span><span class="co">#&gt; 23              Tarragona. Índice general. Índice.        may. 2025 117.533</span></span>
-<span><span class="co">#&gt; 24                  Soria. Índice general. Índice.        may. 2025 117.921</span></span>
-<span><span class="co">#&gt; 25      Valencia/València. Índice general. Índice.        may. 2025 117.851</span></span>
-<span><span class="co">#&gt; 26            Guadalajara. Índice general. Índice.        may. 2025 119.517</span></span>
-<span><span class="co">#&gt; 27                 Burgos. Índice general. Índice.        may. 2025 117.926</span></span>
-<span><span class="co">#&gt; 28                   Lugo. Índice general. Índice.        may. 2025 119.251</span></span>
-<span><span class="co">#&gt; 29               Gipuzkoa. Índice general. Índice.        may. 2025 118.530</span></span>
-<span><span class="co">#&gt; 30                Almería. Índice general. Índice.        may. 2025 117.253</span></span>
-<span><span class="co">#&gt; 31                 Girona. Índice general. Índice.        may. 2025 118.051</span></span>
-<span><span class="co">#&gt; 32                 Lleida. Índice general. Índice.        may. 2025 119.487</span></span>
-<span><span class="co">#&gt; 33               Zaragoza. Índice general. Índice.        may. 2025 118.007</span></span>
-<span><span class="co">#&gt; 34                 Zamora. Índice general. Índice.        may. 2025 119.617</span></span>
-<span><span class="co">#&gt; 35     Castellón/Castelló. Índice general. Índice.        may. 2025 120.195</span></span>
-<span><span class="co">#&gt; 36                   Jaén. Índice general. Índice.        may. 2025 118.972</span></span>
-<span><span class="co">#&gt; 37               Asturias. Índice general. Índice.        may. 2025 117.974</span></span>
-<span><span class="co">#&gt; 38            Araba/Álava. Índice general. Índice.        may. 2025 117.634</span></span>
-<span><span class="co">#&gt; 39                Badajoz. Índice general. Índice.        may. 2025 119.749</span></span>
-<span><span class="co">#&gt; 40                 Madrid. Índice general. Índice.        may. 2025 116.476</span></span>
-<span><span class="co">#&gt; 41                Bizkaia. Índice general. Índice.        may. 2025 119.011</span></span>
-<span><span class="co">#&gt; 42              Cantabria. Índice general. Índice.        may. 2025 117.559</span></span>
-<span><span class="co">#&gt; 43            Palmas, Las. Índice general. Índice.        may. 2025 117.577</span></span>
-<span><span class="co">#&gt; 44                Segovia. Índice general. Índice.        may. 2025 118.631</span></span>
-<span><span class="co">#&gt; 45               Palencia. Índice general. Índice.        may. 2025 118.108</span></span>
-<span><span class="co">#&gt; 46                Sevilla. Índice general. Índice.        may. 2025 118.556</span></span>
-<span><span class="co">#&gt; 47                   León. Índice general. Índice.        may. 2025 120.353</span></span>
-<span><span class="co">#&gt; 48         Balears, Illes. Índice general. Índice.        may. 2025 118.830</span></span>
-<span><span class="co">#&gt; 49              Barcelona. Índice general. Índice.        may. 2025 117.027</span></span>
-<span><span class="co">#&gt; 50                Navarra. Índice general. Índice.        may. 2025 118.360</span></span>
-<span><span class="co">#&gt; 51                Cáceres. Índice general. Índice.        may. 2025 117.332</span></span>
-<span><span class="co">#&gt; 52                 Murcia. Índice general. Índice.        may. 2025 118.147</span></span></code></pre></div>
+<span><span class="co">#&gt; 1               Salamanca. Índice general. Índice.        jun. 2025 120.331</span></span>
+<span><span class="co">#&gt; 2                  Huelva. Índice general. Índice.        jun. 2025 120.058</span></span>
+<span><span class="co">#&gt; 3             Ciudad Real. Índice general. Índice.        jun. 2025 120.288</span></span>
+<span><span class="co">#&gt; 4        Alicante/Alacant. Índice general. Índice.        jun. 2025 119.454</span></span>
+<span><span class="co">#&gt; 5                 Ourense. Índice general. Índice.        jun. 2025 119.950</span></span>
+<span><span class="co">#&gt; 6  Santa Cruz de Tenerife. Índice general. Índice.        jun. 2025 118.311</span></span>
+<span><span class="co">#&gt; 7               Coruña, A. Índice general. Índice.        jun. 2025 118.873</span></span>
+<span><span class="co">#&gt; 8              Valladolid. Índice general. Índice.        jun. 2025 119.276</span></span>
+<span><span class="co">#&gt; 9                  Huesca. Índice general. Índice.        jun. 2025 119.913</span></span>
+<span><span class="co">#&gt; 10                  Cádiz. Índice general. Índice.        jun. 2025 119.623</span></span>
+<span><span class="co">#&gt; 11                 Málaga. Índice general. Índice.        jun. 2025 120.945</span></span>
+<span><span class="co">#&gt; 12                 Teruel. Índice general. Índice.        jun. 2025 118.706</span></span>
+<span><span class="co">#&gt; 13               Albacete. Índice general. Índice.        jun. 2025 120.236</span></span>
+<span><span class="co">#&gt; 14              Rioja, La. Índice general. Índice.        jun. 2025 118.869</span></span>
+<span><span class="co">#&gt; 15             Pontevedra. Índice general. Índice.        jun. 2025 119.970</span></span>
+<span><span class="co">#&gt; 16                Melilla. Índice general. Índice.        jun. 2025 120.157</span></span>
+<span><span class="co">#&gt; 17                 Cuenca. Índice general. Índice.        jun. 2025 119.474</span></span>
+<span><span class="co">#&gt; 18                 Toledo. Índice general. Índice.        jun. 2025 121.160</span></span>
+<span><span class="co">#&gt; 19                Córdoba. Índice general. Índice.        jun. 2025 119.566</span></span>
+<span><span class="co">#&gt; 20                  Ceuta. Índice general. Índice.        jun. 2025 119.126</span></span>
+<span><span class="co">#&gt; 21                Granada. Índice general. Índice.        jun. 2025 119.251</span></span>
+<span><span class="co">#&gt; 22                  Ávila. Índice general. Índice.        jun. 2025 120.659</span></span>
+<span><span class="co">#&gt; 23              Tarragona. Índice general. Índice.        jun. 2025 118.467</span></span>
+<span><span class="co">#&gt; 24                  Soria. Índice general. Índice.        jun. 2025 118.865</span></span>
+<span><span class="co">#&gt; 25      Valencia/València. Índice general. Índice.        jun. 2025 118.740</span></span>
+<span><span class="co">#&gt; 26            Guadalajara. Índice general. Índice.        jun. 2025 120.645</span></span>
+<span><span class="co">#&gt; 27                 Burgos. Índice general. Índice.        jun. 2025 118.800</span></span>
+<span><span class="co">#&gt; 28                   Lugo. Índice general. Índice.        jun. 2025 120.034</span></span>
+<span><span class="co">#&gt; 29               Gipuzkoa. Índice general. Índice.        jun. 2025 119.265</span></span>
+<span><span class="co">#&gt; 30                Almería. Índice general. Índice.        jun. 2025 118.106</span></span>
+<span><span class="co">#&gt; 31                 Girona. Índice general. Índice.        jun. 2025 118.952</span></span>
+<span><span class="co">#&gt; 32                 Lleida. Índice general. Índice.        jun. 2025 120.400</span></span>
+<span><span class="co">#&gt; 33               Zaragoza. Índice general. Índice.        jun. 2025 118.863</span></span>
+<span><span class="co">#&gt; 34                 Zamora. Índice general. Índice.        jun. 2025 120.311</span></span>
+<span><span class="co">#&gt; 35     Castellón/Castelló. Índice general. Índice.        jun. 2025 121.121</span></span>
+<span><span class="co">#&gt; 36                   Jaén. Índice general. Índice.        jun. 2025 119.827</span></span>
+<span><span class="co">#&gt; 37               Asturias. Índice general. Índice.        jun. 2025 119.071</span></span>
+<span><span class="co">#&gt; 38            Araba/Álava. Índice general. Índice.        jun. 2025 118.629</span></span>
+<span><span class="co">#&gt; 39                Badajoz. Índice general. Índice.        jun. 2025 120.533</span></span>
+<span><span class="co">#&gt; 40                 Madrid. Índice general. Índice.        jun. 2025 117.212</span></span>
+<span><span class="co">#&gt; 41                Bizkaia. Índice general. Índice.        jun. 2025 119.808</span></span>
+<span><span class="co">#&gt; 42              Cantabria. Índice general. Índice.        jun. 2025 118.622</span></span>
+<span><span class="co">#&gt; 43            Palmas, Las. Índice general. Índice.        jun. 2025 118.171</span></span>
+<span><span class="co">#&gt; 44                Segovia. Índice general. Índice.        jun. 2025 119.697</span></span>
+<span><span class="co">#&gt; 45               Palencia. Índice general. Índice.        jun. 2025 118.943</span></span>
+<span><span class="co">#&gt; 46                Sevilla. Índice general. Índice.        jun. 2025 119.115</span></span>
+<span><span class="co">#&gt; 47                   León. Índice general. Índice.        jun. 2025 121.068</span></span>
+<span><span class="co">#&gt; 48         Balears, Illes. Índice general. Índice.        jun. 2025 119.989</span></span>
+<span><span class="co">#&gt; 49              Barcelona. Índice general. Índice.        jun. 2025 117.812</span></span>
+<span><span class="co">#&gt; 50                Navarra. Índice general. Índice.        jun. 2025 119.396</span></span>
+<span><span class="co">#&gt; 51                Cáceres. Índice general. Índice.        jun. 2025 118.272</span></span>
+<span><span class="co">#&gt; 52                 Murcia. Índice general. Índice.        jun. 2025 118.836</span></span></code></pre></div>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
