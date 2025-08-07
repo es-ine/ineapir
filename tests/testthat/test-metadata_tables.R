@@ -19,7 +19,7 @@ test_that("test get_metadata_operation_table", {
   expect_s3_class(get_metadata_operation_table(idTable = 50902), "data.frame")
 })
 
-test_that("test gget_metadata_table_varval", {
+test_that("test get_metadata_table_varval", {
   skip_on_cran()
   expect_s3_class(get_metadata_table_varval(idTable = 50902), "data.frame")
   expect_s3_class(get_metadata_table_varval(idTable = 50902, det = 2), "data.frame")

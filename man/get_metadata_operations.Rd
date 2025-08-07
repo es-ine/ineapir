@@ -36,10 +36,17 @@ Data frame with information of the available operations
 Get all available operations
 }
 \examples{
-\dontrun{
-get_metadata_operations()
-get_metadata_operations(operation = "IPC")
-get_metadata_operations(geo = 1)
-}
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+# Get all operations
+df <- get_metadata_operations()
+head(df)
 
+# Get a specific operation
+df <- get_metadata_operations(operation = "IPC", validate = FALSE)
+head(df)
+
+# Get operations with territorial disaggregation
+df <- get_metadata_operations(geo = 1)
+head(df)
+\dontshow{\}) # examplesIf}
 }

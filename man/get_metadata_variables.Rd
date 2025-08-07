@@ -36,9 +36,13 @@ Data frame with information of the available variables
 Get all available variables
 }
 \examples{
-\dontrun{
-get_metadata_variables()
-get_metadata_variables(operation = "IPC")
-}
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+# Gel all variables
+df <- get_metadata_variables()
+head(df)
 
+# Get variables for a specific operation
+df <- get_metadata_variables(operation = "IPC", validate = FALSE)
+head(df)
+\dontshow{\}) # examplesIf}
 }

@@ -97,11 +97,11 @@ Data frame with data of series according to the operation and filter specified i
 Get data from series for a specific operation given a filter
 }
 \examples{
-\dontrun{
-get_data_series_filter(operation = "IPC", periodicity = 1,
-                       filter = list("115"= c("29","28"), "3" = "84", "762" = ""))
-get_data_series_filter(operation = "IPC", periodicity = 1, nlast = 5, unnest = TRUE,
-                       filter = list("115"= "28", "3" = "84", "762" = "304092"))
-}
-
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+# Get last five periods and filter data of time series from "IPC" operation
+filter <- list("115"= "28", "3" = "84", "762" = "304092")
+df <- get_data_series_filter(operation = "IPC", periodicity = 1,
+nlast = 5, unnest = TRUE, validate = FALSE, filter = filter)
+head(df)
+\dontshow{\}) # examplesIf}
 }

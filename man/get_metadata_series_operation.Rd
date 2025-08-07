@@ -38,9 +38,15 @@ Data frame with information of the series belonging to an operation.
 Get all the series for a specific operation
 }
 \examples{
-\dontrun{
-get_metadata_series_operation(operation = "IPC")
-get_metadata_series_operation(operation = "IPC", page = 2)
-}
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+# Get metadata of time series from "IPC" operation
+# Retrieve page 1
+df <- get_metadata_series_operation(operation = "IPC", validate = FALSE)
+nrow(df)
 
+# Retrieve page 2
+df <- get_metadata_series_operation(operation = "IPC", validate = FALSE,
+page = 2)
+nrow(df)
+\dontshow{\}) # examplesIf}
 }

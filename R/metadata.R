@@ -11,14 +11,21 @@
 #' @param verbose (logical): print additional information, including the URL to call the API service.
 #'
 #' @return Data frame with information of the available operations
+#'
+#' @examplesIf interactive()
+#' # Get all operations
+#' df <- get_metadata_operations()
+#' head(df)
+#'
+#' # Get a specific operation
+#' df <- get_metadata_operations(operation = "IPC", validate = FALSE)
+#' head(df)
+#'
+#' # Get operations with territorial disaggregation
+#' df <- get_metadata_operations(geo = 1)
+#' head(df)
+#'
 #' @export
-#'
-#' @examples \dontrun{
-#' get_metadata_operations()
-#' get_metadata_operations(operation = "IPC")
-#' get_metadata_operations(geo = 1)
-#' }
-#'
 get_metadata_operations <- function(operation = NULL, lang = "ES", geo = NULL, page = 0, validate = TRUE, verbose = FALSE){
   # List of values to define the call to the API
   definition <- list()
@@ -63,13 +70,17 @@ get_metadata_operations <- function(operation = NULL, lang = "ES", geo = NULL, p
 #' @param verbose (logical): print additional information, including the URL to call the API service.
 #'
 #' @return Data frame with information of the available variables
+#'
+#' @examplesIf interactive()
+#' # Gel all variables
+#' df <- get_metadata_variables()
+#' head(df)
+#'
+#' # Get variables for a specific operation
+#' df <- get_metadata_variables(operation = "IPC", validate = FALSE)
+#' head(df)
+#'
 #' @export
-#'
-#' @examples \dontrun{
-#' get_metadata_variables()
-#' get_metadata_variables(operation = "IPC")
-#' }
-#'
 get_metadata_variables <- function(operation = NULL, lang = "ES", det = 0, page = 0, validate = TRUE, verbose = FALSE){
   # List of values to define the call to the API
   definition <- list()
@@ -127,13 +138,23 @@ get_metadata_variables <- function(operation = NULL, lang = "ES", det = 0, page 
 #' - A variable can take a empty character "" to get all its possible values: `list(id_variable1 = id_value1, id_variable2 = "")`.
 #'
 #' @return Data frame with information of the available values for the variable specified in the function
+#'
+#' @examplesIf interactive()
+#' # Get the values of the variable "115"
+#' df <- get_metadata_values(variable = 115)
+#' head(df)
+#'
+#' # Get the values of a variable for a specific operation
+#' df <- get_metadata_values(operation = "IPC", variable = 115, validate = FALSE)
+#' head(df)
+#'
+#' # Get the children of a value (provinces of Galicia)
+#' # Variable: Autonomous communities (id=70)
+#' # Value: Galicia (id=9008)
+#' df <- get_metadata_values(variable = 70, value = 9008)
+#' head(df)
+#'
 #' @export
-#'
-#' @examples \dontrun{
-#' get_metadata_values(variable = 115)
-#' get_metadata_values(operation = "IPC", variable = 115)
-#' }
-#'
 get_metadata_values <- function(operation = NULL, variable =  NULL, value = NULL, det = 0, lang = "ES", page = 0, classification = NULL, validate = TRUE, verbose = FALSE, hierarchy = NULL, filter = NULL){
   # List of values to define the call to the API
   definition <- list()
@@ -199,13 +220,17 @@ get_metadata_values <- function(operation = NULL, variable =  NULL, value = NULL
 #' @param verbose (logical): print additional information, including the URL to call the API service.
 #'
 #' @return Data frame with information about publications
+#'
+#' @examplesIf interactive()
+#' # Get all publications
+#' df <- get_metadata_publications()
+#' head(df)
+#'
+#' # Get publications for a specific operation
+#' df <- get_metadata_publications(operation = "IPC", validate = FALSE)
+#' head(df)
+#'
 #' @export
-#'
-#' @examples \dontrun{
-#' get_metadata_publications()
-#' get_metadata_publications(operation = "IPC")
-#' }
-#'
 get_metadata_publications <- function(operation = NULL, det = 0, lang = "ES", page = 0, validate = TRUE, verbose = FALSE){
   # List of values to define the call to the API
   definition <- list()
@@ -250,12 +275,13 @@ get_metadata_publications <- function(operation = NULL, det = 0, lang = "ES", pa
 #' @param verbose (logical): print additional information, including the URL to call the API service.
 #'
 #' @return Data frame with information of the dates of the publication specified in the function
+#'
+#' @examplesIf interactive()
+#' # Get the dates of a publication
+#' df <- get_metadata_publication_dates(publication = 8, validate = FALSE)
+#' head(df)
+#'
 #' @export
-#'
-#' @examples \dontrun{
-#' get_metadata_publication_dates(publication = 8)
-#' }
-#'
 get_metadata_publication_dates <- function(publication = NULL, det = 0, tip = NULL, lang = "ES", page = 0, validate = TRUE, verbose = FALSE){
   # List of values to define the call to the API
   definition <- list()
@@ -299,13 +325,17 @@ get_metadata_publication_dates <- function(publication = NULL, det = 0, tip = NU
 #' @param verbose (logical): print additional information, including the URL to call the API service.
 #'
 #' @return Data frame with information of the available periodicities
+#'
+#' @examplesIf interactive()
+#' # Get all periodicities
+#' df <- get_metadata_periodicity()
+#' head(df)
+#'
+#' # Get periodicities for a specific operation
+#' df <- get_metadata_periodicity(operation = "IPC", validate = FALSE)
+#' head(df)
+#'
 #' @export
-#'
-#' @examples \dontrun{
-#' get_metadata_periodicity()
-#' get_metadata_periodicity(operation = "IPC")
-#' }
-#'
 get_metadata_periodicity <- function(operation = NULL, lang = "ES", validate = TRUE, verbose = FALSE){
   # List of values to define the call to the API
   definition <- list()
@@ -343,13 +373,17 @@ get_metadata_periodicity <- function(operation = NULL, lang = "ES", validate = T
 #' @param verbose (logical): print additional information.
 #'
 #' @return Data frame with information of the available filter shortcuts
+#'
+#' @examples
+#' # Shortcuts in spanish
+#' df <- get_filter_shortcuts()
+#' head(df)
+#'
+#' # Shortcuts in english
+#' df <- get_filter_shortcuts(lang = "EN")
+#' head(df)
+#'
 #' @export
-#'
-#' @examples \dontrun{
-#' get_filter_shortcuts()
-#' get_filter_shortcuts(lang = "EN")
-#' }
-#'
 get_filter_shortcuts <- function(lang = "ES", validate = TRUE, verbose = FALSE){
 
   # List of values to define the call to the API
@@ -405,13 +439,17 @@ get_filter_shortcuts <- function(lang = "ES", validate = TRUE, verbose = FALSE){
 #' @param verbose (logical): print additional information, including the URL to call the API service.
 #'
 #' @return Data frame with information of the available classifications
+#'
+#' @examplesIf interactive()
+#' # Get all classifications
+#' df <- get_metadata_classifications()
+#' head(df)
+#'
+#' # Get classifications for a specific operation
+#' df <- get_metadata_classifications(operation = "IPC", validate = FALSE)
+#' head(df)
+#'
 #' @export
-#'
-#' @examples \dontrun{
-#' get_metadata_classifications()
-#' get_metadata_classifications(operation = "IPC")
-#' }
-#'
 get_metadata_classifications <- function(operation = NULL, lang = "ES", validate = TRUE, verbose = FALSE){
   # List of values to define the call to the API
   definition <- list()

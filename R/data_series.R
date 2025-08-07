@@ -26,22 +26,33 @@
 #'
 #' @return Data frame with data of a series according to the code specified in the function
 #'
-#' @examples \dontrun{
-#' get_data_series(codSeries = "IPC251856")
-#' get_data_series(codSeries = "IPC251856", nlast = 5)
-#' get_data_series(codSeries = "IPC251856", dateStart = "2024/01/01")
-#' get_data_series(codSeries = "IPC251856", dateStart = "2023/01/01",
-#' dateEnd = "2023/05/01")
-#' get_data_series(codSeries = "IPC251856", dateStart = c("2023/01/01","2024/01/01"),
+#' @examplesIf interactive()
+#  # Get the last five periods of time series with code "IPC251856"
+#' df <- get_data_series(codSeries = "IPC251856", nlast = 5)
+#' head(df)
+#'
+#' # Get data for an open range date
+#' df <- get_data_series(codSeries = "IPC251856", dateStart = "2024/01/01")
+#' head(df)
+#'
+#' # Get data for a single range data
+#' df <- get_data_series(codSeries = "IPC251856",
+#' dateStart = "2023/01/01", dateEnd = "2023/05/01")
+#' head(df)
+#'
+#' # Get data for specific dates
+#' df <- get_data_series(codSeries = "IPC251856",
+#' dateStart = c("2023/01/01","2024/01/01"),
 #' dateEnd = c("2023/01/01","2024/01/01"))
-#' get_data_series(codSeries = "IPC251856", dateStart = c("2023/01/01","2024/01/01"),
+#' head(df)
+#'
+#' # Get data for multiple date ranges
+#' df <- get_data_series(codSeries = "IPC251856",
+#' dateStart = c("2023/01/01","2024/01/01"),
 #' dateEnd = c("2023/03/01","2024/03/01"))
-#' get_data_series(codSeries = "IPC251856", dateStart = c("2023/01/01","2024/01/01"),
-#' dateEnd = c("2023/03/01"))
-#' }
+#' head(df)
 #'
 #' @export
-#'
 get_data_series <- function(codSeries = NULL, nlast = 1, dateStart = NULL, dateEnd = NULL, det = 0, tip = NULL, lang = "ES", validate = TRUE, verbose = FALSE, unnest = FALSE){
 
   # List of values to define the call to the API
@@ -128,15 +139,15 @@ get_data_series <- function(codSeries = NULL, nlast = 1, dateStart = NULL, dateE
 #' @param unnest (logical): obtain a single data frame of data
 #'
 #' @return Data frame with data of series according to the operation and filter specified in the function
+#'
+#' @examplesIf interactive()
+#' # Get last five periods and filter data of time series from "IPC" operation
+#' filter <- list("115"= "28", "3" = "84", "762" = "304092")
+#' df <- get_data_series_filter(operation = "IPC", periodicity = 1,
+#' nlast = 5, unnest = TRUE, validate = FALSE, filter = filter)
+#' head(df)
+#'
 #' @export
-#'
-#' @examples \dontrun{
-#' get_data_series_filter(operation = "IPC", periodicity = 1,
-#'                        filter = list("115"= c("29","28"), "3" = "84", "762" = ""))
-#' get_data_series_filter(operation = "IPC", periodicity = 1, nlast = 5, unnest = TRUE,
-#'                        filter = list("115"= "28", "3" = "84", "762" = "304092"))
-#' }
-#'
 get_data_series_filter <- function(operation = NULL, filter = NULL, periodicity = NULL, nlast = 1, dateStart = NULL, dateEnd = NULL, det = 0, tip = NULL, lang = "ES", page = 1, validate = TRUE, verbose = FALSE, unnest = FALSE){
 
   # List of values to define the call to the API

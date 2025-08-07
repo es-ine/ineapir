@@ -30,9 +30,13 @@ Data frame with information of the available periodicities
 Get all available periodicities
 }
 \examples{
-\dontrun{
-get_metadata_periodicity()
-get_metadata_periodicity(operation = "IPC")
-}
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+# Get all periodicities
+df <- get_metadata_periodicity()
+head(df)
 
+# Get periodicities for a specific operation
+df <- get_metadata_periodicity(operation = "IPC", validate = FALSE)
+head(df)
+\dontshow{\}) # examplesIf}
 }

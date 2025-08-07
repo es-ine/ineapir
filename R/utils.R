@@ -149,7 +149,7 @@ get_api_data <- function(url, request){
 
       }
       # Get the content of the response
-      content <- httr::content(response, "text")
+      content <- httr::content(response, "text", encoding = "UTF-8")
 
       if(jsonlite::validate(content)){
         result <- jsonlite::fromJSON(content , flatten = TRUE)
@@ -858,7 +858,7 @@ check_addons <- function(parameters, addons, definition){
 }
 
 #Check the result retrieved for the API
-check_result <- function(result, response = 200){
+check_result <- function(result, response = NULL){
   check <- FALSE
 
   if(!is.null(result)){
@@ -871,8 +871,13 @@ check_result <- function(result, response = 200){
       }
     }
   }else{
-    if(response$status != 200){
-      message(sprintf("A error occurred calling the API (status %s).", response$status))
+    if(!is.null(response)){
+      if(response$status_code != 200){
+        # GRUPOS_TABLA used to check px tables
+        if(!grepl("/GRUPOS_TABLA/", response$url, ignore.case = TRUE)){
+          message(sprintf("An error occurred calling the API (status %s).\n%s", response$status_code, response$url))
+        }
+      }
     }
   }
 
@@ -1501,6 +1506,11 @@ exists_variables_id <- function(metadata){
     colname <- metacols[grep("fk_variable", metacols, ignore.case = TRUE)]
   }
 
+  if(is.element("t3_variable", tolower(metacols))){
+    result <- TRUE
+    colname <- metacols[grep("t3_variable", metacols, ignore.case = TRUE)]
+  }
+
   return(list(result = result, name = colname))
 }
 
@@ -2102,13 +2112,13 @@ extract_metadata <- function(datain, request){
     # check the type of the table
     checktable <- check_type_table(idTable = request$definition$input, lang = request$definition$lang)
 
+    # Check if exits and id for variables
+    existsvarid <- exists_variables_id(metadata)
+
     # Case one: tpx or px table
     if(checktable$ispxtable){
       # Number of variables in metadata information
       nummeta <- min(unique(do.call(rbind,lapply(metadata,nrow))))
-
-      # Check if exits and id fo variables
-      existsvarid <- exists_variables_id(metadata)
 
       # Column to extract metadata
       varmeta <- if(exists_values_id(metadata) && existsvarid$result) existsvarid$name else column_names[[API_version]][["variable.code"]][["es"]]
@@ -2157,14 +2167,18 @@ extract_metadata <- function(datain, request){
       # Loop through all groups
       for (g in checktable$groups$Id){
         # Get th values of the group
-        values <- get_metadata_table_values(idTable = request$definition$input, idGroup = g, validate = FALSE, lang = request$definition$lang)
+        values <- get_metadata_table_values(idTable = request$definition$input, idGroup = g, validate = FALSE, lang = request$definition$lang, det = 2)
+
+        # name of the variable column
+        colname <- if(tolower(existsvarid$name) == "t3_variable") "variable.name" else "variable.id"
 
         # Select a variable id and build a Unique dataframe of variable names
         dfcodes <- do.call(rbind,
                            lapply(metadata,
                                   function(x) subset(x,
-                                                     x[[column_names[[API_version]][["variable.id"]][["es"]]]] %in% unique(values[[column_names[[API_version]][["variable.fk"]][["es"]]]]),
+                                                     x[[existsvarid$name]] %in% unique(values[[column_names[[API_version]][[colname]][["es"]]]]),
                                                      select = metacols)))
+
         # New name of the column
         newname <- unlist(subset(checktable$groups, checktable$groups$Id == g, select = c("Nombre")))
         newname <- gsub("\\s+",".", newname)
@@ -2249,7 +2263,7 @@ get_metadata_variable_values_table <- function(idTable, filter = NULL, verbose, 
         }
 
         # Obtain metadata information
-        df <- get_metadata_series_table(idTable = idTable, filter = filter, tip = "M", validate = FALSE, verbose = verbose, lang = lang)
+        df <- get_metadata_series_table(idTable = idTable, filter = filter, tip = "M", validate = FALSE, verbose = verbose, lang = lang, det = det)
 
         # Check if exits and id for variables
         existsvarid <- exists_variables_id(df$MetaData)

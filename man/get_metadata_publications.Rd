@@ -36,9 +36,13 @@ Data frame with information about publications
 Get all publications
 }
 \examples{
-\dontrun{
-get_metadata_publications()
-get_metadata_publications(operation = "IPC")
-}
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+# Get all publications
+df <- get_metadata_publications()
+head(df)
 
+# Get publications for a specific operation
+df <- get_metadata_publications(operation = "IPC", validate = FALSE)
+head(df)
+\dontshow{\}) # examplesIf}
 }

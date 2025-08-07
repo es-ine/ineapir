@@ -76,9 +76,11 @@ Data frame with information of the series according to the operation and filter 
 Get all the series for a specific operation given a filter
 }
 \examples{
-\dontrun{
-get_metadata_series_filter(operation = "IPC", periodicity = 1,
-                           filter = list("115"= "29", "3" = "84", "762" = ""))
- }
-
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+# Get time series from "IPC" operation that include the filter variables
+# and values
+df <- get_metadata_series_filter(operation = "IPC", periodicity = 1,
+filter = list("115"= "29", "3" = "84", "762" = ""), validate = FALSE)
+head(df)
+\dontshow{\}) # examplesIf}
 }

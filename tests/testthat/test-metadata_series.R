@@ -16,7 +16,7 @@ test_that("test get_metadata_series_values", {
 
 test_that("test get_metadata_series_table", {
   skip_on_cran()
-  expect_s3_class(get_metadata_series_table(idTable = 50902, list("3" = "74", "762" = "304092"),
+  expect_s3_class(get_metadata_series_table(idTable = 50902, filter = list("3" = "74", "762" = "304092"),
                                                      metanames = TRUE, metacodes = TRUE, tip = "M"), "data.frame")
 })
 

@@ -61,9 +61,19 @@ Data frame with information of the available values for the variable specified i
 Get all values for a specific variable
 }
 \examples{
-\dontrun{
-get_metadata_values(variable = 115)
-get_metadata_values(operation = "IPC", variable = 115)
-}
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+# Get the values of the variable "115"
+df <- get_metadata_values(variable = 115)
+head(df)
 
+# Get the values of a variable for a specific operation
+df <- get_metadata_values(operation = "IPC", variable = 115, validate = FALSE)
+head(df)
+
+# Get the children of a value (provinces of Galicia)
+# Variable: Autonomous communities (id=70)
+# Value: Galicia (id=9008)
+df <- get_metadata_values(variable = 70, value = 9008)
+head(df)
+\dontshow{\}) # examplesIf}
 }

@@ -13,12 +13,13 @@
 #' @param verbose (logical): print additional information, including the URL to call the API service.
 #'
 #' @return Data frame with information of the available tables according to the operation specified in the function
+#'
+#' @examplesIf interactive()
+#' # Get all the tables of the "IPC" operation
+#' df <- get_metadata_tables_operation(operation = "IPC", validate = FALSE)
+#' head(df)
+#'
 #' @export
-#'
-#' @examples \dontrun{
-#' get_metadata_tables_operation(operation = "IPC")
-#' }
-#'
 get_metadata_tables_operation <- function(operation = NULL, det = 0, tip = NULL, geo = NULL, lang = "ES", page = 0, validate = TRUE, verbose = FALSE){
 
   # List of values to define the call to the API
@@ -62,12 +63,13 @@ get_metadata_tables_operation <- function(operation = NULL, det = 0, tip = NULL,
 #' @param verbose (logical): print additional information, including the URL to call the API service.
 #'
 #' @return Data frame with information of the groups according to the table specified in the function
+#'
+#' @examplesIf interactive()
+#' # Get the groups of the table with identification code "50902"
+#' df <- get_metadata_table_groups(idTable = 50902)
+#' head(df)
+#'
 #' @export
-#'
-#' @examples \dontrun{
-#' get_metadata_table_groups(idTable = 50902)
-#' }
-#'
 get_metadata_table_groups <- function(idTable = NULL, lang = "ES", validate = TRUE, verbose = FALSE){
 
   # List of values to define the call to the API
@@ -110,12 +112,14 @@ get_metadata_table_groups <- function(idTable = NULL, lang = "ES", validate = TR
 #' @param verbose (logical): print additional information, including the URL to call the API service.
 #'
 #' @return Data frame with information of the values of a table group according to the table and group specified in the function
+#'
+#' @examplesIf interactive()
+#' # Get the values of the group "110889" of the table with identification
+#' # code "50902"
+#' df <- get_metadata_table_values(idTable = 50902, idGroup = 110889, validate = FALSE)
+#' head(df)
+#'
 #' @export
-#'
-#' @examples \dontrun{
-#' get_metadata_table_values(idTable = 50902, idGroup = 110889)
-#' }
-#'
 get_metadata_table_values <- function(idTable = NULL, idGroup = NULL, det = 0, lang = "ES", validate = TRUE, verbose = FALSE){
 
   # List of values to define the call to the API
@@ -156,12 +160,13 @@ get_metadata_table_values <- function(idTable = NULL, idGroup = NULL, det = 0, l
 #' @param verbose (logical): print additional information, including the URL to call the API service.
 #'
 #' @return Data frame with information of the operation according to the table specified in the function
+#'
+#' @examplesIf interactive()
+#' # Get the operation of the table with identification code "50902"
+#' df <- get_metadata_operation_table(idTable = 50902)
+#' head(df)
+#'
 #' @export
-#'
-#' @examples \dontrun{
-#' get_metadata_operation_table(idTable = 50902)
-#' }
-#'
 get_metadata_operation_table <- function(idTable = NULL, lang = "ES", validate = TRUE, verbose = FALSE){
 
   # List of values to define the call to the API
@@ -234,13 +239,18 @@ get_metadata_operation_table <- function(idTable = NULL, lang = "ES", validate =
 #' @param verbose (logical): print additional information, including the URL to call the API service.
 #'
 #' @return Data frame with information about the variables and values that define a table according to the table specified in the function
+#'
+#' @examplesIf interactive()
+#' # Get all the variable and values of the table with identification code "50902"
+#' df <- get_metadata_table_varval(idTable = 50902)
+#' head(df)
+#'
+#' # Filter variables and values
+#' df <- get_metadata_table_varval(idTable = 52056,
+#' filter = list(NAC = "00"), validate = FALSE)
+#' head(df)
+#'
 #' @export
-#'
-#' @examples \dontrun{
-#' get_metadata_table_varval(idTable = 50902)
-#' get_metadata_table_varval(idTable = 52056, filter = list(NAC = "00"))
-#' }
-#'
 get_metadata_table_varval <- function(idTable = NULL, det = 0, filter = NULL, lang = "ES", validate = TRUE, verbose = FALSE){
   # List of values to define the call to the API
   definition <- list()

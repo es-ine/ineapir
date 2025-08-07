@@ -107,10 +107,16 @@ Data frame with information of the series for a given table.
 Get all the series for a given table
 }
 \examples{
-\dontrun{
-get_metadata_series_table(idTable = 50902)
-get_metadata_series_table(idTable = 50902, filter = list("3" = "83"))
-get_metadata_series_table(idTable = 50902, metanames = TRUE, metacodes = TRUE, tip = "M")
-}
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+# Get time series without data from table with identification code "50902"
+filter <- list("3" = "83")
+df <- get_metadata_series_table(idTable = 50902, validate = FALSE,
+filter = filter)
+head(df)
 
+# Get metadata as well
+df <- get_metadata_series_table(idTable = 50902, validate = FALSE,
+filter = filter, metanames = TRUE, metacodes = TRUE, tip = "M")
+head(df)
+\dontshow{\}) # examplesIf}
 }

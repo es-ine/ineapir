@@ -56,18 +56,29 @@ Data frame with data of a series according to the code specified in the function
 Retrieve data from series published by INE calling the API
 }
 \examples{
-\dontrun{
-get_data_series(codSeries = "IPC251856")
-get_data_series(codSeries = "IPC251856", nlast = 5)
-get_data_series(codSeries = "IPC251856", dateStart = "2024/01/01")
-get_data_series(codSeries = "IPC251856", dateStart = "2023/01/01",
-dateEnd = "2023/05/01")
-get_data_series(codSeries = "IPC251856", dateStart = c("2023/01/01","2024/01/01"),
-dateEnd = c("2023/01/01","2024/01/01"))
-get_data_series(codSeries = "IPC251856", dateStart = c("2023/01/01","2024/01/01"),
-dateEnd = c("2023/03/01","2024/03/01"))
-get_data_series(codSeries = "IPC251856", dateStart = c("2023/01/01","2024/01/01"),
-dateEnd = c("2023/03/01"))
-}
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+df <- get_data_series(codSeries = "IPC251856", nlast = 5)
+head(df)
 
+# Get data for an open range date
+df <- get_data_series(codSeries = "IPC251856", dateStart = "2024/01/01")
+head(df)
+
+# Get data for a single range data
+df <- get_data_series(codSeries = "IPC251856",
+dateStart = "2023/01/01", dateEnd = "2023/05/01")
+head(df)
+
+# Get data for specific dates
+df <- get_data_series(codSeries = "IPC251856",
+dateStart = c("2023/01/01","2024/01/01"),
+dateEnd = c("2023/01/01","2024/01/01"))
+head(df)
+
+# Get data for multiple date ranges
+df <- get_data_series(codSeries = "IPC251856",
+dateStart = c("2023/01/01","2024/01/01"),
+dateEnd = c("2023/03/01","2024/03/01"))
+head(df)
+\dontshow{\}) # examplesIf}
 }

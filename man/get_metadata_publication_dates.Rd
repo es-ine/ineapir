@@ -38,8 +38,9 @@ Data frame with information of the dates of the publication specified in the fun
 Get the dates of a publication
 }
 \examples{
-\dontrun{
-get_metadata_publication_dates(publication = 8)
-}
-
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+# Get the dates of a publication
+df <- get_metadata_publication_dates(publication = 8, validate = FALSE)
+head(df)
+\dontshow{\}) # examplesIf}
 }

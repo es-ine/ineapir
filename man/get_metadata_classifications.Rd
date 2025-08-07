@@ -30,9 +30,13 @@ Data frame with information of the available classifications
 Get all available classifications
 }
 \examples{
-\dontrun{
-get_metadata_classifications()
-get_metadata_classifications(operation = "IPC")
-}
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+# Get all classifications
+df <- get_metadata_classifications()
+head(df)
 
+# Get classifications for a specific operation
+df <- get_metadata_classifications(operation = "IPC", validate = FALSE)
+head(df)
+\dontshow{\}) # examplesIf}
 }

@@ -32,8 +32,9 @@ define the series according to the operation specified in the function
 Get metadata information about the variables and values of series for a given operation
 }
 \examples{
-\dontrun{
-get_metadata_series_varval(operation = "IPC")
-}
-
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+# Get metadata information of time series from "IPC" operation
+df <- get_metadata_series_varval(operation = "IPC", validate = FALSE)
+head(df)
+\dontshow{\}) # examplesIf}
 }

@@ -21,9 +21,12 @@ Data frame with information of the available filter shortcuts
 Get all available filter shortcuts
 }
 \examples{
-\dontrun{
-get_filter_shortcuts()
-get_filter_shortcuts(lang = "EN")
-}
+# Shortcuts in spanish
+df <- get_filter_shortcuts()
+head(df)
+
+# Shortcuts in english
+df <- get_filter_shortcuts(lang = "EN")
+head(df)
 
 }

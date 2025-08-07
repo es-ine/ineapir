@@ -1,3 +1,7 @@
+# ineapir 0.2.3
+* Function usage examples have been reorganized.
+* Improvements in compatibility for future versions of the API.
+
 # ineapir 0.2.2
 * Added testing of the package
 * Package description updated

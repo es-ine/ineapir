@@ -79,9 +79,14 @@ Data frame with information about the variables and values that define a table a
 Get metadata information about the variables and values for a given table
 }
 \examples{
-\dontrun{
-get_metadata_table_varval(idTable = 50902)
-get_metadata_table_varval(idTable = 52056, filter = list(NAC = "00"))
-}
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+# Get all the variable and values of the table with identification code "50902"
+df <- get_metadata_table_varval(idTable = 50902)
+head(df)
 
+# Filter variables and values
+df <- get_metadata_table_varval(idTable = 52056,
+filter = list(NAC = "00"), validate = FALSE)
+head(df)
+\dontshow{\}) # examplesIf}
 }

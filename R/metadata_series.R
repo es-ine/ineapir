@@ -10,12 +10,13 @@
 #' @param verbose (logical): print additional information, including the URL to call the API service.
 #'
 #' @return Data frame with information of a series according to the code specified in the function
+#'
+#' @examplesIf interactive()
+#' # Get information of time series with code "IPC206449"
+#' df <- get_metadata_series(codSeries = "IPC206449")
+#' head(df)
+#'
 #' @export
-#'
-#' @examples \dontrun{
-#' get_metadata_series(codSeries = "IPC206449")
-#' }
-#'
 get_metadata_series <- function(codSeries = NULL, det = 0, tip = NULL, lang = "ES", validate = TRUE, verbose = FALSE){
 
   # List of values to define the call to the API
@@ -61,13 +62,19 @@ get_metadata_series <- function(codSeries = NULL, det = 0, tip = NULL, lang = "E
 #' @param verbose (logical): print additional information, including the URL to call the API service.
 #'
 #' @return Data frame with information of the series belonging to an operation.
+#'
+#' @examplesIf interactive()
+#' # Get metadata of time series from "IPC" operation
+#' # Retrieve page 1
+#' df <- get_metadata_series_operation(operation = "IPC", validate = FALSE)
+#' nrow(df)
+#'
+#' # Retrieve page 2
+#' df <- get_metadata_series_operation(operation = "IPC", validate = FALSE,
+#' page = 2)
+#' nrow(df)
+#'
 #' @export
-#'
-#' @examples \dontrun{
-#' get_metadata_series_operation(operation = "IPC")
-#' get_metadata_series_operation(operation = "IPC", page = 2)
-#' }
-#'
 get_metadata_series_operation <- function(operation = NULL, det = 0, tip = NULL, lang = "ES", page = 1 ,validate = TRUE, verbose = FALSE){
 
   # List of values to define the call to the API
@@ -113,12 +120,13 @@ get_metadata_series_operation <- function(operation = NULL, det = 0, tip = NULL,
 #' @param verbose (logical): print additional information, including the URL to call the API service.
 #'
 #' @return Data frame with information of the values of a series according to the code specified in the function
+#'
+#' @examplesIf interactive()
+#' # Get metadata of time series with code "IPC206449"
+#' df <- get_metadata_series_values(codSeries = "IPC206449")
+#' head(df)
+#'
 #' @export
-#'
-#' @examples \dontrun{
-#' get_metadata_series_values(codSeries = "IPC206449")
-#' }
-#'
 get_metadata_series_values <- function(codSeries = NULL, det = 0, tip = NULL, lang = "ES", validate = TRUE, verbose = FALSE){
 
   # List of values to define the call to the API
@@ -213,14 +221,20 @@ get_metadata_series_values <- function(codSeries = NULL, det = 0, tip = NULL, la
 #' Several columns are created corresponding to the values of the different variables.
 #'
 #' @return Data frame with information of the series for a given table.
+#'
+#' @examplesIf interactive()
+#' # Get time series without data from table with identification code "50902"
+#' filter <- list("3" = "83")
+#' df <- get_metadata_series_table(idTable = 50902, validate = FALSE,
+#' filter = filter)
+#' head(df)
+#'
+#' # Get metadata as well
+#' df <- get_metadata_series_table(idTable = 50902, validate = FALSE,
+#' filter = filter, metanames = TRUE, metacodes = TRUE, tip = "M")
+#' head(df)
+#'
 #' @export
-#'
-#' @examples \dontrun{
-#' get_metadata_series_table(idTable = 50902)
-#' get_metadata_series_table(idTable = 50902, filter = list("3" = "83"))
-#' get_metadata_series_table(idTable = 50902, metanames = TRUE, metacodes = TRUE, tip = "M")
-#' }
-#'
 get_metadata_series_table <- function(idTable = NULL, filter = NULL, det = 0, tip = NULL, lang = "ES", validate = TRUE, verbose = FALSE, metanames = FALSE, metacodes = FALSE){
 
   # List of values to define the call to the API
@@ -293,13 +307,15 @@ get_metadata_series_table <- function(idTable = NULL, filter = NULL, det = 0, ti
 #' @param verbose (logical): print additional information, including the URL to call the API service.
 #'
 #' @return Data frame with information of the series according to the operation and filter specified in the function
+#'
+#' @examplesIf interactive()
+#' # Get time series from "IPC" operation that include the filter variables
+#' # and values
+#' df <- get_metadata_series_filter(operation = "IPC", periodicity = 1,
+#' filter = list("115"= "29", "3" = "84", "762" = ""), validate = FALSE)
+#' head(df)
+#'
 #' @export
-#'
-#' @examples \dontrun{
-#' get_metadata_series_filter(operation = "IPC", periodicity = 1,
-#'                            filter = list("115"= "29", "3" = "84", "762" = ""))
-#'  }
-#'
 get_metadata_series_filter <- function(operation = NULL, filter = NULL, periodicity = NULL, det = 0, tip = NULL, lang = "ES", page = 1, validate = TRUE, verbose = FALSE){
 
   # List of values to define the call to the API
@@ -346,12 +362,13 @@ get_metadata_series_filter <- function(operation = NULL, filter = NULL, periodic
 #'
 #' @return Data frame with information about the variables and values that
 #' define the series according to the operation specified in the function
+#'
+#' @examplesIf interactive()
+#' # Get metadata information of time series from "IPC" operation
+#' df <- get_metadata_series_varval(operation = "IPC", validate = FALSE)
+#' head(df)
+#'
 #' @export
-#'
-#' @examples \dontrun{
-#' get_metadata_series_varval(operation = "IPC")
-#' }
-#'
 get_metadata_series_varval <- function(operation = NULL, lang = "ES", det = 0, validate = TRUE, verbose = FALSE){
   # List of values to define the call to the API
   definition <- list()

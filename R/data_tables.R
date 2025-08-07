@@ -73,35 +73,47 @@
 #' Several columns are created corresponding to the values of the different variables.
 #'
 #' @return Data frame with data of a table according to the id specified in the function
+#'
+#' @examplesIf interactive()
+#' # Obtaining the last two periods and filter data
+#' filter <- list("3" = "74", "762" = "304092")
+#' df <-get_data_table(idTable = 50902, nlast = 2, unnest = TRUE,
+#' filter = filter, validate = FALSE)
+#' head(df)
+#'
+#' # Get data for an open range date
+#' df <- get_data_table(idTable = 50902, unnest = TRUE, tip= "A",
+#' filter = filter, validate = FALSE,
+#' dateStart = "2025/01/01")
+#' head(df)
+#'
+#' # Get data for a single range data
+#' df <- get_data_table(idTable = 50902, unnest = TRUE, tip= "A",
+#' filter = filter, validate = FALSE,
+#' dateStart = "2023/01/01", dateEnd = "2023/05/01")
+#' head(df)
+#'
+#' # Get data for specific dates
+#' df <- get_data_table(idTable = 50902, unnest = TRUE, tip= "A",
+#' filter = filter, validate = FALSE,
+#' dateStart = c("2023/01/01","2024/01/01"),
+#' dateEnd = c("2023/01/01","2024/01/01"))
+#' head(df)
+#'
+#' # Get data for multiple date ranges
+#' df <- get_data_table(idTable = 50902, unnest = TRUE, tip= "A",
+#' filter = filter, validate = FALSE,
+#' dateStart = c("2023/01/01","2024/01/01"),
+#' dateEnd = c("2023/03/01","2024/03/01"))
+#' head(df)
+#'
+#' # Get medatada as well
+#' df <- get_data_table(idTable = 50902, nlast = 2, unnest = TRUE,
+#' filter = filter, validate = FALSE,
+#' metanames = TRUE, metacodes = TRUE, tip = "M")
+#' head(df)
+#'
 #' @export
-#'
-#' @examples \dontrun{
-#' get_data_table(idTable = 50902)
-#' get_data_table(idTable = 50902, unnest = TRUE, tip= "A",
-#' filter <- list("3" = "74", "762" = "304092"), dateStart = "2024/01/01")
-#' get_data_table(idTable = 50902, unnest = TRUE, tip= "A",
-#' filter <- list("3" = "74", "762" = "304092"),
-#'  dateStart = "2023/01/01", dateEnd = "2023/05/01")
-#' get_data_table(idTable = 50902, unnest = TRUE, tip= "A",
-#' filter <- list("3" = "74", "762" = "304092"),
-#' dateStart = c("2023/01/01","2024/01/01"), dateEnd = c("2023/01/01","2024/01/01"))
-#' get_data_table(idTable = 50902, unnest = TRUE, tip= "A",
-#' filter <- list("3" = "74", "762" = "304092"),
-#' dateStart = c("2023/01/01","2024/01/01"), dateEnd = c("2023/03/01","2024/03/01"))
-#' get_data_table(idTable = 50902, unnest = TRUE, tip= "A",
-#' filter <- list("3" = "74", "762" = "304092"),
-#' dateStart = c("2023/01/01","2024/01/01"), dateEnd = c("2023/03/01"))
-#' get_data_table(idTable = 50902, nlast = 2, unnest = TRUE, metanames = TRUE,
-#'                metacodes = TRUE, tip = "M")
-#' get_data_table(idTable = 8105, filter = list("18"="454"), verbose = TRUE)
-#' get_data_table(idTable = 33387,
-#'                filter = list(tipodematerial = c("extraccionnacional",
-#'                                                 "2mineralesmetalicosmineralenbruto")))
-#' get_data_table(idTable = "t20/e245/p08/l0/01001.px",
-#'                filter = list(edad3gruposdeedad = "015anos",
-#'                              sexo = c("mujeres", "hombres")))
-#' }
-#'
 get_data_table <- function(idTable = NULL, filter = NULL, nlast = NULL, dateStart = NULL, dateEnd = NULL, det = 0, tip = NULL, lang = "ES", validate = TRUE, verbose = FALSE, unnest = FALSE, metanames = FALSE, metacodes = FALSE){
 
   # List of values to define the call to the API

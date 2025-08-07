@@ -1,6 +1,6 @@
 Package: ineapir
 Title: Obtaining data published by the National Statistics Institute
-Version: 0.2.2
+Version: 0.2.3
 Authors@R: c(
     person("David", "Crespo", email = "david.crespo.roces@ine.es", role = c("aut", "cre")),
     person("Instituto Nacional de Estadistica, INE", role = c("cph")))

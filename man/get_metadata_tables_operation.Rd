@@ -42,8 +42,9 @@ Data frame with information of the available tables according to the operation s
 Get all tables for a given operation
 }
 \examples{
-\dontrun{
-get_metadata_tables_operation(operation = "IPC")
-}
-
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+# Get all the tables of the "IPC" operation
+df <- get_metadata_tables_operation(operation = "IPC", validate = FALSE)
+head(df)
+\dontshow{\}) # examplesIf}
 }
