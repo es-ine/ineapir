@@ -57,7 +57,7 @@ get_metadata_tables_operation <- function(operation = NULL, det = 0, tip = NULL,
 #' Get all groups for a specific a table
 #'
 #' @param idTable (int): id of the table. For further information about
-#' ids click this [link](https://uvima.github.io/ineapir/articles/identify_codes.html).
+#' ids click this [link](https://es-ine.github.io/ineapir/articles/identify_codes.html).
 #' @param lang (string): language of the retrieved data. Set to 'ES' for Spanish or set to 'EN' for English.
 #' @param validate (logical): validate input parameters.
 #' @param verbose (logical): print additional information, including the URL to call the API service.
@@ -103,7 +103,7 @@ get_metadata_table_groups <- function(idTable = NULL, lang = "ES", validate = TR
 #' Get all values for a specific table group
 #'
 #' @param idTable (int): id of the table. For further information about
-#' ids click this [link](https://uvima.github.io/ineapir/articles/identify_codes.html).
+#' ids click this [link](https://es-ine.github.io/ineapir/articles/identify_codes.html).
 #' @param idGroup (int): id of the group of variables. To get all groups
 #' for a specific table see [get_metadata_table_groups()].
 #' @param det (int): level of detail. Valid values: 0, 1 or 2.
@@ -154,7 +154,7 @@ get_metadata_table_values <- function(idTable = NULL, idGroup = NULL, det = 0, l
 #' Get the operation for a given table
 #'
 #' @param idTable (int): id of the table. For further information about
-#' ids click this [link](https://uvima.github.io/ineapir/articles/identify_codes.html).
+#' ids click this [link](https://es-ine.github.io/ineapir/articles/identify_codes.html).
 #' @param lang (string): language of the retrieved data. Set to 'ES' for Spanish or set to 'EN' for English.
 #' @param validate (logical): validate input parameters.
 #' @param verbose (logical): print additional information, including the URL to call the API service.
@@ -200,7 +200,7 @@ get_metadata_operation_table <- function(idTable = NULL, lang = "ES", validate =
 #' Get metadata information about the variables and values for a given table
 #'
 #' @param idTable (int): id of the table. For further information about
-#' ids click this [link](https://uvima.github.io/ineapir/articles/identify_codes.html).
+#' ids click this [link](https://es-ine.github.io/ineapir/articles/identify_codes.html).
 #' @param det (int): level of detail. Valid values: 0, 1 or 2.
 #' @param filter (list): list of variables and values.
 #' ### Filtering data from tables

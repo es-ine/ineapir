@@ -18,7 +18,7 @@ get_metadata_series_table(
 }
 \arguments{
 \item{idTable}{(int): id of the table. For further information about
-ids click this \href{https://uvima.github.io/ineapir/articles/identify_codes.html}{link}.}
+ids click this \href{https://es-ine.github.io/ineapir/articles/identify_codes.html}{link}.}
 
 \item{filter}{(list): list of variables and values.
 \subsection{Filtering data from tables}{

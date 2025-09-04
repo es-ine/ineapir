@@ -3,7 +3,7 @@
 #' @description Retrieve data from series published by INE calling the API
 #'
 #' @param codSeries (string): Code of the series. For further information about
-#' codes click this [link](https://uvima.github.io/ineapir/articles/identify_codes.html).
+#' codes click this [link](https://es-ine.github.io/ineapir/articles/identify_codes.html).
 #' @param nlast (int): number of periods to retrieve. By default is set to 1 period.
 #' @param dateStart (string): the initial date of the requested data. The required
 #' format is yyyy/mm/dd. Additionally, dateStart can be a vector of dates, where

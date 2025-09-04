@@ -15,7 +15,7 @@ get_metadata_table_values(
 }
 \arguments{
 \item{idTable}{(int): id of the table. For further information about
-ids click this \href{https://uvima.github.io/ineapir/articles/identify_codes.html}{link}.}
+ids click this \href{https://es-ine.github.io/ineapir/articles/identify_codes.html}{link}.}
 
 \item{idGroup}{(int): id of the group of variables. To get all groups
 for a specific table see \code{\link[=get_metadata_table_groups]{get_metadata_table_groups()}}.}

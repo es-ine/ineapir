@@ -1,7 +1,7 @@
 #' Get data from a specific table
 #'
 #' @param idTable (int): id of the table. For further information about
-#' ids click this [link](https://uvima.github.io/ineapir/articles/identify_codes.html).
+#' ids click this [link](https://es-ine.github.io/ineapir/articles/identify_codes.html).
 #' @param filter (list): list of variables and values.
 #' ### Filtering data from tables
 #' When we request data from tables there is the possibility of filtering data

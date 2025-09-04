@@ -1,7 +1,7 @@
 #' Get information for a specific series
 #'
 #' @param codSeries (string): code of the series. For further information about
-#' codes click this [link](https://uvima.github.io/ineapir/articles/identify_codes.html).
+#' codes click this [link](https://es-ine.github.io/ineapir/articles/identify_codes.html).
 #' @param det (int): level of detail. Valid values: 0, 1 or 2.
 #' @param tip (string): set to 'A' for friendly output (e.g. readable dates),
 #' set to 'M' to include metadata or set to 'AM' for both.
@@ -111,7 +111,7 @@ get_metadata_series_operation <- function(operation = NULL, det = 0, tip = NULL,
 #' Get all the values for a given series
 #'
 #' @param codSeries (string): code of the series. For further information about
-#' codes click this [link](https://uvima.github.io/ineapir/articles/identify_codes.html).
+#' codes click this [link](https://es-ine.github.io/ineapir/articles/identify_codes.html).
 #' @param det (int): level of detail. Valid values: 0, 1 or 2.
 #' @param tip (string): set to 'A' for friendly output (e.g. readable dates),
 #' set to 'M' to include metadata or set to 'AM' for both.
@@ -162,7 +162,7 @@ get_metadata_series_values <- function(codSeries = NULL, det = 0, tip = NULL, la
 #' Get all the series for a given table
 #'
 #' @param idTable (int): id of the table. For further information about
-#' ids click this [link](https://uvima.github.io/ineapir/articles/identify_codes.html).
+#' ids click this [link](https://es-ine.github.io/ineapir/articles/identify_codes.html).
 #' @param filter (list): list of variables and values.
 #' ### Filtering data from tables
 #' When we request data from tables there is the possibility of filtering data

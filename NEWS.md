@@ -1,3 +1,6 @@
+# ineapir 0.2.4
+* Initial CRAN submission
+
 # ineapir 0.2.3
 * Function usage examples have been reorganized.
 * Improvements in compatibility for future versions of the API.

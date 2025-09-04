@@ -13,7 +13,7 @@ get_metadata_table_groups(
 }
 \arguments{
 \item{idTable}{(int): id of the table. For further information about
-ids click this \href{https://uvima.github.io/ineapir/articles/identify_codes.html}{link}.}
+ids click this \href{https://es-ine.github.io/ineapir/articles/identify_codes.html}{link}.}
 
 \item{lang}{(string): language of the retrieved data. Set to 'ES' for Spanish or set to 'EN' for English.}
 

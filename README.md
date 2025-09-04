@@ -18,14 +18,20 @@ available statistical information published by INE.
 
 ## Installation
 
-To install the development version of **ineapir** from GitHub.
+Install the released version of **ineapir** from CRAN:
+
+``` r
+install.packages("ineapir")
+```
+
+To install the development version of **ineapir** from GitHub:
 
 ``` r
 remotes::install_github("es-ine/ineapir")
 ```
 
 Alternatively, you can download the source code as a zip file and then
-install it as follows.
+install it as follows:
 
 ``` r
 remotes::install_local(path = "path/to/file.zip")
@@ -64,12 +70,12 @@ table[1,c("COD", "Nombre")]
 # of the different periods of each series
 head(table$Data[[1]])
 #>                           Fecha T3_TipoDato T3_Periodo Anyo   Valor
-#> 1 2025-05-01T00:00:00.000+02:00  Definitivo        M05 2025 118.077
-#> 2 2025-04-01T00:00:00.000+02:00  Definitivo        M04 2025 117.997
-#> 3 2025-03-01T00:00:00.000+01:00  Definitivo        M03 2025 117.260
-#> 4 2025-02-01T00:00:00.000+01:00  Definitivo        M02 2025 117.191
-#> 5 2025-01-01T00:00:00.000+01:00  Definitivo        M01 2025 116.733
-#> 6 2024-12-01T00:00:00.000+01:00  Definitivo        M12 2024 116.534
+#> 1 2025-07-01T00:00:00.000+02:00  Definitivo        M07 2025 118.777
+#> 2 2025-06-01T00:00:00.000+02:00  Definitivo        M06 2025 118.867
+#> 3 2025-05-01T00:00:00.000+02:00  Definitivo        M05 2025 118.077
+#> 4 2025-04-01T00:00:00.000+02:00  Definitivo        M04 2025 117.997
+#> 5 2025-03-01T00:00:00.000+01:00  Definitivo        M03 2025 117.260
+#> 6 2025-02-01T00:00:00.000+01:00  Definitivo        M02 2025 117.191
 
 # We can concatenate all data frames into one using unnest = TRUE
 table <- get_data_table(idTable = 50902, tip = "A", unnest = TRUE)
@@ -82,12 +88,12 @@ head(table[,c("COD", "Nombre", "Fecha", "Valor")])
 #> 1.4 IPC251852 Total Nacional. Índice general. Índice. 
 #> 1.5 IPC251852 Total Nacional. Índice general. Índice. 
 #>                             Fecha   Valor
-#> 1   2025-05-01T00:00:00.000+02:00 118.077
-#> 1.1 2025-04-01T00:00:00.000+02:00 117.997
-#> 1.2 2025-03-01T00:00:00.000+01:00 117.260
-#> 1.3 2025-02-01T00:00:00.000+01:00 117.191
-#> 1.4 2025-01-01T00:00:00.000+01:00 116.733
-#> 1.5 2024-12-01T00:00:00.000+01:00 116.534
+#> 1   2025-07-01T00:00:00.000+02:00 118.777
+#> 1.1 2025-06-01T00:00:00.000+02:00 118.867
+#> 1.2 2025-05-01T00:00:00.000+02:00 118.077
+#> 1.3 2025-04-01T00:00:00.000+02:00 117.997
+#> 1.4 2025-03-01T00:00:00.000+01:00 117.260
+#> 1.5 2025-02-01T00:00:00.000+01:00 117.191
 ```
 
 To get the last n data from a table it is necessary to pass the `nlast`
@@ -100,8 +106,8 @@ table[1,c("COD", "Nombre")]
 #>         COD                                   Nombre
 #> 1 IPC251852 Total Nacional. Índice general. Índice.
 head(table$Data[[1]])
-#>         Fecha FK_TipoDato FK_Periodo Anyo   Valor Secreto
-#> 1 1.74605e+12           1          5 2025 118.077   FALSE
+#>          Fecha FK_TipoDato FK_Periodo Anyo   Valor Secreto
+#> 1 1.751321e+12           1          7 2025 118.777   FALSE
 ```
 
 ### Obtaining data from a series
@@ -115,7 +121,7 @@ function `get_data_series()`.
 series <- get_data_series(codSeries = "IPC251856", tip = "A")
 series$Data
 #>                           Fecha T3_TipoDato T3_Periodo Anyo Valor
-#> 1 2025-06-01T00:00:00.000+02:00      Avance        M06 2025   2.2
+#> 1 2025-08-01T00:00:00.000+02:00      Avance        M08 2025   2.7
 ```
 
 To get the last n data from a series it is necessary to pass the `nlast`
@@ -126,11 +132,11 @@ argument as well.
 series <- get_data_series(codSeries = "IPC251856", tip = "A", nlast = 5)
 series$Data
 #>                           Fecha T3_TipoDato T3_Periodo Anyo Valor
-#> 1 2025-02-01T00:00:00.000+01:00  Definitivo        M02 2025   3.0
-#> 2 2025-03-01T00:00:00.000+01:00  Definitivo        M03 2025   2.3
-#> 3 2025-04-01T00:00:00.000+02:00  Definitivo        M04 2025   2.2
-#> 4 2025-05-01T00:00:00.000+02:00  Definitivo        M05 2025   2.0
-#> 5 2025-06-01T00:00:00.000+02:00      Avance        M06 2025   2.2
+#> 1 2025-04-01T00:00:00.000+02:00  Definitivo        M04 2025   2.2
+#> 2 2025-05-01T00:00:00.000+02:00  Definitivo        M05 2025   2.0
+#> 3 2025-06-01T00:00:00.000+02:00  Definitivo        M06 2025   2.3
+#> 4 2025-07-01T00:00:00.000+02:00  Definitivo        M07 2025   2.7
+#> 5 2025-08-01T00:00:00.000+02:00      Avance        M08 2025   2.7
 
 # Using unnest = TRUE
 series <- get_data_series(codSeries = "IPC251856", tip = "A", nlast = 5,
@@ -143,11 +149,11 @@ head(series[,c("COD", "Nombre", "Fecha", "Valor")])
 #> 1.3 IPC251856 Total Nacional. Índice general. Variación anual. 
 #> 1.4 IPC251856 Total Nacional. Índice general. Variación anual. 
 #>                             Fecha Valor
-#> 1   2025-02-01T00:00:00.000+01:00   3.0
-#> 1.1 2025-03-01T00:00:00.000+01:00   2.3
-#> 1.2 2025-04-01T00:00:00.000+02:00   2.2
-#> 1.3 2025-05-01T00:00:00.000+02:00   2.0
-#> 1.4 2025-06-01T00:00:00.000+02:00   2.2
+#> 1   2025-04-01T00:00:00.000+02:00   2.2
+#> 1.1 2025-05-01T00:00:00.000+02:00   2.0
+#> 1.2 2025-06-01T00:00:00.000+02:00   2.3
+#> 1.3 2025-07-01T00:00:00.000+02:00   2.7
+#> 1.4 2025-08-01T00:00:00.000+02:00   2.7
 ```
 
 Additionally, it is possible to obtain data from a series between two

@@ -15,7 +15,7 @@ get_metadata_series(
 }
 \arguments{
 \item{codSeries}{(string): code of the series. For further information about
-codes click this \href{https://uvima.github.io/ineapir/articles/identify_codes.html}{link}.}
+codes click this \href{https://es-ine.github.io/ineapir/articles/identify_codes.html}{link}.}
 
 \item{det}{(int): level of detail. Valid values: 0, 1 or 2.}
 

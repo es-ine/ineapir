@@ -28,15 +28,20 @@ to the INE API service which allows access via URL requests to the
 available statistical information published by INE.
 
 ## Installation
+Install the released version of **ineapir** from CRAN:
 
-To install the development version of **ineapir** from GitHub.
+```{r, eval = FALSE}
+install.packages("ineapir")
+```
+
+To install the development version of **ineapir** from GitHub:
 
 ```{r, eval = FALSE}
 remotes::install_github("es-ine/ineapir")
 ```
 
 Alternatively, you can download the source code as a zip file and
-then install it as follows.
+then install it as follows:
 
 ```{r, eval = FALSE}
 remotes::install_local(path = "path/to/file.zip")

@@ -19,7 +19,7 @@ get_data_series(
 }
 \arguments{
 \item{codSeries}{(string): Code of the series. For further information about
-codes click this \href{https://uvima.github.io/ineapir/articles/identify_codes.html}{link}.}
+codes click this \href{https://es-ine.github.io/ineapir/articles/identify_codes.html}{link}.}
 
 \item{nlast}{(int): number of periods to retrieve. By default is set to 1 period.}
 
