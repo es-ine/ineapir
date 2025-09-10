@@ -1,12 +1,13 @@
 Package: ineapir
 Title: Obtaining Data Published by the National Statistics Institute
-Version: 0.2.4
+Version: 0.2.5
 Authors@R: c(
     person("David", "Crespo", email = "david.crespo.roces@ine.es", role = c("aut", "cre")),
     person("National Statistics Institute, INE", role = c("cph")))
 Description: Get open statistical data and metadata disseminated by the
-    National Statistics Institute of Spain (INE). The functions return data frames
-    with the requested information thanks to calls to the 'INE' API.
+    National Statistics Institute of Spain (INE). The functions return
+    data frames with the requested information thanks to calls to
+    the 'INE' API <https://www.ine.es/dyngs/DAB/index.htm?cid=1100>.
 License: EUPL (== 1.2)
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)

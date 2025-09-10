@@ -1,3 +1,7 @@
+# ineapir 0.2.5
+* CRAN resubmission
+* Added a web reference for the API to the description of the DESCRIPTION file
+
 # ineapir 0.2.4
 * Initial CRAN submission
 
