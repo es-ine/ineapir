@@ -5,14 +5,14 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Obtaining data published by the National Statistics Institute • ineapir</title>
+<title>Obtaining Data Published by the National Statistics Institute • ineapir</title>
 <script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
 <script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
-<script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Obtaining data published by the National Statistics Institute">
-<meta name="description" content="Set of functions to get open statistical data and metadata disseminated by the National Statistics Institute of Spain (INE). The functions return data frames with the requested information thanks to calls to the INE API.">
-<meta property="og:description" content="Set of functions to get open statistical data and metadata disseminated by the National Statistics Institute of Spain (INE). The functions return data frames with the requested information thanks to calls to the INE API.">
+<script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Obtaining Data Published by the National Statistics Institute">
+<meta name="description" content="Get open statistical data and metadata disseminated by the National Statistics Institute of Spain (INE). The functions return data frames with the requested information thanks to calls to the INE API &lt;https://www.ine.es/dyngs/DAB/index.htm?cid=1100&gt;.">
+<meta property="og:description" content="Get open statistical data and metadata disseminated by the National Statistics Institute of Spain (INE). The functions return data frames with the requested information thanks to calls to the INE API &lt;https://www.ine.es/dyngs/DAB/index.htm?cid=1100&gt;.">
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
@@ -22,7 +22,7 @@
 
     <a class="navbar-brand me-2" href="index.html">ineapir</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.5</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -70,11 +70,14 @@
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<p>To install the development version of <strong>ineapir</strong> from GitHub.</p>
+<p>Install the released version of <strong>ineapir</strong> from CRAN:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"es-ine/ineapir"</span><span class="op">)</span></span></code></pre></div>
-<p>Alternatively, you can download the source code as a zip file and then install it as follows.</p>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"ineapir"</span><span class="op">)</span></span></code></pre></div>
+<p>To install the development version of <strong>ineapir</strong> from GitHub:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"es-ine/ineapir"</span><span class="op">)</span></span></code></pre></div>
+<p>Alternatively, you can download the source code as a zip file and then install it as follows:</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_local</span><span class="op">(</span>path <span class="op">=</span> <span class="st">"path/to/file.zip"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
@@ -90,7 +93,7 @@
 <h3 id="obtaining-data-from-a-table">Obtaining data from a table<a class="anchor" aria-label="anchor" href="#obtaining-data-from-a-table"></a>
 </h3>
 <p>To get all the data of a table it is necessary to pass the <code>idTable</code> argument, which is the identification code of the table, to the function <code><a href="reference/get_data_table.html">get_data_table()</a></code>.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/es-ine/ineapir" class="external-link">ineapir</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># We use the function get_data_table with the argument idTable</span></span>
@@ -106,12 +109,12 @@
 <span><span class="co"># of the different periods of each series</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">table</span><span class="op">$</span><span class="va">Data</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="co">#&gt;                           Fecha T3_TipoDato T3_Periodo Anyo   Valor</span></span>
-<span><span class="co">#&gt; 1 2025-05-01T00:00:00.000+02:00  Definitivo        M05 2025 118.077</span></span>
-<span><span class="co">#&gt; 2 2025-04-01T00:00:00.000+02:00  Definitivo        M04 2025 117.997</span></span>
-<span><span class="co">#&gt; 3 2025-03-01T00:00:00.000+01:00  Definitivo        M03 2025 117.260</span></span>
-<span><span class="co">#&gt; 4 2025-02-01T00:00:00.000+01:00  Definitivo        M02 2025 117.191</span></span>
-<span><span class="co">#&gt; 5 2025-01-01T00:00:00.000+01:00  Definitivo        M01 2025 116.733</span></span>
-<span><span class="co">#&gt; 6 2024-12-01T00:00:00.000+01:00  Definitivo        M12 2024 116.534</span></span>
+<span><span class="co">#&gt; 1 2025-07-01T00:00:00.000+02:00  Definitivo        M07 2025 118.777</span></span>
+<span><span class="co">#&gt; 2 2025-06-01T00:00:00.000+02:00  Definitivo        M06 2025 118.867</span></span>
+<span><span class="co">#&gt; 3 2025-05-01T00:00:00.000+02:00  Definitivo        M05 2025 118.077</span></span>
+<span><span class="co">#&gt; 4 2025-04-01T00:00:00.000+02:00  Definitivo        M04 2025 117.997</span></span>
+<span><span class="co">#&gt; 5 2025-03-01T00:00:00.000+01:00  Definitivo        M03 2025 117.260</span></span>
+<span><span class="co">#&gt; 6 2025-02-01T00:00:00.000+01:00  Definitivo        M02 2025 117.191</span></span>
 <span></span>
 <span><span class="co"># We can concatenate all data frames into one using unnest = TRUE</span></span>
 <span><span class="va">table</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_data_table.html">get_data_table</a></span><span class="op">(</span>idTable <span class="op">=</span> <span class="fl">50902</span>, tip <span class="op">=</span> <span class="st">"A"</span>, unnest <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
@@ -124,44 +127,44 @@
 <span><span class="co">#&gt; 1.4 IPC251852 Total Nacional. Índice general. Índice. </span></span>
 <span><span class="co">#&gt; 1.5 IPC251852 Total Nacional. Índice general. Índice. </span></span>
 <span><span class="co">#&gt;                             Fecha   Valor</span></span>
-<span><span class="co">#&gt; 1   2025-05-01T00:00:00.000+02:00 118.077</span></span>
-<span><span class="co">#&gt; 1.1 2025-04-01T00:00:00.000+02:00 117.997</span></span>
-<span><span class="co">#&gt; 1.2 2025-03-01T00:00:00.000+01:00 117.260</span></span>
-<span><span class="co">#&gt; 1.3 2025-02-01T00:00:00.000+01:00 117.191</span></span>
-<span><span class="co">#&gt; 1.4 2025-01-01T00:00:00.000+01:00 116.733</span></span>
-<span><span class="co">#&gt; 1.5 2024-12-01T00:00:00.000+01:00 116.534</span></span></code></pre></div>
+<span><span class="co">#&gt; 1   2025-07-01T00:00:00.000+02:00 118.777</span></span>
+<span><span class="co">#&gt; 1.1 2025-06-01T00:00:00.000+02:00 118.867</span></span>
+<span><span class="co">#&gt; 1.2 2025-05-01T00:00:00.000+02:00 118.077</span></span>
+<span><span class="co">#&gt; 1.3 2025-04-01T00:00:00.000+02:00 117.997</span></span>
+<span><span class="co">#&gt; 1.4 2025-03-01T00:00:00.000+01:00 117.260</span></span>
+<span><span class="co">#&gt; 1.5 2025-02-01T00:00:00.000+01:00 117.191</span></span></code></pre></div>
 <p>To get the last n data from a table it is necessary to pass the <code>nlast</code> argument as well.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># We use the function get_data_table with arguments idTable and nlast</span></span>
 <span><span class="va">table</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_data_table.html">get_data_table</a></span><span class="op">(</span>idTable <span class="op">=</span> <span class="fl">50902</span>, nlast <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
 <span><span class="va">table</span><span class="op">[</span><span class="fl">1</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"COD"</span>, <span class="st">"Nombre"</span><span class="op">)</span><span class="op">]</span></span>
 <span><span class="co">#&gt;         COD                                   Nombre</span></span>
 <span><span class="co">#&gt; 1 IPC251852 Total Nacional. Índice general. Índice.</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">table</span><span class="op">$</span><span class="va">Data</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span>
-<span><span class="co">#&gt;         Fecha FK_TipoDato FK_Periodo Anyo   Valor Secreto</span></span>
-<span><span class="co">#&gt; 1 1.74605e+12           1          5 2025 118.077   FALSE</span></span></code></pre></div>
+<span><span class="co">#&gt;          Fecha FK_TipoDato FK_Periodo Anyo   Valor Secreto</span></span>
+<span><span class="co">#&gt; 1 1.751321e+12           1          7 2025 118.777   FALSE</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="obtaining-data-from-a-series">Obtaining data from a series<a class="anchor" aria-label="anchor" href="#obtaining-data-from-a-series"></a>
 </h3>
 <p>To get the last data of a series it is necessary to pass the <code>codSeries</code> argument, which is the identification code of the series, to the function <code><a href="reference/get_data_series.html">get_data_series()</a></code>.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># We use the function get_data_series with the argument codSeries</span></span>
 <span><span class="va">series</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_data_series.html">get_data_series</a></span><span class="op">(</span>codSeries <span class="op">=</span> <span class="st">"IPC251856"</span>, tip <span class="op">=</span> <span class="st">"A"</span><span class="op">)</span></span>
 <span><span class="va">series</span><span class="op">$</span><span class="va">Data</span></span>
 <span><span class="co">#&gt;                           Fecha T3_TipoDato T3_Periodo Anyo Valor</span></span>
-<span><span class="co">#&gt; 1 2025-06-01T00:00:00.000+02:00      Avance        M06 2025   2.2</span></span></code></pre></div>
+<span><span class="co">#&gt; 1 2025-08-01T00:00:00.000+02:00      Avance        M08 2025   2.7</span></span></code></pre></div>
 <p>To get the last n data from a series it is necessary to pass the <code>nlast</code> argument as well.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># We use the function get_data_series with arguments codSeries and nlast</span></span>
 <span><span class="va">series</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_data_series.html">get_data_series</a></span><span class="op">(</span>codSeries <span class="op">=</span> <span class="st">"IPC251856"</span>, tip <span class="op">=</span> <span class="st">"A"</span>, nlast <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
 <span><span class="va">series</span><span class="op">$</span><span class="va">Data</span></span>
 <span><span class="co">#&gt;                           Fecha T3_TipoDato T3_Periodo Anyo Valor</span></span>
-<span><span class="co">#&gt; 1 2025-02-01T00:00:00.000+01:00  Definitivo        M02 2025   3.0</span></span>
-<span><span class="co">#&gt; 2 2025-03-01T00:00:00.000+01:00  Definitivo        M03 2025   2.3</span></span>
-<span><span class="co">#&gt; 3 2025-04-01T00:00:00.000+02:00  Definitivo        M04 2025   2.2</span></span>
-<span><span class="co">#&gt; 4 2025-05-01T00:00:00.000+02:00  Definitivo        M05 2025   2.0</span></span>
-<span><span class="co">#&gt; 5 2025-06-01T00:00:00.000+02:00      Avance        M06 2025   2.2</span></span>
+<span><span class="co">#&gt; 1 2025-04-01T00:00:00.000+02:00  Definitivo        M04 2025   2.2</span></span>
+<span><span class="co">#&gt; 2 2025-05-01T00:00:00.000+02:00  Definitivo        M05 2025   2.0</span></span>
+<span><span class="co">#&gt; 3 2025-06-01T00:00:00.000+02:00  Definitivo        M06 2025   2.3</span></span>
+<span><span class="co">#&gt; 4 2025-07-01T00:00:00.000+02:00  Definitivo        M07 2025   2.7</span></span>
+<span><span class="co">#&gt; 5 2025-08-01T00:00:00.000+02:00      Avance        M08 2025   2.7</span></span>
 <span></span>
 <span><span class="co"># Using unnest = TRUE</span></span>
 <span><span class="va">series</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_data_series.html">get_data_series</a></span><span class="op">(</span>codSeries <span class="op">=</span> <span class="st">"IPC251856"</span>, tip <span class="op">=</span> <span class="st">"A"</span>, nlast <span class="op">=</span> <span class="fl">5</span>,</span>
@@ -174,13 +177,13 @@
 <span><span class="co">#&gt; 1.3 IPC251856 Total Nacional. Índice general. Variación anual. </span></span>
 <span><span class="co">#&gt; 1.4 IPC251856 Total Nacional. Índice general. Variación anual. </span></span>
 <span><span class="co">#&gt;                             Fecha Valor</span></span>
-<span><span class="co">#&gt; 1   2025-02-01T00:00:00.000+01:00   3.0</span></span>
-<span><span class="co">#&gt; 1.1 2025-03-01T00:00:00.000+01:00   2.3</span></span>
-<span><span class="co">#&gt; 1.2 2025-04-01T00:00:00.000+02:00   2.2</span></span>
-<span><span class="co">#&gt; 1.3 2025-05-01T00:00:00.000+02:00   2.0</span></span>
-<span><span class="co">#&gt; 1.4 2025-06-01T00:00:00.000+02:00   2.2</span></span></code></pre></div>
+<span><span class="co">#&gt; 1   2025-04-01T00:00:00.000+02:00   2.2</span></span>
+<span><span class="co">#&gt; 1.1 2025-05-01T00:00:00.000+02:00   2.0</span></span>
+<span><span class="co">#&gt; 1.2 2025-06-01T00:00:00.000+02:00   2.3</span></span>
+<span><span class="co">#&gt; 1.3 2025-07-01T00:00:00.000+02:00   2.7</span></span>
+<span><span class="co">#&gt; 1.4 2025-08-01T00:00:00.000+02:00   2.7</span></span></code></pre></div>
 <p>Additionally, it is possible to obtain data from a series between two dates. The date must have and specific format (<em>yyyy/mm/dd</em>). If the end date is not specified we obtain all the data from the start date.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># We use the function get_data_series with arguments codSeries, dateStart and dataEnd</span></span>
 <span><span class="va">series</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_data_series.html">get_data_series</a></span><span class="op">(</span>codSeries <span class="op">=</span> <span class="st">"IPC251856"</span>, dateStart <span class="op">=</span> <span class="st">"2023/01/01"</span>, </span>
 <span>                          dateEnd <span class="op">=</span> <span class="st">"2023/04/01"</span><span class="op">)</span></span>
@@ -200,7 +203,7 @@
 <h3 id="obtaining-statistical-operations">Obtaining statistical operations<a class="anchor" aria-label="anchor" href="#obtaining-statistical-operations"></a>
 </h3>
 <p>The database contains information about all short-term statistical operations, those with a periodicity for disseminating results of less than a year, as well as some structural statistical operations. We can get all the operations using the function <code><a href="reference/get_metadata_operations.html">get_metadata_operations()</a></code>.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># We use the function get_metadata_operations</span></span>
 <span><span class="va">operations</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_metadata_operations.html">get_metadata_operations</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">operations</span><span class="op">)</span></span>
@@ -219,7 +222,7 @@
 <span><span class="co">#&gt; 5                                                                                                  &lt;NA&gt;</span></span>
 <span><span class="co">#&gt; 6                                                                                                  &lt;NA&gt;</span></span></code></pre></div>
 <p>An operation can be identify by a numerical code (‘<em>Id</em>’), an alphabetic code (‘<em>Codigo</em>’) or by the code of the statistical operation in the Inventory of Statistical Operations (IOE + ‘<em>Cod_IOE</em>’). To obtain information about only one operation we have to pass the <code>operation</code> argument with one of these codes.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># We use the function get_metadata_operations with argument operation</span></span>
 <span><span class="va">operation</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_metadata_operations.html">get_metadata_operations</a></span><span class="op">(</span>operation <span class="op">=</span> <span class="st">"IPC"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">operation</span><span class="op">)</span></span>
@@ -230,7 +233,7 @@
 <h3 id="obtaining-variables">Obtaining variables<a class="anchor" aria-label="anchor" href="#obtaining-variables"></a>
 </h3>
 <p>We can get all the variables of the system using the function <code><a href="reference/get_metadata_variables.html">get_metadata_variables()</a></code>.</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># We use the function get_metadata_variables</span></span>
 <span><span class="va">variables</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_metadata_variables.html">get_metadata_variables</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">variables</span><span class="op">)</span></span>
@@ -242,7 +245,7 @@
 <span><span class="co">#&gt; 5 955       Cultivos, pastos y huertos       </span></span>
 <span><span class="co">#&gt; 6 956              SAU y Otras tierras</span></span></code></pre></div>
 <p>A variable can be identify by a numerical code (‘<em>Id</em>’). In addition, if we pass the <code>operation</code> argument we obtain the variables used in an operation.</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># We use the function get_metadata_variables with argument operation,</span></span>
 <span><span class="co"># e.g., operation code = 'IPC'</span></span>
 <span><span class="va">variables</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_metadata_variables.html">get_metadata_variables</a></span><span class="op">(</span>operation <span class="op">=</span> <span class="st">"IPC"</span><span class="op">)</span></span>
@@ -259,7 +262,7 @@
 <h3 id="obtaining-values">Obtaining values<a class="anchor" aria-label="anchor" href="#obtaining-values"></a>
 </h3>
 <p>To get all the values that a variable can take it is necessary to pass the <code>variable</code> argument, which is the identifier of the variable, to the function <code><a href="reference/get_metadata_values.html">get_metadata_values()</a></code>.</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># We use the function get_metadata_values with argument variable,</span></span>
 <span><span class="co"># e.g., id = 3 (variable 'Tipo de dato')</span></span>
 <span><span class="va">values</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_metadata_values.html">get_metadata_values</a></span><span class="op">(</span>variable <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
@@ -279,7 +282,7 @@
 <span><span class="co">#&gt; 5       </span></span>
 <span><span class="co">#&gt; 6</span></span></code></pre></div>
 <p>A value can be identify by a numerical code (‘<em>Id</em>’). In addition, if we pass the <code>operation</code> argument as well we obtain the values that the variable takes in that particular operation.</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># We use the function get_metadata_values with arguments operation and variable,</span></span>
 <span><span class="co"># e.g., operation code = 'IPC'</span></span>
 <span><span class="va">values</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_metadata_values.html">get_metadata_values</a></span><span class="op">(</span>operation <span class="op">=</span> <span class="st">"IPC"</span>, variable <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
@@ -296,7 +299,7 @@
 <h3 id="obtaining-tables">Obtaining tables<a class="anchor" aria-label="anchor" href="#obtaining-tables"></a>
 </h3>
 <p>We can get the tables associated with an statistical operation using the function <code><a href="reference/get_metadata_tables_operation.html">get_metadata_tables_operation()</a></code>.</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># We use the function get_metadata_tables with argument operation</span></span>
 <span><span class="va">tables</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_metadata_tables_operation.html">get_metadata_tables_operation</a></span><span class="op">(</span>operation <span class="op">=</span> <span class="st">"IPC"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">tables</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Id"</span>,<span class="st">"Nombre"</span><span class="op">)</span><span class="op">]</span><span class="op">)</span></span>
@@ -315,7 +318,7 @@
 <span><span class="co">#&gt; 5    Índices nacionales a impuestos constantes: general y de grupos ECOICOP</span></span>
 <span><span class="co">#&gt; 6 Tasa de variacion del índice general nacional. Series desde enero de 1961</span></span></code></pre></div>
 <p>A table is defined by different groups or selection combo boxes and each of them by the values that one or several variables take. To obtain the variables and values present in a table first we have to query the groups that define the table using the function <code><a href="reference/get_metadata_table_groups.html">get_metadata_table_groups()</a></code>.</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># We use the function get_metadata_table_groups with argument idTable</span></span>
 <span><span class="va">groups</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_metadata_table_groups.html">get_metadata_table_groups</a></span><span class="op">(</span>idTable <span class="op">=</span> <span class="fl">50902</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">groups</span><span class="op">)</span></span>
@@ -323,7 +326,7 @@
 <span><span class="co">#&gt; 1 110889 Grupos ECOICOP</span></span>
 <span><span class="co">#&gt; 2 110890   Tipo de dato</span></span></code></pre></div>
 <p>Once we have the identification codes of the groups, we can query the values for an specific group using the function <code><a href="reference/get_metadata_table_values.html">get_metadata_table_values()</a></code>.</p>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># We use the function get_metadata_table_values with arguments idTable and idGroup</span></span>
 <span><span class="va">values</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_metadata_table_values.html">get_metadata_table_values</a></span><span class="op">(</span>idTable <span class="op">=</span> <span class="fl">50902</span>, idGroup <span class="op">=</span> <span class="fl">110889</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">values</span>, <span class="fl">4</span><span class="op">)</span></span>
@@ -338,7 +341,7 @@
 <span><span class="co">#&gt; 3             304092</span></span>
 <span><span class="co">#&gt; 4             304092</span></span></code></pre></div>
 <p>Alternatively, we can use the <code><a href="reference/get_metadata_table_varval.html">get_metadata_table_varval()</a></code> function to get the variables and values present in a table.</p>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Using the function get_metadata_table_varval</span></span>
 <span><span class="va">values</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_metadata_table_varval.html">get_metadata_table_varval</a></span><span class="op">(</span>idTable <span class="op">=</span> <span class="fl">50902</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">values</span>, <span class="fl">4</span><span class="op">)</span></span>
@@ -352,7 +355,7 @@
 <h3 id="obtaining-series">Obtaining series<a class="anchor" aria-label="anchor" href="#obtaining-series"></a>
 </h3>
 <p>The data is only associated with the series object. To obtain information about a particular series it is necessary to pass the <code>codSeries</code> argument, which is the identification code of the series, to the function <code><a href="reference/get_metadata_series.html">get_metadata_series()</a></code>.</p>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># We use the function get_metadata_series with argument codSeries</span></span>
 <span><span class="va">series</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_metadata_series.html">get_metadata_series</a></span><span class="op">(</span>codSeries <span class="op">=</span> <span class="st">"IPC251856"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">series</span><span class="op">)</span></span>
@@ -363,7 +366,7 @@
 <span><span class="co">#&gt;   FK_Publicacion FK_Clasificacion FK_Escala FK_Unidad</span></span>
 <span><span class="co">#&gt; 1              8               90         1       135</span></span></code></pre></div>
 <p>To get the values and variables that define a series it is necessary to pass the <code>codSeries</code> argument as well.</p>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># We use the function get_metadata_series_values with argument codSeries</span></span>
 <span><span class="va">values</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_metadata_series_values.html">get_metadata_series_values</a></span><span class="op">(</span>codSeries <span class="op">=</span> <span class="st">"IPC251856"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">values</span><span class="op">)</span></span>
@@ -372,7 +375,7 @@
 <span><span class="co">#&gt; 2 304092         762  Índice general     00</span></span>
 <span><span class="co">#&gt; 3     74           3 Variación anual</span></span></code></pre></div>
 <p>To get all the series that define a table it is necessary to pass the <code>idTable</code> argument, which is the identification code of the table, to the function <code><a href="reference/get_metadata_series_table.html">get_metadata_series_table()</a></code>.</p>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># We use the function get_metadata_series_table with argument idTable</span></span>
 <span><span class="va">series</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_metadata_series_table.html">get_metadata_series_table</a></span><span class="op">(</span>idTable <span class="op">=</span> <span class="fl">50902</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">series</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"COD"</span>, <span class="st">"Nombre"</span><span class="op">)</span><span class="op">]</span>, <span class="fl">4</span><span class="op">)</span></span>
@@ -387,6 +390,7 @@
   </main><aside class="col-md-3"><div class="links">
 <h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
+<li><a href="https://cloud.r-project.org/package=ineapir" class="external-link">View on CRAN</a></li>
 <li><a href="https://github.com/es-ine/ineapir/" class="external-link">Browse source code</a></li>
 <li><a href="https://github.com/es-ine/ineapir/issues" class="external-link">Report a bug</a></li>
 </ul>
