@@ -12,8 +12,8 @@
 #' @return Data frame with information of a series according to the code specified in the function
 #'
 #' @examplesIf interactive()
-#' # Get information of time series with code "IPC206449"
-#' df <- get_metadata_series(codSeries = "IPC206449")
+#' # Get information of time series with code "IPC290750"
+#' df <- get_metadata_series(codSeries = "IPC290750")
 #' head(df)
 #'
 #' @export
@@ -122,8 +122,8 @@ get_metadata_series_operation <- function(operation = NULL, det = 0, tip = NULL,
 #' @return Data frame with information of the values of a series according to the code specified in the function
 #'
 #' @examplesIf interactive()
-#' # Get metadata of time series with code "IPC206449"
-#' df <- get_metadata_series_values(codSeries = "IPC206449")
+#' # Get metadata of time series with code "IPC290750"
+#' df <- get_metadata_series_values(codSeries = "IPC290750")
 #' head(df)
 #'
 #' @export
@@ -171,7 +171,7 @@ get_metadata_series_values <- function(codSeries = NULL, det = 0, tip = NULL, la
 #' There are different approaches to build the filter depending on the table type.
 #'
 #' #### Case one: tempus table
-#' [URL example](https://www.ine.es/jaxiT3/Tabla.htm?t=50902).
+#' [URL example](https://www.ine.es/jaxiT3/Tabla.htm?t=76125).
 #' For a tempus table the filter is based on ids. The format is `list(id_variable1 = id_value1, id_variable2 = id_value2)`.
 #' Besides:
 #' - A variable can take more than one value: `list(id_variable1 = c(id_value11, id_value12), id_variable2 = id_value2)`.
@@ -223,14 +223,14 @@ get_metadata_series_values <- function(codSeries = NULL, det = 0, tip = NULL, la
 #' @return Data frame with information of the series for a given table.
 #'
 #' @examplesIf interactive()
-#' # Get time series without data from table with identification code "50902"
+#' # Get time series without data from table with identification code "76125"
 #' filter <- list("3" = "83")
-#' df <- get_metadata_series_table(idTable = 50902, validate = FALSE,
+#' df <- get_metadata_series_table(idTable = 76125, validate = FALSE,
 #' filter = filter)
 #' head(df)
 #'
 #' # Get metadata as well
-#' df <- get_metadata_series_table(idTable = 50902, validate = FALSE,
+#' df <- get_metadata_series_table(idTable = 76125, validate = FALSE,
 #' filter = filter, metanames = TRUE, metacodes = TRUE, tip = "M")
 #' head(df)
 #'

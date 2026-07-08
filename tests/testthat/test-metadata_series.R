@@ -1,6 +1,6 @@
 test_that("get_metadata_series", {
   skip_on_cran()
-  expect_type(get_metadata_series(codSeries = "IPC206449"), "list")
+  expect_type(get_metadata_series(codSeries = "IPC290750"), "list")
 })
 
 test_that("test get_metadata_series_operation", {
@@ -10,13 +10,13 @@ test_that("test get_metadata_series_operation", {
 
 test_that("test get_metadata_series_values", {
   skip_on_cran()
-  expect_s3_class(get_metadata_series_values(codSeries = "IPC206449"), "data.frame")
-  expect_s3_class(get_metadata_series_values(codSeries = "IPC206449", det = 2), "data.frame")
+  expect_s3_class(get_metadata_series_values(codSeries = "IPC290750"), "data.frame")
+  expect_s3_class(get_metadata_series_values(codSeries = "IPC290750", det = 2), "data.frame")
 })
 
 test_that("test get_metadata_series_table", {
   skip_on_cran()
-  expect_s3_class(get_metadata_series_table(idTable = 50902, filter = list("3" = "74", "762" = "304092"),
+  expect_s3_class(get_metadata_series_table(idTable = 76125, filter = list("3" = "74", "762" = "304092"),
                                                      metanames = TRUE, metacodes = TRUE, tip = "M"), "data.frame")
 })
 

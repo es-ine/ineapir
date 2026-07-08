@@ -36,9 +36,9 @@ Get all values for a specific table group
 }
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-# Get the values of the group "110889" of the table with identification
-# code "50902"
-df <- get_metadata_table_values(idTable = 50902, idGroup = 110889, validate = FALSE)
+# Get the values of the group "155577" of the table with identification
+# code "76125"
+df <- get_metadata_table_values(idTable = 76125, idGroup = 155577, validate = FALSE)
 head(df)
 \dontshow{\}) # examplesIf}
 }

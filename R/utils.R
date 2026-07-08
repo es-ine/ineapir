@@ -351,8 +351,12 @@ get_url <- function(request){
 
 # Return the dates in the format used by the API
 build_date <- function(date){
-  dateStart <- format.Date(date$dateStart,'%Y%m%d')
-  dateEnd <- append(format.Date(date$dateEnd,'%Y%m%d'), rep("", length(date$dateStart)- length(date$dateEnd)))
+  # Date errors in some OS
+  #dateStart <- format.Date(date$dateStart,'%Y%m%d')
+  #dateEnd <- append(format.Date(date$dateEnd,'%Y%m%d'), rep("", length(date$dateStart)- length(date$dateEnd)))
+
+  dateStart <- gsub("[/-]", "", date$dateStart)
+  dateEnd <- append(gsub("[/-]", "", date$dateEnd), rep("", length(date$dateStart)- length(date$dateEnd)))
 
   return(paste(dateStart, dateEnd, sep = ":"))
 }
@@ -784,8 +788,10 @@ check_definition <- function(definition, addons){
                      "input" = check_input(definition$tag, val, addons$verbose)
         )
         # Check results to return
-        result <- append(result, r)
-        names(result)[length(result)] <- x
+        if(!is.null(r)){
+          result <- append(result, r)
+          names(result)[length(result)] <- x
+        }
       }
     }
   }

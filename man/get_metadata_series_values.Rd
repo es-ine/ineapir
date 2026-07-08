@@ -36,8 +36,8 @@ Get all the values for a given series
 }
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-# Get metadata of time series with code "IPC206449"
-df <- get_metadata_series_values(codSeries = "IPC206449")
+# Get metadata of time series with code "IPC290750"
+df <- get_metadata_series_values(codSeries = "IPC290750")
 head(df)
 \dontshow{\}) # examplesIf}
 }

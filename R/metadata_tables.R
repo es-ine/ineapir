@@ -65,8 +65,8 @@ get_metadata_tables_operation <- function(operation = NULL, det = 0, tip = NULL,
 #' @return Data frame with information of the groups according to the table specified in the function
 #'
 #' @examplesIf interactive()
-#' # Get the groups of the table with identification code "50902"
-#' df <- get_metadata_table_groups(idTable = 50902)
+#' # Get the groups of the table with identification code "76125"
+#' df <- get_metadata_table_groups(idTable = 76125)
 #' head(df)
 #'
 #' @export
@@ -114,9 +114,9 @@ get_metadata_table_groups <- function(idTable = NULL, lang = "ES", validate = TR
 #' @return Data frame with information of the values of a table group according to the table and group specified in the function
 #'
 #' @examplesIf interactive()
-#' # Get the values of the group "110889" of the table with identification
-#' # code "50902"
-#' df <- get_metadata_table_values(idTable = 50902, idGroup = 110889, validate = FALSE)
+#' # Get the values of the group "155577" of the table with identification
+#' # code "76125"
+#' df <- get_metadata_table_values(idTable = 76125, idGroup = 155577, validate = FALSE)
 #' head(df)
 #'
 #' @export
@@ -162,8 +162,8 @@ get_metadata_table_values <- function(idTable = NULL, idGroup = NULL, det = 0, l
 #' @return Data frame with information of the operation according to the table specified in the function
 #'
 #' @examplesIf interactive()
-#' # Get the operation of the table with identification code "50902"
-#' df <- get_metadata_operation_table(idTable = 50902)
+#' # Get the operation of the table with identification code "76125"
+#' df <- get_metadata_operation_table(idTable = 76125)
 #' head(df)
 #'
 #' @export
@@ -209,7 +209,7 @@ get_metadata_operation_table <- function(idTable = NULL, lang = "ES", validate =
 #' that define the series. There are different approaches to build the filter depending on the table type.
 #'
 #' #### Case one: tempus table
-#' [URL example](https://www.ine.es/jaxiT3/Tabla.htm?t=50902).
+#' [URL example](https://www.ine.es/jaxiT3/Tabla.htm?t=76125).
 #' For a tempus table the filter is based on ids. The format is `list(id_variable1 = id_value1, id_variable2 = id_value2)`.
 #' Besides:
 #' - A variable can take more than one value: `list(id_variable1 = c(id_value11, id_value12), id_variable2 = id_value2)`.
@@ -241,8 +241,8 @@ get_metadata_operation_table <- function(idTable = NULL, lang = "ES", validate =
 #' @return Data frame with information about the variables and values that define a table according to the table specified in the function
 #'
 #' @examplesIf interactive()
-#' # Get all the variable and values of the table with identification code "50902"
-#' df <- get_metadata_table_varval(idTable = 50902)
+#' # Get all the variable and values of the table with identification code "76125"
+#' df <- get_metadata_table_varval(idTable = 76125)
 #' head(df)
 #'
 #' # Filter variables and values

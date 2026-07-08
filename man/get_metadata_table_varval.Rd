@@ -27,7 +27,7 @@ on the fly using metadata information about the variables and their values
 that define the series. There are different approaches to build the filter depending on the table type.
 \subsection{Case one: tempus table}{
 
-\href{https://www.ine.es/jaxiT3/Tabla.htm?t=50902}{URL example}.
+\href{https://www.ine.es/jaxiT3/Tabla.htm?t=76125}{URL example}.
 For a tempus table the filter is based on ids. The format is \code{list(id_variable1 = id_value1, id_variable2 = id_value2)}.
 Besides:
 \itemize{
@@ -80,8 +80,8 @@ Get metadata information about the variables and values for a given table
 }
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-# Get all the variable and values of the table with identification code "50902"
-df <- get_metadata_table_varval(idTable = 50902)
+# Get all the variable and values of the table with identification code "76125"
+df <- get_metadata_table_varval(idTable = 76125)
 head(df)
 
 # Filter variables and values

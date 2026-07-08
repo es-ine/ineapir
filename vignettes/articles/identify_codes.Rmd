@@ -23,15 +23,15 @@ identifying its ID.
  
 ### Case one
 
-- **URL:** https://www.ine.es/jaxiT3/Tabla.htm?t=50902
-- **ID:** URL *t* parameter **50902**
+- **URL:** https://www.ine.es/jaxiT3/Tabla.htm?t=76125
+- **ID:** URL *t* parameter **76125**
 
 ![Identification code of a Tempus table](img/code_table_1.png){width=100%}
 
 ```{r table_data_1}
 library(ineapir)
-# Request table data with id = 50902
-table <- get_data_table(idTable = 50902, nlast = 1, unnest = TRUE)
+# Request table data with id = 76125
+table <- get_data_table(idTable = 76125, nlast = 1, unnest = TRUE)
 table[1:2,c("Nombre", "FK_Periodo", "Anyo", "Valor")]
 ```
 
@@ -68,7 +68,7 @@ The tables introduced in cases two and three not include temporal series. Only
 tables from case one contain temporal series. In order to obtain the 
 identification code of a series it is necessary to carry out a number of steps.
 
-1. Browse to a [table](https://www.ine.es/jaxi/Tabla.htm?path=/t20/e245/p08/l0/&file=01001.px)
+1. Browse to a [table](https://www.ine.es/jaxiT3/Tabla.htm?t=76125)
 containing the series of interest. 
 2. Make the selection of values in the table and perform the query.
 3. Click on the corresponding value cell.
@@ -78,7 +78,7 @@ the series associated with the cell that was clicked on.
 ![Identification code of a Tempus series](img/code_series_1.png){width=100%}
 
 ```{r serie_data_1}
-# Request series data with code = IPC251856
-serie <- get_data_series(codSeries = "IPC251856", unnest = TRUE)
+# Request series data with code = IPC290750
+serie <- get_data_series(codSeries = "IPC290750", unnest = TRUE)
 serie[1,c("Nombre", "FK_Periodo", "Anyo", "Valor")]
 ```

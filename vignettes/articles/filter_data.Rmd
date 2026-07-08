@@ -22,7 +22,7 @@ table type.
 
 ### Case one.
 
-- **URL:** https://www.ine.es/jaxiT3/Tabla.htm?t=50902
+- **URL:** https://www.ine.es/jaxiT3/Tabla.htm?t=76125
 
 1. The first step is to obtain the values of the groups (combo boxes) of the
 table that interest us to build the filter.
@@ -31,7 +31,7 @@ table that interest us to build the filter.
 library(ineapir)
 
 # Get metadata information of the table
-metadata <- get_metadata_table_varval(idTable = 50902, validate = FALSE)
+metadata <- get_metadata_table_varval(idTable = 76125, validate = FALSE)
 head(metadata,4)
 tail(metadata,4)
 ```
@@ -45,7 +45,7 @@ filter <- list("3" = "74" ,     # variable id = 3, value id = 74
                )
 
 # Request data using the filter
-ipc <- get_data_table(idTable = 50902, filter = filter, unnest = TRUE,
+ipc <- get_data_table(idTable = 76125, filter = filter, unnest = TRUE,
                       tip = "A", nlast = 5, validate = FALSE)
 ipc[,c("Nombre", "T3_Periodo", "Anyo", "Valor")]
 ```
@@ -59,7 +59,7 @@ filter <- list("3" = "74" ,     # variable id = 3, value id = 74
                )
 
 # Request data using the filter
-ipc <- get_data_table(idTable = 50902, filter = filter, unnest = TRUE,
+ipc <- get_data_table(idTable = 76125, filter = filter, unnest = TRUE,
                       tip = "A", nlast = 2, validate = FALSE)
 ipc[,c("Nombre", "T3_Periodo", "Anyo", "Valor")]
 ```

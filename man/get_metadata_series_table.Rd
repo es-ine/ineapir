@@ -29,7 +29,7 @@ that define the series. See \code{\link[=get_metadata_table_varval]{get_metadata
 There are different approaches to build the filter depending on the table type.
 \subsection{Case one: tempus table}{
 
-\href{https://www.ine.es/jaxiT3/Tabla.htm?t=50902}{URL example}.
+\href{https://www.ine.es/jaxiT3/Tabla.htm?t=76125}{URL example}.
 For a tempus table the filter is based on ids. The format is \code{list(id_variable1 = id_value1, id_variable2 = id_value2)}.
 Besides:
 \itemize{
@@ -108,14 +108,14 @@ Get all the series for a given table
 }
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-# Get time series without data from table with identification code "50902"
+# Get time series without data from table with identification code "76125"
 filter <- list("3" = "83")
-df <- get_metadata_series_table(idTable = 50902, validate = FALSE,
+df <- get_metadata_series_table(idTable = 76125, validate = FALSE,
 filter = filter)
 head(df)
 
 # Get metadata as well
-df <- get_metadata_series_table(idTable = 50902, validate = FALSE,
+df <- get_metadata_series_table(idTable = 76125, validate = FALSE,
 filter = filter, metanames = TRUE, metacodes = TRUE, tip = "M")
 head(df)
 \dontshow{\}) # examplesIf}

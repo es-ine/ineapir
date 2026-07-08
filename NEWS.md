@@ -1,3 +1,7 @@
+# ineapir 0.2.6
+* Debugged error in the date argument of the get_data_table() function.
+* Documentation update.
+
 # ineapir 0.2.5
 * CRAN resubmission
 * Added a web reference for the API to the description of the DESCRIPTION file

@@ -10,7 +10,7 @@
 #' There are different approaches to build the filter depending on the table type.
 #'
 #' #### Case one: tempus table
-#' [URL example](https://www.ine.es/jaxiT3/Tabla.htm?t=50902).
+#' [URL example](https://www.ine.es/jaxiT3/Tabla.htm?t=76125).
 #' For a tempus table the filter is based on ids. The format is `list(id_variable1 = id_value1, id_variable2 = id_value2)`.
 #' Besides:
 #' - A variable can take more than one value: `list(id_variable1 = c(id_value11, id_value12), id_variable2 = id_value2)`.
@@ -77,38 +77,38 @@
 #' @examplesIf interactive()
 #' # Obtaining the last two periods and filter data
 #' filter <- list("3" = "74", "762" = "304092")
-#' df <-get_data_table(idTable = 50902, nlast = 2, unnest = TRUE,
+#' df <-get_data_table(idTable = 76125, nlast = 2, unnest = TRUE,
 #' filter = filter, validate = FALSE)
 #' head(df)
 #'
 #' # Get data for an open range date
-#' df <- get_data_table(idTable = 50902, unnest = TRUE, tip= "A",
+#' df <- get_data_table(idTable = 76125, unnest = TRUE, tip= "A",
 #' filter = filter, validate = FALSE,
 #' dateStart = "2025/01/01")
 #' head(df)
 #'
 #' # Get data for a single range data
-#' df <- get_data_table(idTable = 50902, unnest = TRUE, tip= "A",
+#' df <- get_data_table(idTable = 76125, unnest = TRUE, tip= "A",
 #' filter = filter, validate = FALSE,
 #' dateStart = "2023/01/01", dateEnd = "2023/05/01")
 #' head(df)
 #'
 #' # Get data for specific dates
-#' df <- get_data_table(idTable = 50902, unnest = TRUE, tip= "A",
+#' df <- get_data_table(idTable = 76125, unnest = TRUE, tip= "A",
 #' filter = filter, validate = FALSE,
 #' dateStart = c("2023/01/01","2024/01/01"),
 #' dateEnd = c("2023/01/01","2024/01/01"))
 #' head(df)
 #'
 #' # Get data for multiple date ranges
-#' df <- get_data_table(idTable = 50902, unnest = TRUE, tip= "A",
+#' df <- get_data_table(idTable = 76125, unnest = TRUE, tip= "A",
 #' filter = filter, validate = FALSE,
 #' dateStart = c("2023/01/01","2024/01/01"),
 #' dateEnd = c("2023/03/01","2024/03/01"))
 #' head(df)
 #'
 #' # Get medatada as well
-#' df <- get_data_table(idTable = 50902, nlast = 2, unnest = TRUE,
+#' df <- get_data_table(idTable = 76125, nlast = 2, unnest = TRUE,
 #' filter = filter, validate = FALSE,
 #' metanames = TRUE, metacodes = TRUE, tip = "M")
 #' head(df)

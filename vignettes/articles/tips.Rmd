@@ -23,7 +23,7 @@ filter <- list("3" = "74" ,     # variable id = 3, value id = 74
                )
 
 # Request data using dates. The required format is yyyy/mm/dd.
-ipc <- get_data_table(idTable = 50902, filter = filter, unnest = TRUE,
+ipc <- get_data_table(idTable = 76125, filter = filter, unnest = TRUE,
                       tip = "A", validate = FALSE,
                       dateStart = "2025/01/01", dateEnd = "2025/01/01")
 ipc[,c("Nombre", "T3_Periodo", "Anyo", "Valor")]
@@ -32,7 +32,7 @@ ipc[,c("Nombre", "T3_Periodo", "Anyo", "Valor")]
 - Single range of dates:
 ```{r date2}
 # Request data using dates. The required format is yyyy/mm/dd.
-ipc <- get_data_table(idTable = 50902, filter = filter, unnest = TRUE,
+ipc <- get_data_table(idTable = 76125, filter = filter, unnest = TRUE,
                       tip = "A", validate = FALSE,
                       dateStart = "2024/01/01", dateEnd = "2024/12/01")
 ipc[,c("Nombre", "T3_Periodo", "Anyo", "Valor")]
@@ -41,7 +41,7 @@ ipc[,c("Nombre", "T3_Periodo", "Anyo", "Valor")]
 - Open range of dates:
 ```{r date3}
 # Request data using dates. The required format is yyyy/mm/dd.
-ipc <- get_data_table(idTable = 50902, filter = filter, unnest = TRUE,
+ipc <- get_data_table(idTable = 76125, filter = filter, unnest = TRUE,
                       tip = "A", validate = FALSE,
                       dateStart = "2025/01/01")
 ipc[,c("Nombre", "T3_Periodo", "Anyo", "Valor")]
@@ -51,7 +51,7 @@ ipc[,c("Nombre", "T3_Periodo", "Anyo", "Valor")]
 - Multiple dates:
 ```{r date4}
 # Request data using dates. The required format is yyyy/mm/dd.
-ipc <- get_data_table(idTable = 50902, filter = filter, unnest = TRUE,
+ipc <- get_data_table(idTable = 76125, filter = filter, unnest = TRUE,
                       tip = "A", validate = FALSE,
                       dateStart = c("2023/01/01", "2024/01/01", "2025/01/01"), 
                       dateEnd = c("2023/01/01", "2024/01/01", "2025/01/01"))
@@ -61,7 +61,7 @@ ipc[,c("Nombre", "T3_Periodo", "Anyo", "Valor")]
 - Multiple range of dates:
 ```{r date5}
 # Request data using dates. The required format is yyyy/mm/dd.
-ipc <- get_data_table(idTable = 50902, filter = filter, unnest = TRUE,
+ipc <- get_data_table(idTable = 76125, filter = filter, unnest = TRUE,
                       tip = "A", validate = FALSE,
                       dateStart = c("2023/01/01", "2024/01/01", "2025/01/01"),
                       dateEnd = c("2023/03/01", "2024/03/01", "2025/03/01"))
@@ -71,7 +71,7 @@ ipc[,c("Nombre", "T3_Periodo", "Anyo", "Valor")]
 - Multiple range of dates and a final open range:
 ```{r date6}
 # Request data using dates. The required format is yyyy/mm/dd.
-ipc <- get_data_table(idTable = 50902, filter = filter, unnest = TRUE,
+ipc <- get_data_table(idTable = 76125, filter = filter, unnest = TRUE,
                       tip = "A", validate = FALSE,
                       dateStart = c("2023/01/01", "2024/01/01", "2025/01/01"), 
                       dateEnd = c("2023/03/01", "2024/03/01"))
@@ -138,7 +138,7 @@ We can use the English language as well filtering data using shortcuts.
 filter <- list(values = c("annual change" , "overall index"))
 
 # Request data using the filter with shortcut = TRUE and lang = "EN"
-cpi <- get_data_table(idTable = 50902, filter = filter, unnest = TRUE,
+cpi <- get_data_table(idTable = 76125, filter = filter, unnest = TRUE,
                       tip = "A", nlast = 5, lang = "EN")
 
 cpi[,c("Nombre", "T3_Periodo", "Anyo", "Valor")]
@@ -155,7 +155,7 @@ When we request data from tables or series using the functions
 filter <- list(values = c("variación anual" , "variación mensual", "índice general"))
 
 # Request data using the filter and unnest = FALSE
-ipc <- get_data_table(idTable = 50902, filter = filter, tip = "A", nlast = 3)
+ipc <- get_data_table(idTable = 76125, filter = filter, tip = "A", nlast = 3)
 
 # We have two entries
  ipc[,c("COD","Nombre")]
@@ -172,7 +172,7 @@ the argument `unnest = TRUE`.
 filter <- list(values = c("variación anual" , "variación mensual", "índice general"))
 
 # Request data using the filter and unnest = TRUE
-ipc <- get_data_table(idTable = 50902, filter = filter, tip = "A",
+ipc <- get_data_table(idTable = 76125, filter = filter, tip = "A",
                       nlast = 3, unnest = TRUE)
 
 # Unique data frame with 6 rows

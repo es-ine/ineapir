@@ -22,8 +22,8 @@ library(plotly)
 filter <- list(values = c("variación anual" , "índice general"))
 
 # Request data of cpi
-# Table url: https://www.ine.es/jaxiT3/Tabla.htm?t=50902&L=0
-general <- get_data_table(idTable = 50902, filter = filter, unnest = TRUE,
+# Table url: https://www.ine.es/jaxiT3/Tabla.htm?t=76125&L=0
+general <- get_data_table(idTable = 76125, filter = filter, unnest = TRUE,
                           tip = "A", validate = FALSE)
 
 # Filter core cpi
@@ -31,8 +31,8 @@ filter <- list(values = c("variación anual" ,
                        "general sin alimentos no elaborados ni productos energéticos"))
 
 # Request data of core cpi
-# Table url: https://www.ine.es/jaxiT3/Tabla.htm?t=50907&L=0
-subyacente <- get_data_table(idTable = 50907, filter = filter, unnest = TRUE,
+# Table url: https://www.ine.es/jaxiT3/Tabla.htm?t=76130&L=0
+subyacente <- get_data_table(idTable = 76130, filter = filter, unnest = TRUE,
                              tip = "A", validate = FALSE)
 
 # Format Fecha column as date

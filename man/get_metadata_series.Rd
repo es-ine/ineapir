@@ -36,8 +36,8 @@ Get information for a specific series
 }
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-# Get information of time series with code "IPC206449"
-df <- get_metadata_series(codSeries = "IPC206449")
+# Get information of time series with code "IPC290750"
+df <- get_metadata_series(codSeries = "IPC290750")
 head(df)
 \dontshow{\}) # examplesIf}
 }

@@ -59,41 +59,41 @@ library(ineapir)
 
 # We use the function get_data_table with the argument idTable
 # and the argument tip = 'A' for a more friendly output
-table <- get_data_table(idTable = 50902, tip = "A")
+table <- get_data_table(idTable = 76125, tip = "A")
 
 # Each row represents a series
 table[1,c("COD", "Nombre")]
-#>         COD                                   Nombre
-#> 1 IPC251852 Total Nacional. Índice general. Índice.
+#>         COD                             Nombre
+#> 1 IPC290751 Nacional. Índice general. Índice.
 
 # The Data column contains a data frame for each row with the values 
 # of the different periods of each series
 head(table$Data[[1]])
 #>                           Fecha T3_TipoDato T3_Periodo Anyo   Valor
-#> 1 2025-07-01T00:00:00.000+02:00  Definitivo        M07 2025 118.777
-#> 2 2025-06-01T00:00:00.000+02:00  Definitivo        M06 2025 118.867
-#> 3 2025-05-01T00:00:00.000+02:00  Definitivo        M05 2025 118.077
-#> 4 2025-04-01T00:00:00.000+02:00  Definitivo        M04 2025 117.997
-#> 5 2025-03-01T00:00:00.000+01:00  Definitivo        M03 2025 117.260
-#> 6 2025-02-01T00:00:00.000+01:00  Definitivo        M02 2025 117.191
+#> 1 2026-05-01T00:00:00.000+02:00  Definitivo        M05 2026 102.951
+#> 2 2026-04-01T00:00:00.000+02:00  Definitivo        M04 2026 102.883
+#> 3 2026-03-01T00:00:00.000+01:00  Definitivo        M03 2026 102.440
+#> 4 2026-02-01T00:00:00.000+01:00  Definitivo        M02 2026 101.261
+#> 5 2026-01-01T00:00:00.000+01:00  Definitivo        M01 2026 100.836
+#> 6 2025-12-01T00:00:00.000+01:00  Definitivo        M12 2025 101.289
 
 # We can concatenate all data frames into one using unnest = TRUE
-table <- get_data_table(idTable = 50902, tip = "A", unnest = TRUE)
+table <- get_data_table(idTable = 76125, tip = "A", unnest = TRUE)
 head(table[,c("COD", "Nombre", "Fecha", "Valor")])
-#>           COD                                   Nombre
-#> 1   IPC251852 Total Nacional. Índice general. Índice. 
-#> 1.1 IPC251852 Total Nacional. Índice general. Índice. 
-#> 1.2 IPC251852 Total Nacional. Índice general. Índice. 
-#> 1.3 IPC251852 Total Nacional. Índice general. Índice. 
-#> 1.4 IPC251852 Total Nacional. Índice general. Índice. 
-#> 1.5 IPC251852 Total Nacional. Índice general. Índice. 
-#>                             Fecha   Valor
-#> 1   2025-07-01T00:00:00.000+02:00 118.777
-#> 1.1 2025-06-01T00:00:00.000+02:00 118.867
-#> 1.2 2025-05-01T00:00:00.000+02:00 118.077
-#> 1.3 2025-04-01T00:00:00.000+02:00 117.997
-#> 1.4 2025-03-01T00:00:00.000+01:00 117.260
-#> 1.5 2025-02-01T00:00:00.000+01:00 117.191
+#>           COD                             Nombre                         Fecha
+#> 1   IPC290751 Nacional. Índice general. Índice.  2026-05-01T00:00:00.000+02:00
+#> 1.1 IPC290751 Nacional. Índice general. Índice.  2026-04-01T00:00:00.000+02:00
+#> 1.2 IPC290751 Nacional. Índice general. Índice.  2026-03-01T00:00:00.000+01:00
+#> 1.3 IPC290751 Nacional. Índice general. Índice.  2026-02-01T00:00:00.000+01:00
+#> 1.4 IPC290751 Nacional. Índice general. Índice.  2026-01-01T00:00:00.000+01:00
+#> 1.5 IPC290751 Nacional. Índice general. Índice.  2025-12-01T00:00:00.000+01:00
+#>       Valor
+#> 1   102.951
+#> 1.1 102.883
+#> 1.2 102.440
+#> 1.3 101.261
+#> 1.4 100.836
+#> 1.5 101.289
 ```
 
 To get the last n data from a table it is necessary to pass the `nlast`
@@ -101,13 +101,13 @@ argument as well.
 
 ``` r
 # We use the function get_data_table with arguments idTable and nlast
-table <- get_data_table(idTable = 50902, nlast = 2)
+table <- get_data_table(idTable = 76125, nlast = 2)
 table[1,c("COD", "Nombre")]
-#>         COD                                   Nombre
-#> 1 IPC251852 Total Nacional. Índice general. Índice.
+#>         COD                             Nombre
+#> 1 IPC290751 Nacional. Índice general. Índice.
 head(table$Data[[1]])
 #>          Fecha FK_TipoDato FK_Periodo Anyo   Valor Secreto
-#> 1 1.751321e+12           1          7 2025 118.777   FALSE
+#> 1 1.777586e+12           1          5 2026 102.951   FALSE
 ```
 
 ### Obtaining data from a series
@@ -118,10 +118,10 @@ function `get_data_series()`.
 
 ``` r
 # We use the function get_data_series with the argument codSeries
-series <- get_data_series(codSeries = "IPC251856", tip = "A")
+series <- get_data_series(codSeries = "IPC290750", tip = "A")
 series$Data
 #>                           Fecha T3_TipoDato T3_Periodo Anyo Valor
-#> 1 2025-08-01T00:00:00.000+02:00      Avance        M08 2025   2.7
+#> 1 2026-06-01T00:00:00.000+02:00      Avance        M06 2026   3.2
 ```
 
 To get the last n data from a series it is necessary to pass the `nlast`
@@ -129,31 +129,31 @@ argument as well.
 
 ``` r
 # We use the function get_data_series with arguments codSeries and nlast
-series <- get_data_series(codSeries = "IPC251856", tip = "A", nlast = 5)
+series <- get_data_series(codSeries = "IPC290750", tip = "A", nlast = 5)
 series$Data
 #>                           Fecha T3_TipoDato T3_Periodo Anyo Valor
-#> 1 2025-04-01T00:00:00.000+02:00  Definitivo        M04 2025   2.2
-#> 2 2025-05-01T00:00:00.000+02:00  Definitivo        M05 2025   2.0
-#> 3 2025-06-01T00:00:00.000+02:00  Definitivo        M06 2025   2.3
-#> 4 2025-07-01T00:00:00.000+02:00  Definitivo        M07 2025   2.7
-#> 5 2025-08-01T00:00:00.000+02:00      Avance        M08 2025   2.7
+#> 1 2026-02-01T00:00:00.000+01:00  Definitivo        M02 2026   2.3
+#> 2 2026-03-01T00:00:00.000+01:00  Definitivo        M03 2026   3.4
+#> 3 2026-04-01T00:00:00.000+02:00  Definitivo        M04 2026   3.2
+#> 4 2026-05-01T00:00:00.000+02:00  Definitivo        M05 2026   3.2
+#> 5 2026-06-01T00:00:00.000+02:00      Avance        M06 2026   3.2
 
 # Using unnest = TRUE
-series <- get_data_series(codSeries = "IPC251856", tip = "A", nlast = 5,
+series <- get_data_series(codSeries = "IPC290750", tip = "A", nlast = 5,
                           unnest = TRUE)
 head(series[,c("COD", "Nombre", "Fecha", "Valor")])
-#>           COD                                            Nombre
-#> 1   IPC251856 Total Nacional. Índice general. Variación anual. 
-#> 1.1 IPC251856 Total Nacional. Índice general. Variación anual. 
-#> 1.2 IPC251856 Total Nacional. Índice general. Variación anual. 
-#> 1.3 IPC251856 Total Nacional. Índice general. Variación anual. 
-#> 1.4 IPC251856 Total Nacional. Índice general. Variación anual. 
+#>           COD                                      Nombre
+#> 1   IPC290750 Nacional. Índice general. Variación anual. 
+#> 1.1 IPC290750 Nacional. Índice general. Variación anual. 
+#> 1.2 IPC290750 Nacional. Índice general. Variación anual. 
+#> 1.3 IPC290750 Nacional. Índice general. Variación anual. 
+#> 1.4 IPC290750 Nacional. Índice general. Variación anual. 
 #>                             Fecha Valor
-#> 1   2025-04-01T00:00:00.000+02:00   2.2
-#> 1.1 2025-05-01T00:00:00.000+02:00   2.0
-#> 1.2 2025-06-01T00:00:00.000+02:00   2.3
-#> 1.3 2025-07-01T00:00:00.000+02:00   2.7
-#> 1.4 2025-08-01T00:00:00.000+02:00   2.7
+#> 1   2026-02-01T00:00:00.000+01:00   2.3
+#> 1.1 2026-03-01T00:00:00.000+01:00   3.4
+#> 1.2 2026-04-01T00:00:00.000+02:00   3.2
+#> 1.3 2026-05-01T00:00:00.000+02:00   3.2
+#> 1.4 2026-06-01T00:00:00.000+02:00   3.2
 ```
 
 Additionally, it is possible to obtain data from a series between two
@@ -162,7 +162,7 @@ date is not specified we obtain all the data from the start date.
 
 ``` r
 # We use the function get_data_series with arguments codSeries, dateStart and dataEnd
-series <- get_data_series(codSeries = "IPC251856", dateStart = "2023/01/01", 
+series <- get_data_series(codSeries = "IPC290750", dateStart = "2023/01/01", 
                           dateEnd = "2023/04/01")
 series$Data
 #>          Fecha FK_TipoDato FK_Periodo Anyo Valor Secreto
@@ -199,11 +199,11 @@ head(operations)
 #> 6 14   30182                Índices de Precios del Sector Servicios    IPS
 #>                                                                                                     Url
 #> 1                                                                                                  <NA>
-#> 2                                                                                                  <NA>
-#> 3                                                                                                  <NA>
+#> 2                      /dyngs/INEbase/operacion.htm?c=Estadistica_C&cid=1254736053992&idp=1254735976596
+#> 3                      /dyngs/INEbase/operacion.htm?c=Estadistica_C&cid=1254736171438&idp=1254735576606
 #> 4 https://www.ine.es/dyngs/INEbase/es/operacion.htm?c=Estadistica_C&cid=1254736176957&idp=1254735976608
-#> 5                                                                                                  <NA>
-#> 6                                                                                                  <NA>
+#> 5                      /dyngs/INEbase/operacion.htm?c=Estadistica_C&cid=1254736177018&idp=1254735576606
+#> 6                      /dyngs/INEbase/operacion.htm?c=Estadistica_C&cid=1254736176864&idp=1254735576778
 ```
 
 An operation can be identify by a numerical code (‘*Id*’), an alphabetic
@@ -218,6 +218,8 @@ operation <- get_metadata_operations(operation = "IPC")
 as.data.frame(operation)
 #>   Id Cod_IOE                             Nombre Codigo
 #> 1 25   30138 Índice de Precios de Consumo (IPC)    IPC
+#>                                                                                Url
+#> 1 /dyngs/INEbase/operacion.htm?c=Estadistica_C&cid=1254736176802&idp=1254735976607
 ```
 
 ### Obtaining variables
@@ -230,7 +232,7 @@ We can get all the variables of the system using the function
 variables <- get_metadata_variables()
 head(variables)
 #>    Id                           Nombre Codigo
-#> 1 349            Totales Territoriales    NAC
+#> 1 349                   Total Nacional    NAC
 #> 2 954                            Total       
 #> 3  70 Comunidades y Ciudades Autónomas   CCAA
 #> 4 516                     Nacionalidad      1
@@ -253,7 +255,7 @@ head(variables)
 #> 3 115                       Provincias   PROV
 #> 4 269           Grupos especiales 2001       
 #> 5 270                    Rúbricas 2001       
-#> 6 349            Totales Territoriales    NAC
+#> 6 349                   Total Nacional    NAC
 ```
 
 ### Obtaining values
@@ -312,18 +314,18 @@ tables <- get_metadata_tables_operation(operation = "IPC")
 head(tables[,c("Id","Nombre")])
 #>      Id
 #> 1 24077
-#> 2 25331
+#> 2 24080
 #> 3 35083
-#> 4 50902
-#> 5 50908
-#> 6 50911
-#>                                                                      Nombre
-#> 1                       Índice general nacional. Series desde enero de 1961
-#> 2                                Ponderaciones: general y de grupos ECOICOP
-#> 3           Índices nacionales: Componentes para el análisis de la COVID-19
-#> 4                           Índices nacionales: general y de grupos ECOICOP
-#> 5    Índices nacionales a impuestos constantes: general y de grupos ECOICOP
-#> 6 Tasa de variacion del índice general nacional. Series desde enero de 1961
+#> 4 53458
+#> 5 76125
+#> 6 76131
+#>                                                                         Nombre
+#> 1                          Índice general nacional. Series desde enero de 1961
+#> 2              Índice nacionales de grupos ECOICOP. Series desde enero de 1993
+#> 3              Índices nacionales: Componentes para el análisis de la COVID-19
+#> 4                               Índices por comunidades autónomas de subgrupos
+#> 5                        Índices nacionales: general y de grupos ECOICOP ver.2
+#> 6 Índices nacionales a impuestos constantes: general y de grupos ECOICOP ver.2
 ```
 
 A table is defined by different groups or selection combo boxes and each
@@ -334,11 +336,11 @@ groups that define the table using the function
 
 ``` r
 # We use the function get_metadata_table_groups with argument idTable
-groups <- get_metadata_table_groups(idTable = 50902)
+groups <- get_metadata_table_groups(idTable = 76125)
 head(groups)
-#>       Id         Nombre
-#> 1 110889 Grupos ECOICOP
-#> 2 110890   Tipo de dato
+#>       Id               Nombre
+#> 1 155577 Grupos ECOICOP ver.2
+#> 2 155578         Tipo de dato
 ```
 
 Once we have the identification codes of the groups, we can query the
@@ -347,12 +349,12 @@ values for an specific group using the function
 
 ``` r
 # We use the function get_metadata_table_values with arguments idTable and idGroup
-values <- get_metadata_table_values(idTable = 50902, idGroup = 110889)
+values <- get_metadata_table_values(idTable = 76125, idGroup = 155577)
 head(values, 4)
 #>       Id Fk_Variable                             Nombre Codigo
 #> 1 304092         762                     Índice general     00
 #> 2 304093         762 Alimentos y bebidas no alcohólicas     01
-#> 3 304094         762       Bebidas alcohólicas y tabaco     02
+#> 3 418050         762       Bebidas alcohólicas y tabaco     02
 #> 4 304095         762                  Vestido y calzado     03
 #>   FK_JerarquiaPadres
 #> 1               NULL
@@ -366,12 +368,12 @@ get the variables and values present in a table.
 
 ``` r
 # Using the function get_metadata_table_varval
-values <- get_metadata_table_varval(idTable = 50902)
+values <- get_metadata_table_varval(idTable = 76125)
 head(values, 4)
 #>       Id Fk_Variable                             Nombre Codigo
 #> 1 304092         762                     Índice general     00
 #> 2 304093         762 Alimentos y bebidas no alcohólicas     01
-#> 3 304094         762       Bebidas alcohólicas y tabaco     02
+#> 3 418050         762       Bebidas alcohólicas y tabaco     02
 #> 4 304095         762                  Vestido y calzado     03
 ```
 
@@ -384,14 +386,12 @@ the function `get_metadata_series()`.
 
 ``` r
 # We use the function get_metadata_series with argument codSeries
-series <- get_metadata_series(codSeries = "IPC251856")
+series <- get_metadata_series(codSeries = "IPC290750")
 as.data.frame(series)
-#>       Id       COD FK_Operacion
-#> 1 251856 IPC251856           25
-#>                                              Nombre Decimales FK_Periodicidad
-#> 1 Total Nacional. Índice general. Variación anual.          1               1
-#>   FK_Publicacion FK_Clasificacion FK_Escala FK_Unidad
-#> 1              8               90         1       135
+#>       Id       COD FK_Operacion                                      Nombre
+#> 1 290750 IPC290750           25 Nacional. Índice general. Variación anual. 
+#>   Decimales FK_Periodicidad FK_Publicacion FK_Clasificacion FK_Escala FK_Unidad
+#> 1         1               1              8              120         1       135
 ```
 
 To get the values and variables that define a series it is necessary to
@@ -399,12 +399,12 @@ pass the `codSeries` argument as well.
 
 ``` r
 # We use the function get_metadata_series_values with argument codSeries
-values <- get_metadata_series_values(codSeries = "IPC251856")
+values <- get_metadata_series_values(codSeries = "IPC290750")
 head(values)
 #>       Id Fk_Variable          Nombre Codigo
-#> 1  16473         349  Total Nacional     00
+#> 1  16473         349        Nacional     00
 #> 2 304092         762  Índice general     00
-#> 3     74           3 Variación anual
+#> 3     74           3 Variación anual      2
 ```
 
 To get all the series that define a table it is necessary to pass the
@@ -413,11 +413,11 @@ the function `get_metadata_series_table()`.
 
 ``` r
 # We use the function get_metadata_series_table with argument idTable
-series <- get_metadata_series_table(idTable = 50902)
+series <- get_metadata_series_table(idTable = 76125)
 head(series[,c("COD", "Nombre")], 4)
-#>         COD                                                          Nombre
-#> 1 IPC251852                        Total Nacional. Índice general. Índice. 
-#> 2 IPC251855             Total Nacional. Índice general. Variación mensual. 
-#> 3 IPC251856               Total Nacional. Índice general. Variación anual. 
-#> 4 IPC251858 Total Nacional. Índice general. Variación en lo que va de año.
+#>         COD                                                    Nombre
+#> 1 IPC290751                        Nacional. Índice general. Índice. 
+#> 2 IPC290752             Nacional. Índice general. Variación mensual. 
+#> 3 IPC290750               Nacional. Índice general. Variación anual. 
+#> 4 IPC290753 Nacional. Índice general. Variación en lo que va de año.
 ```

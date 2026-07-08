@@ -29,8 +29,8 @@ Get the operation for a given table
 }
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-# Get the operation of the table with identification code "50902"
-df <- get_metadata_operation_table(idTable = 50902)
+# Get the operation of the table with identification code "76125"
+df <- get_metadata_operation_table(idTable = 76125)
 head(df)
 \dontshow{\}) # examplesIf}
 }

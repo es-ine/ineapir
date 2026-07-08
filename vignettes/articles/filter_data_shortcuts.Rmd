@@ -66,7 +66,7 @@ To use a filter with shortcuts it is necessary to pass the argument
 `filter` using a shortcut as variable and a name as value.
 
 ### Example one
-We are going to filter the table [Índices nacionales: general y de grupos ECOICOP](https://www.ine.es/jaxiT3/Tabla.htm?t=50902) (Id 50902):
+We are going to filter the table [Índices nacionales: general y de grupos ECOICOP](https://www.ine.es/jaxiT3/Tabla.htm?t=76125) (Id 76125):
 
 ```{r tabla_filter_1}
 library(ineapir)
@@ -77,7 +77,7 @@ filter <- list(tipodato = "variación anual" , # variable id = 3
                )
 
 # Request data using the filter
-ipc <- get_data_table(idTable = 50902, filter = filter, unnest = TRUE,
+ipc <- get_data_table(idTable = 76125, filter = filter, unnest = TRUE,
                       tip = "A", nlast = 5, validate = FALSE)
 ipc[,c("Nombre", "T3_Periodo", "Anyo", "Valor")]
 ```
@@ -89,7 +89,7 @@ Besides, we can also use the *values* wrapper.
 filter <- list(values = c("variación anual" , "índice general"))
 
 # Request data using the filter
-ipc <- get_data_table(idTable = 50902, filter = filter, unnest = TRUE,
+ipc <- get_data_table(idTable = 76125, filter = filter, unnest = TRUE,
                       tip = "A", nlast = 5, validate = FALSE)
 ipc[,c("Nombre", "T3_Periodo", "Anyo", "Valor")]
 ```
@@ -100,19 +100,19 @@ If we add a minus sign to a value, the value will be excluded from the filter.
 filter <- list(values = c("variación anual" , "-índice general"))
 
 # Request data using the filter
-ipc <- get_data_table(idTable = 50902, filter = filter, unnest = TRUE,
+ipc <- get_data_table(idTable = 76125, filter = filter, unnest = TRUE,
                       tip = "A", nlast = 2, validate = FALSE)
 ipc[,c("Nombre", "T3_Periodo", "Anyo", "Valor")]
 ```
 ### Example two
-We are going to filter the table [PIB pm Oferta (Indices de volumen encadenado)](https://www.ine.es/jaxiT3/Tabla.htm?t=30679) (Id 30679):
+We are going to filter the table [PIB pm Oferta (Indices de volumen encadenado)](https://www.ine.es/jaxiT3/Tabla.htm?t=67822) (Id 67822):
 
 ```{r tabla_filter_3}
 # Filter with the values wrapper (GDP)
 filter <- list(values = c("producto interior", "datos ajustados", "variación anual"))
 
 # Request data using the filter and shortcut = TRUE
-pib <- get_data_table(idTable = 30679, filter = filter, unnest = TRUE,
+pib <- get_data_table(idTable = 67822, filter = filter, unnest = TRUE,
                       tip = "A", nlast = 5, validate = FALSE)
 head(pib[,c("Nombre", "T3_Periodo", "Anyo", "Valor")])
 ```

@@ -70,7 +70,7 @@ library(ineapir)
 
 # We use the function get_data_table with the argument idTable
 # and the argument tip = 'A' for a more friendly output
-table <- get_data_table(idTable = 50902, tip = "A")
+table <- get_data_table(idTable = 76125, tip = "A")
 
 # Each row represents a series
 table[1,c("COD", "Nombre")]
@@ -80,7 +80,7 @@ table[1,c("COD", "Nombre")]
 head(table$Data[[1]])
 
 # We can concatenate all data frames into one using unnest = TRUE
-table <- get_data_table(idTable = 50902, tip = "A", unnest = TRUE)
+table <- get_data_table(idTable = 76125, tip = "A", unnest = TRUE)
 head(table[,c("COD", "Nombre", "Fecha", "Valor")])
 ```
 
@@ -89,7 +89,7 @@ argument as well.
 
 ```{r table_data_n}
 # We use the function get_data_table with arguments idTable and nlast
-table <- get_data_table(idTable = 50902, nlast = 2)
+table <- get_data_table(idTable = 76125, nlast = 2)
 table[1,c("COD", "Nombre")]
 head(table$Data[[1]])
 ```
@@ -102,7 +102,7 @@ argument, which is the identification code of the series, to the function
 
 ```{r series_data}
 # We use the function get_data_series with the argument codSeries
-series <- get_data_series(codSeries = "IPC251856", tip = "A")
+series <- get_data_series(codSeries = "IPC290750", tip = "A")
 series$Data
 ```
 
@@ -111,11 +111,11 @@ argument as well.
 
 ```{r series_data_n}
 # We use the function get_data_series with arguments codSeries and nlast
-series <- get_data_series(codSeries = "IPC251856", tip = "A", nlast = 5)
+series <- get_data_series(codSeries = "IPC290750", tip = "A", nlast = 5)
 series$Data
 
 # Using unnest = TRUE
-series <- get_data_series(codSeries = "IPC251856", tip = "A", nlast = 5,
+series <- get_data_series(codSeries = "IPC290750", tip = "A", nlast = 5,
                           unnest = TRUE)
 head(series[,c("COD", "Nombre", "Fecha", "Valor")])
 ```
@@ -126,7 +126,7 @@ specified we obtain all the data from the start date.
 
 ```{r series_data_date}
 # We use the function get_data_series with arguments codSeries, dateStart and dataEnd
-series <- get_data_series(codSeries = "IPC251856", dateStart = "2023/01/01", 
+series <- get_data_series(codSeries = "IPC290750", dateStart = "2023/01/01", 
                           dateEnd = "2023/04/01")
 series$Data
 ```
@@ -224,7 +224,7 @@ that define the table using the function `get_metadata_table_groups()`.
 
 ```{r groups}
 # We use the function get_metadata_table_groups with argument idTable
-groups <- get_metadata_table_groups(idTable = 50902)
+groups <- get_metadata_table_groups(idTable = 76125)
 head(groups)
 ```
 
@@ -233,7 +233,7 @@ for an specific group using the function `get_metadata_table_values()`.
 
 ```{r group_values}
 # We use the function get_metadata_table_values with arguments idTable and idGroup
-values <- get_metadata_table_values(idTable = 50902, idGroup = 110889)
+values <- get_metadata_table_values(idTable = 76125, idGroup = 155577)
 head(values, 4)
 ```
 
@@ -242,7 +242,7 @@ the variables and values present in a table.
 
 ```{r table_varval}
 # Using the function get_metadata_table_varval
-values <- get_metadata_table_varval(idTable = 50902)
+values <- get_metadata_table_varval(idTable = 76125)
 head(values, 4)
 ```
 
@@ -255,7 +255,7 @@ which is the identification code of the series, to the function
 
 ```{r series}
 # We use the function get_metadata_series with argument codSeries
-series <- get_metadata_series(codSeries = "IPC251856")
+series <- get_metadata_series(codSeries = "IPC290750")
 as.data.frame(series)
 ```
 
@@ -264,7 +264,7 @@ the `codSeries` argument as well.
 
 ```{r series_values}
 # We use the function get_metadata_series_values with argument codSeries
-values <- get_metadata_series_values(codSeries = "IPC251856")
+values <- get_metadata_series_values(codSeries = "IPC290750")
 head(values)
 ```
 
@@ -274,6 +274,6 @@ function `get_metadata_series_table()`.
 
 ```{r series_table}
 # We use the function get_metadata_series_table with argument idTable
-series <- get_metadata_series_table(idTable = 50902)
+series <- get_metadata_series_table(idTable = 76125)
 head(series[,c("COD", "Nombre")], 4)
 ```

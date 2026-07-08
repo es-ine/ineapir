@@ -1,3 +1,6 @@
+## Patch release 0.2.6
+* win-builder devel status: OK
+
 ## Resubmission
 This is a resubmission. In this version I have:
 
