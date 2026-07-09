@@ -7,8 +7,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>How to filter data • ineapir</title>
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="How to filter data">
 </head>
@@ -20,7 +20,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">ineapir</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.5</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.6</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -64,7 +64,7 @@
       <h1>How to filter data</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/es-ine/ineapir/blob/v0.2.5/vignettes/articles/filter_data.Rmd" class="external-link"><code>vignettes/articles/filter_data.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/es-ine/ineapir/blob/main/vignettes/articles/filter_data.Rmd" class="external-link"><code>vignettes/articles/filter_data.Rmd</code></a></small>
       <div class="d-none name"><code>filter_data.Rmd</code></div>
     </div>
 
@@ -85,7 +85,7 @@ the filter depending on the table type.</p>
 </h3>
 <ul>
 <li>
-<strong>URL:</strong> <a href="https://www.ine.es/jaxiT3/Tabla.htm?t=50902" class="external-link uri">https://www.ine.es/jaxiT3/Tabla.htm?t=50902</a>
+<strong>URL:</strong> <a href="https://www.ine.es/jaxiT3/Tabla.htm?t=76125" class="external-link uri">https://www.ine.es/jaxiT3/Tabla.htm?t=76125</a>
 </li>
 </ul>
 <ol style="list-style-type: decimal">
@@ -96,19 +96,19 @@ of the table that interest us to build the filter.</li>
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/es-ine/ineapir" class="external-link">ineapir</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Get metadata information of the table</span></span>
-<span><span class="va">metadata</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_metadata_table_varval.html">get_metadata_table_varval</a></span><span class="op">(</span>idTable <span class="op">=</span> <span class="fl">50902</span>, validate <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="va">metadata</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_metadata_table_varval.html">get_metadata_table_varval</a></span><span class="op">(</span>idTable <span class="op">=</span> <span class="fl">76125</span>, validate <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">metadata</span>,<span class="fl">4</span><span class="op">)</span></span>
 <span><span class="co">#&gt;       Id Fk_Variable                             Nombre Codigo</span></span>
 <span><span class="co">#&gt; 1 304092         762                     Índice general     00</span></span>
 <span><span class="co">#&gt; 2 304093         762 Alimentos y bebidas no alcohólicas     01</span></span>
-<span><span class="co">#&gt; 3 304094         762       Bebidas alcohólicas y tabaco     02</span></span>
+<span><span class="co">#&gt; 3 418050         762       Bebidas alcohólicas y tabaco     02</span></span>
 <span><span class="co">#&gt; 4 304095         762                  Vestido y calzado     03</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">tail</a></span><span class="op">(</span><span class="va">metadata</span>,<span class="fl">4</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    Id Fk_Variable                        Nombre Codigo</span></span>
-<span><span class="co">#&gt; 14 83           3                        Índice      0</span></span>
-<span><span class="co">#&gt; 15 84           3             Variación mensual      1</span></span>
-<span><span class="co">#&gt; 16 74           3               Variación anual      2</span></span>
-<span><span class="co">#&gt; 17 87           3 Variación en lo que va de año      5</span></span></code></pre></div>
+<span><span class="co">#&gt; 15 83           3                        Índice      0</span></span>
+<span><span class="co">#&gt; 16 84           3             Variación mensual      1</span></span>
+<span><span class="co">#&gt; 17 74           3               Variación anual      2</span></span>
+<span><span class="co">#&gt; 18 87           3 Variación en lo que va de año      5</span></span></code></pre></div>
 <ol start="2" style="list-style-type: decimal">
 <li>With this information we build the filter as follows.</li>
 </ol>
@@ -119,15 +119,15 @@ of the table that interest us to build the filter.</li>
 <span>               <span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Request data using the filter</span></span>
-<span><span class="va">ipc</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_data_table.html">get_data_table</a></span><span class="op">(</span>idTable <span class="op">=</span> <span class="fl">50902</span>, filter <span class="op">=</span> <span class="va">filter</span>, unnest <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span><span class="va">ipc</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_data_table.html">get_data_table</a></span><span class="op">(</span>idTable <span class="op">=</span> <span class="fl">76125</span>, filter <span class="op">=</span> <span class="va">filter</span>, unnest <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>                      tip <span class="op">=</span> <span class="st">"A"</span>, nlast <span class="op">=</span> <span class="fl">5</span>, validate <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="va">ipc</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Nombre"</span>, <span class="st">"T3_Periodo"</span>, <span class="st">"Anyo"</span>, <span class="st">"Valor"</span><span class="op">)</span><span class="op">]</span></span>
-<span><span class="co">#&gt;                                                Nombre T3_Periodo Anyo Valor</span></span>
-<span><span class="co">#&gt; 1   Total Nacional. Índice general. Variación anual.         M08 2025   2.7</span></span>
-<span><span class="co">#&gt; 1.1 Total Nacional. Índice general. Variación anual.         M07 2025   2.7</span></span>
-<span><span class="co">#&gt; 1.2 Total Nacional. Índice general. Variación anual.         M06 2025   2.3</span></span>
-<span><span class="co">#&gt; 1.3 Total Nacional. Índice general. Variación anual.         M05 2025   2.0</span></span>
-<span><span class="co">#&gt; 1.4 Total Nacional. Índice general. Variación anual.         M04 2025   2.2</span></span></code></pre></div>
+<span><span class="co">#&gt;                                          Nombre T3_Periodo Anyo Valor</span></span>
+<span><span class="co">#&gt; 1   Nacional. Índice general. Variación anual.         M06 2026   3.2</span></span>
+<span><span class="co">#&gt; 1.1 Nacional. Índice general. Variación anual.         M05 2026   3.2</span></span>
+<span><span class="co">#&gt; 1.2 Nacional. Índice general. Variación anual.         M04 2026   3.2</span></span>
+<span><span class="co">#&gt; 1.3 Nacional. Índice general. Variación anual.         M03 2026   3.4</span></span>
+<span><span class="co">#&gt; 1.4 Nacional. Índice general. Variación anual.         M02 2026   2.3</span></span></code></pre></div>
 <ul>
 <li>
 <strong>NOTE</strong> If we add a minus sign to a value, the value
@@ -140,59 +140,37 @@ will be excluded from the filter.</li>
 <span>               <span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Request data using the filter</span></span>
-<span><span class="va">ipc</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_data_table.html">get_data_table</a></span><span class="op">(</span>idTable <span class="op">=</span> <span class="fl">50902</span>, filter <span class="op">=</span> <span class="va">filter</span>, unnest <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span><span class="va">ipc</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_data_table.html">get_data_table</a></span><span class="op">(</span>idTable <span class="op">=</span> <span class="fl">76125</span>, filter <span class="op">=</span> <span class="va">filter</span>, unnest <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>                      tip <span class="op">=</span> <span class="st">"A"</span>, nlast <span class="op">=</span> <span class="fl">2</span>, validate <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="va">ipc</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Nombre"</span>, <span class="st">"T3_Periodo"</span>, <span class="st">"Anyo"</span>, <span class="st">"Valor"</span><span class="op">)</span><span class="op">]</span></span>
-<span><span class="co">#&gt;                                                                                                                     Nombre</span></span>
-<span><span class="co">#&gt; 1                                                    Total Nacional. Alimentos y bebidas no alcohólicas. Variación anual. </span></span>
-<span><span class="co">#&gt; 1.1                                                  Total Nacional. Alimentos y bebidas no alcohólicas. Variación anual. </span></span>
-<span><span class="co">#&gt; 2                                                          Total Nacional. Bebidas alcohólicas y tabaco. Variación anual. </span></span>
-<span><span class="co">#&gt; 2.1                                                        Total Nacional. Bebidas alcohólicas y tabaco. Variación anual. </span></span>
-<span><span class="co">#&gt; 3                                                                     Total Nacional. Vestido y calzado. Variación anual. </span></span>
-<span><span class="co">#&gt; 3.1                                                                   Total Nacional. Vestido y calzado. Variación anual. </span></span>
-<span><span class="co">#&gt; 4                                Total Nacional. Vivienda, agua, electricidad, gas y otros combustibles. Variación anual. </span></span>
-<span><span class="co">#&gt; 4.1                              Total Nacional. Vivienda, agua, electricidad, gas y otros combustibles. Variación anual. </span></span>
-<span><span class="co">#&gt; 5    Total Nacional. Muebles, artículos del hogar y artículos para el mantenimiento corriente del hogar. Variación anual. </span></span>
-<span><span class="co">#&gt; 5.1  Total Nacional. Muebles, artículos del hogar y artículos para el mantenimiento corriente del hogar. Variación anual. </span></span>
-<span><span class="co">#&gt; 6                                                                               Total Nacional. Sanidad. Variación anual. </span></span>
-<span><span class="co">#&gt; 6.1                                                                             Total Nacional. Sanidad. Variación anual. </span></span>
-<span><span class="co">#&gt; 7                                                                            Total Nacional. Transporte. Variación anual. </span></span>
-<span><span class="co">#&gt; 7.1                                                                          Total Nacional. Transporte. Variación anual. </span></span>
-<span><span class="co">#&gt; 8                                                                        Total Nacional. Comunicaciones. Variación anual. </span></span>
-<span><span class="co">#&gt; 8.1                                                                      Total Nacional. Comunicaciones. Variación anual. </span></span>
-<span><span class="co">#&gt; 9                                                                        Total Nacional. Ocio y cultura. Variación anual. </span></span>
-<span><span class="co">#&gt; 9.1                                                                      Total Nacional. Ocio y cultura. Variación anual. </span></span>
-<span><span class="co">#&gt; 10                                                                            Total Nacional. Enseñanza. Variación anual. </span></span>
-<span><span class="co">#&gt; 10.1                                                                          Total Nacional. Enseñanza. Variación anual. </span></span>
-<span><span class="co">#&gt; 11                                                               Total Nacional. Restaurantes y hoteles. Variación anual. </span></span>
-<span><span class="co">#&gt; 11.1                                                             Total Nacional. Restaurantes y hoteles. Variación anual. </span></span>
-<span><span class="co">#&gt; 12                                                             Total Nacional. Otros bienes y servicios. Variación anual. </span></span>
-<span><span class="co">#&gt; 12.1                                                           Total Nacional. Otros bienes y servicios. Variación anual. </span></span>
-<span><span class="co">#&gt;      T3_Periodo Anyo Valor</span></span>
-<span><span class="co">#&gt; 1           M08 2025   2.3</span></span>
-<span><span class="co">#&gt; 1.1         M07 2025   2.7</span></span>
-<span><span class="co">#&gt; 2           M08 2025   4.2</span></span>
-<span><span class="co">#&gt; 2.1         M07 2025   4.1</span></span>
-<span><span class="co">#&gt; 3           M08 2025   0.7</span></span>
-<span><span class="co">#&gt; 3.1         M07 2025   0.8</span></span>
-<span><span class="co">#&gt; 4           M08 2025   6.0</span></span>
-<span><span class="co">#&gt; 4.1         M07 2025   6.7</span></span>
-<span><span class="co">#&gt; 5           M08 2025   0.8</span></span>
-<span><span class="co">#&gt; 5.1         M07 2025   0.9</span></span>
-<span><span class="co">#&gt; 6           M08 2025   2.0</span></span>
-<span><span class="co">#&gt; 6.1         M07 2025   2.0</span></span>
-<span><span class="co">#&gt; 7           M08 2025   1.2</span></span>
-<span><span class="co">#&gt; 7.1         M07 2025   0.2</span></span>
-<span><span class="co">#&gt; 8           M08 2025   0.8</span></span>
-<span><span class="co">#&gt; 8.1         M07 2025   0.6</span></span>
-<span><span class="co">#&gt; 9           M08 2025   0.7</span></span>
-<span><span class="co">#&gt; 9.1         M07 2025   0.6</span></span>
-<span><span class="co">#&gt; 10          M08 2025   2.6</span></span>
-<span><span class="co">#&gt; 10.1        M07 2025   2.5</span></span>
-<span><span class="co">#&gt; 11          M08 2025   4.3</span></span>
-<span><span class="co">#&gt; 11.1        M07 2025   4.2</span></span>
-<span><span class="co">#&gt; 12          M08 2025   3.4</span></span>
-<span><span class="co">#&gt; 12.1        M07 2025   3.4</span></span></code></pre></div>
+<span><span class="co">#&gt;                                                                                                             Nombre</span></span>
+<span><span class="co">#&gt; 1                                                  Nacional. Alimentos y bebidas no alcohólicas. Variación anual. </span></span>
+<span><span class="co">#&gt; 2                                                        Nacional. Bebidas alcohólicas y tabaco. Variación anual. </span></span>
+<span><span class="co">#&gt; 3                                                                   Nacional. Vestido y calzado. Variación anual. </span></span>
+<span><span class="co">#&gt; 4                              Nacional. Vivienda, agua, electricidad, gas y otros combustibles. Variación anual. </span></span>
+<span><span class="co">#&gt; 5  Nacional. Muebles, artículos del hogar y artículos para el mantenimiento corriente del hogar. Variación anual. </span></span>
+<span><span class="co">#&gt; 6                                                                             Nacional. Sanidad. Variación anual. </span></span>
+<span><span class="co">#&gt; 7                                                                          Nacional. Transporte. Variación anual. </span></span>
+<span><span class="co">#&gt; 8                                                        Nacional. Información y comunicaciones. Variación anual. </span></span>
+<span><span class="co">#&gt; 9                                          Nacional. Actividades recreativas, deporte y cultura. Variación anual. </span></span>
+<span><span class="co">#&gt; 10                                                                          Nacional. Enseñanza. Variación anual. </span></span>
+<span><span class="co">#&gt; 11                                            Nacional. Restaurantes y servicios de alojamiento. Variación anual. </span></span>
+<span><span class="co">#&gt; 12                                                    Nacional. Seguros y servicios financieros. Variación anual. </span></span>
+<span><span class="co">#&gt; 13                 Nacional. Cuidado personal, protección social, y bienes y servicios diversos. Variación anual. </span></span>
+<span><span class="co">#&gt;    T3_Periodo Anyo Valor</span></span>
+<span><span class="co">#&gt; 1         M05 2026   2.2</span></span>
+<span><span class="co">#&gt; 2         M05 2026   3.5</span></span>
+<span><span class="co">#&gt; 3         M05 2026  -1.1</span></span>
+<span><span class="co">#&gt; 4         M05 2026   1.4</span></span>
+<span><span class="co">#&gt; 5         M05 2026   1.2</span></span>
+<span><span class="co">#&gt; 6         M05 2026   2.1</span></span>
+<span><span class="co">#&gt; 7         M05 2026   7.4</span></span>
+<span><span class="co">#&gt; 8         M05 2026   0.2</span></span>
+<span><span class="co">#&gt; 9         M05 2026   2.6</span></span>
+<span><span class="co">#&gt; 10        M05 2026   2.6</span></span>
+<span><span class="co">#&gt; 11        M05 2026   4.8</span></span>
+<span><span class="co">#&gt; 12        M05 2026   4.6</span></span>
+<span><span class="co">#&gt; 13        M05 2026   3.1</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="case-two-pc-axis-file">Case two (pc-axis file)<a class="anchor" aria-label="anchor" href="#case-two-pc-axis-file"></a>
@@ -274,10 +252,10 @@ will be excluded from the filter.</li>
 <span><span class="va">poblacion</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_data_table.html">get_data_table</a></span><span class="op">(</span>idTable <span class="op">=</span> <span class="st">"t20/e245/p08/l0/01001.px"</span>, unnest <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>                            tip <span class="op">=</span> <span class="st">"A"</span>, nlast <span class="op">=</span> <span class="fl">1</span>, filter <span class="op">=</span> <span class="va">filter</span>,</span>
 <span>                            validate <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="co">#&gt; An error occurred calling the API (status 404).</span></span>
+<span><span class="co">#&gt; https://servicios.ine.es/wstempus/js/ES/DATOS_TABLA/t20/e245/p08/l0/01001.px?nult=1&amp;det=0&amp;tip=A&amp;ver=3&amp;tv=sexo%3Ahombres&amp;tv=sexo%3Amujeres&amp;tv=espanolesextranjeros%3Atotal&amp;tv=edad3gruposdeedad%3Atotaledades</span></span>
 <span><span class="va">poblacion</span></span>
-<span><span class="co">#&gt;                         Nombre NombrePeriodo    Valor</span></span>
-<span><span class="co">#&gt; 1 TOTAL EDADES, TOTAL, Hombres          2022 23265381</span></span>
-<span><span class="co">#&gt; 2 TOTAL EDADES, TOTAL, Mujeres          2022 24210039</span></span></code></pre></div>
+<span><span class="co">#&gt; NULL</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="case-three-tpx-file">Case three (tpx file)<a class="anchor" aria-label="anchor" href="#case-three-tpx-file"></a>
@@ -294,21 +272,16 @@ table.</li>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Get metadata information of the table</span></span>
 <span><span class="va">metadata</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_metadata_table_varval.html">get_metadata_table_varval</a></span><span class="op">(</span>idTable <span class="op">=</span> <span class="fl">33387</span><span class="op">)</span></span>
+<span><span class="co">#&gt; An error occurred calling the API (status 404).</span></span>
+<span><span class="co">#&gt; https://servicios.ine.es/wstempus/jsCache/ES/SERIES_TABLA/33387?det=0&amp;tip=M&amp;ver=3</span></span>
 <span><span class="va">metadata</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grepl</a></span><span class="op">(</span><span class="st">"^\\d{1}\\D+"</span>,<span class="va">metadata</span><span class="op">$</span><span class="va">Codigo</span><span class="op">)</span>,<span class="op">]</span></span>
-<span><span class="co">#&gt;                                         Nombre</span></span>
-<span><span class="co">#&gt; 2                                  1.  Biomasa</span></span>
-<span><span class="co">#&gt; 29  2.  Minerales metálicos (mineral en bruto)</span></span>
-<span><span class="co">#&gt; 50                  3.  Minerales no metálicos</span></span>
-<span><span class="co">#&gt; 106                   4.  Combustibles fósiles</span></span>
-<span><span class="co">#&gt;                                Codigo  Variable.Nombre Variable.Codigo</span></span>
-<span><span class="co">#&gt; 2                            1biomasa tipo de material  tipodematerial</span></span>
-<span><span class="co">#&gt; 29  2mineralesmetalicosmineralenbruto tipo de material  tipodematerial</span></span>
-<span><span class="co">#&gt; 50              3mineralesnometalicos tipo de material  tipodematerial</span></span>
-<span><span class="co">#&gt; 106              4combustiblesfosiles tipo de material  tipodematerial</span></span></code></pre></div>
+<span><span class="co">#&gt; NULL</span></span></code></pre></div>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># NOTE: for tpx tables we can use a filter.</span></span>
 <span><span class="va">metadata</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_metadata_table_varval.html">get_metadata_table_varval</a></span><span class="op">(</span>idTable <span class="op">=</span> <span class="fl">33387</span>,</span>
 <span>                                      filter <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>tipodematerial <span class="op">=</span> <span class="st">"1biomasa"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; An error occurred calling the API (status 404).</span></span>
+<span><span class="co">#&gt; https://servicios.ine.es/wstempus/jsCache/ES/SERIES_TABLA/33387?det=0&amp;tip=M&amp;ver=3</span></span>
 <span><span class="va">metadata</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grepl</a></span><span class="op">(</span><span class="st">"^\\d{1}\\D+"</span>,<span class="va">metadata</span><span class="op">$</span><span class="va">Codigo</span><span class="op">)</span>,<span class="op">]</span></span>
 <span><span class="co">#&gt;        Nombre   Codigo  Variable.Nombre Variable.Codigo</span></span>
 <span><span class="co">#&gt; 1 1.  Biomasa 1biomasa tipo de material  tipodematerial</span></span></code></pre></div>
@@ -326,12 +299,10 @@ table.</li>
 <span><span class="co"># Request data using the filter</span></span>
 <span><span class="va">materiales</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_data_table.html">get_data_table</a></span><span class="op">(</span>idTable <span class="op">=</span> <span class="fl">33387</span>, unnest <span class="op">=</span> <span class="cn">TRUE</span>, tip <span class="op">=</span> <span class="st">"A"</span>,</span>
 <span>                             nlast <span class="op">=</span> <span class="fl">1</span>, filter <span class="op">=</span> <span class="va">filter</span>, validate <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="co">#&gt; An error occurred calling the API (status 404).</span></span>
+<span><span class="co">#&gt; https://servicios.ine.es/wstempus/js/ES/DATOS_TABLA/33387?nult=1&amp;det=0&amp;tip=A&amp;ver=3&amp;tv=tipodematerial%3A1biomasa&amp;tv=tipodematerial%3A2mineralesmetalicosmineralenbruto&amp;tv=tipodematerial%3A3mineralesnometalicos&amp;tv=tipodematerial%3A4combustiblesfosiles</span></span>
 <span><span class="va">materiales</span></span>
-<span><span class="co">#&gt;                                       Nombre NombrePeriodo     Valor</span></span>
-<span><span class="co">#&gt; 1                                1.  Biomasa 2023 (avance) 107483869</span></span>
-<span><span class="co">#&gt; 2 2.  Minerales metálicos (mineral en bruto) 2023 (avance)  23233159</span></span>
-<span><span class="co">#&gt; 3                 3.  Minerales no metálicos 2023 (avance) 213294377</span></span>
-<span><span class="co">#&gt; 4                   4.  Combustibles fósiles 2023 (avance)    110206</span></span></code></pre></div>
+<span><span class="co">#&gt; NULL</span></span></code></pre></div>
 <ul>
 <li>
 <strong>NOTE</strong> If we add a minus sign to a value, the value
@@ -348,14 +319,16 @@ will be excluded from the filter.</li>
 <span><span class="co"># Request data using the filter</span></span>
 <span><span class="va">materiales</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_data_table.html">get_data_table</a></span><span class="op">(</span>idTable <span class="op">=</span> <span class="fl">33387</span>, unnest <span class="op">=</span> <span class="cn">TRUE</span>, tip <span class="op">=</span> <span class="st">"A"</span>,</span>
 <span>                             nlast <span class="op">=</span> <span class="fl">1</span>, filter <span class="op">=</span> <span class="va">filter</span>, validate <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="co">#&gt; An error occurred calling the API (status 404).</span></span>
+<span><span class="co">#&gt; https://servicios.ine.es/wstempus/jsCache/ES/SERIES_TABLA/33387?det=0&amp;tip=M&amp;ver=3</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">materiales</span><span class="op">)</span></span>
 <span><span class="co">#&gt;                        Nombre NombrePeriodo     Valor</span></span>
-<span><span class="co">#&gt; 1         EXTRACCION NACIONAL 2023 (avance) 344121611</span></span>
-<span><span class="co">#&gt; 2    1.1.  Cultivos primarios 2023 (avance)  52902520</span></span>
-<span><span class="co">#&gt; 3            1.1.1.  Cereales 2023 (avance)        NA</span></span>
-<span><span class="co">#&gt; 4 1.1.2.  Raices y tubérculos 2023 (avance)        NA</span></span>
-<span><span class="co">#&gt; 5 1.1.3.  Cultivos azucareros 2023 (avance)        NA</span></span>
-<span><span class="co">#&gt; 6         1.1.4.  Leguminosas 2023 (avance)        NA</span></span></code></pre></div>
+<span><span class="co">#&gt; 1         EXTRACCION NACIONAL 2024 (avance) 371995244</span></span>
+<span><span class="co">#&gt; 2                 1.  Biomasa 2024 (avance) 126108212</span></span>
+<span><span class="co">#&gt; 3    1.1.  Cultivos primarios 2024 (avance)  67456391</span></span>
+<span><span class="co">#&gt; 4            1.1.1.  Cereales 2024 (avance)        NA</span></span>
+<span><span class="co">#&gt; 5 1.1.2.  Raices y tubérculos 2024 (avance)        NA</span></span>
+<span><span class="co">#&gt; 6 1.1.3.  Cultivos azucareros 2024 (avance)        NA</span></span></code></pre></div>
 <ul>
 <li>
 <strong>URL:</strong> <a href="https://www.ine.es/jaxi/Tabla.htm?tpx=52056&amp;L=0" class="external-link uri">https://www.ine.es/jaxi/Tabla.htm?tpx=52056&amp;L=0</a>
@@ -373,11 +346,11 @@ see that when we obtain the metadata information from a table.</li>
 <span><span class="va">metadata</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_metadata_table_varval.html">get_metadata_table_varval</a></span><span class="op">(</span>idTable <span class="op">=</span> <span class="fl">52056</span>,</span>
 <span>                                      filter <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>NAC <span class="op">=</span> <span class="st">"00"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">metadata</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/order.html" class="external-link">order</a></span><span class="op">(</span><span class="va">metadata</span><span class="op">$</span><span class="va">Variable.Id</span><span class="op">)</span>,<span class="op">]</span>,<span class="fl">4</span><span class="op">)</span></span>
-<span><span class="co">#&gt;       Id         Nombre Codigo Variable.Id Variable.Nombre Variable.Codigo</span></span>
-<span><span class="co">#&gt; 6  11406 Valor absoluto                  3    Tipo de dato                </span></span>
-<span><span class="co">#&gt; 12    77     Porcentaje                  3    Tipo de dato                </span></span>
-<span><span class="co">#&gt; 4    451          Total                 18            Sexo                </span></span>
-<span><span class="co">#&gt; 40   452        Hombres      1          18            Sexo</span></span></code></pre></div>
+<span><span class="co">#&gt;       Id      Nombre Codigo Variable.Id Variable.Nombre Variable.Codigo</span></span>
+<span><span class="co">#&gt; 6  11406       Valor                  3    Tipo de dato                </span></span>
+<span><span class="co">#&gt; 12    77  Porcentaje                  3    Tipo de dato                </span></span>
+<span><span class="co">#&gt; 4    451 Ambos sexos                 18            Sexo                </span></span>
+<span><span class="co">#&gt; 40   452     Hombres      1          18            Sexo</span></span></code></pre></div>
 <ol start="2" style="list-style-type: decimal">
 <li>In this case, we can use the ids instead of the codes to build the
 filter. To do this we add the alias <em>~id</em> at the end of each
@@ -396,10 +369,10 @@ id.</li>
 <span><span class="va">explotaciones</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_data_table.html">get_data_table</a></span><span class="op">(</span>idTable <span class="op">=</span> <span class="fl">52056</span>, unnest <span class="op">=</span> <span class="cn">TRUE</span>, tip <span class="op">=</span> <span class="st">"A"</span>,</span>
 <span>                             nlast <span class="op">=</span> <span class="fl">1</span>, filter <span class="op">=</span> <span class="va">filter</span>, validate <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="va">explotaciones</span></span>
-<span><span class="co">#&gt;                                                                                          Nombre</span></span>
-<span><span class="co">#&gt; 1   Total Nacional, Total tramos UTAT, Total mano de obra, Total, Explotaciones, Valor absoluto</span></span>
-<span><span class="co">#&gt; 2 Total Nacional, Total tramos UTAT, Total mano de obra, Hombres, Explotaciones, Valor absoluto</span></span>
-<span><span class="co">#&gt; 3 Total Nacional, Total tramos UTAT, Total mano de obra, Mujeres, Explotaciones, Valor absoluto</span></span>
+<span><span class="co">#&gt;                                                                                     Nombre</span></span>
+<span><span class="co">#&gt; 1 Total Nacional, Total tramos UTAT, Total mano de obra, Ambos sexos, Explotaciones, Valor</span></span>
+<span><span class="co">#&gt; 2     Total Nacional, Total tramos UTAT, Total mano de obra, Hombres, Explotaciones, Valor</span></span>
+<span><span class="co">#&gt; 3     Total Nacional, Total tramos UTAT, Total mano de obra, Mujeres, Explotaciones, Valor</span></span>
 <span><span class="co">#&gt;    Valor</span></span>
 <span><span class="co">#&gt; 1 894718</span></span>
 <span><span class="co">#&gt; 2 757886</span></span>
@@ -426,7 +399,7 @@ which the series belong.</li>
 <span><span class="co">#&gt; 3  115                       Provincias   PROV</span></span>
 <span><span class="co">#&gt; 4  269           Grupos especiales 2001       </span></span>
 <span><span class="co">#&gt; 5  270                    Rúbricas 2001       </span></span>
-<span><span class="co">#&gt; 6  349            Totales Territoriales    NAC</span></span>
+<span><span class="co">#&gt; 6  349                   Total Nacional    NAC</span></span>
 <span><span class="co">#&gt; 7  544            Corrección de efectos       </span></span>
 <span><span class="co">#&gt; 8  762                   Grupos ECOICOP       </span></span>
 <span><span class="co">#&gt; 9  763                Subgrupos ECOICOP       </span></span>
@@ -493,10 +466,10 @@ interest us to build the filter.</li>
 <span><span class="co">#&gt; 6 86           3   Variación anual</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">varval</span>, <span class="va">Fk_Variable</span> <span class="op">==</span> <span class="fl">762</span><span class="op">)</span>, <span class="fl">4</span><span class="op">)</span></span>
 <span><span class="co">#&gt;         Id Fk_Variable                             Nombre Codigo</span></span>
-<span><span class="co">#&gt; 176 304092         762                     Índice general     00</span></span>
-<span><span class="co">#&gt; 177 304093         762 Alimentos y bebidas no alcohólicas     01</span></span>
-<span><span class="co">#&gt; 178 304094         762       Bebidas alcohólicas y tabaco     02</span></span>
-<span><span class="co">#&gt; 179 304095         762                  Vestido y calzado     03</span></span></code></pre></div>
+<span><span class="co">#&gt; 179 304092         762                     Índice general     00</span></span>
+<span><span class="co">#&gt; 180 304093         762 Alimentos y bebidas no alcohólicas     01</span></span>
+<span><span class="co">#&gt; 181 304094         762       Bebidas alcohólicas y tabaco     02</span></span>
+<span><span class="co">#&gt; 182 304095         762                  Vestido y calzado     03</span></span></code></pre></div>
 <ol start="3" style="list-style-type: decimal">
 <li>With this information we build the filter as follows.</li>
 </ol>
@@ -512,7 +485,7 @@ interest us to build the filter.</li>
 <span>                              unnest <span class="op">=</span> <span class="cn">TRUE</span>, tip <span class="op">=</span> <span class="st">"A"</span>, validate <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="va">ipc</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Nombre"</span>, <span class="st">"T3_Periodo"</span>, <span class="st">"Anyo"</span>, <span class="st">"Valor"</span><span class="op">)</span><span class="op">]</span></span>
 <span><span class="co">#&gt;                                           Nombre T3_Periodo Anyo Valor</span></span>
-<span><span class="co">#&gt; 1 Araba/Álava. Índice general. Variación anual.        ago. 2025   3.2</span></span></code></pre></div>
+<span><span class="co">#&gt; 1 Araba/Álava. Índice general. Variación anual.        may. 2026   3.3</span></span></code></pre></div>
 <ul>
 <li>A variable can take more than one value (valid to filter data from
 tables as well).</li>
@@ -529,9 +502,9 @@ tables as well).</li>
 <span>                              unnest <span class="op">=</span> <span class="cn">TRUE</span>, tip <span class="op">=</span> <span class="st">"A"</span>, validate <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="va">ipc</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Nombre"</span>, <span class="st">"T3_Periodo"</span>, <span class="st">"Anyo"</span>, <span class="st">"Valor"</span><span class="op">)</span><span class="op">]</span></span>
 <span><span class="co">#&gt;                                                Nombre T3_Periodo Anyo Valor</span></span>
-<span><span class="co">#&gt; 1 Alicante/Alacant. Índice general. Variación anual.        ago. 2025   3.2</span></span>
-<span><span class="co">#&gt; 2         Albacete. Índice general. Variación anual.        ago. 2025   2.5</span></span>
-<span><span class="co">#&gt; 3      Araba/Álava. Índice general. Variación anual.        ago. 2025   3.2</span></span></code></pre></div>
+<span><span class="co">#&gt; 1 Alicante/Alacant. Índice general. Variación anual.        may. 2026   3.5</span></span>
+<span><span class="co">#&gt; 2         Albacete. Índice general. Variación anual.        may. 2026   2.9</span></span>
+<span><span class="co">#&gt; 3      Araba/Álava. Índice general. Variación anual.        may. 2026   3.3</span></span></code></pre></div>
 <ul>
 <li>A variable can take a empty character <code>""</code> to get all its
 possible values (valid to filter data from tables as well).</li>
@@ -548,58 +521,58 @@ possible values (valid to filter data from tables as well).</li>
 <span>                              unnest <span class="op">=</span> <span class="cn">TRUE</span>, tip <span class="op">=</span> <span class="st">"A"</span>, validate <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="va">ipc</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Nombre"</span>, <span class="st">"T3_Periodo"</span>, <span class="st">"Anyo"</span>, <span class="st">"Valor"</span><span class="op">)</span><span class="op">]</span></span>
 <span><span class="co">#&gt;                                              Nombre T3_Periodo Anyo   Valor</span></span>
-<span><span class="co">#&gt; 1               Salamanca. Índice general. Índice.        ago. 2025 119.446</span></span>
-<span><span class="co">#&gt; 2                  Huelva. Índice general. Índice.        ago. 2025 119.667</span></span>
-<span><span class="co">#&gt; 3             Ciudad Real. Índice general. Índice.        ago. 2025 119.468</span></span>
-<span><span class="co">#&gt; 4        Alicante/Alacant. Índice general. Índice.        ago. 2025 119.986</span></span>
-<span><span class="co">#&gt; 5                 Ourense. Índice general. Índice.        ago. 2025 119.814</span></span>
-<span><span class="co">#&gt; 6  Santa Cruz de Tenerife. Índice general. Índice.        ago. 2025 118.627</span></span>
-<span><span class="co">#&gt; 7               Coruña, A. Índice general. Índice.        ago. 2025 118.996</span></span>
-<span><span class="co">#&gt; 8              Valladolid. Índice general. Índice.        ago. 2025 119.144</span></span>
-<span><span class="co">#&gt; 9                  Huesca. Índice general. Índice.        ago. 2025 119.608</span></span>
-<span><span class="co">#&gt; 10                  Cádiz. Índice general. Índice.        ago. 2025 119.422</span></span>
-<span><span class="co">#&gt; 11                 Málaga. Índice general. Índice.        ago. 2025 120.727</span></span>
-<span><span class="co">#&gt; 12                 Teruel. Índice general. Índice.        ago. 2025 118.277</span></span>
-<span><span class="co">#&gt; 13               Albacete. Índice general. Índice.        ago. 2025 119.905</span></span>
-<span><span class="co">#&gt; 14              Rioja, La. Índice general. Índice.        ago. 2025 118.830</span></span>
-<span><span class="co">#&gt; 15             Pontevedra. Índice general. Índice.        ago. 2025 119.941</span></span>
-<span><span class="co">#&gt; 16                Melilla. Índice general. Índice.        ago. 2025 119.754</span></span>
-<span><span class="co">#&gt; 17                 Cuenca. Índice general. Índice.        ago. 2025 119.002</span></span>
-<span><span class="co">#&gt; 18                 Toledo. Índice general. Índice.        ago. 2025 120.608</span></span>
-<span><span class="co">#&gt; 19                Córdoba. Índice general. Índice.        ago. 2025 118.946</span></span>
-<span><span class="co">#&gt; 20                  Ceuta. Índice general. Índice.        ago. 2025 119.115</span></span>
-<span><span class="co">#&gt; 21                Granada. Índice general. Índice.        ago. 2025 119.046</span></span>
-<span><span class="co">#&gt; 22                  Ávila. Índice general. Índice.        ago. 2025 120.371</span></span>
-<span><span class="co">#&gt; 23              Tarragona. Índice general. Índice.        ago. 2025 118.573</span></span>
-<span><span class="co">#&gt; 24                  Soria. Índice general. Índice.        ago. 2025 118.914</span></span>
-<span><span class="co">#&gt; 25      Valencia/València. Índice general. Índice.        ago. 2025 118.768</span></span>
-<span><span class="co">#&gt; 26            Guadalajara. Índice general. Índice.        ago. 2025 120.107</span></span>
-<span><span class="co">#&gt; 27                 Burgos. Índice general. Índice.        ago. 2025 118.249</span></span>
-<span><span class="co">#&gt; 28                   Lugo. Índice general. Índice.        ago. 2025 119.783</span></span>
-<span><span class="co">#&gt; 29               Gipuzkoa. Índice general. Índice.        ago. 2025 119.497</span></span>
-<span><span class="co">#&gt; 30                Almería. Índice general. Índice.        ago. 2025 117.723</span></span>
-<span><span class="co">#&gt; 31                 Girona. Índice general. Índice.        ago. 2025 118.774</span></span>
-<span><span class="co">#&gt; 32                 Lleida. Índice general. Índice.        ago. 2025 120.368</span></span>
-<span><span class="co">#&gt; 33               Zaragoza. Índice general. Índice.        ago. 2025 118.841</span></span>
-<span><span class="co">#&gt; 34                 Zamora. Índice general. Índice.        ago. 2025 119.870</span></span>
-<span><span class="co">#&gt; 35     Castellón/Castelló. Índice general. Índice.        ago. 2025 121.066</span></span>
-<span><span class="co">#&gt; 36                   Jaén. Índice general. Índice.        ago. 2025 119.219</span></span>
-<span><span class="co">#&gt; 37               Asturias. Índice general. Índice.        ago. 2025 119.688</span></span>
-<span><span class="co">#&gt; 38            Araba/Álava. Índice general. Índice.        ago. 2025 118.319</span></span>
-<span><span class="co">#&gt; 39                Badajoz. Índice general. Índice.        ago. 2025 119.617</span></span>
-<span><span class="co">#&gt; 40                 Madrid. Índice general. Índice.        ago. 2025 117.280</span></span>
-<span><span class="co">#&gt; 41                Bizkaia. Índice general. Índice.        ago. 2025 119.573</span></span>
-<span><span class="co">#&gt; 42              Cantabria. Índice general. Índice.        ago. 2025 118.985</span></span>
-<span><span class="co">#&gt; 43            Palmas, Las. Índice general. Índice.        ago. 2025 118.454</span></span>
-<span><span class="co">#&gt; 44                Segovia. Índice general. Índice.        ago. 2025 119.436</span></span>
-<span><span class="co">#&gt; 45               Palencia. Índice general. Índice.        ago. 2025 118.256</span></span>
-<span><span class="co">#&gt; 46                Sevilla. Índice general. Índice.        ago. 2025 118.791</span></span>
-<span><span class="co">#&gt; 47                   León. Índice general. Índice.        ago. 2025 120.754</span></span>
-<span><span class="co">#&gt; 48         Balears, Illes. Índice general. Índice.        ago. 2025 120.410</span></span>
-<span><span class="co">#&gt; 49              Barcelona. Índice general. Índice.        ago. 2025 117.920</span></span>
-<span><span class="co">#&gt; 50                Navarra. Índice general. Índice.        ago. 2025 119.283</span></span>
-<span><span class="co">#&gt; 51                Cáceres. Índice general. Índice.        ago. 2025 117.577</span></span>
-<span><span class="co">#&gt; 52                 Murcia. Índice general. Índice.        ago. 2025 118.498</span></span></code></pre></div>
+<span><span class="co">#&gt; 1               Salamanca. Índice general. Índice.        may. 2026 103.365</span></span>
+<span><span class="co">#&gt; 2                  Huelva. Índice general. Índice.        may. 2026 102.264</span></span>
+<span><span class="co">#&gt; 3             Ciudad Real. Índice general. Índice.        may. 2026 103.206</span></span>
+<span><span class="co">#&gt; 4        Alicante/Alacant. Índice general. Índice.        may. 2026 102.957</span></span>
+<span><span class="co">#&gt; 5                 Ourense. Índice general. Índice.        may. 2026 103.183</span></span>
+<span><span class="co">#&gt; 6  Santa Cruz de Tenerife. Índice general. Índice.        may. 2026 102.861</span></span>
+<span><span class="co">#&gt; 7               Coruña, A. Índice general. Índice.        may. 2026 103.135</span></span>
+<span><span class="co">#&gt; 8              Valladolid. Índice general. Índice.        may. 2026 102.960</span></span>
+<span><span class="co">#&gt; 9                  Huesca. Índice general. Índice.        may. 2026 103.037</span></span>
+<span><span class="co">#&gt; 10                  Cádiz. Índice general. Índice.        may. 2026 102.767</span></span>
+<span><span class="co">#&gt; 11                 Málaga. Índice general. Índice.        may. 2026 103.056</span></span>
+<span><span class="co">#&gt; 12                 Teruel. Índice general. Índice.        may. 2026 103.197</span></span>
+<span><span class="co">#&gt; 13               Albacete. Índice general. Índice.        may. 2026 102.674</span></span>
+<span><span class="co">#&gt; 14              Rioja, La. Índice general. Índice.        may. 2026 102.698</span></span>
+<span><span class="co">#&gt; 15             Pontevedra. Índice general. Índice.        may. 2026 103.482</span></span>
+<span><span class="co">#&gt; 16                Melilla. Índice general. Índice.        may. 2026 102.886</span></span>
+<span><span class="co">#&gt; 17                 Cuenca. Índice general. Índice.        may. 2026 103.252</span></span>
+<span><span class="co">#&gt; 18                 Toledo. Índice general. Índice.        may. 2026 103.376</span></span>
+<span><span class="co">#&gt; 19                Córdoba. Índice general. Índice.        may. 2026 102.893</span></span>
+<span><span class="co">#&gt; 20                  Ceuta. Índice general. Índice.        may. 2026 102.576</span></span>
+<span><span class="co">#&gt; 21                Granada. Índice general. Índice.        may. 2026 103.199</span></span>
+<span><span class="co">#&gt; 22                  Ávila. Índice general. Índice.        may. 2026 102.891</span></span>
+<span><span class="co">#&gt; 23              Tarragona. Índice general. Índice.        may. 2026 102.913</span></span>
+<span><span class="co">#&gt; 24                  Soria. Índice general. Índice.        may. 2026 103.218</span></span>
+<span><span class="co">#&gt; 25      Valencia/València. Índice general. Índice.        may. 2026 102.730</span></span>
+<span><span class="co">#&gt; 26            Guadalajara. Índice general. Índice.        may. 2026 102.773</span></span>
+<span><span class="co">#&gt; 27                 Burgos. Índice general. Índice.        may. 2026 102.752</span></span>
+<span><span class="co">#&gt; 28                   Lugo. Índice general. Índice.        may. 2026 102.712</span></span>
+<span><span class="co">#&gt; 29               Gipuzkoa. Índice general. Índice.        may. 2026 102.218</span></span>
+<span><span class="co">#&gt; 30                Almería. Índice general. Índice.        may. 2026 102.942</span></span>
+<span><span class="co">#&gt; 31                 Girona. Índice general. Índice.        may. 2026 103.312</span></span>
+<span><span class="co">#&gt; 32                 Lleida. Índice general. Índice.        may. 2026 103.117</span></span>
+<span><span class="co">#&gt; 33               Zaragoza. Índice general. Índice.        may. 2026 102.677</span></span>
+<span><span class="co">#&gt; 34                 Zamora. Índice general. Índice.        may. 2026 102.992</span></span>
+<span><span class="co">#&gt; 35     Castellón/Castelló. Índice general. Índice.        may. 2026 103.046</span></span>
+<span><span class="co">#&gt; 36                   Jaén. Índice general. Índice.        may. 2026 102.641</span></span>
+<span><span class="co">#&gt; 37               Asturias. Índice general. Índice.        may. 2026 102.401</span></span>
+<span><span class="co">#&gt; 38            Araba/Álava. Índice general. Índice.        may. 2026 103.208</span></span>
+<span><span class="co">#&gt; 39                Badajoz. Índice general. Índice.        may. 2026 102.756</span></span>
+<span><span class="co">#&gt; 40                 Madrid. Índice general. Índice.        may. 2026 103.223</span></span>
+<span><span class="co">#&gt; 41                Bizkaia. Índice general. Índice.        may. 2026 103.413</span></span>
+<span><span class="co">#&gt; 42              Cantabria. Índice general. Índice.        may. 2026 103.109</span></span>
+<span><span class="co">#&gt; 43            Palmas, Las. Índice general. Índice.        may. 2026 103.014</span></span>
+<span><span class="co">#&gt; 44                Segovia. Índice general. Índice.        may. 2026 102.898</span></span>
+<span><span class="co">#&gt; 45               Palencia. Índice general. Índice.        may. 2026 103.041</span></span>
+<span><span class="co">#&gt; 46                Sevilla. Índice general. Índice.        may. 2026 102.806</span></span>
+<span><span class="co">#&gt; 47                   León. Índice general. Índice.        may. 2026 103.271</span></span>
+<span><span class="co">#&gt; 48         Balears, Illes. Índice general. Índice.        may. 2026 103.026</span></span>
+<span><span class="co">#&gt; 49              Barcelona. Índice general. Índice.        may. 2026 102.762</span></span>
+<span><span class="co">#&gt; 50                Navarra. Índice general. Índice.        may. 2026 102.897</span></span>
+<span><span class="co">#&gt; 51                Cáceres. Índice general. Índice.        may. 2026 102.262</span></span>
+<span><span class="co">#&gt; 52                 Murcia. Índice general. Índice.        may. 2026 102.819</span></span></code></pre></div>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
@@ -612,7 +585,7 @@ possible values (valid to filter data from tables as well).</li>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
     </footer>

@@ -7,8 +7,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Classifications and hierarchy trees • ineapir</title>
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Classifications and hierarchy trees">
 </head>
@@ -20,7 +20,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">ineapir</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.5</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.6</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -64,7 +64,7 @@
       <h1>Classifications and hierarchy trees</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/es-ine/ineapir/blob/v0.2.5/vignettes/articles/classifications.Rmd" class="external-link"><code>vignettes/articles/classifications.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/es-ine/ineapir/blob/main/vignettes/articles/classifications.Rmd" class="external-link"><code>vignettes/articles/classifications.Rmd</code></a></small>
       <div class="d-none name"><code>classifications.Rmd</code></div>
     </div>
 
@@ -168,13 +168,13 @@ any value.</p>
 <span><span class="co"># Get the children of each Autonomous communities (provinces)</span></span>
 <span><span class="va">provinces</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_metadata_values.html">get_metadata_values</a></span><span class="op">(</span>variable <span class="op">=</span> <span class="fl">70</span>, hierarchy <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">provinces</span><span class="op">)</span></span>
-<span><span class="co">#&gt;   Id_0 Fk_Variable_0  Nombre_0 Codigo_0  FK_JerarquiaPadres_0 Id_1</span></span>
-<span><span class="co">#&gt; 1 8995            70   Melilla       19 16473, 274511, 274508   52</span></span>
-<span><span class="co">#&gt; 2 8997            70 Andalucía       01 16473, 274511, 274508    5</span></span>
-<span><span class="co">#&gt; 3 8997            70 Andalucía       01 16473, 274511, 274508   12</span></span>
-<span><span class="co">#&gt; 4 8997            70 Andalucía       01 16473, 274511, 274508   15</span></span>
-<span><span class="co">#&gt; 5 8997            70 Andalucía       01 16473, 274511, 274508   19</span></span>
-<span><span class="co">#&gt; 6 8997            70 Andalucía       01 16473, 274511, 274508   22</span></span>
+<span><span class="co">#&gt;   Id_0 Fk_Variable_0  Nombre_0 Codigo_0          FK_JerarquiaPadres_0 Id_1</span></span>
+<span><span class="co">#&gt; 1 8995            70   Melilla       19         16473, 274511, 274508   52</span></span>
+<span><span class="co">#&gt; 2 8997            70 Andalucía       01 16473, 274511, 457344, 274508    5</span></span>
+<span><span class="co">#&gt; 3 8997            70 Andalucía       01 16473, 274511, 457344, 274508   12</span></span>
+<span><span class="co">#&gt; 4 8997            70 Andalucía       01 16473, 274511, 457344, 274508   15</span></span>
+<span><span class="co">#&gt; 5 8997            70 Andalucía       01 16473, 274511, 457344, 274508   19</span></span>
+<span><span class="co">#&gt; 6 8997            70 Andalucía       01 16473, 274511, 457344, 274508   22</span></span>
 <span><span class="co">#&gt;   Fk_Variable_1 Nombre_1 Codigo_1 FK_JerarquiaPadres_1</span></span>
 <span><span class="co">#&gt; 1           115  Melilla       52                 8995</span></span>
 <span><span class="co">#&gt; 2           115  Almería       04                 8997</span></span>
@@ -195,16 +195,16 @@ interest us with the <code>filter</code> argument.</p>
 <span><span class="va">provinces</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_metadata_values.html">get_metadata_values</a></span><span class="op">(</span>variable <span class="op">=</span> <span class="fl">70</span>, filter <span class="op">=</span> <span class="va">filter</span>, hierarchy <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>                                 validate <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">provinces</span><span class="op">)</span></span>
-<span><span class="co">#&gt;   Id_0 Fk_Variable_0 Nombre_0 Codigo_0  FK_JerarquiaPadres_0 Id_1 Fk_Variable_1</span></span>
-<span><span class="co">#&gt; 1 9008            70  Galicia       12 16473, 274511, 274508   16           115</span></span>
-<span><span class="co">#&gt; 2 9008            70  Galicia       12 16473, 274511, 274508   28           115</span></span>
-<span><span class="co">#&gt; 3 9008            70  Galicia       12 16473, 274511, 274508   36           115</span></span>
-<span><span class="co">#&gt; 4 9008            70  Galicia       12 16473, 274511, 274508   53           115</span></span>
-<span><span class="co">#&gt;     Nombre_1 Codigo_1 FK_JerarquiaPadres_1</span></span>
-<span><span class="co">#&gt; 1  Coruña, A       15                 9008</span></span>
-<span><span class="co">#&gt; 2       Lugo       27                 9008</span></span>
-<span><span class="co">#&gt; 3 Pontevedra       36                 9008</span></span>
-<span><span class="co">#&gt; 4    Ourense       32                 9008</span></span></code></pre></div>
+<span><span class="co">#&gt;   Id_0 Fk_Variable_0 Nombre_0 Codigo_0          FK_JerarquiaPadres_0 Id_1</span></span>
+<span><span class="co">#&gt; 1 9008            70  Galicia       12 16473, 274511, 457344, 274508   16</span></span>
+<span><span class="co">#&gt; 2 9008            70  Galicia       12 16473, 274511, 457344, 274508   28</span></span>
+<span><span class="co">#&gt; 3 9008            70  Galicia       12 16473, 274511, 457344, 274508   36</span></span>
+<span><span class="co">#&gt; 4 9008            70  Galicia       12 16473, 274511, 457344, 274508   53</span></span>
+<span><span class="co">#&gt;   Fk_Variable_1   Nombre_1 Codigo_1 FK_JerarquiaPadres_1</span></span>
+<span><span class="co">#&gt; 1           115  Coruña, A       15                 9008</span></span>
+<span><span class="co">#&gt; 2           115       Lugo       27                 9008</span></span>
+<span><span class="co">#&gt; 3           115 Pontevedra       36                 9008</span></span>
+<span><span class="co">#&gt; 4           115    Ourense       32                 9008</span></span></code></pre></div>
 <ol start="2" style="list-style-type: decimal">
 <li>Example 2.</li>
 </ol>
@@ -216,13 +216,13 @@ interest us with the <code>filter</code> argument.</p>
 <span><span class="va">provinces</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_metadata_values.html">get_metadata_values</a></span><span class="op">(</span>variable <span class="op">=</span> <span class="fl">70</span>, filter <span class="op">=</span> <span class="va">filter</span>, hierarchy <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>                                 validate <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">provinces</span><span class="op">)</span></span>
-<span><span class="co">#&gt;   Id_0 Fk_Variable_0  Nombre_0 Codigo_0  FK_JerarquiaPadres_0 Id_1</span></span>
-<span><span class="co">#&gt; 1 8995            70   Melilla       19 16473, 274511, 274508   52</span></span>
-<span><span class="co">#&gt; 2 8997            70 Andalucía       01 16473, 274511, 274508    5</span></span>
-<span><span class="co">#&gt; 3 8997            70 Andalucía       01 16473, 274511, 274508   12</span></span>
-<span><span class="co">#&gt; 4 8997            70 Andalucía       01 16473, 274511, 274508   15</span></span>
-<span><span class="co">#&gt; 5 8997            70 Andalucía       01 16473, 274511, 274508   19</span></span>
-<span><span class="co">#&gt; 6 8997            70 Andalucía       01 16473, 274511, 274508   22</span></span>
+<span><span class="co">#&gt;   Id_0 Fk_Variable_0  Nombre_0 Codigo_0          FK_JerarquiaPadres_0 Id_1</span></span>
+<span><span class="co">#&gt; 1 8995            70   Melilla       19         16473, 274511, 274508   52</span></span>
+<span><span class="co">#&gt; 2 8997            70 Andalucía       01 16473, 274511, 457344, 274508    5</span></span>
+<span><span class="co">#&gt; 3 8997            70 Andalucía       01 16473, 274511, 457344, 274508   12</span></span>
+<span><span class="co">#&gt; 4 8997            70 Andalucía       01 16473, 274511, 457344, 274508   15</span></span>
+<span><span class="co">#&gt; 5 8997            70 Andalucía       01 16473, 274511, 457344, 274508   19</span></span>
+<span><span class="co">#&gt; 6 8997            70 Andalucía       01 16473, 274511, 457344, 274508   22</span></span>
 <span><span class="co">#&gt;   Fk_Variable_1 Nombre_1 Codigo_1 FK_JerarquiaPadres_1</span></span>
 <span><span class="co">#&gt; 1           115  Melilla       52                 8995</span></span>
 <span><span class="co">#&gt; 2           115  Almería       04                 8997</span></span>
@@ -242,27 +242,27 @@ interest us with the <code>filter</code> argument.</p>
 <span><span class="va">municipalities</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_metadata_values.html">get_metadata_values</a></span><span class="op">(</span>variable <span class="op">=</span> <span class="fl">70</span>, filter <span class="op">=</span> <span class="va">filter</span>, </span>
 <span>                                      hierarchy <span class="op">=</span> <span class="fl">2</span>, validate <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">municipalities</span><span class="op">)</span></span>
-<span><span class="co">#&gt;   Id_0 Fk_Variable_0 Nombre_0 Codigo_0  FK_JerarquiaPadres_0 Id_1 Fk_Variable_1</span></span>
-<span><span class="co">#&gt; 1 9008            70  Galicia       12 16473, 274511, 274508   28           115</span></span>
-<span><span class="co">#&gt; 2 9008            70  Galicia       12 16473, 274511, 274508   28           115</span></span>
-<span><span class="co">#&gt; 3 9008            70  Galicia       12 16473, 274511, 274508   28           115</span></span>
-<span><span class="co">#&gt; 4 9008            70  Galicia       12 16473, 274511, 274508   28           115</span></span>
-<span><span class="co">#&gt; 5 9008            70  Galicia       12 16473, 274511, 274508   28           115</span></span>
-<span><span class="co">#&gt; 6 9008            70  Galicia       12 16473, 274511, 274508   28           115</span></span>
-<span><span class="co">#&gt;   Nombre_1 Codigo_1 FK_JerarquiaPadres_1 Id_2 Fk_Variable_2      Nombre_2</span></span>
-<span><span class="co">#&gt; 1     Lugo       27                 9008  570            19          Lugo</span></span>
-<span><span class="co">#&gt; 2     Lugo       27                 9008 2780            19       Vilalba</span></span>
-<span><span class="co">#&gt; 3     Lugo       27                 9008 2781            19       Baralla</span></span>
-<span><span class="co">#&gt; 4     Lugo       27                 9008 2967            19        Abadín</span></span>
-<span><span class="co">#&gt; 5     Lugo       27                 9008 2968            19         Alfoz</span></span>
-<span><span class="co">#&gt; 6     Lugo       27                 9008 2969            19 Antas de Ulla</span></span>
-<span><span class="co">#&gt;   Codigo_2 FK_JerarquiaPadres_2</span></span>
-<span><span class="co">#&gt; 1    27028           28, 392355</span></span>
-<span><span class="co">#&gt; 2    27065           28, 392353</span></span>
-<span><span class="co">#&gt; 3    27901           28, 392356</span></span>
-<span><span class="co">#&gt; 4    27001           28, 392353</span></span>
-<span><span class="co">#&gt; 5    27002           28, 392354</span></span>
-<span><span class="co">#&gt; 6    27003           28, 392355</span></span></code></pre></div>
+<span><span class="co">#&gt;   Id_0 Fk_Variable_0 Nombre_0 Codigo_0          FK_JerarquiaPadres_0 Id_1</span></span>
+<span><span class="co">#&gt; 1 9008            70  Galicia       12 16473, 274511, 457344, 274508   28</span></span>
+<span><span class="co">#&gt; 2 9008            70  Galicia       12 16473, 274511, 457344, 274508   28</span></span>
+<span><span class="co">#&gt; 3 9008            70  Galicia       12 16473, 274511, 457344, 274508   28</span></span>
+<span><span class="co">#&gt; 4 9008            70  Galicia       12 16473, 274511, 457344, 274508   28</span></span>
+<span><span class="co">#&gt; 5 9008            70  Galicia       12 16473, 274511, 457344, 274508   28</span></span>
+<span><span class="co">#&gt; 6 9008            70  Galicia       12 16473, 274511, 457344, 274508   28</span></span>
+<span><span class="co">#&gt;   Fk_Variable_1 Nombre_1 Codigo_1 FK_JerarquiaPadres_1 Id_2 Fk_Variable_2</span></span>
+<span><span class="co">#&gt; 1           115     Lugo       27                 9008  570            19</span></span>
+<span><span class="co">#&gt; 2           115     Lugo       27                 9008 2780            19</span></span>
+<span><span class="co">#&gt; 3           115     Lugo       27                 9008 2781            19</span></span>
+<span><span class="co">#&gt; 4           115     Lugo       27                 9008 2967            19</span></span>
+<span><span class="co">#&gt; 5           115     Lugo       27                 9008 2968            19</span></span>
+<span><span class="co">#&gt; 6           115     Lugo       27                 9008 2969            19</span></span>
+<span><span class="co">#&gt;        Nombre_2 Codigo_2 FK_JerarquiaPadres_2</span></span>
+<span><span class="co">#&gt; 1          Lugo    27028           28, 392355</span></span>
+<span><span class="co">#&gt; 2       Vilalba    27065           28, 392353</span></span>
+<span><span class="co">#&gt; 3       Baralla    27901           28, 392356</span></span>
+<span><span class="co">#&gt; 4        Abadín    27001           28, 392353</span></span>
+<span><span class="co">#&gt; 5         Alfoz    27002           28, 392354</span></span>
+<span><span class="co">#&gt; 6 Antas de Ulla    27003           28, 392355</span></span></code></pre></div>
 <ol start="4" style="list-style-type: decimal">
 <li>Example 4.</li>
 </ol>
@@ -276,41 +276,41 @@ interest us with the <code>filter</code> argument.</p>
 <span><span class="va">sections</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_metadata_values.html">get_metadata_values</a></span><span class="op">(</span>variable <span class="op">=</span> <span class="fl">70</span>, filter <span class="op">=</span> <span class="va">filter</span>, hierarchy <span class="op">=</span> <span class="fl">4</span>,</span>
 <span>                                validate <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">sections</span><span class="op">)</span></span>
-<span><span class="co">#&gt;   Id_0 Fk_Variable_0 Nombre_0 Codigo_0  FK_JerarquiaPadres_0 Id_1 Fk_Variable_1</span></span>
-<span><span class="co">#&gt; 1 9008            70  Galicia       12 16473, 274511, 274508   28           115</span></span>
-<span><span class="co">#&gt; 2 9008            70  Galicia       12 16473, 274511, 274508   28           115</span></span>
-<span><span class="co">#&gt; 3 9008            70  Galicia       12 16473, 274511, 274508   28           115</span></span>
-<span><span class="co">#&gt; 4 9008            70  Galicia       12 16473, 274511, 274508   28           115</span></span>
-<span><span class="co">#&gt; 5 9008            70  Galicia       12 16473, 274511, 274508   28           115</span></span>
-<span><span class="co">#&gt; 6 9008            70  Galicia       12 16473, 274511, 274508   28           115</span></span>
-<span><span class="co">#&gt;   Nombre_1 Codigo_1 FK_JerarquiaPadres_1 Id_2 Fk_Variable_2 Nombre_2 Codigo_2</span></span>
-<span><span class="co">#&gt; 1     Lugo       27                 9008  570            19     Lugo    27028</span></span>
-<span><span class="co">#&gt; 2     Lugo       27                 9008  570            19     Lugo    27028</span></span>
-<span><span class="co">#&gt; 3     Lugo       27                 9008  570            19     Lugo    27028</span></span>
-<span><span class="co">#&gt; 4     Lugo       27                 9008  570            19     Lugo    27028</span></span>
-<span><span class="co">#&gt; 5     Lugo       27                 9008  570            19     Lugo    27028</span></span>
-<span><span class="co">#&gt; 6     Lugo       27                 9008  570            19     Lugo    27028</span></span>
-<span><span class="co">#&gt;   FK_JerarquiaPadres_2   Id_3 Fk_Variable_3         Nombre_3 Codigo_3</span></span>
-<span><span class="co">#&gt; 1           28, 392355 344156           846 Lugo distrito 01  2702801</span></span>
-<span><span class="co">#&gt; 2           28, 392355 344156           846 Lugo distrito 01  2702801</span></span>
-<span><span class="co">#&gt; 3           28, 392355 344156           846 Lugo distrito 01  2702801</span></span>
-<span><span class="co">#&gt; 4           28, 392355 344160           846 Lugo distrito 02  2702802</span></span>
-<span><span class="co">#&gt; 5           28, 392355 344160           846 Lugo distrito 02  2702802</span></span>
-<span><span class="co">#&gt; 6           28, 392355 344160           846 Lugo distrito 02  2702802</span></span>
-<span><span class="co">#&gt;   FK_JerarquiaPadres_3   Id_4 Fk_Variable_4           Nombre_4   Codigo_4</span></span>
-<span><span class="co">#&gt; 1                  570 344157           847 Lugo sección 01001 2702801001</span></span>
-<span><span class="co">#&gt; 2                  570 344158           847 Lugo sección 01002 2702801002</span></span>
-<span><span class="co">#&gt; 3                  570 344159           847 Lugo sección 01003 2702801003</span></span>
-<span><span class="co">#&gt; 4                  570 344161           847 Lugo sección 02001 2702802001</span></span>
-<span><span class="co">#&gt; 5                  570 344162           847 Lugo sección 02002 2702802002</span></span>
-<span><span class="co">#&gt; 6                  570 344163           847 Lugo sección 02003 2702802003</span></span>
-<span><span class="co">#&gt;   FK_JerarquiaPadres_4</span></span>
-<span><span class="co">#&gt; 1               344156</span></span>
-<span><span class="co">#&gt; 2               344156</span></span>
-<span><span class="co">#&gt; 3               344156</span></span>
-<span><span class="co">#&gt; 4               344160</span></span>
-<span><span class="co">#&gt; 5               344160</span></span>
-<span><span class="co">#&gt; 6               344160</span></span></code></pre></div>
+<span><span class="co">#&gt;   Id_0 Fk_Variable_0 Nombre_0 Codigo_0          FK_JerarquiaPadres_0 Id_1</span></span>
+<span><span class="co">#&gt; 1 9008            70  Galicia       12 16473, 274511, 457344, 274508   28</span></span>
+<span><span class="co">#&gt; 2 9008            70  Galicia       12 16473, 274511, 457344, 274508   28</span></span>
+<span><span class="co">#&gt; 3 9008            70  Galicia       12 16473, 274511, 457344, 274508   28</span></span>
+<span><span class="co">#&gt; 4 9008            70  Galicia       12 16473, 274511, 457344, 274508   28</span></span>
+<span><span class="co">#&gt; 5 9008            70  Galicia       12 16473, 274511, 457344, 274508   28</span></span>
+<span><span class="co">#&gt; 6 9008            70  Galicia       12 16473, 274511, 457344, 274508   28</span></span>
+<span><span class="co">#&gt;   Fk_Variable_1 Nombre_1 Codigo_1 FK_JerarquiaPadres_1 Id_2 Fk_Variable_2</span></span>
+<span><span class="co">#&gt; 1           115     Lugo       27                 9008  570            19</span></span>
+<span><span class="co">#&gt; 2           115     Lugo       27                 9008  570            19</span></span>
+<span><span class="co">#&gt; 3           115     Lugo       27                 9008  570            19</span></span>
+<span><span class="co">#&gt; 4           115     Lugo       27                 9008  570            19</span></span>
+<span><span class="co">#&gt; 5           115     Lugo       27                 9008  570            19</span></span>
+<span><span class="co">#&gt; 6           115     Lugo       27                 9008  570            19</span></span>
+<span><span class="co">#&gt;   Nombre_2 Codigo_2 FK_JerarquiaPadres_2   Id_3 Fk_Variable_3         Nombre_3</span></span>
+<span><span class="co">#&gt; 1     Lugo    27028           28, 392355 344156           846 Lugo distrito 01</span></span>
+<span><span class="co">#&gt; 2     Lugo    27028           28, 392355 344156           846 Lugo distrito 01</span></span>
+<span><span class="co">#&gt; 3     Lugo    27028           28, 392355 344156           846 Lugo distrito 01</span></span>
+<span><span class="co">#&gt; 4     Lugo    27028           28, 392355 344160           846 Lugo distrito 02</span></span>
+<span><span class="co">#&gt; 5     Lugo    27028           28, 392355 344160           846 Lugo distrito 02</span></span>
+<span><span class="co">#&gt; 6     Lugo    27028           28, 392355 344160           846 Lugo distrito 02</span></span>
+<span><span class="co">#&gt;   Codigo_3 FK_JerarquiaPadres_3   Id_4 Fk_Variable_4           Nombre_4</span></span>
+<span><span class="co">#&gt; 1  2702801                  570 344157           847 Lugo sección 01001</span></span>
+<span><span class="co">#&gt; 2  2702801                  570 344158           847 Lugo sección 01002</span></span>
+<span><span class="co">#&gt; 3  2702801                  570 344159           847 Lugo sección 01003</span></span>
+<span><span class="co">#&gt; 4  2702802                  570 344161           847 Lugo sección 02001</span></span>
+<span><span class="co">#&gt; 5  2702802                  570 344162           847 Lugo sección 02002</span></span>
+<span><span class="co">#&gt; 6  2702802                  570 344163           847 Lugo sección 02003</span></span>
+<span><span class="co">#&gt;     Codigo_4 FK_JerarquiaPadres_4</span></span>
+<span><span class="co">#&gt; 1 2702801001               344156</span></span>
+<span><span class="co">#&gt; 2 2702801002               344156</span></span>
+<span><span class="co">#&gt; 3 2702801003               344156</span></span>
+<span><span class="co">#&gt; 4 2702802001               344160</span></span>
+<span><span class="co">#&gt; 5 2702802002               344160</span></span>
+<span><span class="co">#&gt; 6 2702802003               344160</span></span></code></pre></div>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
@@ -323,7 +323,7 @@ interest us with the <code>filter</code> argument.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
     </footer>
