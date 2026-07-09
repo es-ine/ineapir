@@ -9,7 +9,7 @@
 ## Citation
 
 Source:
-[`DESCRIPTION`](https://github.com/es-ine/ineapir/blob/main/DESCRIPTION)
+[`DESCRIPTION`](https://github.com/es-ine/ineapir/blob/v0.2.6/DESCRIPTION)
 
 Crespo D (2026). *ineapir: Obtaining Data Published by the National
 Statistics Institute*. R package version 0.2.6,

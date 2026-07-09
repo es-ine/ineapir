@@ -64,7 +64,7 @@
       <h1>How to filter data</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/es-ine/ineapir/blob/main/vignettes/articles/filter_data.Rmd" class="external-link"><code>vignettes/articles/filter_data.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/es-ine/ineapir/blob/v0.2.6/vignettes/articles/filter_data.Rmd" class="external-link"><code>vignettes/articles/filter_data.Rmd</code></a></small>
       <div class="d-none name"><code>filter_data.Rmd</code></div>
     </div>
 
@@ -272,16 +272,21 @@ table.</li>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Get metadata information of the table</span></span>
 <span><span class="va">metadata</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_metadata_table_varval.html">get_metadata_table_varval</a></span><span class="op">(</span>idTable <span class="op">=</span> <span class="fl">33387</span><span class="op">)</span></span>
-<span><span class="co">#&gt; An error occurred calling the API (status 404).</span></span>
-<span><span class="co">#&gt; https://servicios.ine.es/wstempus/jsCache/ES/SERIES_TABLA/33387?det=0&amp;tip=M&amp;ver=3</span></span>
 <span><span class="va">metadata</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grepl</a></span><span class="op">(</span><span class="st">"^\\d{1}\\D+"</span>,<span class="va">metadata</span><span class="op">$</span><span class="va">Codigo</span><span class="op">)</span>,<span class="op">]</span></span>
-<span><span class="co">#&gt; NULL</span></span></code></pre></div>
+<span><span class="co">#&gt;                                         Nombre</span></span>
+<span><span class="co">#&gt; 2                                  1.  Biomasa</span></span>
+<span><span class="co">#&gt; 29  2.  Minerales metálicos (mineral en bruto)</span></span>
+<span><span class="co">#&gt; 50                  3.  Minerales no metálicos</span></span>
+<span><span class="co">#&gt; 106                   4.  Combustibles fósiles</span></span>
+<span><span class="co">#&gt;                                Codigo  Variable.Nombre Variable.Codigo</span></span>
+<span><span class="co">#&gt; 2                            1biomasa tipo de material  tipodematerial</span></span>
+<span><span class="co">#&gt; 29  2mineralesmetalicosmineralenbruto tipo de material  tipodematerial</span></span>
+<span><span class="co">#&gt; 50              3mineralesnometalicos tipo de material  tipodematerial</span></span>
+<span><span class="co">#&gt; 106              4combustiblesfosiles tipo de material  tipodematerial</span></span></code></pre></div>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># NOTE: for tpx tables we can use a filter.</span></span>
 <span><span class="va">metadata</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_metadata_table_varval.html">get_metadata_table_varval</a></span><span class="op">(</span>idTable <span class="op">=</span> <span class="fl">33387</span>,</span>
 <span>                                      filter <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>tipodematerial <span class="op">=</span> <span class="st">"1biomasa"</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; An error occurred calling the API (status 404).</span></span>
-<span><span class="co">#&gt; https://servicios.ine.es/wstempus/jsCache/ES/SERIES_TABLA/33387?det=0&amp;tip=M&amp;ver=3</span></span>
 <span><span class="va">metadata</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grepl</a></span><span class="op">(</span><span class="st">"^\\d{1}\\D+"</span>,<span class="va">metadata</span><span class="op">$</span><span class="va">Codigo</span><span class="op">)</span>,<span class="op">]</span></span>
 <span><span class="co">#&gt;        Nombre   Codigo  Variable.Nombre Variable.Codigo</span></span>
 <span><span class="co">#&gt; 1 1.  Biomasa 1biomasa tipo de material  tipodematerial</span></span></code></pre></div>
@@ -299,10 +304,12 @@ table.</li>
 <span><span class="co"># Request data using the filter</span></span>
 <span><span class="va">materiales</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_data_table.html">get_data_table</a></span><span class="op">(</span>idTable <span class="op">=</span> <span class="fl">33387</span>, unnest <span class="op">=</span> <span class="cn">TRUE</span>, tip <span class="op">=</span> <span class="st">"A"</span>,</span>
 <span>                             nlast <span class="op">=</span> <span class="fl">1</span>, filter <span class="op">=</span> <span class="va">filter</span>, validate <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; An error occurred calling the API (status 404).</span></span>
-<span><span class="co">#&gt; https://servicios.ine.es/wstempus/js/ES/DATOS_TABLA/33387?nult=1&amp;det=0&amp;tip=A&amp;ver=3&amp;tv=tipodematerial%3A1biomasa&amp;tv=tipodematerial%3A2mineralesmetalicosmineralenbruto&amp;tv=tipodematerial%3A3mineralesnometalicos&amp;tv=tipodematerial%3A4combustiblesfosiles</span></span>
 <span><span class="va">materiales</span></span>
-<span><span class="co">#&gt; NULL</span></span></code></pre></div>
+<span><span class="co">#&gt;                                       Nombre NombrePeriodo     Valor</span></span>
+<span><span class="co">#&gt; 1                                1.  Biomasa 2024 (avance) 126108212</span></span>
+<span><span class="co">#&gt; 2 2.  Minerales metálicos (mineral en bruto) 2024 (avance)  19447383</span></span>
+<span><span class="co">#&gt; 3                 3.  Minerales no metálicos 2024 (avance) 226327605</span></span>
+<span><span class="co">#&gt; 4                   4.  Combustibles fósiles 2024 (avance)    112044</span></span></code></pre></div>
 <ul>
 <li>
 <strong>NOTE</strong> If we add a minus sign to a value, the value
@@ -319,16 +326,14 @@ will be excluded from the filter.</li>
 <span><span class="co"># Request data using the filter</span></span>
 <span><span class="va">materiales</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_data_table.html">get_data_table</a></span><span class="op">(</span>idTable <span class="op">=</span> <span class="fl">33387</span>, unnest <span class="op">=</span> <span class="cn">TRUE</span>, tip <span class="op">=</span> <span class="st">"A"</span>,</span>
 <span>                             nlast <span class="op">=</span> <span class="fl">1</span>, filter <span class="op">=</span> <span class="va">filter</span>, validate <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; An error occurred calling the API (status 404).</span></span>
-<span><span class="co">#&gt; https://servicios.ine.es/wstempus/jsCache/ES/SERIES_TABLA/33387?det=0&amp;tip=M&amp;ver=3</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">materiales</span><span class="op">)</span></span>
 <span><span class="co">#&gt;                        Nombre NombrePeriodo     Valor</span></span>
 <span><span class="co">#&gt; 1         EXTRACCION NACIONAL 2024 (avance) 371995244</span></span>
-<span><span class="co">#&gt; 2                 1.  Biomasa 2024 (avance) 126108212</span></span>
-<span><span class="co">#&gt; 3    1.1.  Cultivos primarios 2024 (avance)  67456391</span></span>
-<span><span class="co">#&gt; 4            1.1.1.  Cereales 2024 (avance)        NA</span></span>
-<span><span class="co">#&gt; 5 1.1.2.  Raices y tubérculos 2024 (avance)        NA</span></span>
-<span><span class="co">#&gt; 6 1.1.3.  Cultivos azucareros 2024 (avance)        NA</span></span></code></pre></div>
+<span><span class="co">#&gt; 2    1.1.  Cultivos primarios 2024 (avance)  67456391</span></span>
+<span><span class="co">#&gt; 3            1.1.1.  Cereales 2024 (avance)        NA</span></span>
+<span><span class="co">#&gt; 4 1.1.2.  Raices y tubérculos 2024 (avance)        NA</span></span>
+<span><span class="co">#&gt; 5 1.1.3.  Cultivos azucareros 2024 (avance)        NA</span></span>
+<span><span class="co">#&gt; 6         1.1.4.  Leguminosas 2024 (avance)        NA</span></span></code></pre></div>
 <ul>
 <li>
 <strong>URL:</strong> <a href="https://www.ine.es/jaxi/Tabla.htm?tpx=52056&amp;L=0" class="external-link uri">https://www.ine.es/jaxi/Tabla.htm?tpx=52056&amp;L=0</a>
@@ -521,58 +526,58 @@ possible values (valid to filter data from tables as well).</li>
 <span>                              unnest <span class="op">=</span> <span class="cn">TRUE</span>, tip <span class="op">=</span> <span class="st">"A"</span>, validate <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="va">ipc</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Nombre"</span>, <span class="st">"T3_Periodo"</span>, <span class="st">"Anyo"</span>, <span class="st">"Valor"</span><span class="op">)</span><span class="op">]</span></span>
 <span><span class="co">#&gt;                                              Nombre T3_Periodo Anyo   Valor</span></span>
-<span><span class="co">#&gt; 1               Salamanca. Índice general. Índice.        may. 2026 103.365</span></span>
-<span><span class="co">#&gt; 2                  Huelva. Índice general. Índice.        may. 2026 102.264</span></span>
-<span><span class="co">#&gt; 3             Ciudad Real. Índice general. Índice.        may. 2026 103.206</span></span>
-<span><span class="co">#&gt; 4        Alicante/Alacant. Índice general. Índice.        may. 2026 102.957</span></span>
-<span><span class="co">#&gt; 5                 Ourense. Índice general. Índice.        may. 2026 103.183</span></span>
-<span><span class="co">#&gt; 6  Santa Cruz de Tenerife. Índice general. Índice.        may. 2026 102.861</span></span>
-<span><span class="co">#&gt; 7               Coruña, A. Índice general. Índice.        may. 2026 103.135</span></span>
-<span><span class="co">#&gt; 8              Valladolid. Índice general. Índice.        may. 2026 102.960</span></span>
-<span><span class="co">#&gt; 9                  Huesca. Índice general. Índice.        may. 2026 103.037</span></span>
-<span><span class="co">#&gt; 10                  Cádiz. Índice general. Índice.        may. 2026 102.767</span></span>
-<span><span class="co">#&gt; 11                 Málaga. Índice general. Índice.        may. 2026 103.056</span></span>
-<span><span class="co">#&gt; 12                 Teruel. Índice general. Índice.        may. 2026 103.197</span></span>
-<span><span class="co">#&gt; 13               Albacete. Índice general. Índice.        may. 2026 102.674</span></span>
-<span><span class="co">#&gt; 14              Rioja, La. Índice general. Índice.        may. 2026 102.698</span></span>
-<span><span class="co">#&gt; 15             Pontevedra. Índice general. Índice.        may. 2026 103.482</span></span>
-<span><span class="co">#&gt; 16                Melilla. Índice general. Índice.        may. 2026 102.886</span></span>
-<span><span class="co">#&gt; 17                 Cuenca. Índice general. Índice.        may. 2026 103.252</span></span>
-<span><span class="co">#&gt; 18                 Toledo. Índice general. Índice.        may. 2026 103.376</span></span>
-<span><span class="co">#&gt; 19                Córdoba. Índice general. Índice.        may. 2026 102.893</span></span>
-<span><span class="co">#&gt; 20                  Ceuta. Índice general. Índice.        may. 2026 102.576</span></span>
-<span><span class="co">#&gt; 21                Granada. Índice general. Índice.        may. 2026 103.199</span></span>
-<span><span class="co">#&gt; 22                  Ávila. Índice general. Índice.        may. 2026 102.891</span></span>
-<span><span class="co">#&gt; 23              Tarragona. Índice general. Índice.        may. 2026 102.913</span></span>
-<span><span class="co">#&gt; 24                  Soria. Índice general. Índice.        may. 2026 103.218</span></span>
-<span><span class="co">#&gt; 25      Valencia/València. Índice general. Índice.        may. 2026 102.730</span></span>
-<span><span class="co">#&gt; 26            Guadalajara. Índice general. Índice.        may. 2026 102.773</span></span>
-<span><span class="co">#&gt; 27                 Burgos. Índice general. Índice.        may. 2026 102.752</span></span>
-<span><span class="co">#&gt; 28                   Lugo. Índice general. Índice.        may. 2026 102.712</span></span>
-<span><span class="co">#&gt; 29               Gipuzkoa. Índice general. Índice.        may. 2026 102.218</span></span>
-<span><span class="co">#&gt; 30                Almería. Índice general. Índice.        may. 2026 102.942</span></span>
-<span><span class="co">#&gt; 31                 Girona. Índice general. Índice.        may. 2026 103.312</span></span>
-<span><span class="co">#&gt; 32                 Lleida. Índice general. Índice.        may. 2026 103.117</span></span>
-<span><span class="co">#&gt; 33               Zaragoza. Índice general. Índice.        may. 2026 102.677</span></span>
-<span><span class="co">#&gt; 34                 Zamora. Índice general. Índice.        may. 2026 102.992</span></span>
-<span><span class="co">#&gt; 35     Castellón/Castelló. Índice general. Índice.        may. 2026 103.046</span></span>
-<span><span class="co">#&gt; 36                   Jaén. Índice general. Índice.        may. 2026 102.641</span></span>
-<span><span class="co">#&gt; 37               Asturias. Índice general. Índice.        may. 2026 102.401</span></span>
-<span><span class="co">#&gt; 38            Araba/Álava. Índice general. Índice.        may. 2026 103.208</span></span>
-<span><span class="co">#&gt; 39                Badajoz. Índice general. Índice.        may. 2026 102.756</span></span>
-<span><span class="co">#&gt; 40                 Madrid. Índice general. Índice.        may. 2026 103.223</span></span>
-<span><span class="co">#&gt; 41                Bizkaia. Índice general. Índice.        may. 2026 103.413</span></span>
-<span><span class="co">#&gt; 42              Cantabria. Índice general. Índice.        may. 2026 103.109</span></span>
-<span><span class="co">#&gt; 43            Palmas, Las. Índice general. Índice.        may. 2026 103.014</span></span>
-<span><span class="co">#&gt; 44                Segovia. Índice general. Índice.        may. 2026 102.898</span></span>
-<span><span class="co">#&gt; 45               Palencia. Índice general. Índice.        may. 2026 103.041</span></span>
-<span><span class="co">#&gt; 46                Sevilla. Índice general. Índice.        may. 2026 102.806</span></span>
-<span><span class="co">#&gt; 47                   León. Índice general. Índice.        may. 2026 103.271</span></span>
-<span><span class="co">#&gt; 48         Balears, Illes. Índice general. Índice.        may. 2026 103.026</span></span>
-<span><span class="co">#&gt; 49              Barcelona. Índice general. Índice.        may. 2026 102.762</span></span>
-<span><span class="co">#&gt; 50                Navarra. Índice general. Índice.        may. 2026 102.897</span></span>
-<span><span class="co">#&gt; 51                Cáceres. Índice general. Índice.        may. 2026 102.262</span></span>
-<span><span class="co">#&gt; 52                 Murcia. Índice general. Índice.        may. 2026 102.819</span></span></code></pre></div>
+<span><span class="co">#&gt; 1               Salamanca. Índice general. Índice.         M05 2026 103.365</span></span>
+<span><span class="co">#&gt; 2                  Huelva. Índice general. Índice.         M05 2026 102.264</span></span>
+<span><span class="co">#&gt; 3             Ciudad Real. Índice general. Índice.         M05 2026 103.206</span></span>
+<span><span class="co">#&gt; 4        Alicante/Alacant. Índice general. Índice.         M05 2026 102.957</span></span>
+<span><span class="co">#&gt; 5                 Ourense. Índice general. Índice.         M05 2026 103.183</span></span>
+<span><span class="co">#&gt; 6  Santa Cruz de Tenerife. Índice general. Índice.         M05 2026 102.861</span></span>
+<span><span class="co">#&gt; 7               Coruña, A. Índice general. Índice.         M05 2026 103.135</span></span>
+<span><span class="co">#&gt; 8              Valladolid. Índice general. Índice.         M05 2026 102.960</span></span>
+<span><span class="co">#&gt; 9                  Huesca. Índice general. Índice.         M05 2026 103.037</span></span>
+<span><span class="co">#&gt; 10                  Cádiz. Índice general. Índice.         M05 2026 102.767</span></span>
+<span><span class="co">#&gt; 11                 Málaga. Índice general. Índice.         M05 2026 103.056</span></span>
+<span><span class="co">#&gt; 12                 Teruel. Índice general. Índice.         M05 2026 103.197</span></span>
+<span><span class="co">#&gt; 13               Albacete. Índice general. Índice.         M05 2026 102.674</span></span>
+<span><span class="co">#&gt; 14              Rioja, La. Índice general. Índice.         M05 2026 102.698</span></span>
+<span><span class="co">#&gt; 15             Pontevedra. Índice general. Índice.         M05 2026 103.482</span></span>
+<span><span class="co">#&gt; 16                Melilla. Índice general. Índice.         M05 2026 102.886</span></span>
+<span><span class="co">#&gt; 17                 Cuenca. Índice general. Índice.         M05 2026 103.252</span></span>
+<span><span class="co">#&gt; 18                 Toledo. Índice general. Índice.         M05 2026 103.376</span></span>
+<span><span class="co">#&gt; 19                Córdoba. Índice general. Índice.         M05 2026 102.893</span></span>
+<span><span class="co">#&gt; 20                  Ceuta. Índice general. Índice.         M05 2026 102.576</span></span>
+<span><span class="co">#&gt; 21                Granada. Índice general. Índice.         M05 2026 103.199</span></span>
+<span><span class="co">#&gt; 22                  Ávila. Índice general. Índice.         M05 2026 102.891</span></span>
+<span><span class="co">#&gt; 23              Tarragona. Índice general. Índice.         M05 2026 102.913</span></span>
+<span><span class="co">#&gt; 24                  Soria. Índice general. Índice.         M05 2026 103.218</span></span>
+<span><span class="co">#&gt; 25      Valencia/València. Índice general. Índice.         M05 2026 102.730</span></span>
+<span><span class="co">#&gt; 26            Guadalajara. Índice general. Índice.         M05 2026 102.773</span></span>
+<span><span class="co">#&gt; 27                 Burgos. Índice general. Índice.         M05 2026 102.752</span></span>
+<span><span class="co">#&gt; 28                   Lugo. Índice general. Índice.         M05 2026 102.712</span></span>
+<span><span class="co">#&gt; 29               Gipuzkoa. Índice general. Índice.         M05 2026 102.218</span></span>
+<span><span class="co">#&gt; 30                Almería. Índice general. Índice.         M05 2026 102.942</span></span>
+<span><span class="co">#&gt; 31                 Girona. Índice general. Índice.         M05 2026 103.312</span></span>
+<span><span class="co">#&gt; 32                 Lleida. Índice general. Índice.         M05 2026 103.117</span></span>
+<span><span class="co">#&gt; 33               Zaragoza. Índice general. Índice.         M05 2026 102.677</span></span>
+<span><span class="co">#&gt; 34                 Zamora. Índice general. Índice.         M05 2026 102.992</span></span>
+<span><span class="co">#&gt; 35     Castellón/Castelló. Índice general. Índice.         M05 2026 103.046</span></span>
+<span><span class="co">#&gt; 36                   Jaén. Índice general. Índice.         M05 2026 102.641</span></span>
+<span><span class="co">#&gt; 37               Asturias. Índice general. Índice.         M05 2026 102.401</span></span>
+<span><span class="co">#&gt; 38            Araba/Álava. Índice general. Índice.         M05 2026 103.208</span></span>
+<span><span class="co">#&gt; 39                Badajoz. Índice general. Índice.         M05 2026 102.756</span></span>
+<span><span class="co">#&gt; 40                 Madrid. Índice general. Índice.         M05 2026 103.223</span></span>
+<span><span class="co">#&gt; 41                Bizkaia. Índice general. Índice.         M05 2026 103.413</span></span>
+<span><span class="co">#&gt; 42              Cantabria. Índice general. Índice.         M05 2026 103.109</span></span>
+<span><span class="co">#&gt; 43            Palmas, Las. Índice general. Índice.         M05 2026 103.014</span></span>
+<span><span class="co">#&gt; 44                Segovia. Índice general. Índice.         M05 2026 102.898</span></span>
+<span><span class="co">#&gt; 45               Palencia. Índice general. Índice.         M05 2026 103.041</span></span>
+<span><span class="co">#&gt; 46                Sevilla. Índice general. Índice.         M05 2026 102.806</span></span>
+<span><span class="co">#&gt; 47                   León. Índice general. Índice.         M05 2026 103.271</span></span>
+<span><span class="co">#&gt; 48         Balears, Illes. Índice general. Índice.         M05 2026 103.026</span></span>
+<span><span class="co">#&gt; 49              Barcelona. Índice general. Índice.         M05 2026 102.762</span></span>
+<span><span class="co">#&gt; 50                Navarra. Índice general. Índice.         M05 2026 102.897</span></span>
+<span><span class="co">#&gt; 51                Cáceres. Índice general. Índice.         M05 2026 102.262</span></span>
+<span><span class="co">#&gt; 52                 Murcia. Índice general. Índice.         M05 2026 102.819</span></span></code></pre></div>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>

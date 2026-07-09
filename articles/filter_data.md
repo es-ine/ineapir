@@ -202,10 +202,17 @@ poblacion
 
 # Get metadata information of the table
 metadata <- get_metadata_table_varval(idTable = 33387)
-#> An error occurred calling the API (status 404).
-#> https://servicios.ine.es/wstempus/jsCache/ES/SERIES_TABLA/33387?det=0&tip=M&ver=3
 metadata[grepl("^\\d{1}\\D+",metadata$Codigo),]
-#> NULL
+#>                                         Nombre
+#> 2                                  1.  Biomasa
+#> 29  2.  Minerales metálicos (mineral en bruto)
+#> 50                  3.  Minerales no metálicos
+#> 106                   4.  Combustibles fósiles
+#>                                Codigo  Variable.Nombre Variable.Codigo
+#> 2                            1biomasa tipo de material  tipodematerial
+#> 29  2mineralesmetalicosmineralenbruto tipo de material  tipodematerial
+#> 50              3mineralesnometalicos tipo de material  tipodematerial
+#> 106              4combustiblesfosiles tipo de material  tipodematerial
 ```
 
 ``` r
@@ -213,8 +220,6 @@ metadata[grepl("^\\d{1}\\D+",metadata$Codigo),]
 # NOTE: for tpx tables we can use a filter.
 metadata <- get_metadata_table_varval(idTable = 33387,
                                       filter = list(tipodematerial = "1biomasa"))
-#> An error occurred calling the API (status 404).
-#> https://servicios.ine.es/wstempus/jsCache/ES/SERIES_TABLA/33387?det=0&tip=M&ver=3
 metadata[grepl("^\\d{1}\\D+",metadata$Codigo),]
 #>        Nombre   Codigo  Variable.Nombre Variable.Codigo
 #> 1 1.  Biomasa 1biomasa tipo de material  tipodematerial
@@ -234,10 +239,12 @@ filter <- list(tipodematerial = c("1biomasa", "2mineralesmetalicosmineralenbruto
 # Request data using the filter
 materiales <- get_data_table(idTable = 33387, unnest = TRUE, tip = "A",
                              nlast = 1, filter = filter, validate = FALSE)
-#> An error occurred calling the API (status 404).
-#> https://servicios.ine.es/wstempus/js/ES/DATOS_TABLA/33387?nult=1&det=0&tip=A&ver=3&tv=tipodematerial%3A1biomasa&tv=tipodematerial%3A2mineralesmetalicosmineralenbruto&tv=tipodematerial%3A3mineralesnometalicos&tv=tipodematerial%3A4combustiblesfosiles
 materiales
-#> NULL
+#>                                       Nombre NombrePeriodo     Valor
+#> 1                                1.  Biomasa 2024 (avance) 126108212
+#> 2 2.  Minerales metálicos (mineral en bruto) 2024 (avance)  19447383
+#> 3                 3.  Minerales no metálicos 2024 (avance) 226327605
+#> 4                   4.  Combustibles fósiles 2024 (avance)    112044
 ```
 
 - **NOTE** If we add a minus sign to a value, the value will be excluded
@@ -255,16 +262,14 @@ filter <- list(tipodematerial = c("-1biomasa", "-2mineralesmetalicosmineralenbru
 # Request data using the filter
 materiales <- get_data_table(idTable = 33387, unnest = TRUE, tip = "A",
                              nlast = 1, filter = filter, validate = FALSE)
-#> An error occurred calling the API (status 404).
-#> https://servicios.ine.es/wstempus/jsCache/ES/SERIES_TABLA/33387?det=0&tip=M&ver=3
 head(materiales)
 #>                        Nombre NombrePeriodo     Valor
 #> 1         EXTRACCION NACIONAL 2024 (avance) 371995244
-#> 2                 1.  Biomasa 2024 (avance) 126108212
-#> 3    1.1.  Cultivos primarios 2024 (avance)  67456391
-#> 4            1.1.1.  Cereales 2024 (avance)        NA
-#> 5 1.1.2.  Raices y tubérculos 2024 (avance)        NA
-#> 6 1.1.3.  Cultivos azucareros 2024 (avance)        NA
+#> 2    1.1.  Cultivos primarios 2024 (avance)  67456391
+#> 3            1.1.1.  Cereales 2024 (avance)        NA
+#> 4 1.1.2.  Raices y tubérculos 2024 (avance)        NA
+#> 5 1.1.3.  Cultivos azucareros 2024 (avance)        NA
+#> 6         1.1.4.  Leguminosas 2024 (avance)        NA
 ```
 
 - **URL:** <https://www.ine.es/jaxi/Tabla.htm?tpx=52056&L=0>
@@ -466,56 +471,56 @@ ipc <- get_data_series_filter(operation = "IPC", filter = filter, periodicity = 
                               unnest = TRUE, tip = "A", validate = FALSE)
 ipc[,c("Nombre", "T3_Periodo", "Anyo", "Valor")]
 #>                                              Nombre T3_Periodo Anyo   Valor
-#> 1               Salamanca. Índice general. Índice.        may. 2026 103.365
-#> 2                  Huelva. Índice general. Índice.        may. 2026 102.264
-#> 3             Ciudad Real. Índice general. Índice.        may. 2026 103.206
-#> 4        Alicante/Alacant. Índice general. Índice.        may. 2026 102.957
-#> 5                 Ourense. Índice general. Índice.        may. 2026 103.183
-#> 6  Santa Cruz de Tenerife. Índice general. Índice.        may. 2026 102.861
-#> 7               Coruña, A. Índice general. Índice.        may. 2026 103.135
-#> 8              Valladolid. Índice general. Índice.        may. 2026 102.960
-#> 9                  Huesca. Índice general. Índice.        may. 2026 103.037
-#> 10                  Cádiz. Índice general. Índice.        may. 2026 102.767
-#> 11                 Málaga. Índice general. Índice.        may. 2026 103.056
-#> 12                 Teruel. Índice general. Índice.        may. 2026 103.197
-#> 13               Albacete. Índice general. Índice.        may. 2026 102.674
-#> 14              Rioja, La. Índice general. Índice.        may. 2026 102.698
-#> 15             Pontevedra. Índice general. Índice.        may. 2026 103.482
-#> 16                Melilla. Índice general. Índice.        may. 2026 102.886
-#> 17                 Cuenca. Índice general. Índice.        may. 2026 103.252
-#> 18                 Toledo. Índice general. Índice.        may. 2026 103.376
-#> 19                Córdoba. Índice general. Índice.        may. 2026 102.893
-#> 20                  Ceuta. Índice general. Índice.        may. 2026 102.576
-#> 21                Granada. Índice general. Índice.        may. 2026 103.199
-#> 22                  Ávila. Índice general. Índice.        may. 2026 102.891
-#> 23              Tarragona. Índice general. Índice.        may. 2026 102.913
-#> 24                  Soria. Índice general. Índice.        may. 2026 103.218
-#> 25      Valencia/València. Índice general. Índice.        may. 2026 102.730
-#> 26            Guadalajara. Índice general. Índice.        may. 2026 102.773
-#> 27                 Burgos. Índice general. Índice.        may. 2026 102.752
-#> 28                   Lugo. Índice general. Índice.        may. 2026 102.712
-#> 29               Gipuzkoa. Índice general. Índice.        may. 2026 102.218
-#> 30                Almería. Índice general. Índice.        may. 2026 102.942
-#> 31                 Girona. Índice general. Índice.        may. 2026 103.312
-#> 32                 Lleida. Índice general. Índice.        may. 2026 103.117
-#> 33               Zaragoza. Índice general. Índice.        may. 2026 102.677
-#> 34                 Zamora. Índice general. Índice.        may. 2026 102.992
-#> 35     Castellón/Castelló. Índice general. Índice.        may. 2026 103.046
-#> 36                   Jaén. Índice general. Índice.        may. 2026 102.641
-#> 37               Asturias. Índice general. Índice.        may. 2026 102.401
-#> 38            Araba/Álava. Índice general. Índice.        may. 2026 103.208
-#> 39                Badajoz. Índice general. Índice.        may. 2026 102.756
-#> 40                 Madrid. Índice general. Índice.        may. 2026 103.223
-#> 41                Bizkaia. Índice general. Índice.        may. 2026 103.413
-#> 42              Cantabria. Índice general. Índice.        may. 2026 103.109
-#> 43            Palmas, Las. Índice general. Índice.        may. 2026 103.014
-#> 44                Segovia. Índice general. Índice.        may. 2026 102.898
-#> 45               Palencia. Índice general. Índice.        may. 2026 103.041
-#> 46                Sevilla. Índice general. Índice.        may. 2026 102.806
-#> 47                   León. Índice general. Índice.        may. 2026 103.271
-#> 48         Balears, Illes. Índice general. Índice.        may. 2026 103.026
-#> 49              Barcelona. Índice general. Índice.        may. 2026 102.762
-#> 50                Navarra. Índice general. Índice.        may. 2026 102.897
-#> 51                Cáceres. Índice general. Índice.        may. 2026 102.262
-#> 52                 Murcia. Índice general. Índice.        may. 2026 102.819
+#> 1               Salamanca. Índice general. Índice.         M05 2026 103.365
+#> 2                  Huelva. Índice general. Índice.         M05 2026 102.264
+#> 3             Ciudad Real. Índice general. Índice.         M05 2026 103.206
+#> 4        Alicante/Alacant. Índice general. Índice.         M05 2026 102.957
+#> 5                 Ourense. Índice general. Índice.         M05 2026 103.183
+#> 6  Santa Cruz de Tenerife. Índice general. Índice.         M05 2026 102.861
+#> 7               Coruña, A. Índice general. Índice.         M05 2026 103.135
+#> 8              Valladolid. Índice general. Índice.         M05 2026 102.960
+#> 9                  Huesca. Índice general. Índice.         M05 2026 103.037
+#> 10                  Cádiz. Índice general. Índice.         M05 2026 102.767
+#> 11                 Málaga. Índice general. Índice.         M05 2026 103.056
+#> 12                 Teruel. Índice general. Índice.         M05 2026 103.197
+#> 13               Albacete. Índice general. Índice.         M05 2026 102.674
+#> 14              Rioja, La. Índice general. Índice.         M05 2026 102.698
+#> 15             Pontevedra. Índice general. Índice.         M05 2026 103.482
+#> 16                Melilla. Índice general. Índice.         M05 2026 102.886
+#> 17                 Cuenca. Índice general. Índice.         M05 2026 103.252
+#> 18                 Toledo. Índice general. Índice.         M05 2026 103.376
+#> 19                Córdoba. Índice general. Índice.         M05 2026 102.893
+#> 20                  Ceuta. Índice general. Índice.         M05 2026 102.576
+#> 21                Granada. Índice general. Índice.         M05 2026 103.199
+#> 22                  Ávila. Índice general. Índice.         M05 2026 102.891
+#> 23              Tarragona. Índice general. Índice.         M05 2026 102.913
+#> 24                  Soria. Índice general. Índice.         M05 2026 103.218
+#> 25      Valencia/València. Índice general. Índice.         M05 2026 102.730
+#> 26            Guadalajara. Índice general. Índice.         M05 2026 102.773
+#> 27                 Burgos. Índice general. Índice.         M05 2026 102.752
+#> 28                   Lugo. Índice general. Índice.         M05 2026 102.712
+#> 29               Gipuzkoa. Índice general. Índice.         M05 2026 102.218
+#> 30                Almería. Índice general. Índice.         M05 2026 102.942
+#> 31                 Girona. Índice general. Índice.         M05 2026 103.312
+#> 32                 Lleida. Índice general. Índice.         M05 2026 103.117
+#> 33               Zaragoza. Índice general. Índice.         M05 2026 102.677
+#> 34                 Zamora. Índice general. Índice.         M05 2026 102.992
+#> 35     Castellón/Castelló. Índice general. Índice.         M05 2026 103.046
+#> 36                   Jaén. Índice general. Índice.         M05 2026 102.641
+#> 37               Asturias. Índice general. Índice.         M05 2026 102.401
+#> 38            Araba/Álava. Índice general. Índice.         M05 2026 103.208
+#> 39                Badajoz. Índice general. Índice.         M05 2026 102.756
+#> 40                 Madrid. Índice general. Índice.         M05 2026 103.223
+#> 41                Bizkaia. Índice general. Índice.         M05 2026 103.413
+#> 42              Cantabria. Índice general. Índice.         M05 2026 103.109
+#> 43            Palmas, Las. Índice general. Índice.         M05 2026 103.014
+#> 44                Segovia. Índice general. Índice.         M05 2026 102.898
+#> 45               Palencia. Índice general. Índice.         M05 2026 103.041
+#> 46                Sevilla. Índice general. Índice.         M05 2026 102.806
+#> 47                   León. Índice general. Índice.         M05 2026 103.271
+#> 48         Balears, Illes. Índice general. Índice.         M05 2026 103.026
+#> 49              Barcelona. Índice general. Índice.         M05 2026 102.762
+#> 50                Navarra. Índice general. Índice.         M05 2026 102.897
+#> 51                Cáceres. Índice general. Índice.         M05 2026 102.262
+#> 52                 Murcia. Índice general. Índice.         M05 2026 102.819
 ```

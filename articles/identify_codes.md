@@ -46,11 +46,10 @@ Identification code of a px table
 
 # Request table data with id = t20/e245/p08/l0/01001.px
 table <- get_data_table(idTable = "t20/e245/p08/l0/01001.px", nlast = 1, unnest = TRUE)
+#> An error occurred calling the API (status 404).
+#> https://servicios.ine.es/wstempus/js/ES/DATOS_TABLA/t20/e245/p08/l0/01001.px?nult=1&det=0&ver=3
 head(table, 3)
-#>                             Nombre NombrePeriodo    Valor Secreto
-#> 1 TOTAL EDADES, TOTAL, Ambos sexos          2022 47475420   FALSE
-#> 2     TOTAL EDADES, TOTAL, Hombres          2022 23265381   FALSE
-#> 3     TOTAL EDADES, TOTAL, Mujeres          2022 24210039   FALSE
+#> NULL
 ```
 
 ### Case three (tpx file)
